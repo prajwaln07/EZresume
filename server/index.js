@@ -5,9 +5,9 @@ const dotenv = require('dotenv');
 const connectToDB=require('./config/db')
 
 const userRoutes = require('./routes/userRoutes');
-// const resumeRoutes = require('./routes/resumeRoutes');
-// const templateRoutes = require('./routes/templateRoutes');
-// const feedbackRoutes = require('./routes/feedbackRoutes');
+// const resumeRoutes = require('./routes/');
+const templateRoutes = require('./routes/templateRoutes');
+const feedbackRoutes = require('./routes/feedbackRoutes');
 
 const cors = require('cors');
 
@@ -22,10 +22,10 @@ app.use(express.urlencoded({ extended: true }));
 
 
 // Route middleware
-// app.use('/users', userRoutes);
+app.use('/users', userRoutes);
 // app.use('/resumes', resumeRoutes);
-// app.use('/templates', templateRoutes);
-// app.use('/feedback', feedbackRoutes);
+app.use('/templates', templateRoutes);
+app.use('/feedback', feedbackRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 5000;
