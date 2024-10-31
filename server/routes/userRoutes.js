@@ -6,7 +6,7 @@ const {
     updateUserProfile, 
     deleteUserAccount 
 } = require('../controllers/userController');
-const { protect } = require('../middleware/auth');
+const { protect } = require('../middleware/auth/protect');
 
 const router = express.Router();
 

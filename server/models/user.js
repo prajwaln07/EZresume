@@ -36,4 +36,6 @@ const userSchema = new mongoose.Schema({
         }, // URL of the user's profile image
 });
 
-module.exports = mongoose.model('User', userSchema);
+const User = mongoose.models.User || mongoose.model('User', userSchema);
+
+module.exports = User;
