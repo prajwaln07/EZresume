@@ -6,7 +6,9 @@ const User = require('../models/User');
 // Middleware for authenticating tokens
 exports.verifyToken = (req, res, next) => {
     const token = req.header('Authorization')?.replace('Bearer ', '');
-
+    if (req.cookies && req.cookies.token) {
+        token = req.cookies.token; // Extract the token from cookies
+    }
     if (!token) return res.status(403).send("Access Denied: No Token Provided");
 
     try {

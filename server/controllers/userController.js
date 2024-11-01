@@ -18,9 +18,16 @@ const registerUser = async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
+    if(!username || !email || !password){
+      return res.status(400).json({
+        success:false,
+        message:"all fields are required."
+      })
+    }
+
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ message: 'Email already in use.' });
+      return res.status(400).json({ success:false,message: 'Email already in use.' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -33,7 +40,8 @@ const registerUser = async (req, res) => {
     await user.save();
 
     const { password: _, ...userData } = user.toObject();
-    res.status(201).json({ message: 'User registered successfully.', user: userData });
+    res.status(201).json({
+      success:true, message: 'User registered successfully.', user: userData });
   } catch (error) {
     console.error('Registration error:', error);
     res.status(500).json({ message: 'Internal server error. Please try again later.' });
@@ -62,17 +70,27 @@ const loginUser = async (req, res) => {
       return res.status(400).json({ message: 'Invalid credentials.' });
     }
 
+    // Generate the token
     const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRES_IN || '1h',
     });
 
+    // Set the token as an HttpOnly cookie
+     res.cookie('token', token, {
+       token,
+      httpOnly: true,    // Prevents JavaScript access to the cookie
+      expiresIn:1*60*60*1000     // Cookie expiration time (1 hour)
+    });
+
+    // Respond with user data (without the password) but no token
     const { password: _, ...userData } = user.toObject();
-    res.status(200).json({ message: 'Login successful.', token, user: userData });
+    res.status(200).json({ message: 'Login successful.', user: userData });
   } catch (error) {
     console.error('Login error:', error);
     res.status(500).json({ message: 'Internal server error. Please try again later.' });
   }
 };
+
 
 // Get User Profile
 const getUserProfile = async (req, res) => {
@@ -89,7 +107,7 @@ const getUserProfile = async (req, res) => {
 
 // Update User Profile
 const updateUserProfile = async (req, res) => {
-  const { username, email } = req.body;
+  const { username,file} = req.body;
 // In your updateUserProfile function:
 if (file) {
   const cloudResponse = await uploadUserProfileImage(file);
@@ -105,7 +123,7 @@ if (file) {
 
     // Update fields
     if (username) user.username = username;
-    if (email) user.email = email;
+    // if (email) user.email = email;
 
     // If a file is uploaded, upload it to Cloudinary
  
