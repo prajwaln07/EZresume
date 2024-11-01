@@ -1,5 +1,5 @@
 const Template=require('../models/template');
-
+const {uploadThumbnail} =require('../config/cloudinary')
 exports.createTemplate = async (req, res) => {
     try {
         const { name, description, layout, thumbnail } = req.body;
@@ -8,8 +8,10 @@ exports.createTemplate = async (req, res) => {
         if (!name || !description || !layout) {
             return res.status(400).send("All fields (name, description, layout) are required.");
         }
+        const cloudResponse = await uploadThumbnail(file);
+        const thumbnail_cloud=cloudResponse;
 
-        const newTemplate = await Template.create({ name, description, layout, thumbnail });
+        const newTemplate = await Template.create({ name, description, layout, thumbnail_cloud });
         res.status(201).json(newTemplate);
     } catch (err) {
         res.status(500).send("Error creating template");
@@ -27,7 +29,10 @@ exports.updateTemplate = async (req, res) => {
         template.name = name || template.name;
         template.description = description || template.description;
         template.layout = layout || template.layout;
-        template.thumbnail = thumbnail || template.thumbnail; // Update thumbnail
+        if(thumbnail){
+            const cloudResponse = await uploadThumbnail(thumbnail);
+            template.thumbnail=cloudResponse;
+        }
 
         await template.save();
         res.json(template);

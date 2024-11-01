@@ -1,6 +1,6 @@
 // server/controllers/versionControlController.js
 const VersionControl = require('../models/version');
-const Resume = require('../models/Resume');
+const Resume = require('../models/resume');
 
 // Create a new version of a resume
 exports.createVersion = async (req, res) => {

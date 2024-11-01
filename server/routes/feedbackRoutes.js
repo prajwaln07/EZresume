@@ -5,12 +5,12 @@ const feedbackController = require('../controllers/feedbackController');
 const { verifyToken, checkRole } = require('../middleware/auth');
 
 // Submit feedback
-router.post('/', verifyToken, feedbackController.submitFeedback);
+router.post('/',feedbackController.submitFeedback);
 
 // Get feedback for a specific template
 router.get('/:templateId', feedbackController.getFeedbackByTemplateId);
 
 // Get all feedback (Admin only)
-router.get('/', verifyToken, checkRole(['admin']), feedbackController.getAllFeedback);
+router.get('/', checkRole(['admin']), feedbackController.getAllFeedback);
 
 module.exports = router;
