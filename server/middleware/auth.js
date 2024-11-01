@@ -1,16 +1,20 @@
 // server/middleware/auth.js
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+const User = require('../models/user');
 
 
 // Middleware for authenticating tokens
 exports.verifyToken = (req, res, next) => {
-    const token = req.header('Authorization')?.replace('Bearer ', '');
+   
+    let token = req.header('Authorization')?.replace('Bearer ', '');
+  
     if (req.cookies && req.cookies.token) {
+    
         token = req.cookies.token; // Extract the token from cookies
     }
+  
     if (!token) return res.status(403).send("Access Denied: No Token Provided");
-
+   
     try {
         const verified = jwt.verify(token, process.env.JWT_SECRET);
         req.user = verified;
@@ -24,7 +28,7 @@ exports.verifyToken = (req, res, next) => {
 exports.checkRole = (roles) => {
     return async (req, res, next) => {
         try {
-            const user = await User.findById(req.user._id);
+            const user = await User.findById(req.user.userId);
             if (roles.includes(user.role)) {
                 next();
             } else {

@@ -1,30 +1,29 @@
 const cloudinary = require('cloudinary').v2;
-require('dotenv').config();
+const streamifier = require('streamifier'); // You'll need to install this package
 
 // Configure Cloudinary
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
+    api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-// Upload thumbnail
-const uploadThumbnail = async (file) => {
-    const result = await cloudinary.uploader.upload(file.path, {
-        folder: 'templates/thumbnails'
+// Function to upload thumbnail
+const uploadThumbnail = (buffer) => {
+    return new Promise((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream(
+            { resource_type: 'auto' }, // Adjust resource_type if necessary
+            (error, result) => {
+                if (error) {
+                    return reject(error);
+                }
+                resolve(result);
+            }
+        );
+
+        // Use streamifier to convert the buffer to a stream
+        streamifier.createReadStream(buffer).pipe(stream);
     });
-    return result.secure_url; // Return the URL of the uploaded thumbnail
 };
 
-// Upload user profile image
-const uploadUserProfileImage = async (file) => {
-    const result = await cloudinary.uploader.upload(file.path, {
-        folder: 'users/profile-images'
-    });
-    return result.secure_url; // Return the URL of the uploaded profile image
-};
-
-module.exports = {
-    uploadThumbnail,
-    uploadUserProfileImage,
-};
+module.exports = { uploadThumbnail };
