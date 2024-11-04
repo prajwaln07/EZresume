@@ -55,7 +55,10 @@ exports.createTemplate = async (req, res) => {
         });
 
         // Respond with the newly created template
-        res.status(201).json(newTemplate);
+        res.status(201).json({
+            success:true,
+            newTemplate
+        });
     } catch (err) {
         console.error(err); // Log error for debugging
         res.status(500).send("Error creating template");

@@ -28,7 +28,7 @@ app.use(cookieParser());
 -
 // Route middleware
 app.use('/users', userRoutes);
-app.use('/resumes',verifyToken, resumeRoutes);
+app.use('/resumes', resumeRoutes);
 app.use('/templates',verifyToken, templateRoutes);
 app.use('/feedback',verifyToken, feedbackRoutes);
 app.use('/resumes/:resumeId/versions', verifyToken, versionRoutes);
@@ -36,7 +36,7 @@ app.use('/resumes/:resumeId/versions', verifyToken, versionRoutes);
 // Start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log(`Server is running on port ------> ${PORT}`);
+    console.log(`Server is running on port -------> ${PORT}`);
 });
 app.get('/',(req,res)=>{
    res.send("running")

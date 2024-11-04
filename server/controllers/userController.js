@@ -1,4 +1,4 @@
-const User = require('../models/User');
+const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
@@ -148,6 +148,20 @@ const deleteUserAccount = async (req, res) => {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
+const logoutUser = async (req, res) => {
+  try {
+    // Clear the cookie by setting its expiration date in the past
+    res.cookie('token', '', { 
+      httpOnly: true, 
+      expires: new Date(0) // Set to a past date to clear it
+    });
+
+    res.status(200).json({ message: 'Logout successful.' });
+  } catch (error) {
+    console.error('Logout error:', error);
+    res.status(500).json({ message: 'Internal server error. Please try again later.' });
+  }
+};
 
 module.exports = {
   registerUser,
@@ -155,4 +169,5 @@ module.exports = {
   getUserProfile,
   updateUserProfile,
   deleteUserAccount,
+  logoutUser,
 };

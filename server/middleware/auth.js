@@ -24,6 +24,31 @@ exports.verifyToken = (req, res, next) => {
     }
 };
 
+exports.checkToken = (req, res, next) => {
+   
+    let token = req.header('Authorization')?.replace('Bearer ', '');
+  
+    if (req.cookies && req.cookies.token) {
+    
+        token = req.cookies.token; // Extract the token from cookies
+    }
+  
+    if (!token){ 
+        // console.log("token is not  present  it shouldn't ",token)
+        req.user=null;
+        return  next();
+    }
+   
+    try {
+        const verified = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = verified;
+        next();
+    } catch (err) {
+        res.status(401).send("Invalid Token");
+    }
+};
+
+
 // Middleware for role-based access control
 exports.checkRole = (roles) => {
     return async (req, res, next) => {
