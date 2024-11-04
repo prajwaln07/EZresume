@@ -8,7 +8,7 @@ const { verifyToken, checkRole } = require('../middleware/auth');
 router.post('/',feedbackController.submitFeedback);
 
 // Get feedback for a specific template
-router.get('/:templateId', feedbackController.getFeedbackByTemplateId);
+router.get('/:templateId',checkRole(['admin']), feedbackController.getFeedbackByTemplateId);
 
 // Get all feedback (Admin only)
 router.get('/', checkRole(['admin']), feedbackController.getAllFeedback);
