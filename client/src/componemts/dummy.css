@@ -1,0 +1,76 @@
+.resume-container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #fff;
+    width: 100%;
+    max-width: 210mm;
+    margin: 0 auto;
+  }
+  
+  .header {
+    text-align: center;
+  }
+  
+  .header .name {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+  .header .title {
+    font-size: 1.2rem;
+    color: gray;
+  }
+  
+  .contact-info p {
+    margin: 5px 0;
+  }
+  
+  .section {
+    margin-top: 20px;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .work-item ul {
+    list-style-type: square;
+    margin-left: 20px;
+  }
+  .resume-builder-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+  }
+  
+  .resume-preview {
+    flex: 1;
+    padding: 20px;
+    border-right: 1px solid #ccc;
+  }
+  
+  .resume-editor {
+    flex: 1;
+    padding: 20px;
+    border-left: 1px solid #ccc;
+  }
+  
+  .edit-section {
+    margin-bottom: 20px;
+  }
+  
+  .edit-section label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .edit-section input,
+  .edit-section textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  

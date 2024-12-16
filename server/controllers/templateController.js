@@ -23,39 +23,38 @@ const {uploadThumbnail} =require('../config/cloudinary')
 //     }
 // };
 
-
 exports.createTemplate = async (req, res) => {
     try {
-   
-        const { name, description, layout } = req.body;
+        const { name, description, layout, structure } = req.body; // Added structure field
         const thumbnail = req.file; // Get the uploaded file from req.file
 
-        if (!name || !description || !layout || !thumbnail) {
-            return res.status(400).send("All fields (name, description, layout, and thumbnail) are required.");
+        if (!name || !description || !layout || !structure || !thumbnail) {
+            return res.status(400).send("All fields (name, description, layout, structure, and thumbnail) are required.");
         }
 
         const cloudResponse = await uploadThumbnail(thumbnail.buffer); // Use thumbnail.buffer for uploading
         const thumbnail_cloud = cloudResponse.secure_url; // Get the URL from the cloud response
-
 
         // Create a new template in the database
         const newTemplate = await Template.create({ 
             name, 
             description, 
             layout, 
+            structure, // Save the structure of the template as well
             image: thumbnail_cloud // Ensure you set the field as expected by the model
         });
 
         // Respond with the newly created template
         res.status(201).json({
-            success:true,
+            success: true,
             newTemplate
         });
     } catch (err) {
-        console.error(err); // Log error for debugging
+        console.error(err);
         res.status(500).send("Error creating template");
     }
 };
+
 
 
 exports.updateTemplate = async (req, res) => {

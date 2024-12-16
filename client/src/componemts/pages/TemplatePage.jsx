@@ -1,4 +1,7 @@
 import React from 'react';
+import {useState,useEffect} from 'react';
+import axios from "axios";
+
 
 const templates = [
   { id: 1, name: 'Double Column', image: '/path-to-image1.png' },
@@ -18,6 +21,30 @@ const templates = [
   { id: 15, name: 'Techy', image: '/path-to-image15.png' },
 ];
 const TemplatePage = () => {
+
+const [allTemplates,setallTemplates] =useState([]);
+
+const getAllTemplates =async()=>{
+    try{
+const response = await axios.get("http://localhost:5000/template/"); // API call
+console.log("all template -->> ",response);
+
+    }
+    catch(err){
+
+    }
+    finally{
+
+    }
+}
+
+
+
+useEffect(()=>{
+
+},[]);
+
+
     return (
       <div className="p-8 min-h-screen bg-gray-100 dark:bg-gray-900">
         <h1 className="text-center text-3xl lg:text-4xl font-bold mb-6 text-gray-800 dark:text-gray-200">

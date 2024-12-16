@@ -8,7 +8,7 @@ import TemplatePage from './componemts/pages/TemplatePage';
 // import {HomePage} from './componemts/pages/HomePage';
 // import {Template} from './componemts/Template.jsx';
 import HomePage from './componemts/pages/HomePage';
-
+import ResumeBuilder from './componemts/Resumebuilder';
 
 
 function App() {
@@ -34,6 +34,9 @@ function App() {
 <Routes>
 
 <Route path='/' element ={<HomePage></HomePage>}></Route>
+
+<Route path='/resume' element ={<ResumeBuilder></ResumeBuilder>}></Route>
+
 
 <Route path='/templates' element={<TemplatePage></TemplatePage>} ></Route>
 
