@@ -25,11 +25,13 @@ const {uploadThumbnail} =require('../config/cloudinary')
 
 exports.createTemplate = async (req, res) => {
     try {
+        console.log("got hit to get create templates ");
+
         const { name, description, layout, structure } = req.body; // Added structure field
         const thumbnail = req.file; // Get the uploaded file from req.file
 
         if (!name || !description || !layout || !structure || !thumbnail) {
-            return res.status(400).send("All fields (name, description, layout, structure, and thumbnail) are required.");
+            return res.status(400).send("All fields (name, description, layout, structure,thumbnail) are required.");
         }
 
         const cloudResponse = await uploadThumbnail(thumbnail.buffer); // Use thumbnail.buffer for uploading
@@ -51,7 +53,7 @@ exports.createTemplate = async (req, res) => {
         });
     } catch (err) {
         console.error(err);
-        res.status(500).send("Error creating template");
+        res.status(500).send("Error creating template----------");
     }
 };
 
@@ -102,6 +104,7 @@ exports.updateTemplate = async (req, res) => {
     }
 };
 exports.getAllTemplates = async (req, res) => {
+    // console.log("got hit to get all templates ");
     try {
         const templates = await Template.find();
         res.json(templates);

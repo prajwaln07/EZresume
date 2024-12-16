@@ -12,7 +12,7 @@ const FAQPage = () => {
     },
     {
       question: 'How do I create a resume?',
-      answer: 'Simply choose a template, customize your details, and download the resume in just a few clicks.',
+      answer: 'Simply choose a template, customize your details, and download the resume in just a some clicks.',
     },
     {
       question: 'Can I use EZResume for free?',

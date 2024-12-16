@@ -29,7 +29,7 @@ app.use(cookieParser());
 // Route middleware
 app.use('/users', userRoutes);
 app.use('/resumes', resumeRoutes);
-app.use('/templates',verifyToken, templateRoutes);
+app.use('/templates', templateRoutes);
 app.use('/feedback', feedbackRoutes);
 app.use('/resumes/:resumeId/versions', verifyToken, versionRoutes);
 

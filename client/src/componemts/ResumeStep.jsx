@@ -18,7 +18,7 @@ const ResumeStep = ({ direction, numberCnt, imageLink, title, desc }) => {
           </div>
         </div>
         <h2 className="text-2xl font-bold mb-4">{title}</h2>
-        <p className={`text-gray-700 ${isDarkmode ? "text-gray-50" : "text-gray-700"}`}>
+        <p className={`text-gray-700 ${isDarkmode ? "text-white" : "text-gray-700"}`}>
   {desc}
 </p>
 

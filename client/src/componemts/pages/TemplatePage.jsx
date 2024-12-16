@@ -3,37 +3,27 @@ import {useState,useEffect} from 'react';
 import axios from "axios";
 
 
-const templates = [
-  { id: 1, name: 'Double Column', image: '/path-to-image1.png' },
-  { id: 2, name: 'Ivy League', image: '/path-to-image2.png' },
-  { id: 3, name: 'Elegant', image: '/path-to-image3.png' },
-  { id: 4, name: 'Contemporary', image: '/path-to-image4.png' },
-  { id: 5, name: 'Modern', image: '/path-to-image5.png' },
-  { id: 6, name: 'Professional', image: '/path-to-image6.png' },
-  { id: 7, name: 'Minimal', image: '/path-to-image7.png' },
-  { id: 8, name: 'Creative', image: '/path-to-image8.png' },
-  { id: 9, name: 'Classic', image: '/path-to-image9.png' },
-  { id: 10, name: 'Stylish', image: '/path-to-image10.png' },
-  { id: 11, name: 'Futuristic', image: '/path-to-image11.png' },
-  { id: 12, name: 'Vintage', image: '/path-to-image12.png' },
-  { id: 13, name: 'Corporate', image: '/path-to-image13.png' },
-  { id: 14, name: 'Bold', image: '/path-to-image14.png' },
-  { id: 15, name: 'Techy', image: '/path-to-image15.png' },
-];
 const TemplatePage = () => {
 
 const [allTemplates,setallTemplates] =useState([]);
+const [loading,setLoading] =useState(false);
+
 
 const getAllTemplates =async()=>{
     try{
-const response = await axios.get("http://localhost:5000/template/"); // API call
-console.log("all template -->> ",response);
+        setLoading(true);
+
+const response = await axios.get("http://localhost:5000/templates/"); // API call
+const ResoponseParsed= response.data;
+
+setallTemplates(ResoponseParsed);
 
     }
     catch(err){
-
+console.log("got error while fetching templates ",err);
     }
     finally{
+        setLoading(false);
 
     }
 }
@@ -41,7 +31,7 @@ console.log("all template -->> ",response);
 
 
 useEffect(()=>{
-
+    getAllTemplates();
 },[]);
 
 
@@ -56,9 +46,9 @@ useEffect(()=>{
   
         {/* Template Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {templates.map((template) => (
+          {allTemplates.map((template) => (
             <div
-              key={template.id}
+              key={template._id}
               className="bg-white dark:bg-gray-800 rounded-md shadow-lg p-4 relative transform transition-all duration-300 group hover:scale-105 hover:shadow-xl hover:bg-teal-100 dark:hover:bg-teal-800"
             >
               <div className="relative">
