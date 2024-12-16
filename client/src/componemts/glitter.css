@@ -1,0 +1,25 @@
+@keyframes glitter {
+    0% {
+      color: #ff0; /* Yellow */
+      text-shadow: 0 0 5px rgba(229, 229, 28, 0.8), 0 0 10px rgba(255, 255, 0, 0.5);
+    }
+    50% {
+      color: #ff5733; /* Orange */
+      text-shadow: 0 0 10px rgba(255, 87, 51, 0.8), 0 0 15px rgba(255, 87, 51, 0.5);
+    }
+    100% {
+      color: #ff0; /* Yellow */
+      text-shadow: 0 0 5px rgba(255, 255, 0, 0.8), 0 0 10px rgba(255, 255, 0, 0.5);
+    }
+  }
+  
+  .glitter {
+    animation: glitter 2.5s infinite alternate;
+  }
+  
+  /* Light mode adjustments */
+  body.light-mode .glitter {
+    color: #ff0; /* Yellow */
+    text-shadow: 0 0 5px rgba(255, 255, 0, 0.8), 0 0 10px rgba(255, 255, 0, 0.5);
+  }
+  

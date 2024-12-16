@@ -26,25 +26,17 @@ const {uploadThumbnail} =require('../config/cloudinary')
 
 exports.createTemplate = async (req, res) => {
     try {
-        // console.log("here for template creation 1");
    
-        // Accessing text fields from req.body
         const { name, description, layout } = req.body;
         const thumbnail = req.file; // Get the uploaded file from req.file
 
-        // Debugging log for checking req.file
-        // console.log("Uploaded File: ", thumbnail); // Should show uploaded file details
-// console.log(">>>>>>>>>>>>>>>>>>>>>",name,description,layout);
-        // Validation
         if (!name || !description || !layout || !thumbnail) {
             return res.status(400).send("All fields (name, description, layout, and thumbnail) are required.");
         }
 
-        // Upload the thumbnail to Cloudinary using the file buffer
         const cloudResponse = await uploadThumbnail(thumbnail.buffer); // Use thumbnail.buffer for uploading
         const thumbnail_cloud = cloudResponse.secure_url; // Get the URL from the cloud response
 
-        // console.log("here for template creation");
 
         // Create a new template in the database
         const newTemplate = await Template.create({ 

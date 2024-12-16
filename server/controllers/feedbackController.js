@@ -52,6 +52,7 @@ exports.getFeedbackByTemplateId = async (req, res) => {
 // Get all feedback (Admin only)
 exports.getAllFeedback = async (req, res) => {
     try {
+        // console.log("i go hit");
         const feedback = await Feedback.find()
         .populate({
             path: "userId",

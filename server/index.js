@@ -30,7 +30,7 @@ app.use(cookieParser());
 app.use('/users', userRoutes);
 app.use('/resumes', resumeRoutes);
 app.use('/templates',verifyToken, templateRoutes);
-app.use('/feedback',verifyToken, feedbackRoutes);
+app.use('/feedback', feedbackRoutes);
 app.use('/resumes/:resumeId/versions', verifyToken, versionRoutes);
 
 // Start the server

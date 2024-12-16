@@ -16,3 +16,4 @@ router.get('/', checkRole(['admin']), templateController.getAllTemplates);
 router.delete('/:id', checkRole(['admin']), templateController.deleteTemplate);
 
 module.exports = router;
+// added comment here .
