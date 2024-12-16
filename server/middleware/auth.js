@@ -53,6 +53,7 @@ exports.checkToken = (req, res, next) => {
 exports.checkRole = (roles) => {
     return async (req, res, next) => {
         try {
+            // console.log("0------------------------------->>",req.user);
             const user = await User.findById(req.user.userId);
             if (roles.includes(user.role)) {
                 next();

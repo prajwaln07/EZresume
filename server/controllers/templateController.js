@@ -25,7 +25,7 @@ const {uploadThumbnail} =require('../config/cloudinary')
 
 exports.createTemplate = async (req, res) => {
     try {
-        console.log("got hit to get create templates ");
+        // console.log("got hit to get create templates ");
 
         const { name, description, layout, structure } = req.body; // Added structure field
         const thumbnail = req.file; // Get the uploaded file from req.file
@@ -104,7 +104,7 @@ exports.updateTemplate = async (req, res) => {
     }
 };
 exports.getAllTemplates = async (req, res) => {
-    // console.log("got hit to get all templates ");
+    console.log("got hit to get all templates ");
     try {
         const templates = await Template.find();
         res.json(templates);
