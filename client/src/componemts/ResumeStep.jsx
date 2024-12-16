@@ -7,7 +7,7 @@ const ResumeStep = ({ direction, numberCnt, imageLink, title, desc }) => {
   return (
     <div
       className={`flex flex-col ${direction ? "lg:flex-row-reverse" : "lg:flex-row"} items-center p-8 ${
-        isDarkmode ? "bg-gray-800 text-white" : "bg-gray-100 text-gray-900"
+        isDarkmode ? "bg-gray-800 text-white" : "bg-gray-50 text-gray-900"
       }`}
     >
       {/* Left Section */}
