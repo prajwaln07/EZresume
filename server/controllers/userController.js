@@ -84,7 +84,10 @@ const loginUser = async (req, res) => {
 
     // Respond with user data (without the password) but no token
     const { password: _, ...userData } = user.toObject();
-    res.status(200).json({ message: 'Login successful.', user: userData });
+    res.status(200).json({
+      success:true,
+      message: 'Login successful.',
+       user: userData });
   } catch (error) {
     console.error('Login error:', error);
     res.status(500).json({ message: 'Internal server error. Please try again later.' });

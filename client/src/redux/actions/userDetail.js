@@ -1,13 +1,9 @@
-export const updateBasicDetails = (details) => {
+export const setUser = (details) => {
     return {
-      type: 'UPDATE_BASIC_DETAILS',
+      type: 'SET_USER',
       payload: details,
     };
   };
-  
-  export const updateResumeSection = (sectionKey, sectionData) => ({
-    type: 'UPDATE_SECTION',
-    payload: { sectionKey, sectionData },
-  });
+ 
 
   

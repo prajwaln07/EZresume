@@ -8,7 +8,7 @@ const User=require('../models/user');
 exports.createResume = async (req, res) => {
   const { title, content, templateId } = req.body;
 
-  // Handle unauthenticated user: PDF generation only
+  // Handle unauthenticated user: PDF generation only.
   if (!req.user) {
     try {
       const resumeFile = await generateResumeFile(title, content, templateId);

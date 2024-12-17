@@ -9,10 +9,11 @@ import HomePage from './componemts/pages/HomePage';
 import TemplateDetail from './componemts/TemplateDetail';
 import UnderConstruction from './componemts/pages/UnderContructionPage';
 import PremiumRequired from './componemts/pages/BuyPremiumPage';
-
+import SignupForm from './componemts/SignupForm';
+import LoginForm from './componemts/LoginForm';
 function App() {
 
-  const isDarkmode = useSelector((state) => state.theme.isDarkmode); // Redux state
+  const isDarkmode = useSelector((state) => state.theme.isDarkmode); // Redux state/
 
 
   useEffect(() => {
@@ -43,9 +44,9 @@ function App() {
 
 <Route path='/support' element = {<PremiumRequired></PremiumRequired>}> </Route>
 
-{/* <Route path='/login'> </Route> */}
+<Route path='/login' element={<LoginForm></LoginForm>}> </Route>
 
-{/* <Route path='/signup'> </Route> */}
+<Route path='/signup' element={<SignupForm></SignupForm>} > </Route>
 
 
 </Routes>

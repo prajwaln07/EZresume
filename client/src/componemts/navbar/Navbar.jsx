@@ -6,6 +6,10 @@ import { toggleTheme } from '../../redux/actions/themeAction';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false); // For mobile menu
   const isDarkmode = useSelector((state) => state.theme.isDarkmode); // Redux state
+  const  isAuthenticated =useSelector((state) =>state.user.isAuthenticated);
+  const  username =useSelector((state) =>state.user.username);
+
+
   const dispatch = useDispatch();
 
   const themeChangeHandler = () => {
@@ -19,7 +23,9 @@ const Navbar = () => {
     } else {
       document.body.classList.remove('dark');
     }
-  }, [isDarkmode]);
+  }, [isDarkmode,isAuthenticated]);
+ 
+
 
   return (
     <nav className={`${isDarkmode ? 'bg-gray-900' : 'bg-white'} transition-colors`}>
@@ -51,6 +57,7 @@ const Navbar = () => {
             Support
           </Link>
         </div>
+        
 
         {/* Right Side Buttons */}
         <div className="hidden md:flex space-x-4 items-center">
@@ -67,15 +74,40 @@ const Navbar = () => {
             />
           </div>
 
-          <Link to="/login" className={`text-lg hover:text-blue-500 ${isDarkmode ? 'text-white' : 'text-gray-900'}`}>
+
+
+     { !isAuthenticated ? <div > 
+
+      <Link to="/login" className={`text-lg hover:text-blue-500 ${isDarkmode ? 'text-white' : 'text-gray-900'}`}>
             Login
           </Link>
+
           <Link
             to="/signup"
-            className={`px-6 py-2 rounded-lg transition ${isDarkmode ? 'bg-blue-700 text-white' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
+            className={`px-3 mx-6 py-2 rounded-lg transition ${isDarkmode ? 'bg-blue-700 text-white' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
           >
             Sign Up
           </Link>
+     </div> : <div>
+
+
+     <Link to="/userDetails" className={`text-lg my-6 hover:text-blue-500 ${isDarkmode ? 'text-white' : 'text-gray-900'}`}>
+            {username}
+          </Link>
+
+          <Link
+            to="/logout"
+            className={`px-3 mx-6 py-2 rounded-lg transition ${isDarkmode ? 'bg-blue-700 text-white' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
+          >
+            Logout
+          </Link>
+
+     </div>
+
+     }
+
+
+
         </div>
 
         {/* Hamburger Menu */}
