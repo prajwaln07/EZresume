@@ -1,19 +1,30 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useSelector,useDispatch } from "react-redux";
+import { AtomSpinner } from 'react-epic-spinners'
+
+
+import {setLoading} from '../redux/actions/loadingSetter';
+import {unsetLoading} from '../redux/actions/loadingSetter';
+
+
 
 const Feedback = () => {
+  let dispatch =useDispatch();
+
   const [feedbacks, setFeedbacks] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const loading =useSelector((state)=>state.loader.loading);
 
   const fetchFeedbacks = async () => {
     try {
+dispatch(setLoading());
       const response = await axios.get("http://localhost:5000/feedback/"); // API call
       let allFeedback = response.data;
       setFeedbacks(allFeedback);
     } catch (error) {
       console.error("Error fetching feedbacks:", error);
     } finally {
-      setLoading(false);
+      dispatch(unsetLoading());
     }
   };
 
@@ -32,7 +43,11 @@ const Feedback = () => {
     ));
   };
 
-  if (loading) return <p>Loading feedbacks...</p>;
+  if (loading) return (
+        <div className="flex justify-center align-center items-center">
+<AtomSpinner color="red"/>
+    </div>
+  );
 
   return (
     <div className="p-6 bg-gray-50 dark:bg-gray-800">

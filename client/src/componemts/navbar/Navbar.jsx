@@ -26,11 +26,13 @@ const Navbar = () => {
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
         <div className="h-10 w-10">
+          <Link to="/">
           <img
             className="rounded-full"
             src="https://res.cloudinary.com/dkynwi65w/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1734259184/ezresumelogo_rdkib3.jpg"
             alt="EZ Resume Logo"
           />
+          </Link>
         </div>
         <div className={`text-3xl font-semibold ${isDarkmode ? 'text-white' : 'text-gray-900'}`}>
 <Link to="/">          EZResume
@@ -65,15 +67,15 @@ const Navbar = () => {
             />
           </div>
 
-          <a href="#login" className={`text-lg hover:text-blue-500 ${isDarkmode ? 'text-white' : 'text-gray-900'}`}>
+          <Link to="/login" className={`text-lg hover:text-blue-500 ${isDarkmode ? 'text-white' : 'text-gray-900'}`}>
             Login
-          </a>
-          <a
-            href="#signup"
+          </Link>
+          <Link
+            to="/signup"
             className={`px-6 py-2 rounded-lg transition ${isDarkmode ? 'bg-blue-700 text-white' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
           >
             Sign Up
-          </a>
+          </Link>
         </div>
 
         {/* Hamburger Menu */}

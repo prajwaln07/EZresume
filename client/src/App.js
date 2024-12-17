@@ -5,11 +5,10 @@ import {Router,Routes,Route} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import TemplatePage from './componemts/pages/TemplatePage';
 
-// import {HomePage} from './componemts/pages/HomePage';
-// import {Template} from './componemts/Template.jsx';
 import HomePage from './componemts/pages/HomePage';
-import ResumeBuilder from './componemts/Resumebuilder';
-
+import TemplateDetail from './componemts/TemplateDetail';
+import UnderConstruction from './componemts/pages/UnderContructionPage';
+import PremiumRequired from './componemts/pages/BuyPremiumPage';
 
 function App() {
 
@@ -35,18 +34,18 @@ function App() {
 
 <Route path='/' element ={<HomePage></HomePage>}></Route>
 
-<Route path='/resume' element ={<ResumeBuilder></ResumeBuilder>}></Route>
-
-
 <Route path='/templates' element={<TemplatePage></TemplatePage>} ></Route>
+{/* <Route path="templates/edit/:templateId"  element ={<TemplateDetail></TemplateDetail>} /> */}
 
-<Route path='/pricing'> displaying pricing</Route>
+<Route path='*' element={<UnderConstruction></UnderConstruction>}></Route>
 
-<Route path='/support'> displaying support</Route>
+{/* <Route path='/pricing'> displaying pricing</Route> */}
 
-<Route path='/login'> displaying login</Route>
+<Route path='/support' element = {<PremiumRequired></PremiumRequired>}> </Route>
 
-<Route path='/signup'> displaying signup</Route>
+{/* <Route path='/login'> </Route> */}
+
+{/* <Route path='/signup'> </Route> */}
 
 
 </Routes>

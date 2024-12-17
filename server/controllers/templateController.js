@@ -104,7 +104,7 @@ exports.updateTemplate = async (req, res) => {
     }
 };
 exports.getAllTemplates = async (req, res) => {
-    console.log("got hit to get all templates ");
+    // console.log("got hit to get all templates ");
     try {
         const templates = await Template.find();
         res.json(templates);
@@ -116,7 +116,13 @@ exports.getAllTemplates = async (req, res) => {
 
 exports.getTemplateById = async (req, res) => {
     try {
+
+            console.log("got hit to get  template BY ID ");
+
+
         const { id } = req.params;
+        console.log("got hit to get  template BY ID --->>",id);
+
         const template = await Template.findById(id);
 
         if (!template) return res.status(404).send("Template not found");

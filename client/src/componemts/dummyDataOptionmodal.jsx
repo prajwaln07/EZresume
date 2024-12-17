@@ -1,31 +1,30 @@
 export const features = [
-    {
-      icon: "⚡",
-      title: "Customizable Designs",
-      description:
-        "Create stunning visuals tailored to your brand's identity effortlessly.",
-      link: "Explore Customizable Options",
-    },
-    {
-      icon: "✨",
-      title: "Diverse Styles",
-      description:
-        "Choose from a wide variety of styles, from modern to classic, to suit any project.",
-      link: "View All Styles",
-    },
-    {
-      icon: "🔒",
-      title: "Industry-Specific",
-      description:
-        "Find templates designed specifically for your industry, making your work easier and faster.",
-      link: "Discover Industry Templates",
-    },
-    {
-      icon: "❤️",
-      title: "User-Friendly",
-      description:
-        "Enjoy an intuitive interface that allows you to create professional designs in minutes.",
-      link: "Start Designing Now",
-    },
-  ];
-
+  {
+    icon: "🎨", // Icon updated
+    title: "Tailored Layouts",
+    description:
+      "Customize your resume design to match your professional style with flexible layout options.",
+    link: "Explore Customizable Options",
+  },
+  {
+    icon: "🌈", // Icon updated
+    title: "Versatile Templates",
+    description:
+      "Choose from a variety of templates that cater to different career fields and personal preferences.",
+    link: "View All Templates",
+  },
+  {
+    icon: "🏆", // Icon updated
+    title: "Career-Focused Designs",
+    description:
+      "Select industry-specific designs that highlight the skills and experience most relevant to your career path.",
+    link: "Discover Industry Templates",
+  },
+  {
+    icon: "💡", // Icon updated
+    title: "Intuitive Interface",
+    description:
+      "Easily create and update your resume with our user-friendly tools and streamlined design.",
+    link: "Start Designing Now",
+  },
+];

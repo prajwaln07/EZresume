@@ -7,7 +7,7 @@ exports.submitFeedback = async (req, res) => {
     try {
         let { templateId, comments, rating } = req.body;
         // console.log("////////////  ||\\\\\\\\\\\\\\\ ", templateId, comments, rating);
-        let userId = new mongoose.Types.ObjectId(req.user.userId); // Assuming user ID is set in req.user by the auth middleware
+        let userId = new mongoose.Types.ObjectId(req.user.userId); // Assuming user ID is set in re.user by the auth middleware
 
         // Validate templateId format
         if (!templateId || templateId.length !== 24) {
