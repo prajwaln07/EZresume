@@ -1,103 +1,119 @@
-
-
-import { ResumeInfoContext } from '../../../../context/ResumeInfoContext'
-import { LoaderCircle } from 'lucide-react';
-import React, { useContext, useEffect, useState } from 'react'
+import { ResumeInfoContext } from '../../../../context/ResumeInfoContext';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-// import GlobalApi from './../../../../../service/GlobalApi';
-// import { toast } from 'sonner';
 
-function PersonalDetail({enabledNext}) {
+function PersonalDetail({ enabledNext }) {
+    const params = useParams();
+    const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
 
-    const params=useParams();
-    const {resumeInfo,setResumeInfo}=useContext(ResumeInfoContext)
+    const [formData, setFormData] = useState();
 
-    const [formData,setFormData]=useState();
-    const [loading,setLoading]=useState(false);
-    useEffect(()=>{
-        console.log("---",resumeInfo)
-    },[])
+    useEffect(() => {
+        console.log("---", resumeInfo); // Debugging: Check initial resume information
+    }, []);
 
-    const handleInputChange=(e)=>{
-        enabledNext(false)
-        const {name,value}=e.target;
+    const handleInputChange = (e) => {
+        enabledNext(false);
+        const { name, value } = e.target;
 
         setFormData({
             ...formData,
-            [name]:value
-        })
+            [name]: value,
+        });
         setResumeInfo({
             ...resumeInfo,
-            [name]:value
-        })
-    }
+            [name]: value,
+        });
+    };
 
-    const onSave=(e)=>{
-        e.preventDefault();
-        setLoading(true)
-        const data={
-            data:formData
-        }
-        // GlobalApi.UpdateResumeDetail(params?.resumeId,data).then(resp=>{
-        //     console.log(resp);
-        //     enabledNext(true);
-        //     setLoading(false);
-        //     toast("Details updated")
-        // },(error)=>{
-        //     setLoading(false);
-        // })
-        
-    }
-  return (
-    <div className='p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10'>
-        <h2 className='font-bold text-lg'>Personal Detail</h2>
-        <p>Get Started with the basic information</p>
+    return (
+        <div className="p-6 bg-white shadow-lg rounded-lg border-t-4 border-t-primary mt-10">
+            <h2 className="font-bold text-2xl text-primary mb-2">Personal Details</h2>
+            <p className="text-gray-600">Get started with your basic information.</p>
 
-        <form onSubmit={onSave}>
-            <div className='grid grid-cols-2 mt-5 gap-3'>
-                <div>
-                    <label className='text-sm'>First Name</label>
-                    <input name="firstName" defaultValue={resumeInfo?.firstName} required onChange={handleInputChange}  />
+            <form className="mt-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* First Name */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">First Name</label>
+                        <input
+                            type="text"
+                            name="firstName"
+                            defaultValue={resumeInfo?.firstName}
+                            onChange={handleInputChange}
+                            required
+                            className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-primary focus:border-primary p-2"
+                        />
+                    </div>
+
+                    {/* Last Name */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Last Name</label>
+                        <input
+                            type="text"
+                            name="lastName"
+                            defaultValue={resumeInfo?.lastName}
+                            onChange={handleInputChange}
+                            required
+                            className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-primary focus:border-primary p-2"
+                        />
+                    </div>
+
+                    {/* Job Title */}
+                    <div className="col-span-1 md:col-span-2">
+                        <label className="block text-sm font-medium text-gray-700">Job Title</label>
+                        <input
+                            type="text"
+                            name="jobTitle"
+                            defaultValue={resumeInfo?.jobTitle}
+                            onChange={handleInputChange}
+                            required
+                            className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-primary focus:border-primary p-2"
+                        />
+                    </div>
+
+                    {/* Address */}
+                    <div className="col-span-1 md:col-span-2">
+                        <label className="block text-sm font-medium text-gray-700">Address</label>
+                        <input
+                            type="text"
+                            name="address"
+                            defaultValue={resumeInfo?.address}
+                            onChange={handleInputChange}
+                            required
+                            className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-primary focus:border-primary p-2"
+                        />
+                    </div>
+
+                    {/* Phone */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Phone</label>
+                        <input
+                            type="text"
+                            name="phone"
+                            defaultValue={resumeInfo?.phone}
+                            onChange={handleInputChange}
+                            required
+                            className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-primary focus:border-primary p-2"
+                        />
+                    </div>
+
+                    {/* Email */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Email</label>
+                        <input
+                            type="email"
+                            name="email"
+                            defaultValue={resumeInfo?.email}
+                            onChange={handleInputChange}
+                            required
+                            className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-primary focus:border-primary p-2"
+                        />
+                    </div>
                 </div>
-                <div>
-                    <label className='text-sm'>Last Name</label>
-                    <input name="lastName" required onChange={handleInputChange} 
-                    defaultValue={resumeInfo?.lastName} />
-                </div>
-                <div className='col-span-2'>
-                    <label className='text-sm'>Job Title</label>
-                    <input name="jobTitle" required 
-                    defaultValue={resumeInfo?.jobTitle}
-                    onChange={handleInputChange}  />
-                </div>
-                <div className='col-span-2'>
-                    <label className='text-sm'>Address</label>
-                    <input name="address" required 
-                    defaultValue={resumeInfo?.address}
-                    onChange={handleInputChange}  />
-                </div>
-                <div>
-                    <label className='text-sm'>Phone</label>
-                    <input name="phone" required 
-                    defaultValue={resumeInfo?.phone}
-                    onChange={handleInputChange}  />
-                </div>
-                <div>
-                    <label className='text-sm'>Email</label>
-                    <input name="email" required 
-                    defaultValue={resumeInfo?.email}
-                    onChange={handleInputChange}  />
-                </div>
-            </div>
-            <div className='mt-3 flex justify-end'>
-                <button type="submit"
-                disabled={loading}>
-                    {loading?<LoaderCircle className='animate-spin' />:'Save'}
-                    </button>
-            </div>
-        </form>
-    </div>
-  )
+            </form>
+        </div>
+    );
 }
 
-export default PersonalDetail
+export default PersonalDetail;

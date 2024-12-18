@@ -1,154 +1,150 @@
-// import { Button } from '@/components/ui/button'
-// import { Input } from '@/components/ui/input'
-// import { Textarea } from '@/components/ui/textarea'
-import { ResumeInfoContext } from '../../../../context/ResumeInfoContext'
-import { LoaderCircle } from 'lucide-react'
-import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-// import GlobalApi from './../../../../../service/GlobalApi'
-// import { toast } from 'sonner'
+import { ResumeInfoContext } from '../../../../context/ResumeInfoContext';
+import { LoaderCircle } from 'lucide-react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 function Education() {
-
-  const [loading,setLoading]=useState(false);
-  const {resumeInfo,setResumeInfo}=useContext(ResumeInfoContext);
-  const params=useParams();
-  const [educationalList,setEducationalList]=useState([
+  const [loading, setLoading] = useState(false);
+  const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
+  const params = useParams();
+  const [educationalList, setEducationalList] = useState([
     {
-      universityName:'',
-      degree:'',
-      major:'',
-      startDate:'',
-      endDate:'',
-      description:''
+      universityName: '',
+      degree: '',
+      major: '',
+      startDate: '',
+      endDate: '',
+      description: ''
     }
-  ])
+  ]);
 
-  useEffect(()=>{
-    resumeInfo&&setEducationalList(resumeInfo?.education)
-  },[])
-  const handleChange=(event,index)=>{
-    const newEntries=educationalList.slice();
-    const {name,value}=event.target;
-    newEntries[index][name]=value;
+  // Initialize educational list from resumeInfo
+  useEffect(() => {
+    resumeInfo && setEducationalList(resumeInfo?.education);
+  }, []);
+
+  // Handle changes in form inputs
+  const handleChange = (event, index) => {
+    const newEntries = educationalList.slice();
+    const { name, value } = event.target;
+    newEntries[index][name] = value;
     setEducationalList(newEntries);
-  }
+  };
 
-  const AddNewEducation=()=>{
-    setEducationalList([...educationalList,
+  // Add a new education entry
+  const AddNewEducation = () => {
+    setEducationalList([
+      ...educationalList,
       {
-        universityName:'',
-        degree:'',
-        major:'',
-        startDate:'',
-        endDate:'',
-        description:''
+        universityName: '',
+        degree: '',
+        major: '',
+        startDate: '',
+        endDate: '',
+        description: ''
       }
-    ])
-  }
-  const RemoveEducation=()=>{
-    setEducationalList(educationalList=>educationalList.slice(0,-1))
+    ]);
+  };
 
-  }
-  const onSave=()=>{
-    setLoading(true)
-    const data={
-      data:{
-        education:educationalList.map(({ id, ...rest }) => rest)
-      }
-    }
+  // Remove the last education entry
+  const RemoveEducation = () => {
+    setEducationalList((educationalList) => educationalList.slice(0, -1));
+  };
 
-    // GlobalApi.UpdateResumeDetail(params.resumeId,data).then(resp=>{
-    //   console.log(resp);
-    //   setLoading(false)
-    //   toast('Details updated !')
-    // },(error)=>{
-    //   setLoading(false);
-    //   toast('Server Error, Please try again!')
-    // })
-
-  }
-
-  useEffect(()=>{
+  // Sync educationalList with resumeInfo
+  useEffect(() => {
     setResumeInfo({
       ...resumeInfo,
-      education:educationalList
-    })
-  },[educationalList])
-  return (
-    <div className='p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10'>
-    <h2 className='font-bold text-lg'>Education</h2>
-    <p>Add Your educational details</p>
+      education: educationalList
+    });
+  }, [educationalList]);
 
-    <div>
-      {educationalList.map((item,index)=>(
-        <div>
-          <div className='grid grid-cols-2 gap-3 border p-3 my-5 rounded-lg'>
-            <div className='col-span-2'>
-              <label>University Name</label>
-              <input name="universityName" 
-              onChange={(e)=>handleChange(e,index)}
-              defaultValue={item?.universityName}
+  return (
+    <div className="p-5 shadow-lg rounded-lg border-t-4 border-primary mt-10 bg-white">
+      <h2 className="font-bold text-lg text-gray-800">Education</h2>
+      <p className="text-sm text-gray-600">Add your educational details</p>
+
+      <div>
+        {educationalList.map((item, index) => (
+          <div key={index} className="grid grid-cols-2 gap-3 border p-3 my-5 rounded-lg bg-gray-50">
+            <div className="col-span-2">
+              <label className="block text-sm font-medium text-gray-700">University Name</label>
+              <input
+                className="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-primary focus:outline-none"
+                name="universityName"
+                onChange={(e) => handleChange(e, index)}
+                defaultValue={item?.universityName}
               />
             </div>
             <div>
-              <label>Degree</label>
-              <input name="degree" 
-              onChange={(e)=>handleChange(e,index)}
-              defaultValue={item?.degree} />
+              <label className="block text-sm font-medium text-gray-700">Degree</label>
+              <input
+                className="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-primary focus:outline-none"
+                name="degree"
+                onChange={(e) => handleChange(e, index)}
+                defaultValue={item?.degree}
+              />
             </div>
             <div>
-              <label>Major</label>
-              <input name="major" 
-              onChange={(e)=>handleChange(e,index)}
-              defaultValue={item?.major} />
+              <label className="block text-sm font-medium text-gray-700">Major</label>
+              <input
+                className="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-primary focus:outline-none"
+                name="major"
+                onChange={(e) => handleChange(e, index)}
+                defaultValue={item?.major}
+              />
             </div>
             <div>
-              <label>Start Date</label>
-              <input type="date" name="startDate" 
-              onChange={(e)=>handleChange(e,index)}
-              defaultValue={item?.startDate} />
+              <label className="block text-sm font-medium text-gray-700">Start Date</label>
+              <input
+                type="date"
+                className="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-primary focus:outline-none"
+                name="startDate"
+                onChange={(e) => handleChange(e, index)}
+                defaultValue={item?.startDate}
+              />
             </div>
             <div>
-              <label>End Date</label>
-              <input type="date" name="endDate" 
-              onChange={(e)=>handleChange(e,index)}
-              defaultValue={item?.endDate} />
+              <label className="block text-sm font-medium text-gray-700">End Date</label>
+              <input
+                type="date"
+                className="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-primary focus:outline-none"
+                name="endDate"
+                onChange={(e) => handleChange(e, index)}
+                defaultValue={item?.endDate}
+              />
             </div>
-            <div className='col-span-2'>
-              <label>Description</label>
-              <textarea name="description" 
-              onChange={(e)=>handleChange(e,index)}
-              defaultValue={item?.description} />
+            <div className="col-span-2">
+              <label className="block text-sm font-medium text-gray-700">Description</label>
+              <textarea
+                className="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-primary focus:outline-none"
+                name="description"
+                onChange={(e) => handleChange(e, index)}
+                defaultValue={item?.description}
+              />
             </div>
-
           </div>
-       
-        </div>
-      ))}
-    </div>
-    <div className='flex justify-between'>
-            <div className='flex gap-2'>
-            <button variant="outline" onClick={AddNewEducation} className="text-primary"> + Add More Education</button>
-            <button variant="outline" onClick={RemoveEducation} className="text-primary"> - Remove</button>
+        ))}
+      </div>
 
-            </div>
-            <button disabled={loading} onClick={()=>onSave()}>
-            {loading?<LoaderCircle className='animate-spin' />:'Save'}    
-            </button>
+      <div className="flex justify-between mt-5">
+        <div className="flex gap-2">
+          <button
+            onClick={AddNewEducation}
+            className="px-4 py-2 text-sm font-medium text-white bg-green-400 rounded hover:bg-primary-dark"
+          >
+            + Add More Education
+          </button>
+          <button
+            onClick={RemoveEducation}
+            className="px-4 py-2 text-sm font-medium text-white bg-red-500 rounded hover:bg-red-600"
+          >
+            - Remove
+          </button>
         </div>
+      </div>
     </div>
-  )
+  );
 }
 
 export default Education;
-
-// import React from 'react'
-
-// const Education = () => {
-//   return (
-//     <div>Education</div>
-//   )
-// }
-
-// export default Education
