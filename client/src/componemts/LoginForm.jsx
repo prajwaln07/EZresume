@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../redux/actions/userDetail';
@@ -60,7 +60,7 @@ let navigate =useNavigate();
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/users/login', formData);
+      const response = await axios.post('http://localhost:5000/api/v1/users/login', formData);
     //   console.log("after login -> ",response);
 
       if(response.data.success){

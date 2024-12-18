@@ -18,7 +18,7 @@ const Feedback = () => {
   const fetchFeedbacks = async () => {
     try {
 dispatch(setLoading());
-      const response = await axios.get("http://localhost:5000/feedback/"); // API call
+      const response = await axios.get("http://localhost:5000/api/v1/feedback/"); // API call ...
       let allFeedback = response.data;
       setFeedbacks(allFeedback);
     } catch (error) {

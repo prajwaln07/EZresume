@@ -36,7 +36,7 @@ const Navbar = () => {
     console.log('User logged out');
 
     try {
-      let response = await axios.post("http://localhost:5000/users/logout");
+      let response = await axios.post("http://localhost:5000/api/v1/users/logout");
       dispatch(userLogout());
     } catch (err) {
       console.log("Got error while logging out.", err.message);

@@ -28,14 +28,14 @@ app.use(cookieParser());
 
 
 // Route middleware
-app.use('/users', userRoutes);
-app.use('/resumes', resumeRoutes);
-app.use('/templates', templateRoutes);
-app.use('/feedback', feedbackRoutes);
-app.use('/resumes/:resumeId/versions', verifyToken, versionRoutes);
+app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/resumes', resumeRoutes);
+app.use('/api/v1/templates', templateRoutes);
+app.use('/api/v1/feedback', feedbackRoutes);
+app.use('/api/v1/resumes/:resumeId/versions', verifyToken, versionRoutes);
 
 
-// Test route to ensure server is working 
+// Test route to ensure server is working  ...
 app.get('/api/test', (req, res) => {
   res.send('Server is running');
 });
