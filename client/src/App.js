@@ -13,10 +13,11 @@ import SignupForm from './componemts/SignupForm';
 import LoginForm from './componemts/LoginForm';
 // import ResumeMainBuilder from './componemts/resume/ResumeMainBuilder';
 import IndexOne from './componemts/resume/IndexOne';
+import SupportPage from './componemts/Support';
 
 function App() {
 
-  const isDarkmode = useSelector((state) => state.theme.isDarkmode); // Redux state/
+  const isDarkmode = useSelector((state) => state.theme.isDarkmode); // Redux state..
 
 
   useEffect(() => {
@@ -45,7 +46,7 @@ function App() {
 
 {/* <Route path='/pricing'> displaying pricing</Route> */}
 
-<Route path='/support' element = {<PremiumRequired></PremiumRequired>}> </Route>
+<Route path='/support' element = {<SupportPage></SupportPage>}> </Route>
 
 <Route path='/login' element={<LoginForm></LoginForm>}> </Route>
 

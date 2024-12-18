@@ -4,7 +4,7 @@ const router = express.Router();
 const versionControlController = require('../controllers/versionControlController');
 const { verifyToken } = require('../middleware/auth');
 
-// Create a new version for a resume
+// Create a new version for a resume.
 router.post('/:resumeId/versions', verifyToken, versionControlController.createVersion);
 
 // Get all versions of a resume

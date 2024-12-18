@@ -128,13 +128,13 @@ function Experience() {
         <div className="flex gap-2">
           <button
             onClick={AddNewExperience}
-            className="text-primary font-medium px-4 py-2 text-sm font-medium text-white bg-green-500 rounded hover:bg-primary-dark "
+            className="text-primary  px-4 py-2 text-sm font-medium text-white bg-green-500 rounded hover:bg-primary-dark "
           >
             + Add More Experience
           </button>
           <button
             onClick={RemoveExperience}
-            className="text-primary font-medium px-4 py-2 text-sm font-medium text-white bg-red-500 rounded hover:bg-primary-dark"
+            className="text-primary  px-4 py-2 text-sm font-medium text-white bg-red-500 rounded hover:bg-primary-dark"
           >
             - Remove
           </button>

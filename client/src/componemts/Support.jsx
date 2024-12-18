@@ -1,9 +1,20 @@
-import React from 'react'
+import React from 'react';
+import Chatbot from './ChatbotWithChat';
 
-const Support = () => {
+const SupportPage = () => {
   return (
-    <div>Support</div>
-  )
-}
+    <div
+      className="flex flex-col items-center justify-center bg-gradient-to-br from-teal-500 to-blue-600 text-white"
+      style={{
+        minHeight: 'calc(100vh - 60px)', // Adjust for navbar height
+        width: '100%',
+      }}
+    >
 
-export default Support
+      {/* Chatbot Component */}
+      <Chatbot />
+    </div>
+  );
+};
+
+export default SupportPage;

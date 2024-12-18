@@ -8,7 +8,7 @@ const { verifyToken, checkRole } = require('../middleware/auth');
 const storage = multer.memoryStorage(); // Store files in memory (or specify a disk storage location)
 const upload = multer({ storage: storage }); // Initialize multer with stoage....
 
-// Admin-only routes for managing templates
+// Admin-only routes for managing templates.
 router.post('/', verifyToken,checkRole(['admin']), upload.single('thumbnail'), templateController.createTemplate);
 // router.post('/',verifyToken,checkRole(['admin']), templateController.createTemplate);
 
