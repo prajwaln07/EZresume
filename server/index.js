@@ -26,6 +26,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+
 // Route middleware
 app.use('/users', userRoutes);
 app.use('/resumes', resumeRoutes);
