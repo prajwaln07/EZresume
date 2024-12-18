@@ -11,6 +11,9 @@ import UnderConstruction from './componemts/pages/UnderContructionPage';
 import PremiumRequired from './componemts/pages/BuyPremiumPage';
 import SignupForm from './componemts/SignupForm';
 import LoginForm from './componemts/LoginForm';
+// import ResumeMainBuilder from './componemts/resume/ResumeMainBuilder';
+import IndexOne from './componemts/resume/IndexOne';
+
 function App() {
 
   const isDarkmode = useSelector((state) => state.theme.isDarkmode); // Redux state/
@@ -48,7 +51,9 @@ function App() {
 
 <Route path='/signup' element={<SignupForm></SignupForm>} > </Route>
 
+<Route path='/resume/maker' element={<IndexOne></IndexOne>} > </Route>
 
+ 
 </Routes>
 
 
