@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleTheme } from '../../redux/actions/themeAction';
+import axios from "axios";
+import { userLogout } from '../../redux/actions/userDetail';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false); // For mobile menu
+  const [isModalOpen, setIsModalOpen] = useState(false); // For logout modal
   const isDarkmode = useSelector((state) => state.theme.isDarkmode); // Redux state
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const username = useSelector((state) => state.user.username);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const themeChangeHandler = () => {
     dispatch(toggleTheme());
@@ -26,6 +30,22 @@ const Navbar = () => {
       document.body.classList.remove('dark');
     }
   }, [isDarkmode]);
+
+  const handleLogout = async () => {
+    // Perform logout logic, like clearing auth tokens, Redux state, etc.
+    console.log('User logged out');
+
+    try {
+      let response = await axios.post("http://localhost:5000/users/logout");
+      dispatch(userLogout());
+    } catch (err) {
+      console.log("Got error while logging out.", err.message);
+    }
+    console.log("User logged out finally");
+    setIsModalOpen(false); // Close the modal
+
+    navigate('/'); // Redirect to the home page or login page
+  };
 
   return (
     <nav className={`${isDarkmode ? 'bg-gray-900' : 'bg-white'} transition-colors`}>
@@ -108,21 +128,19 @@ const Navbar = () => {
                 {username}
               </Link>
 
-              <Link
-                to="/logout"
+              <button
+                onClick={() => setIsModalOpen(true)}
                 className={`px-3 mx-6 py-2 rounded-lg transition ${isDarkmode ? 'bg-blue-700 text-white' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
               >
                 Logout
-              </Link>
+              </button>
             </div>
           )}
         </div>
 
         {/* Hamburger Menu */}
         <button
-          className={`md:hidden flex items-center px-3 py-2 border rounded ${
-            isDarkmode ? 'border-gray-600 text-white' : 'border-gray-400 text-gray-900'
-          } hover:text-white hover:border-white`}
+          className={`md:hidden flex items-center px-3 py-2 border rounded ${isDarkmode ? 'border-gray-600 text-white' : 'border-gray-400 text-gray-900'} hover:text-white hover:border-white`}
           onClick={() => setIsOpen(!isOpen)}
         >
           <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -131,28 +149,104 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu (Conditional Rendering) */}
       {isOpen && (
-        <div className={`md:hidden px-4 py-3 space-y-4 ${isDarkmode ? 'bg-gray-800' : 'bg-gray-100'}`}>
-          <a href="#templates" className={`block hover:text-blue-500 ${isDarkmode ? 'text-white' : 'text-gray-900'}`}>
-            Templates
-          </a>
-          <a href="#pricing" className={`block hover:text-blue-500 ${isDarkmode ? 'text-white' : 'text-gray-900'}`}>
-            Pricing
-          </a>
-          <a href="#support" className={`block hover:text-blue-500 ${isDarkmode ? 'text-white' : 'text-gray-900'}`}>
-            Support
-          </a>
-          <div className="border-t border-gray-600 my-2"></div>
-          <a href="#login" className={`block hover:text-blue-500 ${isDarkmode ? 'text-white' : 'text-gray-900'}`}>
-            Login
-          </a>
-          <a
-            href="#signup"
-            className={`block px-4 py-2 rounded-lg text-center transition ${isDarkmode ? 'bg-blue-700 text-white' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
+        <div className={`md:hidden transition-transform transform ${isDarkmode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'}`}>
+          <div className="space-y-4 px-6 py-4">
+            <Link
+              to="/templates"
+              className="block text-lg hover:text-blue-500"
+              onClick={() => setIsOpen(false)} // Close menu on link click
+            >
+              Templates
+            </Link>
+            <Link
+              to="/pricing"
+              className="block text-lg hover:text-blue-500"
+              onClick={() => setIsOpen(false)} // Close menu on link click
+            >
+              Pricing
+            </Link>
+            <Link
+              to="/support"
+              className="block text-lg hover:text-blue-500"
+              onClick={() => setIsOpen(false)} // Close menu on link click
+            >
+              Support
+            </Link>
+
+            {isAuthenticated ? (
+              <>
+                <Link
+                  to="/userDetails"
+                  className="block text-lg hover:text-blue-500"
+                  onClick={() => setIsOpen(false)} // Close menu on link click
+                >
+                  {username}
+                </Link>
+                <button
+                  onClick={() => {
+                    setIsOpen(false);
+                    setIsModalOpen(true);
+                  }}
+                  className="block w-full text-left px-3 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="block text-lg hover:text-blue-500"
+                  onClick={() => setIsOpen(false)} // Close menu on link click
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/signup"
+                  className="block w-full text-left px-3 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700"
+                  onClick={() => setIsOpen(false)} // Close menu on link click
+                >
+                  Sign Up
+                </Link>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Logout Modal */}
+      {isModalOpen && (
+        <div
+          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+          onClick={() => setIsModalOpen(false)} // Close modal on background click
+        >
+          <div
+            className={`p-6 rounded-lg shadow-md transition-transform transform ${
+              isDarkmode
+                ? 'bg-gray-800 text-white border border-gray-600'
+                : 'bg-white text-gray-900 border border-gray-200'
+            }`}
+            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
           >
-            Sign Up
-          </a>
+            <h2 className="text-xl font-bold mb-4">Confirm Logout</h2>
+            <p className="mb-6">Are you sure you want to log out?</p>
+            <div className="flex space-x-4">
+              <button
+                onClick={handleLogout}
+                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+              >
+                Yes, Logout
+              </button>
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </nav>
