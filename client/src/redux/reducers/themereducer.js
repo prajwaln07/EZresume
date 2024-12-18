@@ -11,6 +11,11 @@ const initialState = {
           ...state,
           isDarkmode: !state.isDarkmode, // Toggle theme
         };
+        case 'SET_LIGHT':
+          return {
+            ...state,
+            isDarkmode: false, // Toggle theme
+          };
       default:
         return state;
     }

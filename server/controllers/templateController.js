@@ -27,7 +27,7 @@ exports.createTemplate = async (req, res) => {
     try {
         // console.log("got hit to get create templates ");
 
-        const { name, description, layout, structure } = req.body; // Added structure field
+        const { name, description, layout, structure,premiumTemplate } = req.body; // Added structure field
         const thumbnail = req.file; // Get the uploaded file from req.file
 
         if (!name || !description || !layout || !structure || !thumbnail) {
@@ -41,6 +41,7 @@ exports.createTemplate = async (req, res) => {
         const newTemplate = await Template.create({ 
             name, 
             description, 
+            premiumTemplate,
             layout, 
             structure, // Save the structure of the template as well
             image: thumbnail_cloud // Ensure you set the field as expected by the model

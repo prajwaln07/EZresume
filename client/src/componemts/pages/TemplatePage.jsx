@@ -30,8 +30,11 @@ const TemplatePage = () => {
     getAllTemplates();
   }, []);
 
-  const handleTemplateClick = (templateId) => {
-    navigate(`edit/${templateId}`); // Redirect to the editor page with the template ID
+  const handleTemplateClick = (templateId,premiumTemplate) => {
+if(premiumTemplate)
+  navigate(`/pricing`);
+    else
+    navigate(`/resume/maker`); // Redirect to the editor page with the template ID
   };
 
   if(loading) return (
@@ -63,12 +66,21 @@ const TemplatePage = () => {
                 className="rounded-md mb-4 h-64 object-cover"
               />
               {/* Hover button */}
-              <button
-                onClick={() => handleTemplateClick(template._id)} // Navigate on click
-                className="absolute bottom-4 left-0 right-0 mx-auto bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 rounded w-3/4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              >
-                Use this template
-              </button>
+
+{   !template.premiumTemplate ?           <button
+                onClick={() => handleTemplateClick(template._id,template.premiumTemplate)} // Navigate on click
+
+className="absolute bottom-4 left-0 right-0 mx-auto bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 rounded w-3/4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" >
+ "Use this template"
+</button>  :
+
+<button
+        onClick={() => handleTemplateClick(template._id,template.premiumTemplate)} // Navigate on click
+
+className="absolute bottom-4 left-0 right-0 mx-auto bg-yellow-300 hover:bg-yellow-400 text-white font-bold py-2 rounded w-3/4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" >
+ "Premium Required"
+</button>
+}
             </div>
             <h2 className="text-lg font-semibold text-gray-700 dark:text-gray-200 text-center">
               {template.name}

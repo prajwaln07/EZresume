@@ -9,6 +9,7 @@ const templateSchema = new mongoose.Schema({
     required: true,
     default: {}, // Default is an empty object
   },
+  premiumTemplate: { type: Boolean, required: true, default:false},
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
   image: { type: String, required: true }, 
