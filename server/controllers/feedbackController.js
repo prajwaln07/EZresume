@@ -1,5 +1,5 @@
 // server/controllers/feedbackController.js
-const Feedback = require('../models/Feedback');
+const Feedback = require('../models/feedback');
 const mongoose=require('mongoose');
 
 // Submit feedback on a template
