@@ -6,6 +6,7 @@ const connectToDB = require('./config/db');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const multer = require('multer');
+const path = require('path');
 
 const { verifyToken } = require('./middleware/auth');
 
@@ -18,6 +19,9 @@ const versionRoutes = require('./routes/versionControlRoutes');
 // OpenAI integration
 dotenv.config();
 connectToDB();
+
+// const _dirname =path.resolve();
+
 
 
 const app = express();
@@ -34,14 +38,17 @@ app.use('/api/v1/templates', templateRoutes);
 app.use('/api/v1/feedback', feedbackRoutes);
 app.use('/api/v1/resumes/:resumeId/versions', verifyToken, versionRoutes);
 
+// app.use(express.static(path.join(__dirname, '../client/build')));
 
-// Test route to ensure server is working  ....
-app.get('/api/test', (req, res) => {
-  res.send('Server is running');
-});
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+// });
+
+
+
 
 // Start the server..
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-
+console.log("server is running on PORT ",PORT);
 });
