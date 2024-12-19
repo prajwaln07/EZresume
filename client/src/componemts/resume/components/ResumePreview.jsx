@@ -6,13 +6,14 @@ import ExperiencePreview from './preview/ExperiencePreview';
 import EducationalPreview from './preview/EducationalPreview';
 import SkillsPreview from './preview/SkillsPreview';
 import html2pdf from 'html2pdf.js';
+import axios from 'axios';
 
 const ResumePreview = () => {
   const { resumeInfo } = useContext(ResumeInfoContext);
   const resumeRef = useRef();
 
   // Function to download the resume as PDF
-  const downloadResume = () => {
+  const downloadResume = async () => {
     const element = resumeRef.current;
 
     const options = {
@@ -22,7 +23,21 @@ const ResumePreview = () => {
       jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
     };
 
+    // Generate and download the PDF
     html2pdf().from(element).set(options).save();
+
+    // Track the download via API
+    try {
+     let response =await axios.post('https://ezresume.onrender.com/api/v1/downloads/track');
+
+if(!response.success){
+console.log("got some problem in trackign no of downloads");
+}
+
+    } 
+    catch (error) {
+      console.error('Error while tracking download:', error);
+    }
   };
 
   return (
