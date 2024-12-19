@@ -35,7 +35,7 @@ const Navbar = () => {
     // Perform logout logic, like clearing auth tokens, Redux state, etc.
 
     try {
-      let response = await axios.post("http://localhost:5000/api/v1/users/logout");
+      let response = await axios.post("https://ezresume.onrender.com/api/v1/users/logout");
       dispatch(userLogout());
     } catch (err) {
       console.log("Got error while logging out.", err.message);

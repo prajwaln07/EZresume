@@ -58,7 +58,7 @@ let navigate =useNavigate();
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/api/v1/users/register', formData);
+      const response = await axios.post('https://ezresume.onrender.com/api/v1/users/register', formData);
       setSuccessMessage(response.data.success);
 
       setFormData({ username: '', email: '', password: '' });

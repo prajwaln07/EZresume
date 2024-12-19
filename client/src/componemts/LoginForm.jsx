@@ -60,7 +60,7 @@ let navigate =useNavigate();
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/api/v1/users/login', formData);
+      const response = await axios.post('https://ezresume.onrender.com/api/v1/users/login', formData);
 
       if(response.data.success){
         const { email, username, resumes, role } = response.data.user;
