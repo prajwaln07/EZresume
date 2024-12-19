@@ -35,12 +35,12 @@ app.use('/api/v1/feedback', feedbackRoutes);
 app.use('/api/v1/resumes/:resumeId/versions', verifyToken, versionRoutes);
 
 
-// Test route to ensure server is working  ...
+// Test route to ensure server is working  ....
 app.get('/api/test', (req, res) => {
   res.send('Server is running');
 });
 
-// Start the server
+// Start the server..
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Server is running on port -------> ${PORT}`);

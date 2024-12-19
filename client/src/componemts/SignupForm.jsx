@@ -82,7 +82,7 @@ let navigate =useNavigate();
     if(successMessage)
 navigate('/login');
 
-  },[])
+  },[successMessage])
 
   
   return (

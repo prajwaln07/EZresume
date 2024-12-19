@@ -8,12 +8,9 @@ function PersonalDetail({ enabledNext }) {
 
     const [formData, setFormData] = useState();
 
-    useEffect(() => {
-        console.log("---", resumeInfo); // Debugging: Check initial resume information
-    }, []);
-
+   
     const handleInputChange = (e) => {
-        enabledNext(false);
+        enabledNext(true);
         const { name, value } = e.target;
 
         setFormData({
