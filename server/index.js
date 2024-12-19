@@ -20,7 +20,7 @@ const versionRoutes = require('./routes/versionControlRoutes');
 dotenv.config();
 connectToDB();
 
-// const _dirname =path.resolve();
+const _dirname =path.resolve();
 
 
 
@@ -38,11 +38,11 @@ app.use('/api/v1/templates', templateRoutes);
 app.use('/api/v1/feedback', feedbackRoutes);
 app.use('/api/v1/resumes/:resumeId/versions', verifyToken, versionRoutes);
 
-// app.use(express.static(path.join(__dirname, '../client/build')));
+app.use(express.static(path.join(_dirname, '/client/build')));
 
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-// });
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(_dirname, 'client','build', 'index.html'));
+});
 
 
 
