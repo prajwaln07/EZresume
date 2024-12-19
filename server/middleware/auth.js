@@ -34,7 +34,6 @@ exports.checkToken = (req, res, next) => {
     }
   
     if (!token){ 
-        // console.log("token is not  present  it shouldn't ",token)
         req.user=null;
         return  next();
     }
@@ -53,7 +52,7 @@ exports.checkToken = (req, res, next) => {
 exports.checkRole = (roles) => {
     return async (req, res, next) => {
         try {
-            // console.log("0------------------------------->>",req.user);
+
             const user = await User.findById(req.user.userId);
             if (roles.includes(user.role)) {
                 next();

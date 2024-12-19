@@ -60,9 +60,7 @@ let navigate =useNavigate();
     try {
       const response = await axios.post('http://localhost:5000/api/v1/users/register', formData);
       setSuccessMessage(response.data.success);
-    //   console.log("response setSuccessMessage setSuccessMessage ",response.data.success);
 
-    //   console.log("response after registration ",response);
       setFormData({ username: '', email: '', password: '' });
       setErrors({});
     } 

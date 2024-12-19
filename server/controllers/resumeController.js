@@ -112,10 +112,8 @@ exports.getResumeById = async (req, res) => {
 exports.getAllResumes = async (req, res) => {
   try {
     // Retrieve the user by their ID
-    // console.log("User ID::", req.user.userId,typeof(req.user.userId)); // Debugging line
     let tempId=req.user.userId;
     tempId = new mongoose.Types.ObjectId(tempId);
-    // console.log("temp ID::",typeof(tempId),tempId); 
     const userResumes = await User.findById(tempId).select('resumes')
 .populate({
   path:'resumes'

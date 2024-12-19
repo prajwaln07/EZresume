@@ -61,11 +61,9 @@ let navigate =useNavigate();
 
     try {
       const response = await axios.post('http://localhost:5000/api/v1/users/login', formData);
-    //   console.log("after login -> ",response);
 
       if(response.data.success){
         const { email, username, resumes, role } = response.data.user;
-        // console.log("we got this after login ",email, username,resumes,role);
         dispatch(setUser({
             email,
             username,

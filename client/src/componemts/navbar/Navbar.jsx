@@ -33,7 +33,6 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     // Perform logout logic, like clearing auth tokens, Redux state, etc.
-    console.log('User logged out');
 
     try {
       let response = await axios.post("http://localhost:5000/api/v1/users/logout");
@@ -41,7 +40,6 @@ const Navbar = () => {
     } catch (err) {
       console.log("Got error while logging out.", err.message);
     }
-    console.log("User logged out finally");
     setIsModalOpen(false); // Close the modal
 
     navigate('/'); // Redirect to the home page or login page
