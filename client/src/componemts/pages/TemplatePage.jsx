@@ -14,6 +14,7 @@ const TemplatePage = () => {
   const navigate = useNavigate(); // To navigate to other pages
   let dispatch =useDispatch();
 
+
   const getAllTemplates = async () => {
     try {
       dispatch(setLoading());
@@ -77,7 +78,7 @@ className="absolute bottom-4 left-0 right-0 mx-auto bg-teal-500 hover:bg-teal-60
 <button
         onClick={() => handleTemplateClick(template._id,template.premiumTemplate)} // Navigate on click
 
-className="absolute bottom-4 left-0 right-0 mx-auto bg-yellow-300 hover:bg-yellow-400 text-white font-bold py-2 rounded w-3/4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" >
+className="pointer-events-none  absolute bottom-4 left-0 right-0 mx-auto bg-yellow-300 hover:bg-yellow-400 text-white font-bold py-2 rounded w-3/4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" >
  "Premium Required"
 </button>
 }
