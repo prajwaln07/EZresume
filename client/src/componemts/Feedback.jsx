@@ -58,15 +58,15 @@ const Feedback = () => {
         <AtomSpinner color="red" />
       </div>
     );
-
+    
   return (
-    <div className="flex flex-col justify-center align-center items-center  bg-gray-50 dark:bg-gray-800 p-5">
-      <div className="p-6 bg-gray-50 dark:bg-gray-800 ">
+    <div className=" bg-gray-50 dark:bg-gray-800 overflow-x-hidden flex flex-col justify-center align-center items-center p-5">
+      <div className=" bg-gray-50 dark:bg-gray-800 p-6 overflow-x-hidden ">
         <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 text-center">
           User Feedback
         </h2>
-        <div className="overflow-x-auto no-scrollbar">
-          <div className="flex space-x-4">
+        <div className="overflow-x-scroll  no-scrollbar p-6 flex justify-center items-center align-middle">
+          <div className="overflow-x-auto flex justify-start space-x-4  p-2">
             {feedbacks.map((feedback) => (
               <div
                 key={feedback.userId._id}
