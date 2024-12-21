@@ -21,12 +21,11 @@ dotenv.config();
 connectToDB();
 
 const _dirname = path.resolve();
-const corsOption = {
+
+let corsOptions = {
   origin: "https://ezresume.onrender.com",
   credentials: true,
 };
-
-
 
 const app = express();
 app.use(express.json());
