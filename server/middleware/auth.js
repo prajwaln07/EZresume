@@ -5,11 +5,11 @@ const User = require('../models/user');
 
 // Middleware for authenticating tokens
 exports.verifyToken = (req, res, next) => {
-   
-    let token = req.header('Authorization')?.replace('Bearer ', '');
+
+    let token;
+     token = req.header('Authorization')?.replace('Bearer ', '');
   
     if (req.cookies && req.cookies.token) {
-    
         token = req.cookies.token; // Extract the token from cookies
     }
   

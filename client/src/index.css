@@ -6,3 +6,18 @@
 ::-webkit-scrollbar{
     display: none;
 }
+
+
+@keyframes bounce-slow {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  .animate-bounce-slow {
+    animation: bounce-slow 2s infinite; /* Adjust "2s" for slower or faster bounce */
+  }
+  

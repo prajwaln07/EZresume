@@ -60,10 +60,20 @@ let navigate =useNavigate();
     }
 
     try {
-      const response = await axios.post('https://ezresume.onrender.com/api/v1/users/login', formData);
+      const response = await axios.post('https://ezresume.onrender.com/api/v1/users/login', formData,
+        {withCredentials:true}
+      );
 
       if(response.data.success){
+
         const { email, username, resumes, role } = response.data.user;
+      
+        const token = response.data.token;  // Assuming your backend sends a token in the response body
+        if (token) {
+          localStorage.setItem("token", token);
+        }
+
+
         dispatch(setUser({
             email,
             username,
