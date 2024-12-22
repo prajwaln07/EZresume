@@ -26,7 +26,7 @@ Explore the application here: [EZResume](https://ezresume.onrender.com/)
 - Interactive Animations and Parallax Scrolling.
 
 ### 🤖 AI Integration
-- AI chatbot powered by **Rasa** for resume-related queries.
+- AI chatbot for resume-related queries.
 
 ### 💾 Backend Features
 - **MERN Stack**: MongoDB, Express, React, Node.js.
