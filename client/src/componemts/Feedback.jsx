@@ -23,7 +23,7 @@ const Feedback = () => {
       dispatch(setLoading());
       const response = await axios.get(
         "https://ezresume.onrender.com/api/v1/feedback/"
-      ); // API call ...
+      ); // API call .....
       let allFeedback = response.data;
       setFeedbacks(allFeedback);
     } catch (error) {
@@ -60,13 +60,13 @@ const Feedback = () => {
     );
     
   return (
-    <div className=" bg-gray-50 dark:bg-gray-800 overflow-x-hidden flex flex-col justify-center align-center items-center p-5">
-      <div className=" bg-gray-50 dark:bg-gray-800 p-6 overflow-x-hidden ">
+    <div className="bg-gray-50 dark:bg-gray-800   overflow-x-hidden flex flex-col justify-center align-center items-center p-5">
+      <div className="bg-gray-50 dark:bg-gray-800   p-6 overflow-x-hidden ">
         <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 text-center">
           User Feedback
         </h2>
-        <div className="overflow-x-scroll  no-scrollbar p-6 flex justify-center items-center align-middle">
-          <div className="overflow-x-auto flex justify-start space-x-4  p-2">
+        <div className=" ml-[1650px]  overflow-x-scroll  no-scrollbar p-6 flex justify-center items-center align-middle">
+          <div className=" overflow-x-auto flex justify-start space-x-4  p-2">
             {feedbacks.map((feedback) => (
               <div
                 key={feedback.userId._id}
