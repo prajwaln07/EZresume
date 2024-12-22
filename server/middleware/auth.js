@@ -13,7 +13,8 @@ exports.verifyToken = (req, res, next) => {
         token = req.cookies.token; // Extract the token from cookies
     }
   
-    if (!token) return res.status(403).send("Access Denied: No Token Provided");
+    if (!token) 
+    return res.status(403).send("Access Denied: No Token Provided");
    
     try {
         const verified = jwt.verify(token, process.env.JWT_SECRET);
@@ -50,17 +51,18 @@ exports.checkToken = (req, res, next) => {
 
 // Middleware for role-based access control
 exports.checkRole = (roles) => {
-    return async (req, res, next) => {
+    return  (req, res, next) => {
         try {
 
-            const user = await User.findById(req.user.userId);
-            if (roles.includes(user.role)) {
+            const currentUser =req.user;
+            if (roles.includes(currentUser.role)) {
                 next();
             } else {
-                res.status(403).send("Access Denied: Insufficient Permissions");
+                res.status(403).send("Access Denied:: Insufficient Permissions");
             }
         } catch (err) {
             res.status(500).send("Internal Server Error");
         }
     };
 };
+
