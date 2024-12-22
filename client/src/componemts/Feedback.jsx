@@ -60,46 +60,44 @@ const Feedback = () => {
     );
     
   return (
-    <div className="bg-gray-50 dark:bg-gray-800   overflow-x-hidden flex flex-col justify-center align-center items-center p-5">
-      <div className="bg-gray-50 dark:bg-gray-800   p-6 overflow-x-hidden ">
-        <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 text-center">
-          User Feedback
-        </h2>
-        <div className=" ml-[1650px]  overflow-x-scroll  no-scrollbar p-6 flex justify-center items-center align-middle">
-          <div className=" overflow-x-auto flex justify-start space-x-4  p-2">
-            {feedbacks.map((feedback) => (
-              <div
-                key={feedback.userId._id}
-                className="bg-white dark:bg-gray-900 border dark:border-gray-700 shadow-md rounded-lg p-4 min-w-[300px] flex-shrink-0"
-              >
-                <div className="mb-2">{renderStars(feedback.rating)}</div>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  {feedback.comments}
-                </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  - {feedback.userId.username}
-                </p>
-              </div>
-            ))}
-          </div>
+<div className="bg-gray-50 dark:bg-gray-800 overflow-x-hidden flex flex-col justify-center items-center p-5">
+  <div className="bg-gray-50 dark:bg-gray-800 p-6 overflow-x-hidden w-full max-w-6xl">
+    <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 text-center">
+      User Feedback
+    </h2>
+    {/* Scrollable Feedback Section */}
+    <div className="flex overflow-x-auto space-x-4 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 dark:scrollbar-thumb-gray-600 dark:scrollbar-track-gray-700 p-4">
+      {feedbacks.map((feedback) => (
+        <div
+          key={feedback.userId._id}
+          className="bg-white dark:bg-gray-900 border dark:border-gray-700 shadow-md rounded-lg p-4 w-72 flex-shrink-0"
+        >
+          <div className="mb-2">{renderStars(feedback.rating)}</div>
+          <p className="text-gray-700 dark:text-gray-300 mb-4">
+            {feedback.comments}
+          </p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            - {feedback.userId.username}
+          </p>
         </div>
-      </div>
-
-{ isAuthenticated && 
-      <button
-  className="px-6 rounded-full w-fit py-2 bg-gray-50 dark:bg-gray-950 text-gray-800 dark:text-white
-    shadow-md hover:bg-gray-300 dark:hover:bg-gray-600 
-    focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500 
-    transition duration-200 animate-bounce-slow   drop-shadow-2xl"
-    
-    onClick={feedbackClickHandler}
-
->
-  Add Feedback
-</button>}
-
-
+      ))}
     </div>
+  </div>
+
+  {isAuthenticated && (
+    <button
+      className="px-6 rounded-full w-fit py-2 bg-gray-50 dark:bg-gray-950 text-gray-800 dark:text-white
+        shadow-md hover:bg-gray-300 dark:hover:bg-gray-600 
+        focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500 
+        transition duration-200 animate-bounce-slow drop-shadow-2xl mt-4"
+      onClick={feedbackClickHandler}
+    >
+      Add Feedback
+    </button>
+  )}
+</div>
+
+
   );
 };
 
