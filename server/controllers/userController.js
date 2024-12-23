@@ -2,7 +2,7 @@ const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
-const {uploadUserProfileImage} =require('../config/cloudinary')
+const {uploadUserProfileImage} =require('../config/cloudinary');
 
 // User Registration Function
 const registerUser = async (req, res) => {
@@ -48,12 +48,15 @@ const registerUser = async (req, res) => {
   }
 };
 
+
+
 // User Login Function
 const loginUser = async (req, res) => {
   await body('email').isEmail().normalizeEmail().run(req);
   await body('password').isLength({ min: 6 }).run(req);
 
   const errors = validationResult(req);
+
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
@@ -61,10 +64,11 @@ const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
+
     if (!user) {
       return res.status(400).json({ message: 'Invalid credentials.' });
     }
-
+                  
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: 'Invalid credentials.' });
@@ -95,6 +99,7 @@ const loginUser = async (req, res) => {
 };
 
 
+
 // Get User Profile
 const getUserProfile = async (req, res) => {
   try {
@@ -107,6 +112,8 @@ const getUserProfile = async (req, res) => {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
+
+
 
 // Update User Profile
 const updateUserProfile = async (req, res) => {
@@ -139,6 +146,8 @@ if (file) {
   }
 };
 
+
+
 // Delete User Account
 const deleteUserAccount = async (req, res) => {
   try {
@@ -151,6 +160,9 @@ const deleteUserAccount = async (req, res) => {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
+
+
+
 const logoutUser = async (req, res) => {
   try {
     // Clear the cookie by setting its expiration date in the past

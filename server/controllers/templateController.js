@@ -33,7 +33,7 @@ exports.createTemplate = async (req, res) => {
         });
     } catch (err) {
         console.error(err);
-        res.status(500).send("Error creating template----------");
+        res.status(500).send("Error creating template",err.message);
     }
 };
 
@@ -56,7 +56,7 @@ exports.updateTemplate = async (req, res) => {
         const { name, description, layout } = req.body;
  
         const thumbnail = req.file;
-        const template = await Template.findById(id);
+        const template = await Template.findById(newObjectId);
         if (!template) return res.status(404).send("Template not found");
 
 
@@ -71,12 +71,15 @@ exports.updateTemplate = async (req, res) => {
         await template.save();
         res.json(template);
     } catch (err) {
+        console.log(err.message);
         res.status(500).json({
             message:"Error updating template ." +err,
             success:false
         });
     }
 };
+
+
 exports.getAllTemplates = async (req, res) => {
 
     try {

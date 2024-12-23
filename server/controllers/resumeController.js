@@ -49,8 +49,6 @@ catch(err){
   }
 };
 
-
-
 // Function to generate the resume file.
 async function generateResumeFile(title, content, templateId) {
   const doc = new pdfkit();
