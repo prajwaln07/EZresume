@@ -8,7 +8,7 @@ import { combineReducers } from 'redux';
 const persistConfig = {
   key: 'root',
   storage,  // Specifies localStorage for persistence
-  whitelist: ['user'],  // Persist only the 'user' reducer (authentication-related state)
+  whitelist: ['user','theme'],  // Persist only the 'user' reducer (authentication-related state)
 };
 
 // Create persisted reducer
