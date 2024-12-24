@@ -32,7 +32,7 @@ function App() {
   }, [isDarkmode]);
 
   return (
-    <div className={`${isDarkmode ? 'bg-gray-900' : 'bg-white'} transition-colors App`}>
+    <div className={`${isDarkmode ? 'bg-gray-900' : 'bg-white'} transition-colors App select-none`}>
  
 <Navbar></Navbar>
 <div className={`h-0.5  ${isDarkmode ? 'bg-gray-950' : 'bg-gray-100'} `}  ></div>
