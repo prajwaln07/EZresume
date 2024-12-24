@@ -120,7 +120,7 @@ const Navbar = () => {
           ) : (
             <div>
               <Link
-                to="/userDetails"
+                to=""
                 className={`text-lg my-6 hover:text-blue-500 ${isDarkmode ? 'text-white' : 'text-gray-900'}`}
               >
                 {username}
