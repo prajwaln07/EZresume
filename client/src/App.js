@@ -1,17 +1,14 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import Navbar from './componemts/navbar/Navbar';
-import {Router,Routes,Route} from 'react-router-dom';
+import {Routes,Route} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import TemplatePage from './componemts/pages/TemplatePage';
 
+import TemplatePage from './componemts/pages/TemplatePage';
 import HomePage from './componemts/pages/HomePage';
-import TemplateDetail from './componemts/TemplateDetail';
 import UnderConstruction from './componemts/pages/UnderContructionPage';
-import PremiumRequired from './componemts/pages/BuyPremiumPage';
 import SignupForm from './componemts/SignupForm';
 import LoginForm from './componemts/LoginForm';
-// import ResumeMainBuilder from './componemts/resume/ResumeMainBuilder';
 import IndexOne from './componemts/resume/IndexOne';
 import SupportPage from './componemts/Support';
 import FeedbackForm from './componemts/FeedbackForm';
@@ -41,11 +38,9 @@ function App() {
 <Route path='/' element ={<HomePage></HomePage>}></Route>
 
 <Route path='/templates' element={<TemplatePage></TemplatePage>} ></Route>
-{/* <Route path="templates/edit/:templateId"  element ={<TemplateDetail></TemplateDetail>} /> */}
+
 
 <Route path='*' element={<UnderConstruction></UnderConstruction>}></Route>
-
-{/* <Route path='/pricing'> displaying pricing</Route> */}
 
 <Route path='/support' element = {<SupportPage></SupportPage>}> </Route>
 

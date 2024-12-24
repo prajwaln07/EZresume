@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-const ResumeStep = ({ direction, numberCnt, imageLink, title, desc }) => {
+const SingleResumeStep = ({ direction, numberCnt, imageLink, title, desc }) => {
   const isDarkmode = useSelector((state) => state.theme.isDarkmode); // Get dark mode state
 
   return (
@@ -36,4 +36,4 @@ const ResumeStep = ({ direction, numberCnt, imageLink, title, desc }) => {
   );
 };
 
-export default ResumeStep;
+export default SingleResumeStep;

@@ -6,6 +6,7 @@ import axios from "axios";
 import { userLogout } from '../../redux/actions/userDetail';
 
 const Navbar = () => {
+
   const [isOpen, setIsOpen] = useState(false); // For mobile menu
   const [isModalOpen, setIsModalOpen] = useState(false); // For logout modal
   const isDarkmode = useSelector((state) => state.theme.isDarkmode); // Redux state
@@ -31,6 +32,9 @@ const Navbar = () => {
     }
   }, [isDarkmode]);
 
+  
+  
+
   const handleLogout = async () => {
     // Perform logout logic, like clearing auth tokens, Redux state, etc.
 
@@ -54,10 +58,11 @@ const Navbar = () => {
             <img
               className="rounded-full"
               src="https://res.cloudinary.com/dkynwi65w/image/upload/w_1000,c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1734259184/ezresumelogo_rdkib3.jpg"
-              alt="EZ Resume Logo"
+              alt="EZresume Logo"
             />
           </Link>
         </div>
+
         <div className={`text-3xl font-semibold ${isDarkmode ? 'text-white' : 'text-gray-900'}`}>
           <Link to="/">EZResume</Link>
         </div>
@@ -70,18 +75,21 @@ const Navbar = () => {
           >
             Templates
           </Link>
+
           <Link
             to="/pricing"
             className={`text-lg hover:text-blue-500 ${isDarkmode ? 'text-white' : 'text-gray-900'}`}
           >
             Pricing
           </Link>
+
           <Link
             to="/support"
             className={`text-lg hover:text-blue-500 ${isDarkmode ? 'text-white' : 'text-gray-900'}`}
           >
             Support
           </Link>
+          
         </div>
 
         {/* Right Side Buttons */}
@@ -176,7 +184,7 @@ const Navbar = () => {
             {isAuthenticated ? (
               <>
                 <Link
-                  to="/userDetails"
+                  to="/"
                   className="block text-lg hover:text-blue-500"
                   onClick={() => setIsOpen(false)} // Close menu on link click
                 >
