@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { features } from './dummyDataOptionmodal';
+import { Link } from 'react-router-dom';
 
 const OptionModal = () => {
   const isDarkmode = useSelector((state) => state.theme.isDarkmode);
@@ -30,12 +31,12 @@ const OptionModal = () => {
             <p className={`${isDarkmode ? 'text-gray-400' : 'text-gray-500'} mt-2`}>
               {feature.description}
             </p>
-            <a
-              href="#"
+            <Link
+              to={`${feature.to}`}
               className={`${isDarkmode ? 'text-blue-400' : 'text-blue-600'} font-medium mt-4 hover:underline`}
             >
               {feature.link}
-            </a>
+            </Link>
           </div>
         ))}
       </div>
