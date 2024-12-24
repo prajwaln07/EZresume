@@ -91,68 +91,79 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="h-screen flex items-center justify-center ">
-      <motion.div
-        className="max-w-md w-full p-8 bg-white rounded-3xl shadow-2xl"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: 'easeOut' }}
-      >
-        <h2 className="text-4xl font-extrabold text-center text-gray-800">Welcome Back</h2>
-        <p className="text-center text-gray-600 mt-2">Log in to access your account</p>
+    <div className="flex flex-col md:flex-row h-[655px]">
+      {/* Left side Image */}
+      <div
+        className="ml-1 hidden lg:block w-2/5 bg-cover bg-center"
+        style={{
+          backgroundImage: `url('https://res.cloudinary.com/dkynwi65w/image/upload/v1735038010/freepik__candid-image-photography-natural-textures-highly-r__2462_dnxbpu.jpg')`,
+        }}
+      ></div>
 
-        {errors.form && (
-          <div className="mt-4 p-4 bg-red-100 text-red-800 rounded-lg text-center">
-            {errors.form}
-          </div>
-        )}
+      {/* Right side Form */}
+      <div className="flex-grow flex items-center justify-center px-4 md:px-8">
+        <motion.div
+          className="max-w-md w-full p-6 bg-white rounded-3xl shadow-2xl"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+        >
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-center text-gray-800">Welcome Back</h2>
+          <p className="text-center text-gray-600 mt-2">Log in to access your account</p>
 
-        <form onSubmit={handleSubmit} className="mt-6 space-y-6">
-          {/* Email */}
-          <div className="form-group">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-purple-500 focus:border-purple-500 placeholder-gray-400 text-gray-700"
-              placeholder="Enter your email"
-            />
-            {errors.email && <span className="text-red-500 text-sm">{errors.email}</span>}
-          </div>
+          {errors.form && (
+            <div className="mt-4 p-4 bg-red-100 text-red-800 rounded-lg text-center">
+              {errors.form}
+            </div>
+          )}
 
-          {/* Password */}
-          <div className="form-group">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-purple-500 focus:border-purple-500 placeholder-gray-400 text-gray-700"
-              placeholder="Enter your password"
-            />
-            {errors.password && <span className="text-red-500 text-sm">{errors.password}</span>}
-          </div>
+          <form onSubmit={handleSubmit} className="mt-6 space-y-6">
+            {/* Email */}
+            <div className="form-group">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-purple-500 focus:border-purple-500 placeholder-gray-400 text-gray-700"
+                placeholder="Enter your email"
+              />
+              {errors.email && <span className="text-red-500 text-sm">{errors.email}</span>}
+            </div>
 
-          {/* Submit Button */}
-          <motion.button
-            type="submit"
-            className="w-full border-2 py-3 px-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-xl shadow-lg hover:from-pink-500 hover:to-purple-500 focus:ring-4 focus:ring-purple-300"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-          >
-            Log In
-          </motion.button>
-        </form>
-      </motion.div>
+            {/* Password */}
+            <div className="form-group">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-purple-500 focus:border-purple-500 placeholder-gray-400 text-gray-700"
+                placeholder="Enter your password"
+              />
+              {errors.password && <span className="text-red-500 text-sm">{errors.password}</span>}
+            </div>
+
+            {/* Submit Button */}
+            <motion.button
+              type="submit"
+              className="w-full border-2 py-3 px-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-xl shadow-lg hover:from-pink-500 hover:to-purple-500 focus:ring-4 focus:ring-purple-300"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              Log In
+            </motion.button>
+          </form>
+        </motion.div>
+      </div>
     </div>
   );
 };

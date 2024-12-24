@@ -14,17 +14,15 @@ const SignupForm = () => {
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
 
-  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value,
     });
-    setErrors({ ...errors, [name]: '' }); // Clear individual field errors on change
+    setErrors({ ...errors, [name]: '' });
   };
 
-  // Form validation
   const validate = () => {
     const newErrors = {};
     if (!formData.username.trim()) {
@@ -48,7 +46,6 @@ const SignupForm = () => {
     return newErrors;
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
@@ -78,79 +75,85 @@ const SignupForm = () => {
   }, [successMessage]);
 
   return (
-    <div className="h-screen flex items-center justify-center ">
-      <motion.div
-        className="max-w-md w-full p-8 bg-white rounded-3xl shadow-2xl border-2"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: 'easeOut' }}
-      >
-        <h2 className="text-4xl font-extrabold text-center text-gray-800">Create Your Account</h2>
-        <p className="text-center text-gray-600 mt-2">Join us and get started!</p>
+    <div className="h-[655px] flex flex-col md:flex-row">
+      {/* Image Section */}
+      <div className="ml-1 hidden lg:block w-2/5 bg-cover bg-center" style={{ backgroundImage: `url('https://res.cloudinary.com/dkynwi65w/image/upload/v1735036933/freepik__candid-image-photography-natural-textures-highly-r__59814_frkf5a.jpg')` }}></div>
 
-        {errors.form && (
-          <div className="mt-4 p-4 bg-red-100 text-red-800 rounded-lg text-center">
-            {errors.form}
-          </div>
-        )}
+      {/* Form Section */}
+      <div className="w-full md:w-3/5 flex items-center justify-center px-4 md:px-8">
+        <motion.div
+          className="max-w-md w-full p-6 bg-white rounded-3xl shadow-2xl border-2"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+        >
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-center text-gray-800">Create Your Account</h2>
+          <p className="text-center text-gray-600 mt-2">Join us and get started!</p>
 
-        <form onSubmit={handleSubmit} className="mt-6 space-y-6 ">
-          {/* Username */}
-          <div className="form-group">
-            <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-purple-500 focus:border-purple-500 placeholder-gray-400 text-gray-700"
-              placeholder="Enter your username"
-            />
-            {errors.username && <span className="text-red-500 text-sm">{errors.username}</span>}
-          </div>
+          {errors.form && (
+            <div className="mt-4 p-4 bg-red-100 text-red-800 rounded-lg text-center">
+              {errors.form}
+            </div>
+          )}
 
-          {/* Email */}
-          <div className="form-group">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-purple-500 focus:border-purple-500 placeholder-gray-400 text-gray-700"
-              placeholder="Enter your email"
-            />
-            {errors.email && <span className="text-red-500 text-sm">{errors.email}</span>}
-          </div>
+          <form onSubmit={handleSubmit} className="mt-6 space-y-6">
+            {/* Username */}
+            <div className="form-group">
+              <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-purple-500 focus:border-purple-500 placeholder-gray-400 text-gray-700"
+                placeholder="Enter your username"
+              />
+              {errors.username && <span className="text-red-500 text-sm">{errors.username}</span>}
+            </div>
 
-          {/* Password */}
-          <div className="form-group">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-purple-500 focus:border-purple-500 placeholder-gray-400 text-gray-700"
-              placeholder="Create a password"
-            />
-            {errors.password && <span className="text-red-500 text-sm">{errors.password}</span>}
-          </div>
+            {/* Email */}
+            <div className="form-group">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-purple-500 focus:border-purple-500 placeholder-gray-400 text-gray-700"
+                placeholder="Enter your email"
+              />
+              {errors.email && <span className="text-red-500 text-sm">{errors.email}</span>}
+            </div>
 
-          {/* Submit Button */}
-          <motion.button
-            type="submit"
-            className="w-full py-3 px-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-xl shadow-lg hover:from-pink-500 hover:to-purple-500 focus:ring-4 focus:ring-purple-300"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-          >
-            Sign Up
-          </motion.button>
-        </form>
-      </motion.div>
+            {/* Password */}
+            <div className="form-group">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-purple-500 focus:border-purple-500 placeholder-gray-400 text-gray-700"
+                placeholder="Create a password"
+              />
+              {errors.password && <span className="text-red-500 text-sm">{errors.password}</span>}
+            </div>
+
+            {/* Submit Button */}
+            <motion.button
+              type="submit"
+              className="w-full py-3 px-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-xl shadow-lg hover:from-pink-500 hover:to-purple-500 focus:ring-4 focus:ring-purple-300"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              Sign Up
+            </motion.button>
+          </form>
+        </motion.div>
+      </div>
     </div>
   );
 };
