@@ -83,7 +83,7 @@ const SignupForm = () => {
       <div className="w-full md:w-3/5 flex items-center justify-center px-4 md:px-8">
         <motion.div
           className="max-w-md w-full p-6 bg-white rounded-3xl shadow-2xl border-2"
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
         >
