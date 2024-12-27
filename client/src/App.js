@@ -12,6 +12,7 @@ import LoginForm from './componemts/LoginForm';
 import IndexOne from './componemts/resume/IndexOne';
 import SupportPage from './componemts/Support';
 import FeedbackForm from './componemts/FeedbackForm';
+import ContactUs from './componemts/ContactUs';
 
 function App() {
 
@@ -47,6 +48,9 @@ function App() {
 <Route path='/login' element={<LoginForm></LoginForm>}> </Route>
 
 <Route path='/signup' element={<SignupForm></SignupForm>} > </Route>
+
+<Route path='/contactUs' element={<ContactUs></ContactUs>} > </Route>
+
 
 <Route path='/resume/maker' element={<IndexOne></IndexOne>} > </Route>
 

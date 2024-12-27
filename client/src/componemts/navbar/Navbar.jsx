@@ -77,6 +77,14 @@ const Navbar = () => {
           </Link>
 
 
+          <Link
+            to="/contactUs"
+            className={`text-lg hover:text-blue-500 ${isDarkmode ? 'text-white' : 'text-gray-900'}`}
+          >
+            Contact
+          </Link>
+
+
 
           <Link
             to="/support"
