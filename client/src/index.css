@@ -21,3 +21,7 @@
     animation: bounce-slow 2s infinite; /* Adjust "2s" for slower or faster bounce */
   }
   
+  .custom-bullet::marker {
+    color: #4169E1 !important; /* Royal Blue */
+  }
+  

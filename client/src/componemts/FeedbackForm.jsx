@@ -18,7 +18,6 @@ const FeedbackForm = ({ templateId, onFeedbackSubmitted }) => {
     setError(""); // Clear any previous errors
 
     try {
-        console.log("feedback controller req sent");
 
       const response =await axios.post(
         "https://ezresume.onrender.com/api/v1/feedback/",

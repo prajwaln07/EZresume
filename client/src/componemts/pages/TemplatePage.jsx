@@ -3,15 +3,18 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSelector,useDispatch } from "react-redux";
 import {setLoading} from '../../redux/actions/loadingSetter';
+
 import {unsetLoading} from '../../redux/actions/loadingSetter';
 import { AtomSpinner } from 'react-epic-spinners'
+import { changeTemplate } from "../../redux/actions/templateDetails";
 
 
 const TemplatePage = () => {
   const [allTemplates, setAllTemplates] = useState([]);
-  // const [loading, setLoading] = useState(false);
+
   let loading =useSelector((state)=>state.loader.loading);
   const navigate = useNavigate(); // To navigate to other pages
+  
   let dispatch =useDispatch();
 
 
@@ -31,11 +34,13 @@ const TemplatePage = () => {
     getAllTemplates();
   }, []);
 
-  const handleTemplateClick = (templateId,premiumTemplate) => {
+  const handleTemplateClick = (name,templateId,premiumTemplate) => {
 if(premiumTemplate)
   navigate(`/pricing`);
-    else
-    navigate(`/resume/maker`); // Redirect to the editor page with the template ID
+    else{
+      dispatch(changeTemplate(name));
+     navigate(`/resume/maker`); // Redirect to the editor page with the template ID
+    }
   };
 
   if(loading) return (
@@ -69,14 +74,14 @@ if(premiumTemplate)
               {/* Hover button */}
 
 {   !template.premiumTemplate ?           <button
-                onClick={() => handleTemplateClick(template._id,template.premiumTemplate)} // Navigate on click
+                onClick={() => handleTemplateClick(template.layout,template._id,template.premiumTemplate)} // Navigate on click
 
 className="absolute bottom-4 left-0 right-0 mx-auto bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 rounded w-3/4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" >
  "Use this template"
 </button>  :
 
 <button
-        onClick={() => handleTemplateClick(template._id,template.premiumTemplate)} // Navigate on click
+        onClick={() => handleTemplateClick(template.layout,template._id,template.premiumTemplate)} // Navigate on click
 
 className="pointer-events-none  absolute bottom-4 left-0 right-0 mx-auto bg-yellow-300 hover:bg-yellow-400 text-white font-bold py-2 rounded w-3/4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" >
  "Premium Required"

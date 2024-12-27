@@ -1,0 +1,95 @@
+import React from "react";
+
+const MicrosoftTemplate = ({ resumeInfo, resumeRef }) => {
+  return (
+    <div
+      ref={resumeRef}
+      className="p-8 bg-white text-black font-sans"
+      style={{ width: "8.5in", minHeight: "11in" }}
+    >
+      {/* Header Section */}
+      <div className="text-left mb-6">
+        <h1 className="text-3xl font-bold">{resumeInfo?.firstName} {resumeInfo?.lastName || "Your Name"}</h1>
+        <p className="text-lg font-semibold text-gray-700">
+          {resumeInfo?.jobTitle || "Professional Title"}
+        </p>
+        <p className="text-sm mt-1 text-gray-600">
+          {resumeInfo?.address || "Your Address"} |{" "}
+          {resumeInfo?.phone || "Your Phone"} |{" "}
+          {resumeInfo?.email || "Your Email"}
+        </p>
+      </div>
+
+      {/* Summary Section */}
+      {resumeInfo?.summery && (
+        <div className="mb-6">
+          <h2 className="text-lg font-bold">Summary</h2>
+          <hr className="my-2 border-gray-300" />
+          <p className="text-sm">{resumeInfo.summery}</p>
+        </div>
+      )}
+
+      {/* Experience Section */}
+      {resumeInfo?.experience?.length > 0 && (
+        <div className="mb-6">
+          <h2 className="text-lg font-bold">Experience</h2>
+          <hr className="my-2 border-gray-300" />
+          {resumeInfo.experience.map((exp, index) => (
+            <div key={index} className="mb-4">
+              <div className="flex justify-between">
+                <p className="font-semibold">
+                  {exp.title} | {exp.companyName}
+                </p>
+                <p className="text-sm">
+                  {exp.startDate} - {exp.endDate || (exp.currentlyWorking ? "Present" : "")}
+                </p>
+              </div>
+              <ul className="list-disc ml-5 text-sm mt-2 text-gray-600">
+                {exp.workSummery.split("\n").map((point, i) => (
+                  <li key={i}>{point}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Education Section */}
+      {resumeInfo?.education?.length > 0 && (
+        <div className="mb-6">
+          <h2 className="text-lg font-bold">Education</h2>
+          <hr className="my-2 border-gray-300" />
+          {resumeInfo.education.map((edu, index) => (
+            <div key={index} className="mb-4">
+              <p className="font-semibold">
+                {edu.universityName} | {edu.degree}
+              </p>
+              <p className="text-sm text-gray-600">
+                Major: {edu.major}
+              </p>
+              <p className="text-sm">{edu.startDate} - {edu.endDate}</p>
+              {edu.description && (
+                <p className="text-sm mt-2 text-gray-600">{edu.description}</p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Skills Section */}
+      {resumeInfo?.skills?.length > 0 && (
+        <div>
+          <h2 className="text-lg font-bold">Skills & Abilities</h2>
+          <hr className="my-2 border-gray-300" />
+          <ul className="list-disc ml-5 text-sm text-gray-600">
+            {resumeInfo.skills.map((skill, index) => (
+              <li key={index}>{skill.name}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default MicrosoftTemplate;
