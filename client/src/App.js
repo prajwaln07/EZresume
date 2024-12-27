@@ -3,7 +3,6 @@ import axios from 'axios';
 import Navbar from './componemts/navbar/Navbar';
 import {Routes,Route} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-
 import TemplatePage from './componemts/pages/TemplatePage';
 import HomePage from './componemts/pages/HomePage';
 import UnderConstruction from './componemts/pages/UnderContructionPage';

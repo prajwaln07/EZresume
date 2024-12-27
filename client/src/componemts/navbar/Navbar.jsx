@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { toggleTheme } from '../../redux/actions/themeAction';
 import axios from "axios";
 import { userLogout } from '../../redux/actions/userDetail';
+import {toast } from 'react-toastify';
+
 
 const Navbar = () => {
 
@@ -40,6 +42,17 @@ const Navbar = () => {
 
     try {
       let response = await axios.post("https://ezresume.onrender.com/api/v1/users/logout");
+
+      toast.info('User Logout Successful!', {
+        position: "bottom-right",
+        autoClose: 4000, // Slightly faster auto-close for logout
+        hideProgressBar: true, // Remove progress bar for cleaner appearance
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark", // Set a dark theme to signify logout
+      });
       dispatch(userLogout());
     } catch (err) {
       console.log("Got error while logging out.", err.message);

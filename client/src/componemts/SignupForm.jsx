@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { toast } from 'react-toastify';
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({
@@ -71,7 +72,19 @@ const SignupForm = () => {
   };
 
   useEffect(() => {
-    if (successMessage) navigate('/login');
+    if (successMessage) {
+      toast.success('User Signup Successful!', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true, // Allow clicking to close for convenience
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light", // Distinguish signup with a colored theme
+      });
+      navigate('/login');
+    }
   }, [successMessage]);
 
   return (

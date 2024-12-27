@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../redux/actions/userDetail';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { toast } from 'react-toastify';
+
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -75,6 +77,16 @@ const LoginForm = () => {
             role,
           })
         );
+        toast.success('User Login Successful!', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false, // Keep it non-clickable for stability
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light", // Keep login theme light for simplicity
+        });
         navigate('/');
       }
 
