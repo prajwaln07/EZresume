@@ -76,12 +76,7 @@ const Navbar = () => {
             Templates
           </Link>
 
-          <Link
-            to="/pricing"
-            className={`text-lg hover:text-blue-500 ${isDarkmode ? 'text-white' : 'text-gray-900'}`}
-          >
-            Pricing
-          </Link>
+
 
           <Link
             to="/support"
