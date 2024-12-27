@@ -19,10 +19,10 @@ export default{
             endDate:'',
             currentlyWorking:true,
             workSummery:' Designed, developed, and maintained full-stack applications using React and Node.js.\n'+
-            '• Implemented responsive user interfaces with React, ensuring seamless user experiences across\n'+
+            'Implemented responsive user interfaces with React, ensuring seamless user experiences across'+
             'various devices and browsers.\n'+
-            '• Maintaining the React Native in-house organization application.'+
-            '• CreatedRESTfulAPIs withNode.js and Express,facilitating data communicationbetween the front-end'+
+            'Maintaining the React Native in-house organization application.\n'+
+            'CreatedRESTfulAPIs withNode.js and Express,facilitating data communicationbetween the front-end '+
             'and back-end systems.'
         },
         {
@@ -34,11 +34,11 @@ export default{
             startDate:'May 2019',
             endDate:'Jan 2021',
             currentlyWorking:false,
-            workSummery:' Designed, developed, and maintained full-stack applications using React and Node.js.'+
-            '• Implemented responsive user interfaces with React, ensuring seamless user experiences across'+
-            'various devices and browsers.'+
-            '• Maintaining the React Native in-house organization application.'+
-            '• CreatedRESTfulAPIs withNode.js and Express,facilitating data communicationbetween the front-end'+
+            workSummery:' Designed, developed, and maintained full-stack applications using React and Node.js.\n'+
+            'Implemented responsive user interfaces with React, ensuring seamless user experiences across'+
+            'various devices and browsers.\n'+
+            'Maintaining the React Native in-house organization application.\n'+
+            'CreatedRESTfulAPIs withNode.js and Express,facilitating data communicationbetween the front-end'+
             'and back-end systems.'
         }
     ],
