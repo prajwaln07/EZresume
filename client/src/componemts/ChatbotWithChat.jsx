@@ -59,8 +59,29 @@ const Chatbot = () => {
         style={{ minHeight: '350px' }}
       >
         {/* Decorative Floating Elements */}
-        <div className="absolute -top-10 -left-10 w-32 h-32 bg-indigo-300 rounded-full opacity-30"></div>
-        <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-purple-300 rounded-full opacity-30"></div>
+        <motion.div 
+        initial={{x:-10,y:10}}
+        animate={{x:0,y:0}}
+        transition={{
+          duration:5,
+          repeat:Infinity,
+          ease:"easeInOut",
+          repeatType: 'reverse'
+        }}
+        
+        className="absolute -top-10 -left-10 w-32 h-32 bg-indigo-300 rounded-full opacity-30"></motion.div>
+        <motion.div 
+
+        initial={{x:30,y:30}}
+        animate={{x:0,y:0}}
+        transition={{
+          duration:4,
+          repeat:Infinity,
+          repeatType:"reverse",
+          ease:"easeInOut"
+        }}
+
+         className="absolute -bottom-10 -right-10 w-32 h-32 bg-purple-300 rounded-full opacity-30"></motion.div>
 
         {/* Chatbot Text */}
         <h2 className="text-3xl font-semibold mb-4 text-center">
