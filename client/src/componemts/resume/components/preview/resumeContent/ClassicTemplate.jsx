@@ -3,7 +3,7 @@ import React from 'react';
 // Personal Detail Component
 function PersonalDetailPreview({ resumeInfo }) {
   return (
-    <div>
+    <div className='mt-6 '>
       <h2
         className="font-bold text-xl text-center"
         style={{
@@ -198,7 +198,7 @@ function SkillsPreview({ resumeInfo }) {
 // Combined Component: ClassicTemplate
 function ClassicTemplate({ resumeInfo }) {
   return (
-    <div>
+    <div className='border-t-8 border-red-400  rounded-t-md '>
       <PersonalDetailPreview resumeInfo={resumeInfo} />
       <SummeryPreview resumeInfo={resumeInfo} />
       <EducationalPreview resumeInfo={resumeInfo} />
