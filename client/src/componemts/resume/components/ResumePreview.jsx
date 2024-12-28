@@ -5,6 +5,8 @@ import ModernResumeTemplate from '../components/preview/resumeContent/ModernResu
 import ClassicTemplate from './preview/resumeContent/ClassicTemplate';
 import MicrosoftTemplate from './preview/resumeContent/MicrosoftTemplate';
 import NextGenTemplate from './preview/resumeContent/NextGenTemplate';
+import SimpleTemplate from './preview/resumeContent/SimpleTemplate';
+
 import html2pdf from 'html2pdf.js';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
@@ -59,8 +61,12 @@ const ResumePreview = () => {
         case 'NextGenLayout':
         return <NextGenTemplate resumeInfo={resumeInfo} resumeRef={resumeRef}></NextGenTemplate>;
 
+        case 'SimpleLayout':
+        return <SimpleTemplate resumeInfo={resumeInfo} resumeRef={resumeRef}></SimpleTemplate>;
+
+
       default:
-        return <NextGenTemplate resumeInfo={resumeInfo} resumeRef={resumeRef} />;
+        return <SimpleTemplate resumeInfo={resumeInfo} resumeRef={resumeRef} />;
     }
   };
 
