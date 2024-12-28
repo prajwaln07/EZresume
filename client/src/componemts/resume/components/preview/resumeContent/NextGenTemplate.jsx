@@ -11,9 +11,9 @@ import {
 
 const NextGenTemplate = ({ resumeInfo, resumeRef }) => {
   return (
-    <div ref={resumeRef} className="shadow-lg h-full p-8 bg-white rounded-md font-serif text-gray-800" style={{ borderColor: resumeInfo?.themeColor }}>
+    <div ref={resumeRef} className="shadow-lg h-full p-4 bg-white rounded-md font-serif text-gray-800" style={{ borderColor: resumeInfo?.themeColor }}>
       {/* Header Section */}
-      <div className="text-center pb-6 mb-8 border-gray-300">
+      <div className="text-center pb-2  border-gray-300">
         <h1 className="text-3xl font-bold" style={{ color: '#32CD32', fontFamily: 'Georgia, serif' }}>
           {resumeInfo?.firstName} {resumeInfo?.lastName}
         </h1>
