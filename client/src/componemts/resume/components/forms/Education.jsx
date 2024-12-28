@@ -4,9 +4,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 function Education() {
-  const [loading, setLoading] = useState(false);
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
-  const params = useParams();
   const [educationalList, setEducationalList] = useState([
     {
       universityName: '',
@@ -61,8 +59,8 @@ function Education() {
 
   return (
     <div className="p-5 shadow-lg rounded-lg border-t-4 border-primary mt-10 bg-white">
-      <h2 className="font-bold text-lg text-gray-800">Education</h2>
-      <p className="text-sm text-gray-600">Add your educational details</p>
+      <h2 className="font-bold text-2xl text-gray-800">Education</h2>
+      <p className="text-sm text-gray-600 mt-2">Add your educational details</p>
 
       <div>
         {educationalList.map((item, index) => (
@@ -94,6 +92,7 @@ function Education() {
                 defaultValue={item?.major}
               />
             </div>
+
             <div>
               <label className="block text-sm font-medium text-gray-700">Start Date</label>
               <input
@@ -104,6 +103,7 @@ function Education() {
                 defaultValue={item?.startDate}
               />
             </div>
+
             <div>
               <label className="block text-sm font-medium text-gray-700">End Date</label>
               <input
@@ -114,6 +114,7 @@ function Education() {
                 defaultValue={item?.endDate}
               />
             </div>
+
             <div className="col-span-2">
               <label className="block text-sm font-medium text-gray-700">Description</label>
               <textarea
@@ -123,6 +124,7 @@ function Education() {
                 defaultValue={item?.description}
               />
             </div>
+            
           </div>
         ))}
       </div>

@@ -15,7 +15,6 @@ const formField = {
 function Experience() {
   const [experinceList, setExperinceList] = useState([]);
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
-  const params = useParams();
 
   useEffect(() => {
     if (resumeInfo?.experience?.length > 0) {
@@ -50,8 +49,8 @@ function Experience() {
 
   return (
     <div className="p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10">
-      <h2 className="font-bold text-lg">Professional Experience</h2>
-      <p>Add Your Previous Job Experience</p>
+      <h2 className="font-bold text-2xl ">Professional Experience</h2>
+      <p className="text-gray-600 mt-2" >Add Your Previous Job Experience</p>
       <div>
         {experinceList.map((item, index) => (
           <div key={index} className="grid grid-cols-2 gap-3 border p-3 my-5 rounded-lg">
@@ -115,7 +114,7 @@ function Experience() {
               <label className="text-xs">Work Summary</label>
               <textarea
                 name="workSummery"
-                rows="4"
+                rows="6"
                 className="border border-gray-300 p-2 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-primary"
                 onChange={(event) => handleChange(index, event)}
                 value={item.workSummery}
@@ -124,8 +123,9 @@ function Experience() {
           </div>
         ))}
       </div>
+
       <div className="flex justify-between">
-        <div className="flex gap-2">
+        <div className="flex justify-between gap-2">
           <button
             onClick={AddNewExperience}
             className="text-primary  px-4 py-2 text-sm font-medium text-white bg-green-500 rounded hover:bg-primary-dark "
@@ -140,6 +140,7 @@ function Experience() {
           </button>
         </div>
       </div>
+
     </div>
   );
 }

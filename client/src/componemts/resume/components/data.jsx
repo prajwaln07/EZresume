@@ -16,13 +16,12 @@ export default{
             city:'New York',
             state:'NY',
             startDate:'Jan 2021',
-            endDate:'',
+            endDate:'Feb 2023',
             currentlyWorking:true,
             workSummery:' Designed, developed, and maintained full-stack applications using React and Node.js.\n'+
-            'Implemented responsive user interfaces with React, ensuring seamless user experiences across'+
-            'various devices and browsers.\n'+
+            'Implemented responsive user interfaces with React, ensuring seamless user experiences. \n'+
             'Maintaining the React Native in-house organization application.\n'+
-            'CreatedRESTfulAPIs withNode.js and Express,facilitating data communicationbetween the front-end '+
+            'CreatedRESTfulAPIs withNode.js and Express .\n Facilitating data communicationbetween the front-end '+
             'and back-end systems.'
         },
         {
@@ -35,10 +34,9 @@ export default{
             endDate:'Jan 2021',
             currentlyWorking:false,
             workSummery:' Designed, developed, and maintained full-stack applications using React and Node.js.\n'+
-            'Implemented responsive user interfaces with React, ensuring seamless user experiences across'+
-            'various devices and browsers.\n'+
+            'Implemented responsive user interfaces with React, ensuring seamless user experiences. \n'+
             'Maintaining the React Native in-house organization application.\n'+
-            'CreatedRESTfulAPIs withNode.js and Express,facilitating data communicationbetween the front-end'+
+            'CreatedRESTfulAPIs withNode.js and Express .\n Facilitating data communicationbetween the front-end '+
             'and back-end systems.'
         }
     ],

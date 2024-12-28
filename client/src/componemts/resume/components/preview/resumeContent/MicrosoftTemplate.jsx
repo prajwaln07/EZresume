@@ -5,7 +5,7 @@ const MicrosoftTemplate = ({ resumeInfo, resumeRef }) => {
     <div
       ref={resumeRef}
       className="p-8 bg-white text-black font-sans"
-      style={{ width: "8.5in", minHeight: "11in" }}
+      style={{ width: "7.8in", minHeight: "11in" }}
     >
       {/* Header Section */}
       <div className="text-left mb-6">

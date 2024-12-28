@@ -10,7 +10,6 @@ function PersonalDetail({ enabledNext }) {
 
    
     const handleInputChange = (e) => {
-        enabledNext(true);
         const { name, value } = e.target;
 
         setFormData({
@@ -32,8 +31,9 @@ function PersonalDetail({ enabledNext }) {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* First Name */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">First Name</label>
+                        <label htmlFor='firstName' className="block text-sm font-medium text-gray-700">First Name</label>
                         <input
+                            id="firstName"
                             type="text"
                             name="firstName"
                             defaultValue={resumeInfo?.firstName}
@@ -45,23 +45,25 @@ function PersonalDetail({ enabledNext }) {
 
                     {/* Last Name */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Last Name</label>
+                        <label htmlFor='lastName'  className="block text-sm font-medium text-gray-700">Last Name</label>
                         <input
                             type="text"
+                            id="lastName"
                             name="lastName"
                             defaultValue={resumeInfo?.lastName}
                             onChange={handleInputChange}
                             required
-                            className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-primary focus:border-primary p-2"
+                            className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm  p-2"
                         />
                     </div>
 
                     {/* Job Title */}
                     <div className="col-span-1 md:col-span-2">
-                        <label className="block text-sm font-medium text-gray-700">Job Title</label>
+                        <label htmlFor="jobTitle" className="block text-sm font-medium text-gray-700">Job Title</label>
                         <input
                             type="text"
                             name="jobTitle"
+                            id="jobTitle"
                             defaultValue={resumeInfo?.jobTitle}
                             onChange={handleInputChange}
                             required
@@ -71,10 +73,11 @@ function PersonalDetail({ enabledNext }) {
 
                     {/* Address */}
                     <div className="col-span-1 md:col-span-2">
-                        <label className="block text-sm font-medium text-gray-700">Address</label>
+                        <label htmlFor='address' className="block text-sm font-medium text-gray-700">Address</label>
                         <input
                             type="text"
                             name="address"
+                            id="address"
                             defaultValue={resumeInfo?.address}
                             onChange={handleInputChange}
                             required
@@ -86,7 +89,7 @@ function PersonalDetail({ enabledNext }) {
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Phone</label>
                         <input
-                            type="text"
+                            type="phone"
                             name="phone"
                             defaultValue={resumeInfo?.phone}
                             onChange={handleInputChange}

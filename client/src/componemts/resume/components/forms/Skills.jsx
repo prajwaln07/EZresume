@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Rating } from '@smastrom/react-rating';
 import '@smastrom/react-rating/style.css';
 import { ResumeInfoContext } from '../../../../context/ResumeInfoContext';
-import { useParams } from 'react-router-dom';
 
 function Skills() {
   const [skillsList, setSkillsList] = useState([
@@ -11,7 +10,6 @@ function Skills() {
       rating: 0
     }
   ]);
-  const { resumeId } = useParams();
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
 
   // Initialize skills list from resumeInfo
@@ -52,14 +50,14 @@ function Skills() {
 
   return (
     <div className="p-5 shadow-lg rounded-lg border-t-4 border-primary mt-10 bg-white">
-      <h2 className="font-bold text-lg text-gray-800">Skills</h2>
-      <p className="text-sm text-gray-600">Add your top professional key skills</p>
+      <h2 className="font-bold text-2xl text-gray-800">Skills</h2>
+      <p className="text-sm text-gray-600 my-2">Add your top professional key skills</p>
 
       <div>
         {skillsList.map((item, index) => (
-          <div key={index} className="flex justify-between items-center mb-2 border rounded-lg p-3 bg-gray-50">
+          <div key={index} className="mt-2 flex justify-between items-center mb-2 border rounded-lg p-3 bg-gray-50">
             <div className="flex-1">
-              <label className="block text-xs font-medium text-gray-700">Name</label>
+              <label className="block text-xs font-medium text-gray-700 ml-1 mb-1">Name</label>
               <input
                 className="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-primary focus:outline-none"
                 defaultValue={item.name}

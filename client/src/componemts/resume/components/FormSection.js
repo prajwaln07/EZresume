@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import { ArrowLeft, ArrowRight, Home } from 'lucide-react';
+import { Link} from 'react-router-dom';
+
 import Summery from './forms/Summery';
 import Experience from './forms/Experience';
 import Education from './forms/Education';
 import Skills from './forms/Skills';
-import { Link, useParams } from 'react-router-dom';
 import PersonalDetail from './forms/PersonalDetail';
 
 const FormSection = () => {
+
   const [activeFormIndex, setActiveFormIndex] = useState(1);
   const [enableNext, setEnableNext] = useState(true);  // Set initial state to false
-  const { resumeId } = useParams();
 
   
   let nextClickHandler=()=>{
@@ -20,11 +21,13 @@ const FormSection = () => {
   return (
     <div>
       <div className='flex justify-between items-center'>
+
         <div className='flex gap-5'>
           <Link to={"/"}>
             <button><Home /></button>
           </Link>
         </div>
+
         <div className='flex gap-2'>
           {activeFormIndex > 1 && (
             <button 
@@ -50,6 +53,7 @@ const FormSection = () => {
 
           )}
         </div>
+        
       </div>
 
       {activeFormIndex === 1 ? (
@@ -63,6 +67,7 @@ const FormSection = () => {
       ) : activeFormIndex === 5 ? (
         <Skills />
       ) : null}
+
     </div>
   );
 };

@@ -5,10 +5,9 @@ import { useParams } from 'react-router-dom'
 const Summery = ({ enabledNext }) => {
     const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext)
     const [summery, setSummery] = useState()
-    const params = useParams()
 
     useEffect(() => {
-        if (summery) {
+        if(summery){
             setResumeInfo({
                 ...resumeInfo,
                 summery: summery,
@@ -18,8 +17,8 @@ const Summery = ({ enabledNext }) => {
 
     return (
         <div className="p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10">
-            <h2 className="font-bold text-lg">Summary</h2>
-            <p>Add a summary for your job title</p>
+            <h2 className="font-bold text-2xl">Summary</h2>
+            <p className="text-gray-600 mt-2">Add a summary for your job title</p>
 
             <form className="mt-7">
                 <textarea
