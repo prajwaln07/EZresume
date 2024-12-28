@@ -49,7 +49,7 @@ const TemplatePage = () => {
       {/* Template Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {loadingTemplates
-          ? Array(4) // Placeholder for skeleton loading
+          ? Array(8) // Placeholder for skeleton loading
               .fill(0)
               .map((_, index) => (
                 <div
