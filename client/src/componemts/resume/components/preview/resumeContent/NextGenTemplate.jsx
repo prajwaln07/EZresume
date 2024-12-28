@@ -3,8 +3,6 @@ import {
   Mail,
   Phone,
   MapPin,
-  CheckCircle,
-  Circle,
   Briefcase,
   GraduationCap
 } from 'lucide-react';

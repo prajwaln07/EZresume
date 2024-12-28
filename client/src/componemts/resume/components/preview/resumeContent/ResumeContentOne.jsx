@@ -91,8 +91,8 @@ const ResumeContent = ({ resumeInfo, resumeRef }) => {
           ))}
         </div>
       )}
-
-      {/* Skills */}
+ 
+      {/* Skills .. */}
       {resumeInfo?.skills?.length > 0 && (
         <div className="my-4">
           <h2 className="text-xl font-bold border-b-2 pb-1 mb-2">Technical Skills</h2>

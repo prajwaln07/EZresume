@@ -75,7 +75,7 @@ const SimpleTemplate = ({ resumeInfo, resumeRef }) => {
         </div>
       )}
 
-      {/* Skills Section */}
+      {/* Skills Section .. */}
       {resumeInfo?.skills?.length > 0 && (
         <div className="mb-6">
           <h2 className="text-lg text-center bg-blue-100 font-semibold text-gray-700 border-b-2 border-gray-200 pb-1 mb-4">

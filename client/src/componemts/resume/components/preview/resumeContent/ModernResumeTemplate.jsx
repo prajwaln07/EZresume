@@ -97,7 +97,7 @@ const ModernResumeTemplate = ({ resumeInfo, resumeRef }) => {
         </div>
       )}
 
-      {/* Technical Skills */}
+      {/* Technical Skills ..*/}
       {resumeInfo?.skills?.length > 0 && (
         <div className="mb-6">
           <h2 className="text-xl font-bold text-blue-400   border-b-2 pb-1 mb-2">

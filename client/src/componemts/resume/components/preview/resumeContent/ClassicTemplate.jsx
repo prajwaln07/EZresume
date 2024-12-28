@@ -195,7 +195,7 @@ function SkillsPreview({ resumeInfo }) {
   );
 }
 
-// Combined Component: ClassicTemplate
+// Combined Component: ClassicTemplate..
 function ClassicTemplate({ resumeInfo }) {
   return (
     <div className='border-t-8 border-red-400  rounded-t-md '>

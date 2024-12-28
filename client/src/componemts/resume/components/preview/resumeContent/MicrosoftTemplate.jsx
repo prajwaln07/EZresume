@@ -76,7 +76,7 @@ const MicrosoftTemplate = ({ resumeInfo, resumeRef }) => {
         </div>
       )}
 
-      {/* Skills Section */}
+      {/* Skills Section ..*/}
       {resumeInfo?.skills?.length > 0 && (
         <div>
           <h2 className="text-lg font-bold">Skills & Abilities</h2>
