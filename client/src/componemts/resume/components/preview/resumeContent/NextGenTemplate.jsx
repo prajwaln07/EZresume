@@ -94,8 +94,8 @@ const NextGenTemplate = ({ resumeInfo, resumeRef }) => {
         <div className="mb-8">
           <h2 className="text-lg font-bold border-b-2 pb-2 mb-4" style={{ color: '#32CD32', fontFamily: 'Georgia, serif' }}>Skills & Abilities</h2>
           <ul className="grid grid-cols-2 gap-4 text-sm text-gray-700">
-            {resumeInfo.skills.map((skill) => (
-                <li key={skill.id} className="flex items-center">
+            {resumeInfo.skills.map((skill,index) => (
+                <li key={index} className="flex items-center">
                 <span
                     className={`px-3 py-1 rounded-full text-sm ${
                     skill.level > 75 ? 'bg-green-500 text-white' : 'bg-gray-300'

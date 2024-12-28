@@ -82,8 +82,8 @@ const SimpleTemplate = ({ resumeInfo, resumeRef }) => {
             SKILLS
           </h2>
           <ul className="flex flex-wrap gap-4 text-sm text-gray-700">
-            {resumeInfo.skills.map((skill) => (
-              <li key={skill.id} className="bg-gray-100 px-3 py-1 rounded-md shadow-sm">
+            {resumeInfo.skills.map((skill,index) => (
+              <li key={index} className="bg-gray-100 px-3 py-1 rounded-md shadow-sm">
                 {skill.name}
               </li>
             ))}
