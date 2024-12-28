@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { ResumeInfoContext } from '../../../../context/ResumeInfoContext';
-import { useParams } from 'react-router-dom';
 
 const formField = {
   title: '',

@@ -1,21 +1,14 @@
 import { ResumeInfoContext } from '../../../../context/ResumeInfoContext';
-import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useContext} from 'react';
 
-function PersonalDetail({ enabledNext }) {
-    const params = useParams();
+function PersonalDetail() {
     const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
-
-    const [formData, setFormData] = useState();
 
    
     const handleInputChange = (e) => {
         const { name, value } = e.target;
 
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
+       
         setResumeInfo({
             ...resumeInfo,
             [name]: value,
@@ -24,7 +17,7 @@ function PersonalDetail({ enabledNext }) {
 
     return (
         <div className="p-6 bg-white shadow-lg rounded-lg border-t-4 border-t-primary mt-10">
-            <h2 className="font-bold text-2xl text-primary mb-2">Personal Details</h2>
+            <h2 className="font-bold text-2xl  mb-2">Personal Details</h2>
             <p className="text-gray-600">Get started with your basic information.</p>
 
             <form className="mt-5">
@@ -67,7 +60,7 @@ function PersonalDetail({ enabledNext }) {
                             defaultValue={resumeInfo?.jobTitle}
                             onChange={handleInputChange}
                             required
-                            className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-primary focus:border-primary p-2"
+                            className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm  p-2"
                         />
                     </div>
 
@@ -81,7 +74,7 @@ function PersonalDetail({ enabledNext }) {
                             defaultValue={resumeInfo?.address}
                             onChange={handleInputChange}
                             required
-                            className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-primary focus:border-primary p-2"
+                            className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm p-2"
                         />
                     </div>
 

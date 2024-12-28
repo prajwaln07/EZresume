@@ -1,7 +1,5 @@
 import { ResumeInfoContext } from '../../../../context/ResumeInfoContext';
-import { LoaderCircle } from 'lucide-react';
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 
 function Education() {
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
@@ -59,6 +57,7 @@ function Education() {
 
   return (
     <div className="p-5 shadow-lg rounded-lg border-t-4 border-primary mt-10 bg-white">
+
       <h2 className="font-bold text-2xl text-gray-800">Education</h2>
       <p className="text-sm text-gray-600 mt-2">Add your educational details</p>
 

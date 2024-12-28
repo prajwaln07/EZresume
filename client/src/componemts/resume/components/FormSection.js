@@ -14,8 +14,12 @@ const FormSection = () => {
   const [enableNext, setEnableNext] = useState(true);  // Set initial state to false
 
   
-  let nextClickHandler=()=>{
-    setActiveFormIndex(activeFormIndex + 1);
+  let ClickHandler=(value)=>{
+    if(value == 1)
+     setActiveFormIndex(activeFormIndex -1);
+    else
+     setActiveFormIndex(activeFormIndex +1);
+
   }
 
   return (
@@ -29,11 +33,12 @@ const FormSection = () => {
         </div>
 
         <div className='flex gap-2'>
+          
           {activeFormIndex > 1 && (
             <button 
               size="sm" 
               className='cursor-pointer' 
-              onClick={() => setActiveFormIndex(activeFormIndex - 1)}>
+              onClick={() => ClickHandler(1)}>
               <ArrowLeft />
             </button>
           )}
@@ -44,7 +49,7 @@ const FormSection = () => {
               disabled={!enableNext}
               className="flex gap-2 cursor-pointer" 
               size="sm"
-              onClick={() => nextClickHandler()
+              onClick={ ()=> ClickHandler(0)
                  }>
               Next
               
@@ -57,9 +62,9 @@ const FormSection = () => {
       </div>
 
       {activeFormIndex === 1 ? (
-        <PersonalDetail enabledNext={(v) => setEnableNext(v)} />
+        <PersonalDetail/>
       ) : activeFormIndex === 2 ? (
-        <Summery enabledNext={(v) => setEnableNext(v)} />
+        <Summery/>
       ) : activeFormIndex === 3 ? (
         <Experience />
       ) : activeFormIndex === 4 ? (

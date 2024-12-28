@@ -1,8 +1,7 @@
 import { ResumeInfoContext } from '../../../../context/ResumeInfoContext'
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 
-const Summery = ({ enabledNext }) => {
+const Summery = () => {
     const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext)
     const [summery, setSummery] = useState()
 
