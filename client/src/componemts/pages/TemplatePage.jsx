@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { FaInfoCircle } from "react-icons/fa";
+import { useDispatch } from "react-redux";
 import { setLoading, unsetLoading } from "../../redux/actions/loadingSetter";
 import { changeTemplate } from "../../redux/actions/templateDetails";
 
 const TemplatePage = () => {
   const [allTemplates, setAllTemplates] = useState([]);
   const [loadingTemplates, setLoadingTemplates] = useState(true); // Loading state for skeleton
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalDescription, setModalDescription] = useState(""); // Store description for modal
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -36,6 +39,21 @@ const TemplatePage = () => {
       navigate(`/resume/maker`);
     }
   };
+
+  const openModal = (description) => {
+    console.log("description --> ",description)
+    let arr=description.split('.');
+    console.log("arr --> ",arr)
+
+    setModalDescription(description);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setModalDescription("");
+  };
+
 
   return (
     <div className="p-8 min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -67,6 +85,10 @@ const TemplatePage = () => {
                 className="bg-gray-200 dark:bg-gray-800 rounded-md shadow-lg p-4 relative transform transition-all duration-300 group hover:scale-105 hover:shadow-xl hover:bg-teal-100 dark:hover:bg-teal-800"
               >
                 <div className="relative flex items-center justify-center">
+                  <FaInfoCircle
+                    onClick={() => openModal(template.description)}
+                    className="size-6 absolute -right-2 -top-2 text-blue-500 opacity-0 group-hover:opacity-100 cursor-pointer transition-opacity duration-300"
+                  />
                   <img
                     src={template.image}
                     alt={template.name}
@@ -83,7 +105,7 @@ const TemplatePage = () => {
                       }
                       className="absolute bottom-4 left-0 right-0 mx-auto bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 rounded w-3/4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     >
-                      "Use this template"
+                      Use this template
                     </button>
                   ) : (
                     <button
@@ -96,7 +118,7 @@ const TemplatePage = () => {
                       }
                       className="pointer-events-none absolute bottom-4 left-0 right-0 mx-auto bg-yellow-300 hover:bg-yellow-400 text-white font-bold py-2 rounded w-3/4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     >
-                      "Premium Required"
+                      Premium Required
                     </button>
                   )}
                 </div>
@@ -106,6 +128,37 @@ const TemplatePage = () => {
               </div>
             ))}
       </div>
+
+      {/* Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-3/4 md:w-1/2 lg:w-1/3 shadow-lg">
+            <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4">
+              Template Description
+            </h3>
+            {
+            modalDescription.split('.').map((point, index) => (
+              point.trim() && (
+                <div key={index} className="text-gray-600 dark:text-gray-400 ">
+                  <div> 
+                    <p className="inline font-semibold">{index+1}</p>
+                  {". " + point.trim()}
+                  </div>
+                 
+                  <div className="h-2 block"></div>
+                </div>
+              )
+            ))
+            }
+            <button
+              onClick={closeModal}
+              className="mt-4 bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
