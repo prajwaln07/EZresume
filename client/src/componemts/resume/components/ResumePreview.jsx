@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useRef } from 'react';
 import { ResumeInfoContext } from '../../../context/ResumeInfoContext';
 import ResumeContent from '../components/preview/resumeContent/ResumeContentOne';
 import ModernResumeTemplate from '../components/preview/resumeContent/ModernResumeTemplate';
