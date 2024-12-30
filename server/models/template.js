@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const templateSchema = new mongoose.Schema({
   name: { type: String, required: true, maxLength: 100 },
-  description: { type: String, required: true, maxLength: 250 },
+  description: { type: String, required: true, maxLength: 550 },
   layout: { type: String, required: true }, // Stores basic layout type or identifier
   structure: { 
     type: mongoose.Schema.Types.Mixed, // Allows JSON or dynamic data
