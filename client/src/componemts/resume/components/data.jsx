@@ -15,8 +15,8 @@ export default{
             companyName:'Amazon',
             city:'New York',
             state:'NY',
-            startDate:'Jan 2021',
-            endDate:'Feb 2023',
+            startDate:'01-01-2021',
+            endDate:  '01-01-2022',
             currentlyWorking:true,
             workSummery:' Designed, developed, and maintained full-stack applications using React and Node.js.\n'+
             'Implemented responsive user interfaces with React, ensuring seamless user experiences. \n'+
@@ -30,9 +30,9 @@ export default{
             companyName:'Google',
             city:'Charlotte',
             state:'NC',
-            startDate:'May 2019',
-            endDate:'Jan 2021',
-            currentlyWorking:false,
+            startDate:'01-01-2021',
+            endDate:'01-01-2022',
+            currentlyWorking:true,
             workSummery:' Designed, developed, and maintained full-stack applications using React and Node.js.\n'+
             'Implemented responsive user interfaces with React, ensuring seamless user experiences. \n'+
             'Maintaining the React Native in-house organization application.\n'+
@@ -44,8 +44,8 @@ export default{
         {
             id:1,
             universityName:'Western Illinois University',
-            startDate:'Aug 2018',
-            endDate:'Dec:2019',
+            startDate:'01-02-2023',
+            endDate:'01-02-2024',
             degree:'Master',
             major:'Computer Science',
             description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud'
@@ -53,8 +53,8 @@ export default{
         {
             id:2,
             universityName:'Western Illinois University',
-            startDate:'Aug 2018',
-            endDate:'Dec 2019',
+            startDate:'01-03-2023',
+            endDate:'01-01-2025',
             degree:'Master',
             major:'Computer Science',
             description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud'
