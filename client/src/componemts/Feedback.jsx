@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { AtomSpinner } from "react-epic-spinners";
-
 import { setLoading } from "../redux/actions/loadingSetter";
 import { unsetLoading } from "../redux/actions/loadingSetter";
 import { useNavigate } from "react-router-dom";
@@ -21,6 +19,7 @@ const Feedback = () => {
   const fetchFeedbacks = async () => {
     try {
       dispatch(setLoading());
+      
       const response = await axios.get(
         "https://ezresume.onrender.com/api/v1/feedback/"
       ); // API call .....
@@ -55,7 +54,22 @@ const Feedback = () => {
   if (loading)
     return (
       <div className="flex justify-center items-center">
-        <AtomSpinner color="red" />
+         <div className="flex flex-wrap justify-center items-start gap-4 p-4">
+        {Array(4)
+          .fill(0)
+          .map((_, index) => (
+            <div
+              key={index}
+              className="bg-gray-300 dark:bg-gray-700 flex justify-center flex-col items-center rounded-lg shadow-md p-4 w-72 animate-pulse"
+            >
+              <div className="bg-gray-400 dark:bg-gray-600 rounded-md  w-5/12 h-3 mb-4"></div>
+              <div className="bg-gray-400 dark:bg-gray-600 h-20 w-3/4 mb-2 mx-auto rounded"></div>
+              <div className="bg-gray-400 dark:bg-gray-600 h-6 w-6/12 mb-2 mx-auto rounded"></div>
+
+
+            </div>
+          ))}
+      </div>
       </div>
     );
     
