@@ -7,7 +7,7 @@ export default{
     phone:'(+91)-9699xxxxxx',
     email:'exmaple@gmail.com',
     themeColor:"#ff6666",
-    summery:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    summery:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     experience:[
         {
             id:1,
@@ -21,8 +21,7 @@ export default{
             workSummery:' Designed, developed, and maintained full-stack applications using React and Node.js.\n'+
             'Implemented responsive user interfaces with React, ensuring seamless user experiences. \n'+
             'Maintaining the React Native in-house organization application.\n'+
-            'CreatedRESTfulAPIs withNode.js and Express .\n Facilitating data communicationbetween the front-end '+
-            'and back-end systems.'
+            'CreatedRESTfulAPIs withNode.js and Express.'
         },
         {
             id:2,
@@ -36,8 +35,7 @@ export default{
             workSummery:' Designed, developed, and maintained full-stack applications using React and Node.js.\n'+
             'Implemented responsive user interfaces with React, ensuring seamless user experiences. \n'+
             'Maintaining the React Native in-house organization application.\n'+
-            'CreatedRESTfulAPIs withNode.js and Express .\n Facilitating data communicationbetween the front-end '+
-            'and back-end systems.'
+            'CreatedRESTfulAPIs withNode.js and Express.'
         }
     ],
     education:[

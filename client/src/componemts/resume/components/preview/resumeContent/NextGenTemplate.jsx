@@ -96,7 +96,7 @@ const NextGenTemplate = ({ resumeInfo, resumeRef }) => {
                 <li key={index} className="flex items-center">
                 <span
                     className={`px-3 py-1 rounded-full text-sm ${
-                    skill.level > 75 ? 'bg-green-500 text-white' : 'bg-gray-300'
+                    (skill.rating * 20) > 75 ? 'bg-green-500 text-white' : 'bg-gray-300'
                     }`}
                 >
                     {skill.name}
