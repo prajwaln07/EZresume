@@ -15,7 +15,7 @@ const FormSection = () => {
 
   
   let ClickHandler=(value)=>{
-    if(value == 1)
+    if(value === 1)
      setActiveFormIndex(activeFormIndex -1);
     else
      setActiveFormIndex(activeFormIndex +1);
