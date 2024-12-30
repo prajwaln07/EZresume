@@ -1,12 +1,5 @@
 import React from 'react';
-// import 'index.css'
-import {
-  Mail,
-  Phone,
-  Briefcase,
-  GraduationCap,
-  CheckCircle,
-} from 'lucide-react';
+import { Mail, Phone, Briefcase, GraduationCap, CheckCircle } from 'lucide-react';
 
 const ModernResumeTemplate = ({ resumeInfo, resumeRef }) => {
   return (
@@ -16,9 +9,7 @@ const ModernResumeTemplate = ({ resumeInfo, resumeRef }) => {
         <h1 className="text-4xl font-bold text-gray-800">
           {resumeInfo?.firstName} {resumeInfo?.lastName}
         </h1>
-        <h2 className="text-lg font-medium text-gray-600 mt-1">
-          {resumeInfo?.jobTitle}
-        </h2>
+        <h2 className="text-lg font-medium text-gray-600 mt-1">{resumeInfo?.jobTitle}</h2>
         <div className="flex justify-center gap-6 mt-2 text-gray-600">
           {resumeInfo?.phone && (
             <div className="flex items-center gap-1">
@@ -38,21 +29,15 @@ const ModernResumeTemplate = ({ resumeInfo, resumeRef }) => {
       {/* Profile Summary */}
       {resumeInfo?.summery && (
         <div className="mb-6">
-          <h2 className="text-xl font-bold text-blue-400   border-b-2 pb-1 mb-2">
-            Profile Summary
-          </h2>
-          <p className="text-gray-700 leading-relaxed text-sm">
-            {resumeInfo.summery}
-          </p>
+          <h2 className="text-xl font-bold text-blue-400 border-b-2 pb-1 mb-2">Profile Summary</h2>
+          <p className="text-gray-700 leading-relaxed text-sm">{resumeInfo.summery}</p>
         </div>
       )}
 
       {/* Work Experience */}
       {resumeInfo?.experience?.length > 0 && (
         <div className="mb-6">
-          <h2 className="text-xl font-bold text-blue-400   border-b-2 pb-1 mb-2">
-            Work Experience
-          </h2>
+          <h2 className="text-xl font-bold text-blue-400 border-b-2 pb-1 mb-2">Work Experience</h2>
           {resumeInfo.experience.map((exp, index) => (
             <div key={index} className="mb-4">
               <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-1">
@@ -64,12 +49,16 @@ const ModernResumeTemplate = ({ resumeInfo, resumeRef }) => {
                   {exp?.startDate} - {exp?.currentlyWorking ? 'Present' : exp?.endDate}
                 </span>
               </div>
-              <ul className="list-disc list-inside mt-2 text-sm text-gray-700">
-              {exp?.workSummery?.split('\n').map((point, i) => (
-               <li key={i} className="custom-bullet">{point}</li>
+              <ul className="list-disc pl-5 mt-2 text-sm text-gray-700 flex flex-wrap gap-2 items-start">
+                {exp?.workSummery?.split('\n').map((point, i) => (
+                  <li
+                    key={i}
+                    className="break-words max-w-full relative before:content-['•'] before:absolute before:-left-4 before:top-0"
+                  >
+                    {point}
+                  </li>
                 ))}
               </ul>
-
             </div>
           ))}
         </div>
@@ -78,9 +67,7 @@ const ModernResumeTemplate = ({ resumeInfo, resumeRef }) => {
       {/* Education */}
       {resumeInfo?.education?.length > 0 && (
         <div className="mb-6">
-          <h2 className="text-xl font-bold text-blue-400   border-b-2 pb-1 mb-2">
-            Education
-          </h2>
+          <h2 className="text-xl font-bold text-blue-400 border-b-2 pb-1 mb-2">Education</h2>
           {resumeInfo.education.map((edu, index) => (
             <div key={index} className="mb-4">
               <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-1">
@@ -97,15 +84,13 @@ const ModernResumeTemplate = ({ resumeInfo, resumeRef }) => {
         </div>
       )}
 
-      {/* Technical Skills ..*/}
+      {/* Technical Skills */}
       {resumeInfo?.skills?.length > 0 && (
         <div className="mb-6">
-          <h2 className="text-xl font-bold text-blue-400   border-b-2 pb-1 mb-2">
-            Technical Skills
-          </h2>
+          <h2 className="text-xl font-bold text-blue-400 border-b-2 pb-1 mb-2">Technical Skills</h2>
           <ul className="grid grid-cols-2 gap-2 text-sm text-gray-700">
             {resumeInfo.skills.map((skill, index) => (
-              <li key={index} className="flex items-center gap-1 ">
+              <li key={index} className="flex items-center gap-1">
                 <CheckCircle size={16} /> {skill?.name}
               </li>
             ))}

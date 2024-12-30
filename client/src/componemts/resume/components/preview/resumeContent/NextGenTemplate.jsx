@@ -1,18 +1,19 @@
 import React from 'react';
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Briefcase,
-  GraduationCap
-} from 'lucide-react';
+import { Mail, Phone, MapPin, Briefcase, GraduationCap } from 'lucide-react';
 
 const NextGenTemplate = ({ resumeInfo, resumeRef }) => {
   return (
-    <div ref={resumeRef} className="shadow-lg h-full p-4 bg-white rounded-md font-serif text-gray-800" style={{ borderColor: resumeInfo?.themeColor }}>
+    <div
+      ref={resumeRef}
+      className="shadow-lg h-full p-4 bg-white rounded-md font-serif text-gray-800"
+      style={{ borderColor: resumeInfo?.themeColor }}
+    >
       {/* Header Section */}
-      <div className="text-center pb-2  border-gray-300">
-        <h1 className="text-3xl font-bold" style={{ color: '#32CD32', fontFamily: 'Georgia, serif' }}>
+      <div className="text-center pb-2 border-gray-300">
+        <h1
+          className="text-3xl font-bold"
+          style={{ color: '#32CD32', fontFamily: 'Georgia, serif' }}
+        >
           {resumeInfo?.firstName} {resumeInfo?.lastName}
         </h1>
         <hr className="border-t-2 border-gray-300 my-4" />
@@ -38,29 +39,63 @@ const NextGenTemplate = ({ resumeInfo, resumeRef }) => {
       {/* Profile Summary */}
       {resumeInfo?.summery && (
         <div className="mb-8">
-          <h2 className="text-lg font-bold border-b-2 pb-2 mb-4" style={{ color: '#32CD32', fontFamily: 'Georgia, serif' }}>Profile</h2>
-          <p className="text-sm leading-relaxed text-gray-700" style={{ fontFamily: 'Georgia, serif' }}>{resumeInfo.summery}</p>
+          <h2
+            className="text-lg font-bold border-b-2 pb-2 mb-4"
+            style={{ color: '#32CD32', fontFamily: 'Georgia, serif' }}
+          >
+            Profile
+          </h2>
+          <p
+            className="text-sm leading-relaxed text-gray-700"
+            style={{ fontFamily: 'Georgia, serif' }}
+          >
+            {resumeInfo.summery}
+          </p>
         </div>
       )}
 
       {/* Work Experience */}
       {resumeInfo?.experience?.length > 0 && (
         <div className="mb-8">
-          <h2 className="text-lg font-bold border-b-2 pb-2 mb-4" style={{ color: '#32CD32', fontFamily: 'Georgia, serif' }}>Experience</h2>
+          <h2
+            className="text-lg font-bold border-b-2 pb-2 mb-4"
+            style={{ color: '#32CD32', fontFamily: 'Georgia, serif' }}
+          >
+            Experience
+          </h2>
           {resumeInfo.experience.map((exp) => (
             <div key={exp.id} className="mb-6">
               <h3 className="text-md font-semibold text-gray-800 flex items-center gap-2">
                 <Briefcase size={16} /> {exp.title}
               </h3>
               <div className="flex justify-between text-sm text-gray-600">
-                <span>{exp.companyName}, {exp.city}, {exp.state}</span>
+                <span>
+                  {exp.companyName}, {exp.city}, {exp.state}
+                </span>
                 <span>
                   {exp.startDate} - {exp.currentlyWorking ? 'Present' : exp.endDate}
                 </span>
               </div>
-              <ul className="list-disc list-inside mt-2 text-sm text-gray-700">
+              <ul
+                className="list-disc mt-2 text-sm text-gray-700 pl-6"
+                style={{
+                  listStylePosition: 'outside', // Ensures proper alignment
+                  marginLeft: 0, // Avoid extra margin
+                  paddingLeft: '1.5rem', // Space for bullet alignment
+                }}
+              >
                 {exp.workSummery?.split('\n').map((point, i) => (
-                  <li key={i}>{point}</li>
+                  <li
+                    key={i}
+                    className="break-words"
+                    style={{
+                      whiteSpace: 'pre-line', // Respects newlines
+                      wordWrap: 'break-word', // Prevents text overflow
+                      maxWidth: '100%', // Prevents content overflow
+                    }}
+                  >
+                    {point}
+                  </li>
                 ))}
               </ul>
             </div>
@@ -71,7 +106,12 @@ const NextGenTemplate = ({ resumeInfo, resumeRef }) => {
       {/* Education */}
       {resumeInfo?.education?.length > 0 && (
         <div className="mb-8">
-          <h2 className="text-lg font-bold border-b-2 pb-2 mb-4" style={{ color: '#32CD32', fontFamily: 'Georgia, serif' }}>Education</h2>
+          <h2
+            className="text-lg font-bold border-b-2 pb-2 mb-4"
+            style={{ color: '#32CD32', fontFamily: 'Georgia, serif' }}
+          >
+            Education
+          </h2>
           {resumeInfo.education.map((edu) => (
             <div key={edu.id} className="mb-6">
               <h3 className="text-md font-semibold text-gray-800 flex items-center gap-2">
@@ -90,22 +130,25 @@ const NextGenTemplate = ({ resumeInfo, resumeRef }) => {
       {/* Technical Skills */}
       {resumeInfo?.skills?.length > 0 && (
         <div className="mb-8">
-          <h2 className="text-lg font-bold border-b-2 pb-2 mb-4" style={{ color: '#32CD32', fontFamily: 'Georgia, serif' }}>Skills & Abilities</h2>
+          <h2
+            className="text-lg font-bold border-b-2 pb-2 mb-4"
+            style={{ color: '#32CD32', fontFamily: 'Georgia, serif' }}
+          >
+            Skills & Abilities
+          </h2>
           <ul className="grid grid-cols-2 gap-4 text-sm text-gray-700">
-            {resumeInfo.skills.map((skill,index) => (
-                <li key={index} className="flex items-center">
+            {resumeInfo.skills.map((skill, index) => (
+              <li key={index} className="flex items-center">
                 <span
-                    className={`px-3 py-1 rounded-full text-sm ${
-                    (skill.rating * 20) > 75 ? 'bg-green-500 text-white' : 'bg-gray-300'
-                    }`}
+                  className={`px-3 py-1 rounded-full text-sm ${
+                    skill.rating * 20 > 75 ? 'bg-green-500 text-white' : 'bg-gray-300'
+                  }`}
                 >
-                    {skill.name}
+                  {skill.name}
                 </span>
-                </li>
+              </li>
             ))}
           </ul>
-
-
         </div>
       )}
     </div>

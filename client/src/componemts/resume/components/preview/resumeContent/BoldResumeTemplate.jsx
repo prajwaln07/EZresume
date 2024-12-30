@@ -50,7 +50,7 @@ const BoldResumeTemplate = ({ resumeInfo, resumeRef }) => {
         </div>
 
         {/* Vertical Divider */}
-        <div className="border-r-2 border-gray-300 absolute left-1/3 top-0 bottom-0"></div>
+        <div className="border-r-2 border-gray-300 absolute left-1/3 top-9 bottom-0"></div>
 
         {/* Right Column */}
         <div className="col-span-2 pl-8">
@@ -71,11 +71,18 @@ const BoldResumeTemplate = ({ resumeInfo, resumeRef }) => {
                   <p className="text-sm font-bold">{exp.title}</p>
                   <p className="text-xs text-gray-600">{exp.companyName}, {exp.city}, {exp.state}</p>
                   <p className="text-xs mb-2">{exp.startDate} - {exp.currentlyWorking ? 'Present' : exp.endDate}</p>
-                  <ul className="text-sm list-disc list-inside">
+
+                  <ul className="text-sm list-disc pl-5 flex flex-wrap gap-2 items-start">
                     {exp.workSummery?.split('\n').map((line, i) => (
-                      <li key={i}>{line}</li>
+                      <li
+                        key={i}
+                        className="max-w-md break-words relative before:content-['•'] before:absolute before:-left-4 before:top-0"
+                      >
+                        {line}
+                      </li>
                     ))}
                   </ul>
+
                 </div>
               ))}
             </div>

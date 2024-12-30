@@ -1,19 +1,19 @@
 import React from 'react';
 
-const ClassicTemplate = ({ resumeInfo ,resumeRef}) => {
+const ClassicTemplate = ({ resumeInfo, resumeRef }) => {
   const formatWorkSummary = (summary) => {
     const lines = summary.split('\n');
     const bulletPointPattern = /^[\*\-\+]\s/;
 
     const htmlContent = lines.map((line) => {
       if (bulletPointPattern.test(line)) {
-        return `<li>${line.replace(bulletPointPattern, '')}</li>`;
+        return `<li class="ml-4">${line.replace(bulletPointPattern, '')}</li>`;
       } else {
         return `<p>${line}</p>`;
       }
     });
 
-    return `<ul>${htmlContent.join('')}</ul>`;
+    return `<ul class="list-inside">${htmlContent.join('')}</ul>`;
   };
 
   return (

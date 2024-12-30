@@ -9,13 +9,14 @@ const MicrosoftTemplate = ({ resumeInfo, resumeRef }) => {
     >
       {/* Header Section */}
       <div className="text-left mb-6">
-        <h1 className="text-3xl font-bold">{resumeInfo?.firstName} {resumeInfo?.lastName || "Your Name"}</h1>
+        <h1 className="text-3xl font-bold">
+          {resumeInfo?.firstName} {resumeInfo?.lastName || "Your Name"}
+        </h1>
         <p className="text-lg font-semibold text-gray-700">
           {resumeInfo?.jobTitle || "Professional Title"}
         </p>
         <p className="text-sm mt-1 text-gray-600">
-          {resumeInfo?.address || "Your Address"} |{" "}
-          {resumeInfo?.phone || "Your Phone"} |{" "}
+          {resumeInfo?.address || "Your Address"} | {resumeInfo?.phone || "Your Phone"} |{" "}
           {resumeInfo?.email || "Your Email"}
         </p>
       </div>
@@ -25,7 +26,7 @@ const MicrosoftTemplate = ({ resumeInfo, resumeRef }) => {
         <div className="mb-6">
           <h2 className="text-lg font-bold">Summary</h2>
           <hr className="my-2 border-gray-300" />
-          <p className="text-sm">{resumeInfo.summery}</p>
+          <p className="text-sm leading-relaxed text-gray-700">{resumeInfo.summery}</p>
         </div>
       )}
 
@@ -36,7 +37,7 @@ const MicrosoftTemplate = ({ resumeInfo, resumeRef }) => {
           <hr className="my-2 border-gray-300" />
           {resumeInfo.experience.map((exp, index) => (
             <div key={index} className="mb-4">
-              <div className="flex justify-between">
+              <div className="flex justify-between items-start">
                 <p className="font-semibold">
                   {exp.title} | {exp.companyName}
                 </p>
@@ -44,9 +45,9 @@ const MicrosoftTemplate = ({ resumeInfo, resumeRef }) => {
                   {exp.startDate} - {exp.endDate || (exp.currentlyWorking ? "Present" : "")}
                 </p>
               </div>
-              <ul className="list-disc ml-5 text-sm mt-2 text-gray-600">
+              <ul className="list-disc pl-5 mt-2 text-sm text-gray-600">
                 {exp.workSummery.split("\n").map((point, i) => (
-                  <li key={i}>{point}</li>
+                  <li key={i} className="break-words">{point}</li>
                 ))}
               </ul>
             </div>
@@ -64,9 +65,7 @@ const MicrosoftTemplate = ({ resumeInfo, resumeRef }) => {
               <p className="font-semibold">
                 {edu.universityName} | {edu.degree}
               </p>
-              <p className="text-sm text-gray-600">
-                Major: {edu.major}
-              </p>
+              <p className="text-sm text-gray-600">Major: {edu.major}</p>
               <p className="text-sm">{edu.startDate} - {edu.endDate}</p>
               {edu.description && (
                 <p className="text-sm mt-2 text-gray-600">{edu.description}</p>
@@ -76,14 +75,14 @@ const MicrosoftTemplate = ({ resumeInfo, resumeRef }) => {
         </div>
       )}
 
-      {/* Skills Section ..*/}
+      {/* Skills Section */}
       {resumeInfo?.skills?.length > 0 && (
         <div>
           <h2 className="text-lg font-bold">Skills & Abilities</h2>
           <hr className="my-2 border-gray-300" />
-          <ul className="list-disc ml-5 text-sm text-gray-600">
+          <ul className="list-disc pl-5 text-sm text-gray-600">
             {resumeInfo.skills.map((skill, index) => (
-              <li key={index}>{skill.name}</li>
+              <li key={index} className="break-words">{skill.name}</li>
             ))}
           </ul>
         </div>

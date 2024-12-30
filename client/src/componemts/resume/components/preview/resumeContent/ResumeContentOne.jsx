@@ -6,7 +6,9 @@ const ResumeContent = ({ resumeInfo, resumeRef }) => {
     <div ref={resumeRef} className="shadow-lg h-full p-14 bg-gray-100 rounded-md">
       {/* Personal Details */}
       <div className="text-center mb-4">
-        <h1 className="text-3xl font-bold">{resumeInfo?.firstName} {resumeInfo?.lastName}</h1>
+        <h1 className="text-3xl font-bold">
+          {resumeInfo?.firstName} {resumeInfo?.lastName}
+        </h1>
         <h2 className="text-lg font-medium mt-1">{resumeInfo?.jobTitle}</h2>
         <div className="flex justify-center gap-4 mt-2">
           {resumeInfo?.phone && (
@@ -50,7 +52,7 @@ const ResumeContent = ({ resumeInfo, resumeRef }) => {
           <h2 className="text-xl font-bold border-b-2 pb-1 mb-2">Experience</h2>
           {resumeInfo.experience.map((exp, index) => (
             <div key={index} className="mb-4">
-              <div className="flex justify-between">
+              <div className="flex justify-between items-start">
                 <h3 className="text-lg font-semibold flex items-center gap-1">
                   <Briefcase size={16} /> {exp?.title}
                 </h3>
@@ -58,12 +60,14 @@ const ResumeContent = ({ resumeInfo, resumeRef }) => {
                   <Calendar size={16} /> {exp?.startDate} - {exp?.currentlyWorking ? 'Present' : exp?.endDate}
                 </span>
               </div>
-              <h4 className="text-sm font-medium flex items-center gap-1">
+              <h4 className="text-sm font-medium flex items-center gap-1 mt-1">
                 <MapPin size={16} /> {exp?.companyName}, {exp?.city}, {exp?.state}
               </h4>
-              <ul className="list-disc list-inside mt-2 text-sm">
+              <ul className="list-disc pl-5 mt-2 text-sm text-gray-700">
                 {exp?.workSummery?.split('\n').map((point, i) => (
-                  <li key={i}>{point}</li>
+                  <li key={i} className="break-words max-w-full relative  before:absolute before:-left-5 before:top-0">
+                    {point}
+                  </li>
                 ))}
               </ul>
             </div>
@@ -91,8 +95,8 @@ const ResumeContent = ({ resumeInfo, resumeRef }) => {
           ))}
         </div>
       )}
- 
-      {/* Skills .. */}
+
+      {/* Skills */}
       {resumeInfo?.skills?.length > 0 && (
         <div className="my-4">
           <h2 className="text-xl font-bold border-b-2 pb-1 mb-2">Technical Skills</h2>
