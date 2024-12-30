@@ -6,6 +6,7 @@ import ClassicTemplate from './preview/resumeContent/ClassicTemplate';
 import MicrosoftTemplate from './preview/resumeContent/MicrosoftTemplate';
 import NextGenTemplate from './preview/resumeContent/NextGenTemplate';
 import SimpleTemplate from './preview/resumeContent/SimpleTemplate';
+import BoldResumeTemplate from './preview/resumeContent/BoldResumeTemplate';
 
 import html2pdf from 'html2pdf.js';
 import axios from 'axios';
@@ -48,14 +49,16 @@ const ResumePreview = () => {
   // Function to render the selected template
   const renderTemplate = () => {
     switch (selectedTemplate) { //ClassicLayout
-      case 'ModernLayout':
+        case 'ModernLayout':
         return <ModernResumeTemplate resumeInfo={resumeInfo} resumeRef={resumeRef} />;
-      case 'ClassicLayout':
+
+        case 'ClassicLayout':
         return <ClassicTemplate resumeInfo={resumeInfo} resumeRef={resumeRef} />;
-      case 'ElegantLayout':
+
+        case 'ElegantLayout':
         return <ResumeContent resumeInfo={resumeInfo} resumeRef={resumeRef} />;
       
-      case 'ProfessionalLayout':
+        case 'ProfessionalLayout':
         return <MicrosoftTemplate resumeInfo={resumeInfo} resumeRef={resumeRef}></MicrosoftTemplate>;
 
         case 'NextGenLayout':
@@ -64,9 +67,12 @@ const ResumePreview = () => {
         case 'SimpleLayout':
         return <SimpleTemplate resumeInfo={resumeInfo} resumeRef={resumeRef}></SimpleTemplate>;
 
+        case 'BoldLayout':
+        return <BoldResumeTemplate resumeInfo={resumeInfo} resumeRef={resumeRef}></BoldResumeTemplate>;
+
 
       default:
-        return <SimpleTemplate resumeInfo={resumeInfo} resumeRef={resumeRef} />;
+        return <BoldResumeTemplate resumeInfo={resumeInfo} resumeRef={resumeRef} />;
     }
   };
 
