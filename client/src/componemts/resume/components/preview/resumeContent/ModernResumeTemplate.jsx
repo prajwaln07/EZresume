@@ -53,7 +53,7 @@ const ModernResumeTemplate = ({ resumeInfo, resumeRef }) => {
                 {exp?.workSummery?.split('\n').map((point, i) => (
                   <li
                     key={i}
-                    className="break-words block max-w-full relative before:absolute before:-left-4 before:top-0"
+                    className="break-words  max-w-full relative before:absolute before:-left-4 before:top-0"
                   >
                     {point}
                   </li>
