@@ -24,33 +24,29 @@ const ResumePreview = () => {
     setLoading(true);
     const element = resumeRef.current;
   
-    // Clean styles to prevent extra padding/margin
-    element.style.padding = '0';
-    element.style.margin = '0';
+    element.style.width = '8.5in'; // Match PDF size
     element.style.boxSizing = 'border-box';
-    element.style.overflow = 'hidden'; // Prevent content overflow
+    element.style.overflow = 'hidden';
   
     const options = {
       filename: 'resume.pdf',
       image: { type: 'jpeg', quality: 0.98 },
       html2canvas: {
-        scale: 2, // Adjust for better quality
+        scale: 4, 
         useCORS: true,
-        logging: true, // Debugging option to see rendering details
-        width: element.offsetWidth, // Ensure the width of the canvas matches the element
-        height: element.offsetHeight, // Set height based on content size
+        logging: true,
+        scrollX: 0,
+        scrollY: 0,
+        windowWidth: element.scrollWidth,
       },
       jsPDF: {
         unit: 'in',
-        format: [8.5, 11], // Standard letter size
+        format: [8.5, 11], 
         orientation: 'portrait',
-        compress: true,
-        putOnlyUsedFonts: true,
       },
     };
   
     try {
-      // Generate and download the PDF
       await html2pdf().from(element).set(options).save();
       const response = await axios.post('https://ezresume.onrender.com/api/v1/downloads/track');
       if (!response.data.success) {
@@ -59,15 +55,12 @@ const ResumePreview = () => {
     } catch (error) {
       console.error('Error while generating PDF or tracking download:', error);
     } finally {
+      element.style.width = ''; // Reset styles
+      element.style.boxSizing = '';
       setLoading(false);
     }
-  
-    // Restore original styles after download
-    element.style.padding = '';
-    element.style.margin = '';
-    element.style.boxSizing = '';
-    element.style.overflow = '';
   };
+  
   
 
   const templates = {
