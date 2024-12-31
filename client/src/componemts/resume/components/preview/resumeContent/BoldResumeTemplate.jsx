@@ -76,7 +76,7 @@ const BoldResumeTemplate = ({ resumeInfo, resumeRef }) => {
                     {exp.workSummery?.split('\n').map((line, i) => (
                       <li
                         key={i}
-                        className="max-w-md break-words relative before:content-['•'] before:absolute before:-left-4 before:top-0"
+                        className="max-w-md break-words relative  before:absolute before:-left-4 before:top-0"
                       >
                         {line}
                       </li>
