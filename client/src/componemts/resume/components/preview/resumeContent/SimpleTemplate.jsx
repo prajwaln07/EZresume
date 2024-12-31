@@ -35,8 +35,8 @@ const SimpleTemplate = ({ resumeInfo, resumeRef }) => {
           <h2 className="text-lg font-semibold text-gray-700 border-b-2 border-gray-200 pb-1 mb-4 text-center bg-blue-100">
             PROFESSIONAL EXPERIENCE
           </h2>
-          {resumeInfo.experience.map((exp) => (
-            <div key={exp.id} className="mb-4">
+          {resumeInfo.experience.map((exp,index) => (
+            <div key={index} className="mb-4">
               <h3 className="text-md font-bold text-black">{exp.title}</h3>
               <p className="text-sm text-gray-700">
                 {exp.companyName} | {exp.city}, {exp.state}

@@ -63,8 +63,8 @@ const NextGenTemplate = ({ resumeInfo, resumeRef }) => {
           >
             Experience
           </h2>
-          {resumeInfo.experience.map((exp) => (
-            <div key={exp.id} className="mb-6">
+          {resumeInfo.experience.map((exp,index) => (
+            <div key={index} className="mb-6">
               <h3 className="text-md font-semibold text-gray-800 flex items-center gap-2">
                 <Briefcase size={16} /> {exp.title}
               </h3>

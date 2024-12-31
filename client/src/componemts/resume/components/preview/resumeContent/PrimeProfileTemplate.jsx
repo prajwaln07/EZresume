@@ -44,8 +44,8 @@ const PrimeProfileTemplate = ({ resumeInfo, resumeRef }) => {
             >
               Experience
             </h2>
-            {resumeInfo.experience.map((exp) => (
-              <div key={exp.id} className="mb-4">
+            {resumeInfo.experience.map((exp,index) => (
+              <div key={index} className="mb-4">
                 <p className="text-md font-bold">{exp.title}</p>
                 <p className="text-sm">
                   {exp.companyName} | {exp.city}, {exp.state} |{" "}
