@@ -21,7 +21,7 @@ export default{
             workSummery:' Designed, developed, and maintained full-stack applications using React and Node.js.\n'+
             'Implemented responsive user interfaces with React, ensuring seamless user experiences. \n'+
             'Maintaining the React Native in-house organization application.\n'+
-            'CreatedRESTfulAPIs withNode.js and Express.'
+            'CreatedRESTfulAPIs withNode.js and Express and improved backend speed.'
         },
         {
             id:2,
@@ -35,7 +35,7 @@ export default{
             workSummery:' Designed, developed, and maintained full-stack applications using React and Node.js.\n'+
             'Implemented responsive user interfaces with React, ensuring seamless user experiences. \n'+
             'Maintaining the React Native in-house organization application.\n'+
-            'CreatedRESTfulAPIs withNode.js and Express.'
+            'CreatedRESTfulAPIs withNode.js and Express and improved backend speed.'
         }
     ],
     education:[
