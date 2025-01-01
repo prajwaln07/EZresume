@@ -178,11 +178,27 @@ const logoutUser = async (req, res) => {
   }
 };
 
+// Get Count of Users
+const getUserCount = async (req, res) => {
+  try {
+    const userCount = await User.countDocuments(); // Get total count of users
+    res.status(200).json({
+      success: true,
+      userCount: userCount,
+    });
+  } catch (error) {
+    console.error('Error fetching user count:', error);
+    res.status(500).json({ message: 'Internal server error. Please try again later.' });
+  }
+};
+
+
 module.exports = {
   registerUser,
   loginUser,
   getUserProfile,
   updateUserProfile,
   deleteUserAccount,
+  getUserCount,
   logoutUser,
 };
