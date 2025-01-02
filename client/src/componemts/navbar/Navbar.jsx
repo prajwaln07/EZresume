@@ -52,7 +52,7 @@ const Navbar = () => {
     // Perform logout logic, like clearing auth tokens, Redux state, etc.
 
     try {
-      await axios.post("http://localhost:5000/api/v1/users/logout");
+      await axios.post("https://ezresume.onrender.com/api/v1/users/logout");
 
       toast.info('User Logout Successful!', {
         position: "bottom-right",
