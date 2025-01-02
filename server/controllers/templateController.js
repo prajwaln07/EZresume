@@ -37,11 +37,10 @@ exports.createTemplate = async (req, res) => {
     }
 };
 
-
-
 exports.updateTemplate = async (req, res) => {
     try {
         let { id } = req.params;
+        
         
 
         if (!mongoose.Types.ObjectId.isValid(id)) {

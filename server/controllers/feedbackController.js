@@ -1,16 +1,12 @@
 // server/controllers/feedbackController.js
 const Feedback = require('../models/feedback');
-const mongoose=require('mongoose');
+const mongoose = require('mongoose');
 
 // Submit feedback on a template
 exports.submitFeedback = async (req, res) => {
     try {
-
         let { templateId, comments, rating } = req.body;
-        let userId = new mongoose.Types.ObjectId(req.user.userId); // Assuming user ID is set in re.user by the auth middleware
-
-
-        
+        let userId = new mongoose.Types.ObjectId(req.user.userId); // Assuming user ID is set in req.user by the auth middleware
 
         if (!comments || rating === undefined) {
             return res.status(400).send("Comments and rating are required.");
@@ -25,16 +21,18 @@ exports.submitFeedback = async (req, res) => {
     }
 };
 
-
 // Get feedback for a specific template
 exports.getFeedbackByTemplateId = async (req, res) => {
     try {
         let { templateId } = req.params;
         templateId = new mongoose.Types.ObjectId(templateId);
-        const feedback = await Feedback.find({ templateId }).select('userId').populate({
-            path:"userId",
-            select :"email username"
-        }).select('comments rating');
+
+        const feedback = await Feedback.find({ templateId })
+            .populate({
+                path: "userId",
+                select: "email username",
+            })
+            .select("comments rating");
 
         if (!feedback.length) return res.status(404).send("No feedback found for this template");
 
@@ -49,12 +47,12 @@ exports.getFeedbackByTemplateId = async (req, res) => {
 exports.getAllFeedback = async (req, res) => {
     try {
         const feedback = await Feedback.find()
-        .populate({
-            path: "userId",
-            select: "username"
-        })
-        .select("comments rating")
-        .sort({ rating: -1 });
+            .populate({
+                path: "userId",
+                select: "username",
+            })
+            .select("comments rating")
+            .sort({ rating: -1 });
 
         res.json(feedback);
     } catch (err) {
@@ -63,3 +61,19 @@ exports.getAllFeedback = async (req, res) => {
     }
 };
 
+exports.getOverallAverageRating = async (req, res) => {
+    try {
+        const result = await Feedback.aggregate([
+            { $group: { _id: null, averageRating: { $avg: "$rating" } } },
+        ]);
+
+        if (!result.length) {
+            return res.status(404).send("No feedback found");
+        }
+
+        res.json({ averageRating: result[0].averageRating.toFixed(2) });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error calculating overall average rating");
+    }
+};

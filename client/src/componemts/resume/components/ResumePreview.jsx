@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import html2pdf from 'html2pdf.js';
 import axios from 'axios';
 
-import ModernResumeTemplate from '../components/preview/resumeContent/ModernResumeTemplate';
+import ModernResumeTemplate from './preview/resumeContent/ModernResumeTemplate';
 import ClassicTemplate from './preview/resumeContent/ClassicTemplate';
 import ResumeContent from '../components/preview/resumeContent/ResumeContentOne';
 import MicrosoftTemplate from './preview/resumeContent/MicrosoftTemplate';
@@ -17,6 +17,7 @@ const ResumePreview = () => {
   const { resumeInfo } = useContext(ResumeInfoContext);
   const resumeRef = useRef();
   const [loading, setLoading] = useState(false);
+  const templateId = useSelector((state) => state.template.selectedTemplateID);
 
   const selectedTemplate = useSelector((state) => state.template.selectedTemplate);
 
@@ -47,8 +48,15 @@ const ResumePreview = () => {
     };
   
     try {
+      
       await html2pdf().from(element).set(options).save();
-      const response = await axios.post('https://ezresume.onrender.com/api/v1/downloads/track');
+
+      const response = await axios.post('https://ezresume.onrender.com/api/v1/downloads/track', {
+        templateId: templateId,  
+      }, {
+        withCredentials: true, 
+      });
+
       if (!response.data.success) {
         console.error('Error tracking download.');
       }
@@ -74,7 +82,7 @@ const ResumePreview = () => {
     PrimeLayout: PrimeProfileTemplate,
   };
 
-  const TemplateComponent = templates[selectedTemplate] || PrimeProfileTemplate;
+  const TemplateComponent = templates[selectedTemplate] || ResumeContent;
 
   return (
     <div>

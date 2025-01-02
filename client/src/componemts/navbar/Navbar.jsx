@@ -14,6 +14,8 @@ const Navbar = () => {
   const isDarkmode = useSelector((state) => state.theme.isDarkmode); // Redux state
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const username = useSelector((state) => state.user.username);
+  const role = useSelector(state => state.user.role); // Get the user's role from Redux
+
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -34,6 +36,15 @@ const Navbar = () => {
     }
   }, [isDarkmode]);
 
+  const Clickhandler =()=>{
+
+
+  if (role === 'admin') {
+    navigate('admin/dashboard'); 
+  } else {
+    navigate('/'); 
+  }
+  }
   
   
 
@@ -41,7 +52,7 @@ const Navbar = () => {
     // Perform logout logic, like clearing auth tokens, Redux state, etc.
 
     try {
-      await axios.post("https://ezresume.onrender.com/api/v1/users/logout");
+      await axios.post("http://localhost:5000/api/v1/users/logout");
 
       toast.info('User Logout Successful!', {
         position: "bottom-right",
@@ -143,12 +154,12 @@ const Navbar = () => {
             </div>
           ) : (
             <div>
-              <Link
-                to=""
+              <span
+                onClick={Clickhandler}
                 className={`text-lg my-6 hover:text-blue-500 ${isDarkmode ? 'text-white' : 'text-gray-900'}`}
               >
                 {username}
-              </Link>
+              </span>
 
               <button
                 onClick={() => setIsModalOpen(true)}

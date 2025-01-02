@@ -13,6 +13,7 @@ const templateSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
   image: { type: String, required: true }, 
+  downloads:{type:Number ,default:0},
 });
 
 const Template = mongoose.model('Template', templateSchema);

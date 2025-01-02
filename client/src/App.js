@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
-import axios from 'axios';
 import Navbar from './componemts/navbar/Navbar';
 import {Routes,Route} from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import TemplatePage from './componemts/pages/TemplatePage';
 import HomePage from './componemts/pages/HomePage';
 import UnderConstruction from './componemts/pages/UnderContructionPage';
@@ -12,6 +11,8 @@ import IndexOne from './componemts/resume/IndexOne';
 import SupportPage from './componemts/Support';
 import FeedbackForm from './componemts/FeedbackForm';
 import ContactUs from './componemts/ContactUs';
+import AdminDashboard from './componemts/pages/AdminDashboard';
+
 
 function App() {
 
@@ -54,6 +55,13 @@ function App() {
 <Route path='/resume/maker' element={<IndexOne></IndexOne>} > </Route>
 
 <Route path='/feedback' element={<FeedbackForm></FeedbackForm>} > </Route>
+
+<Route
+  path='/admin/dashboard'
+  element={useSelector(state => state.user.role) === 'admin' ? <AdminDashboard /> : <HomePage/>}
+/>
+
+
 
 
  

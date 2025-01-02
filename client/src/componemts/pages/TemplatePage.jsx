@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FaInfoCircle } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux"; // Import useSelector
 import { setLoading, unsetLoading } from "../../redux/actions/loadingSetter";
-import { changeTemplate } from "../../redux/actions/templateDetails";
+import { setTemplateID,changeTemplate, fetchTemplatesSuccess, fetchTemplatesFailure } from "../../redux/actions/templateDetails";
+
 
 const TemplatePage = () => {
-  const [allTemplates, setAllTemplates] = useState([]);
   const [loadingTemplates, setLoadingTemplates] = useState(true); // Loading state for skeleton
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalDescription, setModalDescription] = useState(""); // Store description for modal
@@ -15,12 +15,18 @@ const TemplatePage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // Get templates from the Redux store
+  const templates = useSelector((state) => state.template.templates);
+
+
+  // Fetch templates from the backend and dispatch Redux actions
   const getAllTemplates = async () => {
     try {
       dispatch(setLoading());
       const response = await axios.get("https://ezresume.onrender.com/api/v1/templates/");
-      setAllTemplates(response.data);
+      dispatch(fetchTemplatesSuccess(response.data)); // Dispatch success action with templates
     } catch (err) {
+      dispatch(fetchTemplatesFailure(err.message)); // Dispatch failure action with error message
       console.error("Error while fetching templates", err);
     } finally {
       setLoadingTemplates(false); // Stop skeleton loading
@@ -36,14 +42,13 @@ const TemplatePage = () => {
     if (premiumTemplate) navigate(`/pricing`);
     else {
       dispatch(changeTemplate(name));
+      dispatch(setTemplateID(templateId));
       navigate(`/resume/maker`);
     }
   };
 
   const openModal = (description) => {
-    console.log("description --> ",description)
-    let arr=description.split('.');
-    console.log("arr --> ",arr)
+    let arr = description.split(".");
 
     setModalDescription(description);
     setIsModalOpen(true);
@@ -53,7 +58,6 @@ const TemplatePage = () => {
     setIsModalOpen(false);
     setModalDescription("");
   };
-
 
   return (
     <div className="p-8 min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -79,7 +83,7 @@ const TemplatePage = () => {
                   <div className="bg-gray-400 dark:bg-gray-600 h-6 w-1/2 mx-auto rounded"></div>
                 </div>
               ))
-          : allTemplates.map((template) => (
+          : templates.map((template) => (
               <div
                 key={template._id}
                 className="bg-gray-200 dark:bg-gray-800 rounded-md shadow-lg p-4 relative transform transition-all duration-300 group hover:scale-105 hover:shadow-xl hover:bg-teal-100 dark:hover:bg-teal-800"
@@ -136,20 +140,18 @@ const TemplatePage = () => {
             <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4">
               Template Description
             </h3>
-            {
-            modalDescription.split('.').map((point, index) => (
+            {modalDescription.split(".").map((point, index) => (
               point.trim() && (
-                <div key={index} className="text-gray-600 dark:text-gray-400 ">
-                  <div> 
-                    <p className="inline font-semibold">{index+1}</p>
-                  {". " + point.trim()}
+                <div key={index} className="text-gray-600 dark:text-gray-400">
+                  <div>
+                    <p className="inline font-semibold">{index + 1}</p>
+                    {". " + point.trim()}
                   </div>
-                 
+
                   <div className="h-2 block"></div>
                 </div>
               )
-            ))
-            }
+            ))}
             <button
               onClick={closeModal}
               className="mt-4 bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded"

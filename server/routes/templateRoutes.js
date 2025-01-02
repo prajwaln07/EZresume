@@ -10,10 +10,10 @@ const upload = multer({ storage: storage }); // Initialize multer with stoage...
 
 // Admin-only routes for managing templates.
 router.post('/', verifyToken,checkRole(['admin']), upload.single('thumbnail'), templateController.createTemplate);
-router.put('/:id', checkRole(['admin']), templateController.updateTemplate);
+router.put('/:id',verifyToken ,checkRole(['admin']),upload.single('thumbnail'), templateController.updateTemplate);
 router.get('/:id', templateController.getTemplateById);
 router.get('/', templateController.getAllTemplates);
-router.delete('/:id', checkRole(['admin']), templateController.deleteTemplate);
+router.delete('/:id', verifyToken,checkRole(['admin']), templateController.deleteTemplate);
 
 module.exports = router;
 // added comment here .
