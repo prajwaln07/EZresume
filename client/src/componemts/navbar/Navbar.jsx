@@ -156,7 +156,7 @@ const Navbar = () => {
             <div>
               <span
                 onClick={Clickhandler}
-                className={`text-lg my-6 hover:text-blue-500 ${isDarkmode ? 'text-white' : 'text-gray-900'}`}
+                className={` cursor-pointer text-lg my-6 hover:text-blue-500 ${isDarkmode ? 'text-white' : 'text-gray-900'}`}
               >
                 {username}
               </span>
