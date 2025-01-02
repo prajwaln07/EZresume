@@ -7,22 +7,27 @@ const FAQPage = () => {
 
   const faqs = [
     {
-      question: 'What is EZResume?',
-      answer: 'EZResume is a user-friendly platform to create, customize, and download professional resumes effortlessly.',
+      question: 'What makes EZResume different from other resume builders?',
+      answer: 'EZResume offers ATS-friendly resumes, is free to use, has an intuitive interface, and provides 24/7 chatbot support for any questions.',
     },
     {
-      question: 'How do I create a resume?',
-      answer: 'Simply choose a template, customize your details, and download the resume in just a some clicks.',
+      question: 'Is there a way to get instant help with resume-related questions?',
+      answer: 'Yes, our 24/7 chatbot support is always available to help with any resume-related doubts.',
     },
     {
-      question: 'Can I use EZResume for free?',
-      answer: 'Yes, EZResume offers free templates and basic features for all users.',
+      question: 'Are my resumes secure on EZResume?',
+      answer: 'EZResume does not store any resume data, ensuring your privacy and security.',
     },
     {
-      question: 'How do I contact support?',
-      answer: 'You can contact our support team through the “Contact Us” page for any assistance or queries.',
+      question: 'Can I download my resume in different formats?',
+      answer: 'Yes, you can preview your resume in real-time and make adjustments before downloading.',
+    },
+    {
+      question: 'Do I need to sign up to create a resume on EZResume?',
+      answer: 'No, you can create and download resumes without signing up.',
     },
   ];
+  
 
   const toggleAnswer = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
