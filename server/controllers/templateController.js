@@ -49,7 +49,7 @@ exports.updateTemplate = async (req, res) => {
                 message: "Invalid ID format. Must be a 24 character hex string."
             });
         }
-
+        
        
         const newObjectId = new mongoose.Types.ObjectId(id);
         const { name, description, layout } = req.body;
@@ -63,7 +63,7 @@ exports.updateTemplate = async (req, res) => {
         template.description = description || template.description;
         template.layout = layout || template.layout;
         if(thumbnail){
-            const cloudResponse = await uploadThumbnail(thumbnail);
+            const cloudResponse = await uploadThumbnail(thumbnail.buffer);
             template.thumbnail=cloudResponse;
         }
 
