@@ -27,10 +27,10 @@ ChartJS.register(
   BarElement
 );
 
-toast.configure({
-  position: toast.POSITION.TOP_RIGHT,
-  autoClose: 3000,
-});
+// toast.configure({
+//   position: toast.POSITION.TOP_RIGHT,
+//   autoClose: 3000,
+// });
 
 const AdminDashboard = () => {
   const [createLoading, setCreateLoading] = useState(false);
