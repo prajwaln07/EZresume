@@ -10,6 +10,8 @@ import {
 } from "chart.js";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import Charts from './components/Charts';
 import MetricsCard from "./components/MetricsCard";
 import TemplateManagement from "./components/TemplateManagement";
@@ -24,6 +26,11 @@ ChartJS.register(
   LinearScale,
   BarElement
 );
+
+toast.configure({
+  position: toast.POSITION.TOP_RIGHT,
+  autoClose: 3000,
+});
 
 const AdminDashboard = () => {
   const [createLoading, setCreateLoading] = useState(false);
@@ -145,7 +152,7 @@ const AdminDashboard = () => {
 
     try {
       setCreateLoading(true);
-       await axios.post(
+      await axios.post(
         "https://ezresume.onrender.com/api/v1/templates",
         form,
         {
@@ -153,11 +160,11 @@ const AdminDashboard = () => {
           withCredentials: true,
         }
       );
-      alert("Template created successfully!");
+      toast.success("Template created successfully!");
       setShowModal(false); // Close the modal on success
     } catch (error) {
       console.error("Error creating template:", error);
-      alert("Failed to create template.");
+      toast.error("Failed to create template.");
     } finally {
       setCreateLoading(false);
     }
@@ -213,7 +220,6 @@ const AdminDashboard = () => {
     try {
       setCreateLoading(true);
 
-      // Send FormData in the request body
       await axios.put(
         `https://ezresume.onrender.com/api/v1/templates/${editTemplateData._id}`,
         form,
@@ -222,11 +228,11 @@ const AdminDashboard = () => {
           withCredentials: true,
         }
       );
-      alert("Template updated successfully!");
+      toast.success("Template updated successfully!");
       setIsEditing(false); // Close modal after successful update
     } catch (error) {
       console.error("Error updating template:", error);
-      alert("Failed to update template.");
+      toast.error("Failed to update template.");
     } finally {
       setCreateLoading(false);
     }
@@ -236,7 +242,6 @@ const AdminDashboard = () => {
   const [templateToDelete, setTemplateToDelete] = useState(null);
 
   const handleDelete = (templateId) => {
-    // Set the template to be deleted and show the modal
     setTemplateToDelete(templateId);
     setShowDeleteModal(true);
   };
@@ -265,21 +270,18 @@ const AdminDashboard = () => {
 
   const confirmDelete = async () => {
     try {
-      // Send delete request to the server
-     await axios.delete(
+      await axios.delete(
         `https://ezresume.onrender.com/api/v1/templates/${templateToDelete}`,
         { withCredentials: true }
       );
-      alert("Template deleted successfully");
+      toast.success("Template deleted successfully");
       setShowDeleteModal(false);
-      // Optionally, update the state or remove the deleted template from the UI
     } catch (error) {
       console.error(error);
-      alert("Error deleting template");
+      toast.error("Error deleting template");
     }
   };
 
-  // Cancel delete
   const cancelDelete = () => {
     setShowDeleteModal(false);
   };
@@ -301,60 +303,59 @@ const AdminDashboard = () => {
 
   return (
     <div className="p-8 bg-gray-100 dark:bg-gray-900 min-h-screen">
-  <h1 className="text-3xl font-bold text-center text-gray-800 dark:text-gray-200 mb-8">Admin Dashboard</h1>
+      <h1 className="text-3xl font-bold text-center text-gray-800 dark:text-gray-200 mb-8">Admin Dashboard</h1>
 
-  <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-    <MetricsCard title="Total Users" value={metrics.users} color="text-blue-500" />
-    <MetricsCard title="Total Templates" value={metrics.templates} color="text-green-500" />
-    <MetricsCard title="Resumes Downloaded" value={metrics.resumesDownloaded} color="text-purple-500" />
-    <MetricsCard title="Average Rating" value={metrics.averageRating || "N/A"} color="text-yellow-500" />
-  </div>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <MetricsCard title="Total Users" value={metrics.users} color="text-blue-500" />
+        <MetricsCard title="Total Templates" value={metrics.templates} color="text-green-500" />
+        <MetricsCard title="Resumes Downloaded" value={metrics.resumesDownloaded} color="text-purple-500" />
+        <MetricsCard title="Average Rating" value={metrics.averageRating || "N/A"} color="text-yellow-500" />
+      </div>
 
-  <Charts
-    templateDownloadData={templateDownloadData}
-    monthlyDownloadData={monthlyDownloadData}
-  />
+      <Charts
+        templateDownloadData={templateDownloadData}
+        monthlyDownloadData={monthlyDownloadData}
+      />
 
-  <TemplateManagement
-    templates={templates}
-    handleDelete={handleDelete}
-    setShowModal={setShowModal}
-    setEditTemplateData={setEditTemplateData}
-    setIsEditing={setIsEditing}
-    expandedDescription={expandedDescription}
-    setExpandedDescription={setExpandedDescription}
-  />
+      <TemplateManagement
+        templates={templates}
+        handleDelete={handleDelete}
+        setShowModal={setShowModal}
+        setEditTemplateData={setEditTemplateData}
+        setIsEditing={setIsEditing}
+        expandedDescription={expandedDescription}
+        setExpandedDescription={setExpandedDescription}
+      />
 
-  {showModal && (
-    <CreateTemplateModal
-      formData={formData}
-      onClose={() => setShowModal(false)}
-      onInputChange={handleInputChange}
-      onFileChange={handleFileChange}
-      onSubmit={handleSubmit}
-      isLoading={createLoading}
-    />
-  )}
+      {showModal && (
+        <CreateTemplateModal
+          formData={formData}
+          onClose={() => setShowModal(false)}
+          onInputChange={handleInputChange}
+          onFileChange={handleFileChange}
+          onSubmit={handleSubmit}
+          isLoading={createLoading}
+        />
+      )}
 
-  {isEditing && (
-    <EditTemplateModal
-      formData={editTemplateData}
-      onClose={() => setIsEditing(false)}
-      onInputChange={handleEditInputChange}
-      onFileChange={handleFileChange}
-      onSubmit={handleEditSubmit}
-      isLoading={createLoading}
-    />
-  )}
+      {isEditing && (
+        <EditTemplateModal
+          formData={editTemplateData}
+          onClose={() => setIsEditing(false)}
+          onInputChange={handleEditInputChange}
+          onFileChange={handleFileChange}
+          onSubmit={handleEditSubmit}
+          isLoading={createLoading}
+        />
+      )}
 
-  {showDeleteModal && (
-    <DeleteConfirmationModal
-      onConfirm={confirmDelete}
-      onCancel={cancelDelete}
-    />
-  )}
-</div>
-
+      {showDeleteModal && (
+        <DeleteConfirmationModal
+          onConfirm={confirmDelete}
+          onCancel={cancelDelete}
+        />
+      )}
+    </div>
   );
 };
 
