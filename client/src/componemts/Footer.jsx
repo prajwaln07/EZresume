@@ -18,21 +18,21 @@ const Footer = () => {
         </div>
         <div className="flex space-x-6">
           <a
-            href="#"
+            href="https://www.linkedin.com/in/prajwalnimbalkar/"
             className="hover:text-teal-500"
             aria-label="Facebook"
           >
             Facebook
           </a>
           <a
-            href="#"
+            href="https://www.linkedin.com/in/prajwalnimbalkar/"
             className="hover:text-teal-500"
             aria-label="Twitter"
           >
             Twitter
           </a>
           <a
-            href="#"
+            href="https://www.linkedin.com/in/prajwalnimbalkar/"
             className="hover:text-teal-500"
             aria-label="LinkedIn"
           >
