@@ -62,10 +62,16 @@ exports.updateTemplate = async (req, res) => {
         template.name = name || template.name;
         template.description = description || template.description;
         template.layout = layout || template.layout;
-        if(thumbnail){
+
+        if (thumbnail) {
             const cloudResponse = await uploadThumbnail(thumbnail.buffer);
-            template.image=cloudResponse.secure_url;
+            if (cloudResponse && cloudResponse.secure_url) {
+                template.image = cloudResponse.secure_url; // Use only the URL
+            } else {
+                throw new Error("Failed to upload thumbnail to Cloudinary");
+            }
         }
+        
         template.updatedAt=Date.now();
         await template.save();
         res.json(template);
