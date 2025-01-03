@@ -66,7 +66,7 @@ exports.updateTemplate = async (req, res) => {
             const cloudResponse = await uploadThumbnail(thumbnail.buffer);
             template.thumbnail=cloudResponse;
         }
-
+        template.updatedAt=Date.now();
         await template.save();
         res.json(template);
     } catch (err) {
