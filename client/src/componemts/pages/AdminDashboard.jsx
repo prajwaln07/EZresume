@@ -224,7 +224,6 @@ const AdminDashboard = () => {
         `https://ezresume.onrender.com/api/v1/templates/${editTemplateData._id}`,
         form,
         {
-          headers: { "Content-Type": "multipart/form-data" },
           withCredentials: true,
         }
       );
