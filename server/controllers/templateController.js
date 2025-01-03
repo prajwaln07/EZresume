@@ -65,12 +65,7 @@ exports.updateTemplate = async (req, res) => {
 
         if (thumbnail) {
             const cloudResponse = await uploadThumbnail(thumbnail.buffer);
-            if (cloudResponse && cloudResponse.secure_url) {
-                template.image = cloudResponse.secure_url; // Use only the URL
-                console.log("-->",secure_url);
-            } else {
-                throw new Error("Failed to upload thumbnail to Cloudinary");
-            }
+            template.image = cloudResponse.secure_url;
         }
         
         template.updatedAt=Date.now();
