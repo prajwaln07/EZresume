@@ -64,7 +64,7 @@ exports.updateTemplate = async (req, res) => {
         template.layout = layout || template.layout;
         if(thumbnail){
             const cloudResponse = await uploadThumbnail(thumbnail.buffer);
-            template.thumbnail=cloudResponse;
+            template.image=cloudResponse;
         }
         template.updatedAt=Date.now();
         await template.save();
