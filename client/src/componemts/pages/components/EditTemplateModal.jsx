@@ -72,7 +72,7 @@ const EditTemplateModal = ({
           <div className="mb-4">
             <label className="block text-gray-700 font-medium mb-2">Structure</label>
             <input
-              type="file"
+              type="text"
               name="structure"
               value={formData.structure || ""}
               onChange={onInputChange}
