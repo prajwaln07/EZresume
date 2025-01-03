@@ -1,4 +1,6 @@
 import React from 'react';
+import parse from 'html-react-parser';
+
 
 const SimpleTemplate = ({ resumeInfo, resumeRef }) => {
   return (
@@ -31,30 +33,28 @@ const SimpleTemplate = ({ resumeInfo, resumeRef }) => {
 
       {/* Professional Experience Section */}
       {resumeInfo?.experience?.length > 0 && (
-        <div className="mb-6">
-          <h2 className="text-lg font-semibold text-gray-700 border-b-2 border-gray-200 pb-1 mb-4 text-center bg-blue-100">
-            PROFESSIONAL EXPERIENCE
-          </h2>
-          {resumeInfo.experience.map((exp,index) => (
-            <div key={index} className="mb-4">
-              <h3 className="text-md font-bold text-black">{exp.title}</h3>
-              <p className="text-sm text-gray-700">
-                {exp.companyName} | {exp.city}, {exp.state}
-              </p>
-              <p className="text-sm text-gray-600">
-                {exp.startDate} - {exp.currentlyWorking ? 'Present' : exp.endDate}
-              </p>
-              <ul className="list-disc list-inside mt-2 text-sm text-gray-700">
-                {exp.workSummery?.split('\n').map((point, i) => (
-                  <li key={i} className="ml-4 break-words">
-                    {point}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      )}
+  <div className="mb-6">
+    <h2 className="text-lg font-semibold text-gray-700 border-b-2 border-gray-200 pb-1 mb-4 text-center bg-blue-100">
+      PROFESSIONAL EXPERIENCE
+    </h2>
+    {resumeInfo.experience.map((exp, index) => (
+      <div key={index} className="mb-4">
+        <h3 className="text-md font-bold text-black">{exp.title}</h3>
+        <p className="text-sm text-gray-700">
+          {exp.companyName} | {exp.city}, {exp.state}
+        </p>
+        <p className="text-sm text-gray-600">
+          {exp.startDate} - {exp.currentlyWorking ? 'Present' : exp.endDate}
+        </p>
+        <div
+                  className="text-sm text-gray-700 mt-2 [&>ul]:list-disc [&>ul]:pl-5 [&>li]:mb-1"
+                  dangerouslySetInnerHTML={{ __html: exp.workSummery }}
+        />
+      </div>
+    ))}
+  </div>
+)}
+
 
       {/* Education Section */}
       {resumeInfo?.education?.length > 0 && (

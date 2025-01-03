@@ -1,5 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { ResumeInfoContext } from '../../../../context/ResumeInfoContext';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; // Quill stylesheet
 
 const formField = {
   title: '',
@@ -152,13 +154,22 @@ function Experience() {
             {/* Work Summary */}
             <div className="col-span-2">
               <label className="text-xs">Work Summary</label>
-              <textarea
-                name="workSummery"
-                rows="6"
-                className="border border-gray-300 p-2 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-primary"
-                onChange={(event) => handleChange(index, event)}
-                value={item.workSummery}
-              />
+              <ReactQuill
+  theme="snow"
+  value={item.workSummery}
+  onChange={(value) => handleChange(index, { target: { name: 'workSummery', value } })}
+  modules={{
+    toolbar: [
+      ['bold', 'italic', 'underline'],
+      [{ list: 'bullet' }],
+      ['link'],
+    ],
+  }}
+  className="border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
+  formats={['bold', 'italic', 'underline', 'list', 'bullet', 'link']}
+/>
+
+
             </div>
           </div>
         ))}

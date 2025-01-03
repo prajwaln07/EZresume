@@ -1,4 +1,6 @@
 import React from "react";
+import parse from 'html-react-parser';
+
 
 const PrimeProfileTemplate = ({ resumeInfo, resumeRef }) => {
   return (
@@ -37,26 +39,30 @@ const PrimeProfileTemplate = ({ resumeInfo, resumeRef }) => {
 
         {/* Experience Section */}
         {resumeInfo?.experience?.length > 0 && (
-          <div className="mb-6">
-            <h2
-              className="text-lg font-bold mb-2 uppercase"
-              style={{ color: resumeInfo?.themeColor }}
-            >
-              Experience
-            </h2>
-            {resumeInfo.experience.map((exp,index) => (
-              <div key={index} className="mb-4">
-                <p className="text-md font-bold">{exp.title}</p>
-                <p className="text-sm">
-                  {exp.companyName} | {exp.city}, {exp.state} |{" "}
-                  {exp.startDate} -{" "}
-                  {exp.currentlyWorking ? "Present" : exp.endDate}
-                </p>
-                <p className="text-sm mt-2">{exp.workSummery}</p>
-              </div>
-            ))}
-          </div>
-        )}
+  <div className="mb-6">
+    <h2
+      className="text-lg font-bold mb-2 uppercase"
+      style={{ color: resumeInfo?.themeColor }}
+    >
+      Experience
+    </h2>
+    {resumeInfo.experience.map((exp, index) => (
+      <div key={index} className="mb-4">
+        <p className="text-md font-bold">{exp.title}</p>
+        <p className="text-sm">
+          {exp.companyName} | {exp.city}, {exp.state} |{" "}
+          {exp.startDate} -{" "}
+          {exp.currentlyWorking ? "Present" : exp.endDate}
+        </p>
+        <div
+                  className="text-sm text-gray-700 mt-2 [&>ul]:list-disc [&>ul]:pl-5 [&>li]:mb-1"
+                  dangerouslySetInnerHTML={{ __html: exp.workSummery }}
+        />
+      </div>
+    ))}
+  </div>
+)}
+
 
         {/* Education Section */}
         {resumeInfo?.education?.length > 0 && (

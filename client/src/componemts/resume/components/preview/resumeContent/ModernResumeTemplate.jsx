@@ -1,5 +1,7 @@
 import React from 'react';
 import { Mail, Phone, Briefcase, GraduationCap, CheckCircle } from 'lucide-react';
+import parse from 'html-react-parser';
+
 
 const ModernResumeTemplate = ({ resumeInfo, resumeRef }) => {
   return (
@@ -36,33 +38,30 @@ const ModernResumeTemplate = ({ resumeInfo, resumeRef }) => {
 
       {/* Work Experience */}
       {resumeInfo?.experience?.length > 0 && (
-        <div className="mb-6">
-          <h2 className="text-xl font-bold text-blue-400 border-b-2 pb-1 mb-2">Work Experience</h2>
-          {resumeInfo.experience.map((exp, index) => (
-            <div key={index} className="mb-4">
-              <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-1">
-                <Briefcase size={16} /> {exp?.title}
-              </h3>
-              <div className="flex justify-between text-sm text-gray-600">
-                <span>{exp?.companyName}</span>
-                <span>
-                  {exp?.startDate} - {exp?.currentlyWorking ? 'Present' : exp?.endDate}
-                </span>
-              </div>
-              <ul className="list-disc pl-5 mt-2 text-sm text-gray-700 flex flex-wrap gap-2 items-start">
-                {exp?.workSummery?.split('\n').map((point, i) => (
-                  <li
-                    key={i}
-                    className="break-words  max-w-full relative before:absolute before:-left-4 before:top-0"
-                  >
-                    {point}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+  <div className="mb-6">
+    <h2 className="text-xl font-bold text-blue-400 border-b-2 pb-1 mb-2">Work Experience</h2>
+    {resumeInfo.experience.map((exp, index) => (
+      <div key={index} className="mb-4">
+        <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-1">
+          <Briefcase size={16} /> {exp?.title}
+        </h3>
+        <div className="flex justify-between text-sm text-gray-600">
+          <span>{exp?.companyName}</span>
+          <span>
+            {exp?.startDate} - {exp?.currentlyWorking ? 'Present' : exp?.endDate}
+          </span>
         </div>
-      )}
+        {/* Updated to render rich text content with lists */}
+        <div
+          className="text-sm text-gray-700 mt-2 [&>ul]:list-disc [&>ul]:pl-5 [&>li]:mb-1"
+          dangerouslySetInnerHTML={{ __html: exp?.workSummery || '' }}
+        ></div>
+
+      </div>
+    ))}
+  </div>
+)}
+
 
       {/* Education */}
       {resumeInfo?.education?.length > 0 && (

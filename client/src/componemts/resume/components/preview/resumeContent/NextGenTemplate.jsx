@@ -1,5 +1,7 @@
 import React from 'react';
 import { Mail, Phone, MapPin, Briefcase, GraduationCap } from 'lucide-react';
+import parse from 'html-react-parser';
+
 
 const NextGenTemplate = ({ resumeInfo, resumeRef }) => {
   return (
@@ -56,52 +58,39 @@ const NextGenTemplate = ({ resumeInfo, resumeRef }) => {
 
       {/* Work Experience */}
       {resumeInfo?.experience?.length > 0 && (
-        <div className="mb-8">
-          <h2
-            className="text-lg font-bold border-b-2 pb-2 mb-4"
-            style={{ color: '#32CD32', fontFamily: 'Georgia, serif' }}
-          >
-            Experience
-          </h2>
-          {resumeInfo.experience.map((exp,index) => (
-            <div key={index} className="mb-6">
-              <h3 className="text-md font-semibold text-gray-800 flex items-center gap-2">
-                <Briefcase size={16} /> {exp.title}
-              </h3>
-              <div className="flex justify-between text-sm text-gray-600">
-                <span>
-                  {exp.companyName}, {exp.city}, {exp.state}
-                </span>
-                <span>
-                  {exp.startDate} - {exp.currentlyWorking ? 'Present' : exp.endDate}
-                </span>
-              </div>
-              <ul
-                className="list-disc mt-2 text-sm text-gray-700 pl-6"
-                style={{
-                  listStylePosition: 'outside', // Ensures proper alignment
-                  marginLeft: 0, // Avoid extra margin
-                  paddingLeft: '1.5rem', // Space for bullet alignment
-                }}
-              >
-                {exp.workSummery?.split('\n').map((point, i) => (
-                  <li
-                    key={i}
-                    className="break-words"
-                    style={{
-                      whiteSpace: 'pre-line', // Respects newlines
-                      wordWrap: 'break-word', // Prevents text overflow
-                      maxWidth: '100%', // Prevents content overflow
-                    }}
-                  >
-                    {point}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+  <div className="mb-8">
+    <h2
+      className="text-lg font-bold border-b-2 pb-2 mb-4"
+      style={{ color: '#32CD32', fontFamily: 'Georgia, serif' }}
+    >
+      Experience
+    </h2>
+    {resumeInfo.experience.map((exp, index) => (
+      <div key={index} className="mb-6">
+        <h3 className="text-md font-semibold text-gray-800 flex items-center gap-2">
+          <Briefcase size={16} /> {exp.title}
+        </h3>
+        <div className="flex justify-between text-sm text-gray-600">
+          <span>
+            {exp.companyName}, {exp.city}, {exp.state}
+          </span>
+          <span>
+            {exp.startDate} - {exp.currentlyWorking ? 'Present' : exp.endDate}
+          </span>
         </div>
-      )}
+        <div
+                  className="text-sm text-gray-700 mt-2 [&>ul]:list-disc [&>ul]:pl-5 [&>li]:mb-1"
+          style={{
+            whiteSpace: 'normal', // Normalizes spacing for rich text
+            wordWrap: 'break-word', // Prevents text overflow
+            maxWidth: '100%', // Ensures content stays within bounds
+          }}
+          dangerouslySetInnerHTML={{ __html: exp.workSummery }}
+        />
+      </div>
+    ))}
+  </div>
+)}
 
       {/* Education */}
       {resumeInfo?.education?.length > 0 && (

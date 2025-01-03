@@ -1,4 +1,6 @@
 import React from 'react';
+import parse from 'html-react-parser';
+
 
 const BoldResumeTemplate = ({ resumeInfo, resumeRef }) => {
   return (
@@ -64,29 +66,31 @@ const BoldResumeTemplate = ({ resumeInfo, resumeRef }) => {
 
           {/* Experience Section */}
           {resumeInfo?.experience?.length > 0 && (
-            <div className="mb-8">
-              <h2 className="text-lg font-bold uppercase border-b pb-2 mb-4" style={{ color: resumeInfo?.themeColor }}>Experience</h2>
-              {resumeInfo.experience.map((exp, index) => (
-                <div key={index} className="mb-6">
-                  <p className="text-sm font-bold">{exp.title}</p>
-                  <p className="text-xs text-gray-600">{exp.companyName}, {exp.city}, {exp.state}</p>
-                  <p className="text-xs mb-2">{exp.startDate} - {exp.currentlyWorking ? 'Present' : exp.endDate}</p>
+  <div className="mb-8">
+    <h2
+      className="text-lg font-bold uppercase border-b pb-2 mb-4"
+      style={{ color: resumeInfo?.themeColor }}
+    >
+      Experience
+    </h2>
+    {resumeInfo.experience.map((exp, index) => (
+      <div key={index} className="mb-6">
+        <p className="text-sm font-bold">{exp.title}</p>
+        <p className="text-xs text-gray-600">
+          {exp.companyName}, {exp.city}, {exp.state}
+        </p>
+        <p className="text-xs mb-2">
+          {exp.startDate} - {exp.currentlyWorking ? 'Present' : exp.endDate}
+        </p>
+        <div
+                  className="text-sm text-gray-700 mt-2 [&>ul]:list-disc [&>ul]:pl-5 [&>li]:mb-1"
+                  dangerouslySetInnerHTML={{ __html: exp.workSummery }}
+        />
+      </div>
+    ))}
+  </div>
+)}
 
-                  <ul className="text-sm list-disc pl-5 flex flex-wrap gap-2 items-start">
-                    {exp.workSummery?.split('\n').map((line, i) => (
-                      <li
-                        key={i}
-                        className="max-w-md break-words relative  before:absolute before:-left-4 before:top-0"
-                      >
-                        {line}
-                      </li>
-                    ))}
-                  </ul>
-
-                </div>
-              ))}
-            </div>
-          )}
         </div>
       </div>
     </div>

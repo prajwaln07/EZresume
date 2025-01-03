@@ -1,4 +1,5 @@
 import React from "react";
+import parse from 'html-react-parser';
 
 const MicrosoftTemplate = ({ resumeInfo, resumeRef }) => {
   return (
@@ -32,28 +33,28 @@ const MicrosoftTemplate = ({ resumeInfo, resumeRef }) => {
 
       {/* Experience Section */}
       {resumeInfo?.experience?.length > 0 && (
-        <div className="mb-6">
-          <h2 className="text-lg font-bold">Experience</h2>
-          <hr className="my-2 border-gray-300" />
-          {resumeInfo.experience.map((exp, index) => (
-            <div key={index} className="mb-4">
-              <div className="flex justify-between items-start">
-                <p className="font-semibold">
-                  {exp.title} | {exp.companyName}
-                </p>
-                <p className="text-sm">
-                  {exp.startDate} - {exp.endDate || (exp.currentlyWorking ? "Present" : "")}
-                </p>
-              </div>
-              <ul className="list-disc pl-5 mt-2 text-sm text-gray-600">
-                {exp.workSummery.split("\n").map((point, i) => (
-                  <li key={i} className="break-words">{point}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
+  <div className="mb-6">
+    <h2 className="text-lg font-bold">Experience</h2>
+    <hr className="my-2 border-gray-300" />
+    {resumeInfo.experience.map((exp, index) => (
+      <div key={index} className="mb-4">
+        <div className="flex justify-between items-start">
+          <p className="font-semibold">
+            {exp.title} | {exp.companyName}
+          </p>
+          <p className="text-sm">
+            {exp.startDate} - {exp.endDate || (exp.currentlyWorking ? "Present" : "")}
+          </p>
         </div>
-      )}
+        <div
+          className="text-sm text-gray-700 mt-2 [&>ul]:list-disc [&>ul]:pl-5 [&>li]:mb-1"
+
+          dangerouslySetInnerHTML={{ __html: exp.workSummery }}
+        />
+      </div>
+    ))}
+  </div>
+)}
 
       {/* Education Section */}
       {resumeInfo?.education?.length > 0 && (

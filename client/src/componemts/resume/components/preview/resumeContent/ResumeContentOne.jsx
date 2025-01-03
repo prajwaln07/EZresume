@@ -1,5 +1,7 @@
 import React from 'react';
 import { Mail, Phone, MapPin, Linkedin, Briefcase, GraduationCap, Calendar, CheckCircle } from 'lucide-react';
+import parse from 'html-react-parser';
+
 
 const ResumeContent = ({ resumeInfo, resumeRef }) => {
   return (
@@ -48,32 +50,31 @@ const ResumeContent = ({ resumeInfo, resumeRef }) => {
 
       {/* Experience */}
       {resumeInfo?.experience?.length > 0 && (
-        <div className="my-4">
-          <h2 className="text-xl font-bold border-b-2 pb-1 mb-2">Experience</h2>
-          {resumeInfo.experience.map((exp, index) => (
-            <div key={index} className="mb-4">
-              <div className="flex justify-between items-start">
-                <h3 className="text-lg font-semibold flex items-center gap-1">
-                  <Briefcase size={16} /> {exp?.title}
-                </h3>
-                <span className="text-sm flex items-center gap-1">
-                  <Calendar size={16} /> {exp?.startDate} - {exp?.currentlyWorking ? 'Present' : exp?.endDate}
-                </span>
-              </div>
-              <h4 className="text-sm font-medium flex items-center gap-1 mt-1">
-                <MapPin size={16} /> {exp?.companyName}, {exp?.city}, {exp?.state}
-              </h4>
-              <ul className="list-disc pl-5 mt-2 text-sm text-gray-700">
-                {exp?.workSummery?.split('\n').map((point, i) => (
-                  <li key={i} className="break-words max-w-full relative  before:absolute before:-left-5 before:top-0">
-                    {point}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+  <div className="my-4">
+    <h2 className="text-xl font-bold border-b-2 pb-1 mb-2">Experience</h2>
+    {resumeInfo.experience.map((exp, index) => (
+      <div key={index} className="mb-4">
+        <div className="flex justify-between items-start">
+          <h3 className="text-lg font-semibold flex items-center gap-1">
+            <Briefcase size={16} /> {exp?.title}
+          </h3>
+          <span className="text-sm flex items-center gap-1">
+            <Calendar size={16} /> {exp?.startDate} - {exp?.currentlyWorking ? 'Present' : exp?.endDate}
+          </span>
         </div>
-      )}
+        <h4 className="text-sm font-medium flex items-center gap-1 mt-1">
+          <MapPin size={16} /> {exp?.companyName}, {exp?.city}, {exp?.state}
+        </h4>
+        <div
+                  className="text-sm text-gray-700 mt-2 [&>ul]:list-disc [&>ul]:pl-5 [&>li]:mb-1"
+                  dangerouslySetInnerHTML={{ __html: exp.workSummery }}
+        />
+      </div>
+    ))}
+  </div>
+)}
+
+
 
       {/* Education */}
       {resumeInfo?.education?.length > 0 && (
