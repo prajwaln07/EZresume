@@ -20,6 +20,7 @@ ChartJS.register(
 );
 
 const Charts = ({ templateDownloadData, monthlyDownloadData }) => {
+  
   const chartOptions = {
     responsive: true,
     plugins: {

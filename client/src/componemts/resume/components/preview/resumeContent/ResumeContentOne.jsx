@@ -1,6 +1,9 @@
 import React from 'react';
-import { Mail, Phone, MapPin, Linkedin, Briefcase, GraduationCap, Calendar, CheckCircle } from 'lucide-react';
-import parse from 'html-react-parser';
+
+ import { Mail, Phone,Globe, MapPin, Linkedin,Briefcase, GraduationCap,Github, Calendar, CheckCircle } from 'lucide-react';
+const cleanUrl = (url) => {
+  return url ? url.trim().replace(/<.*?>/g, '') : '';
+};
 
 
 const ResumeContent = ({ resumeInfo, resumeRef }) => {
@@ -8,37 +11,78 @@ const ResumeContent = ({ resumeInfo, resumeRef }) => {
     <div ref={resumeRef} className="shadow-lg h-full p-14 bg-gray-100 rounded-md">
       {/* Personal Details */}
       <div className="text-center mb-4">
-        <h1 className="text-3xl font-bold">
-          {resumeInfo?.firstName} {resumeInfo?.lastName}
-        </h1>
-        <h2 className="text-lg font-medium mt-1">{resumeInfo?.jobTitle}</h2>
-        <div className="flex justify-center gap-4 mt-2">
-          {resumeInfo?.phone && (
-            <div className="flex items-center gap-1">
-              <Phone size={16} />
-              <span>{resumeInfo.phone}</span>
-            </div>
-          )}
-          {resumeInfo?.email && (
-            <div className="flex items-center gap-1">
-              <Mail size={16} />
-              <span>{resumeInfo.email}</span>
-            </div>
-          )}
-          {resumeInfo?.address && (
-            <div className="flex items-center gap-1">
-              <MapPin size={16} />
-              <span>{resumeInfo.address}</span>
-            </div>
-          )}
-          {resumeInfo?.linkedin && (
-            <div className="flex items-center gap-1">
-              <Linkedin size={16} />
-              <span>{resumeInfo.linkedin}</span>
-            </div>
-          )}
-        </div>
+  <h1 className="text-3xl font-bold">
+    {resumeInfo?.firstName} {resumeInfo?.lastName}
+  </h1>
+  <h2 className="text-lg font-medium mt-1">
+    {resumeInfo?.jobTitle}
+  </h2>
+  <div className="flex justify-center gap-4 mt-2">
+    {resumeInfo?.phone && (
+      <div className="flex items-center gap-1">
+        <Phone size={16} />
+        <span>{resumeInfo.phone}</span>
       </div>
+    )}
+    {resumeInfo?.email && (
+      <div className="flex items-center gap-1">
+        <Mail size={16} />
+        <span>{resumeInfo.email}</span>
+      </div>
+    )}
+    {resumeInfo?.address && (
+      <div className="flex items-center gap-1">
+        <MapPin size={16} />
+        <span>{resumeInfo.address}</span>
+      </div>
+    )}
+     </div>
+
+<div className='flex justify-around gap-4 mt-2'>
+    {resumeInfo?.github && (
+      <div className="flex items-center gap-1">
+        <Github size={16} />
+        <a
+          href={cleanUrl(resumeInfo.github)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-primary"
+        >
+          GitHub
+        </a>
+      </div>
+    )}
+    {resumeInfo?.linkedin && (
+      <div className="flex items-center gap-1">
+        <Linkedin size={16} />
+        <a
+          href={cleanUrl(resumeInfo.linkedin)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-primary"
+        >
+          LinkedIn
+        </a>
+      </div>
+    )}
+    {resumeInfo?.portfolio && (
+      <div className="flex items-center gap-1">
+        <Globe size={16} />
+        <a
+          href={cleanUrl(resumeInfo.portfolio)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-primary"
+        >
+          Portfolio
+        </a>
+      </div>
+    )}
+
+</div>
+
+</div>
+
 
       {/* Summary */}
       {resumeInfo?.summery && (

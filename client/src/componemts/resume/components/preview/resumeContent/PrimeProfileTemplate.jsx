@@ -1,6 +1,8 @@
 import React from "react";
-import parse from 'html-react-parser';
-
+import {Linkedin,Github ,Globe   } from 'lucide-react';
+const cleanUrl = (url) => {
+  return url ? url.trim().replace(/<.*?>/g, '') : '';
+};
 
 const PrimeProfileTemplate = ({ resumeInfo, resumeRef }) => {
   return (
@@ -23,12 +25,59 @@ const PrimeProfileTemplate = ({ resumeInfo, resumeRef }) => {
       <div className="w-5/6 px-10 py-5 min-h-screen">
         {/* Header */}
         <div className="text-center mb-5">
-          <h1 className="text-4xl font-bold uppercase">{`${resumeInfo?.firstName} ${resumeInfo?.lastName}`}</h1>
-          <p className="text-sm mt-2">{resumeInfo?.address}</p>
-          <p className="text-sm">
-            {resumeInfo?.phone} | {resumeInfo?.email}
-          </p>
-        </div>
+  <h1 className="text-4xl font-bold uppercase">{`${resumeInfo?.firstName} ${resumeInfo?.lastName}`}</h1>
+  <p className="text-sm mt-2">{resumeInfo?.address}</p>
+  <p className="text-sm">
+    {resumeInfo?.phone} | {resumeInfo?.email}
+  </p>
+  <div className="grid grid-cols-3 gap-4 text-sm text-black mt-4">
+    {/* GitHub */}
+    {resumeInfo?.github && (
+      <p className="flex items-center gap-2">
+        <Github size={16} />
+        <a
+          href={cleanUrl(resumeInfo.github)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-primary"
+        >
+          GitHub
+        </a>
+      </p>
+    )}
+
+    {/* LinkedIn */}
+    {resumeInfo?.linkedin && (
+      <p className="flex items-center gap-2">
+        <Linkedin size={16} />
+        <a
+          href={cleanUrl(resumeInfo.linkedin)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-primary"
+        >
+          LinkedIn
+        </a>
+      </p>
+    )}
+
+    {/* Portfolio */}
+    {resumeInfo?.portfolio && (
+      <p className="flex items-center gap-2">
+        <Globe size={16} />
+        <a
+          href={cleanUrl(resumeInfo.portfolio)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-primary"
+        >
+          Portfolio
+        </a>
+      </p>
+    )}
+  </div>
+</div>
+
 
         {/* Summary Section */}
         {resumeInfo?.summery && (

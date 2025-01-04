@@ -1,5 +1,8 @@
 import React from 'react';
-import parse from 'html-react-parser';
+import {Linkedin,Github ,Globe   } from 'lucide-react';
+const cleanUrl = (url) => {
+  return url ? url.trim().replace(/<.*?>/g, '') : '';
+};
 
 
 const ClassicTemplate = ({ resumeInfo, resumeRef }) => {
@@ -22,38 +25,82 @@ const ClassicTemplate = ({ resumeInfo, resumeRef }) => {
     <div ref={resumeRef} className="border-t-8 border-red-400 rounded-t-md p-5">
       {/* Personal Details */}
       <div className="mt-6">
-        <h2
-          className="font-bold text-xl text-center"
-          style={{ color: resumeInfo?.themeColor }}
+  <h2
+    className="font-bold text-xl text-center"
+    style={{ color: resumeInfo?.themeColor }}
+  >
+    {resumeInfo?.firstName} {resumeInfo?.lastName}
+  </h2>
+  <h2 className="text-center text-sm font-medium">
+    {resumeInfo?.jobTitle}
+  </h2>
+  <h2
+    className="text-center font-normal text-xs"
+    style={{ color: resumeInfo?.themeColor }}
+  >
+    {resumeInfo?.address}
+  </h2>
+  <div className="flex justify-between">
+    <h2
+      className="font-normal text-xs"
+      style={{ color: resumeInfo?.themeColor }}
+    >
+      {resumeInfo?.phone}
+    </h2>
+    <h2
+      className="font-normal text-xs"
+      style={{ color: resumeInfo?.themeColor }}
+    >
+      {resumeInfo?.email}
+    </h2>
+  </div>
+  <div className="flex justify-center gap-4 mt-2 text-xs text-gray-600">
+    {resumeInfo?.github && (
+      <div className="flex items-center gap-1">
+        <Github size={14} />
+        <a
+          href={cleanUrl(resumeInfo.github)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-primary"
         >
-          {resumeInfo?.firstName} {resumeInfo?.lastName}
-        </h2>
-        <h2 className="text-center text-sm font-medium">{resumeInfo?.jobTitle}</h2>
-        <h2
-          className="text-center font-normal text-xs"
-          style={{ color: resumeInfo?.themeColor }}
-        >
-          {resumeInfo?.address}
-        </h2>
-        <div className="flex justify-between">
-          <h2
-            className="font-normal text-xs"
-            style={{ color: resumeInfo?.themeColor }}
-          >
-            {resumeInfo?.phone}
-          </h2>
-          <h2
-            className="font-normal text-xs"
-            style={{ color: resumeInfo?.themeColor }}
-          >
-            {resumeInfo?.email}
-          </h2>
-        </div>
-        <hr
-          className="border-[1.5px] my-2"
-          style={{ borderColor: resumeInfo?.themeColor }}
-        />
+          GitHub
+        </a>
       </div>
+    )}
+    {resumeInfo?.linkedin && (
+      <div className="flex items-center gap-1">
+        <Linkedin size={14} />
+        <a
+          href={cleanUrl(resumeInfo.linkedin)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-primary"
+        >
+          LinkedIn
+        </a>
+      </div>
+    )}
+    {resumeInfo?.portfolio && (
+      <div className="flex items-center gap-1">
+        <Globe size={14} />
+        <a
+          href={cleanUrl(resumeInfo.portfolio)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-primary"
+        >
+          Portfolio
+        </a>
+      </div>
+    )}
+  </div>
+  <hr
+    className="border-[1.5px] my-2"
+    style={{ borderColor: resumeInfo?.themeColor }}
+  />
+</div>
+
 
       {/* Summary */}
       {resumeInfo?.summery && (

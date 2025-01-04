@@ -1,7 +1,9 @@
 import React from 'react';
 import { Mail, Phone, MapPin, Briefcase, GraduationCap } from 'lucide-react';
-import parse from 'html-react-parser';
-
+import {Linkedin,Github ,Globe   } from 'lucide-react';
+const cleanUrl = (url) => {
+  return url ? url.trim().replace(/<.*?>/g, '') : '';
+};
 
 const NextGenTemplate = ({ resumeInfo, resumeRef }) => {
   return (
@@ -12,31 +14,83 @@ const NextGenTemplate = ({ resumeInfo, resumeRef }) => {
     >
       {/* Header Section */}
       <div className="text-center pb-2 border-gray-300">
-        <h1
-          className="text-3xl font-bold"
-          style={{ color: '#32CD32', fontFamily: 'Georgia, serif' }}
+  <h1
+    className="text-3xl font-bold"
+    style={{ color: '#32CD32', fontFamily: 'Georgia, serif' }}
+  >
+    {resumeInfo?.firstName} {resumeInfo?.lastName}
+  </h1>
+  <hr className="border-t-2 border-gray-300 my-4" />
+  <div className="grid grid-cols-3 gap-4 text-sm text-gray-500">
+    {/* Address */}
+    {resumeInfo?.address && (
+      <p className="flex items-center gap-2">
+        <MapPin size={16} /> {resumeInfo.address}
+      </p>
+    )}
+
+    {/* Phone */}
+    {resumeInfo?.phone && (
+      <p className="flex items-center gap-2">
+        <Phone size={16} /> {resumeInfo.phone}
+      </p>
+    )}
+
+    {/* Email */}
+    {resumeInfo?.email && (
+      <p className="flex items-center gap-2">
+        <Mail size={16} /> {resumeInfo.email}
+      </p>
+    )}
+
+    {/* GitHub */}
+    {resumeInfo?.github && (
+      <p className="flex items-center gap-2">
+        <Github size={16} />
+        <a
+          href={cleanUrl(resumeInfo.github)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-primary"
         >
-          {resumeInfo?.firstName} {resumeInfo?.lastName}
-        </h1>
-        <hr className="border-t-2 border-gray-300 my-4" />
-        <div className="flex justify-center items-center gap-6 text-sm text-gray-500">
-          {resumeInfo?.address && (
-            <p className="flex items-center gap-2">
-              <MapPin size={16} /> {resumeInfo.address}
-            </p>
-          )}
-          {resumeInfo?.phone && (
-            <p className="flex items-center gap-2">
-              <Phone size={16} /> {resumeInfo.phone}
-            </p>
-          )}
-          {resumeInfo?.email && (
-            <p className="flex items-center gap-2">
-              <Mail size={16} /> {resumeInfo.email}
-            </p>
-          )}
-        </div>
-      </div>
+          GitHub
+        </a>
+      </p>
+    )}
+
+    {/* LinkedIn */}
+    {resumeInfo?.linkedin && (
+      <p className="flex items-center gap-2">
+        <Linkedin size={16} />
+        <a
+          href={cleanUrl(resumeInfo.linkedin)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-primary"
+        >
+          LinkedIn
+        </a>
+      </p>
+    )}
+
+    {/* Portfolio */}
+    {resumeInfo?.portfolio && (
+      <p className="flex items-center gap-2">
+        <Globe size={16} />
+        <a
+          href={cleanUrl(resumeInfo.portfolio)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-primary"
+        >
+          Portfolio
+        </a>
+      </p>
+    )}
+  </div>
+</div>
+
+
 
       {/* Profile Summary */}
       {resumeInfo?.summery && (

@@ -6,6 +6,9 @@ export default{
     address:'525 N tryon Street, NC 28117',
     phone:'(+91)-9699xxxxxx',
     email:'exmaple@gmail.com',
+    portfolio:'',
+    github:'',
+    linkedin:'',
     themeColor:"#ff6666",
     summery:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     experience:[

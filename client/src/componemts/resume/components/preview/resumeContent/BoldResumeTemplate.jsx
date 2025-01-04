@@ -1,24 +1,80 @@
 import React from 'react';
-import parse from 'html-react-parser';
+import {Linkedin,Github ,Globe   } from 'lucide-react';
 
+import parse from 'html-react-parser';
+const cleanUrl = (url) => {
+  // Check if it's already properly formed
+  return url ? url.trim().replace(/<.*?>/g, '') : '';
+};
 
 const BoldResumeTemplate = ({ resumeInfo, resumeRef }) => {
   return (
     <div ref={resumeRef} className="p-8 bg-white text-gray-900 font-sans border-t-8">
       {/* Header Section */}
       <div className="text-center mb-8 border-b-2 pb-4">
-        <h1 className="text-4xl font-bold tracking-widest uppercase mb-2" style={{ color: resumeInfo?.themeColor }}>
-          {resumeInfo?.firstName} {resumeInfo?.lastName}
-        </h1>
-        <p className="text-lg uppercase tracking-wide font-medium mb-4">{resumeInfo?.jobTitle}</p>
-        <div className="text-sm flex justify-center gap-4">
-          <span>{resumeInfo?.phone}</span>
-          <span>|</span>
-          <span>{resumeInfo?.email}</span>
-          <span>|</span>
-          <span>{resumeInfo?.address}</span>
-        </div>
+  <h1
+    className="text-4xl font-bold tracking-widest uppercase mb-2"
+    style={{ color: resumeInfo?.themeColor }}
+  >
+    {resumeInfo?.firstName} {resumeInfo?.lastName}
+  </h1>
+  <p className="text-lg uppercase tracking-wide font-medium mb-4">
+    {resumeInfo?.jobTitle}
+  </p>
+  <div className="text-sm flex justify-center gap-4 mb-2">
+    <span>{resumeInfo?.phone}</span>
+    <span>|</span>
+    <span>{resumeInfo?.email}</span>
+    <span>|</span>
+    <span>{resumeInfo?.address}</span>
+  </div>
+
+  {/* Add GitHub, LinkedIn, and Portfolio links */}
+  <div className="flex justify-center gap-6 mt-4 text-sm text-gray-600">
+    {resumeInfo?.github && (
+      <div className="flex items-center gap-1">
+        <Github size={16} />
+        <a
+          href={cleanUrl(resumeInfo.github)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-primary"
+        >
+          GitHub
+        </a>
       </div>
+    )}
+
+    {resumeInfo?.linkedin && (
+      <div className="flex items-center gap-1">
+        <Linkedin size={16} />
+        <a
+          href={cleanUrl(resumeInfo.linkedin)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-primary"
+        >
+          LinkedIn
+        </a>
+      </div>
+    )}
+
+    {resumeInfo?.portfolio && (
+      <div className="flex items-center gap-1">
+        <Globe size={16} />
+        <a
+          href={cleanUrl(resumeInfo.portfolio)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-primary"
+        >
+          Portfolio
+        </a>
+      </div>
+    )}
+  </div>
+</div>
+
 
       <div className="grid grid-cols-3 gap-8 relative">
         {/* Left Column */}

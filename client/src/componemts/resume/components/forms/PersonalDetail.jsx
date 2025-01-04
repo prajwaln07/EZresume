@@ -1,14 +1,12 @@
 import { ResumeInfoContext } from '../../../../context/ResumeInfoContext';
-import React, { useContext} from 'react';
+import React, { useContext } from 'react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; // Import the Quill styles
 
 function PersonalDetail() {
     const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
 
-   
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-
-       
+    const handleInputChange = (name, value) => {
         setResumeInfo({
             ...resumeInfo,
             [name]: value,
@@ -24,13 +22,13 @@ function PersonalDetail() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* First Name */}
                     <div>
-                        <label htmlFor='firstName' className="block text-sm font-medium text-gray-700">First Name</label>
+                        <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">First Name</label>
                         <input
                             id="firstName"
                             type="text"
                             name="firstName"
                             defaultValue={resumeInfo?.firstName}
-                            onChange={handleInputChange}
+                            onChange={(e) => handleInputChange(e.target.name, e.target.value)}
                             required
                             className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-primary focus:border-primary p-2"
                         />
@@ -38,13 +36,13 @@ function PersonalDetail() {
 
                     {/* Last Name */}
                     <div>
-                        <label htmlFor='lastName'  className="block text-sm font-medium text-gray-700">Last Name</label>
+                        <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">Last Name</label>
                         <input
                             type="text"
                             id="lastName"
                             name="lastName"
                             defaultValue={resumeInfo?.lastName}
-                            onChange={handleInputChange}
+                            onChange={(e) => handleInputChange(e.target.name, e.target.value)}
                             required
                             className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm  p-2"
                         />
@@ -58,7 +56,7 @@ function PersonalDetail() {
                             name="jobTitle"
                             id="jobTitle"
                             defaultValue={resumeInfo?.jobTitle}
-                            onChange={handleInputChange}
+                            onChange={(e) => handleInputChange(e.target.name, e.target.value)}
                             required
                             className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm  p-2"
                         />
@@ -66,13 +64,13 @@ function PersonalDetail() {
 
                     {/* Address */}
                     <div className="col-span-1 md:col-span-2">
-                        <label htmlFor='address' className="block text-sm font-medium text-gray-700">Address</label>
+                        <label htmlFor="address" className="block text-sm font-medium text-gray-700">Address</label>
                         <input
                             type="text"
                             name="address"
                             id="address"
                             defaultValue={resumeInfo?.address}
-                            onChange={handleInputChange}
+                            onChange={(e) => handleInputChange(e.target.name, e.target.value)}
                             required
                             className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm p-2"
                         />
@@ -85,7 +83,7 @@ function PersonalDetail() {
                             type="phone"
                             name="phone"
                             defaultValue={resumeInfo?.phone}
-                            onChange={handleInputChange}
+                            onChange={(e) => handleInputChange(e.target.name, e.target.value)}
                             required
                             className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-primary focus:border-primary p-2"
                         />
@@ -98,11 +96,59 @@ function PersonalDetail() {
                             type="email"
                             name="email"
                             defaultValue={resumeInfo?.email}
-                            onChange={handleInputChange}
+                            onChange={(e) => handleInputChange(e.target.name, e.target.value)}
                             required
                             className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-primary focus:border-primary p-2"
                         />
                     </div>
+
+{/* LinkedIn */}
+<div className="col-span-1 md:col-span-2">
+    <label className="block text-sm font-medium text-gray-700">LinkedIn</label>
+    <ReactQuill
+        theme="snow"
+        value={resumeInfo?.linkedin || ''}
+        onChange={(value) => handleInputChange('linkedin', value)}
+        modules={{
+            toolbar: [['link']], // Simplified toolbar
+        }}
+        formats={['link']}
+        className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm"
+    />
+</div>
+
+{/* GitHub */}
+<div className="col-span-1 md:col-span-2">
+    <label className="block text-sm font-medium text-gray-700">GitHub</label>
+    <ReactQuill
+        theme="snow"
+        value={resumeInfo?.github || ''}
+        onChange={(value) => handleInputChange('github', value)}
+        modules={{
+            toolbar: [['link']], // Simplified toolbar
+        }}
+        formats={['link']}
+        className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm"
+    />
+</div>
+
+
+{/* PortFolio */}
+<div className="col-span-1 md:col-span-2">
+    <label className="block text-sm font-medium text-gray-700">Portfolio</label>
+    <ReactQuill
+        theme="snow"
+        value={resumeInfo?.portfolio || ''}
+        onChange={(value) => handleInputChange('portfolio', value)}
+        modules={{
+            toolbar: [['link']], // Simplified toolbar
+        }}
+        formats={['link']}
+        className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm"
+    />
+</div>
+
+
                 </div>
             </form>
         </div>
