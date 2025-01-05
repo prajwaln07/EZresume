@@ -1,11 +1,7 @@
 import React from 'react';
 import { Mail, Phone, Briefcase, GraduationCap, CheckCircle,Linkedin,Github ,Globe   } from 'lucide-react';
-import parse from 'html-react-parser';
+import cleanUrl from '../utils';
 
-const cleanUrl = (url) => {
-  // Check if it's already properly formed
-  return url ? url.trim().replace(/<.*?>/g, '') : '';
-};
 
 
 const ModernResumeTemplate = ({ resumeInfo, resumeRef }) => {

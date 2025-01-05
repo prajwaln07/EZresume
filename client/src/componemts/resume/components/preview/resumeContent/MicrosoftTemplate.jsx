@@ -1,9 +1,7 @@
 import React from "react";
-import parse from 'html-react-parser';
 import {Linkedin,Github ,Globe   } from 'lucide-react';
-const cleanUrl = (url) => {
-  return url ? url.trim().replace(/<.*?>/g, '') : '';
-};
+import cleanUrl from '../utils';
+
 
 const MicrosoftTemplate = ({ resumeInfo, resumeRef }) => {
   return (

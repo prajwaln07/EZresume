@@ -1,9 +1,8 @@
 import React from 'react';
 import { Mail, Phone, MapPin, Briefcase, GraduationCap } from 'lucide-react';
 import {Linkedin,Github ,Globe   } from 'lucide-react';
-const cleanUrl = (url) => {
-  return url ? url.trim().replace(/<.*?>/g, '') : '';
-};
+import cleanUrl from '../utils';
+
 
 const NextGenTemplate = ({ resumeInfo, resumeRef }) => {
   return (

@@ -1,9 +1,7 @@
 import React from 'react';
+import { Mail, Phone,Globe, MapPin, Linkedin,Briefcase, GraduationCap,Github, Calendar, CheckCircle } from 'lucide-react';
+import cleanUrl from '../utils';
 
- import { Mail, Phone,Globe, MapPin, Linkedin,Briefcase, GraduationCap,Github, Calendar, CheckCircle } from 'lucide-react';
-const cleanUrl = (url) => {
-  return url ? url.trim().replace(/<.*?>/g, '') : '';
-};
 
 
 const ResumeContent = ({ resumeInfo, resumeRef }) => {

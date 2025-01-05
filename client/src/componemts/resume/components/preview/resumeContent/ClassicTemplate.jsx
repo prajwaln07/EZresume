@@ -1,8 +1,7 @@
 import React from 'react';
 import {Linkedin,Github ,Globe   } from 'lucide-react';
-const cleanUrl = (url) => {
-  return url ? url.trim().replace(/<.*?>/g, '') : '';
-};
+import cleanUrl from '../utils';
+
 
 
 const ClassicTemplate = ({ resumeInfo, resumeRef }) => {

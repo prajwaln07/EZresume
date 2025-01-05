@@ -1,11 +1,6 @@
 import React from 'react';
 import {Linkedin,Github ,Globe   } from 'lucide-react';
-
-import parse from 'html-react-parser';
-const cleanUrl = (url) => {
-  // Check if it's already properly formed
-  return url ? url.trim().replace(/<.*?>/g, '') : '';
-};
+import cleanUrl from '../utils';
 
 const BoldResumeTemplate = ({ resumeInfo, resumeRef }) => {
   return (
