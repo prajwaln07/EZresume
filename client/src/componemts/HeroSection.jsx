@@ -12,7 +12,7 @@ const HeroSection = () => {
 <div className="flex justify-center h-5/6">
         {/* Left div of image */}
         <div className="w-5/12 h-full flex justify-center items-center">
-          <div className="h-96 w-96 rounded-sm">
+          <div className="h-96 w-96 rounded-sm hidden md:block">
             <img
               className="rounded-md"
               src="https://res.cloudinary.com/dkynwi65w/image/upload/v1734270622/freepik__candid-image-photography-natural-textures-highly-r__1868_volh1c.jpg"
