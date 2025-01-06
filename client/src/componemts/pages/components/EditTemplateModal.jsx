@@ -69,17 +69,7 @@ const EditTemplateModal = ({
           </div>
 
 
-          <div className="mb-4">
-            <label className="block text-gray-700 font-medium mb-2">Structure</label>
-            <input
-              type="text"
-              name="structure"
-              value={formData.structure || ""}
-              onChange={onInputChange}
-              className="w-full border border-gray-300 p-2 rounded-lg"
-              required
-            />
-          </div>
+ 
 
           <div className="mb-4">
             <label className="block text-gray-700 font-medium mb-2">Thumbnail</label>

@@ -6,11 +6,11 @@ const {uploadThumbnail} =require('../config/cloudinary')
 exports.createTemplate = async (req, res) => {
     try {
 
-        const { name, description, layout, structure,premiumTemplate } = req.body; // Added structure field
+        const { name, description, layout,isCustomizable } = req.body; 
         const thumbnail = req.file; // Get the uploaded file from req.file
 
-        if (!name || !description || !layout || !structure || !thumbnail) {
-            return res.status(400).send("All fields (name, description, layout, structure,thumbnail) are required.");
+        if (!name || !description || !layout  || !thumbnail) {
+            return res.status(400).send("All fields (name, description, layout,thumbnail) are required.");
         }
 
         const cloudResponse = await uploadThumbnail(thumbnail.buffer); // Use thumbnail.buffer for uploading
@@ -20,9 +20,8 @@ exports.createTemplate = async (req, res) => {
         const newTemplate = await Template.create({ 
             name, 
             description, 
-            premiumTemplate,
+            isCustomizable,
             layout, 
-            structure, // Save the structure of the template as well
             image: thumbnail_cloud // Ensure you set the field as expected by the model
         });
 

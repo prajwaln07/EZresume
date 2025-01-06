@@ -66,16 +66,7 @@ const CreateTemplateModal = ({
           ></textarea>
         </div>
 
-        <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">Structure</label>
-          <textarea
-            name="structure"
-            value={formData.structure}
-            onChange={onInputChange}
-            className="w-full border border-gray-300 p-2 rounded-lg"
-            required
-          ></textarea>
-        </div>
+
 
 
         <div className="mb-4">

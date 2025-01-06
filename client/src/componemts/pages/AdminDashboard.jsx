@@ -49,8 +49,7 @@ const AdminDashboard = () => {
     name: "",
     description: "",
     layout: "",
-    structure: "",
-    premiumTemplate: false,
+    isCustomizable: false,
     thumbnail: null,
   });
 
@@ -146,8 +145,7 @@ const AdminDashboard = () => {
     form.append("name", formData.name);
     form.append("description", formData.description);
     form.append("layout", formData.layout);
-    form.append("structure", formData.structure);
-    form.append("premiumTemplate", formData.premiumTemplate);
+    form.append("isCustomizable", formData.isCustomizable);
     form.append("thumbnail", formData.thumbnail);
 
     try {
@@ -213,8 +211,7 @@ const AdminDashboard = () => {
     form.append("name", editTemplateData.name);
     form.append("description", editTemplateData.description);
     form.append("layout", editTemplateData.layout);
-    form.append("structure", editTemplateData.structure);
-    form.append("premiumTemplate", editTemplateData.premiumTemplate);
+    form.append("isCustomizable", editTemplateData.isCustomizable);
     form.append("thumbnail", editTemplateData.thumbnail); // Only if you are updating the thumbnail
 
     try {

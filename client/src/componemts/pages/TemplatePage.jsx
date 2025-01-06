@@ -23,7 +23,7 @@ const TemplatePage = () => {
   const getAllTemplates = async () => {
     try {
       dispatch(setLoading());
-      const response = await axios.get("https://ezresume.onrender.com/api/v1/templates/");
+      const response = await axios.get("http://localhost:5000/api/v1/templates/");
       dispatch(fetchTemplatesSuccess(response.data)); // Dispatch success action with templates
     } catch (err) {
       dispatch(fetchTemplatesFailure(err.message)); // Dispatch failure action with error message
