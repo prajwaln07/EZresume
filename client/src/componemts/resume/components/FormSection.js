@@ -67,11 +67,11 @@ const FormSection = () => {
       ) : activeFormIndex === 2 ? (
         <Summery/>
       ) : activeFormIndex === 3 ? (
-        <Experience />
-      ) :activeFormIndex ===  4 ?(
-        <Project/>
-      ) : activeFormIndex === 5 ? (
         <Education />
+      ) :activeFormIndex ===  4 ?(
+        <Experience/>
+      ) : activeFormIndex === 5 ? (
+        <Project />
       ) : activeFormIndex === 6 ? (
         <Skills />
       ) : null}
