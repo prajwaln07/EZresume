@@ -12,6 +12,7 @@ import NextGenTemplate from './preview/resumeContent/NextGenTemplate';
 import SimpleTemplate from './preview/resumeContent/SimpleTemplate';
 import BoldResumeTemplate from './preview/resumeContent/BoldResumeTemplate';
 import PrimeProfileTemplate from './preview/resumeContent/PrimeProfileTemplate';
+import GradTemplate from './preview/resumeContent/Customizable/ProfessionalResume';
 
 const ResumePreview = () => {
   const { resumeInfo } = useContext(ResumeInfoContext);
@@ -80,9 +81,11 @@ const ResumePreview = () => {
     SimpleLayout: SimpleTemplate,
     BoldLayout: BoldResumeTemplate,
     PrimeLayout: PrimeProfileTemplate,
+    CustomLayout:GradTemplate,
   };
 
   const TemplateComponent = templates[selectedTemplate] || ResumeContent;
+
 
   return (
     <div>
