@@ -39,12 +39,11 @@ const TemplatePage = () => {
   }, []);
 
   const handleTemplateClick = (name, templateId, premiumTemplate) => {
-    if (premiumTemplate) navigate(`/pricing`);
-    else {
+   
       dispatch(changeTemplate(name));
       dispatch(setTemplateID(templateId));
       navigate(`/resume/maker`);
-    }
+    
   };
 
   const openModal = (description) => {
@@ -120,9 +119,9 @@ const TemplatePage = () => {
                           template.premiumTemplate
                         )
                       }
-                      className="pointer-events-none absolute bottom-4 left-0 right-0 mx-auto bg-yellow-300 hover:bg-yellow-400 text-white font-bold py-2 rounded w-3/4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      className=" absolute bottom-4 left-0 right-0 mx-auto bg-yellow-300 hover:bg-yellow-400 text-white font-bold py-2 rounded w-3/4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     >
-                      Premium Required
+                      Customizable  Template
                     </button>
                   )}
                 </div>
