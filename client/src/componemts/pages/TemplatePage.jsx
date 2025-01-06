@@ -98,7 +98,7 @@ const TemplatePage = () => {
                     alt={template.name}
                     className="rounded-md mb-4 h-64 object-cover"
                   />
-                  {!template.premiumTemplate ? (
+                  {!template.isCustomizable ? (
                     <button
                       onClick={() =>
                         handleTemplateClick(
