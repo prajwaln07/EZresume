@@ -26,20 +26,6 @@ export default{
             'Maintaining the React Native in-house organization application.\n'+
             'CreatedRESTfulAPIs withNode.js and Express and improved backend speed.'
         },
-        {
-            id:2,
-            title:'Frontend Developer',
-            companyName:'Google',
-            city:'Charlotte',
-            state:'NC',
-            startDate:'01-01-2021',
-            endDate:'01-01-2022',
-            currentlyWorking:true,
-            workSummery:' Designed, developed, and maintained full-stack applications using React and Node.js.\n'+
-            'Implemented responsive user interfaces with React, ensuring seamless user experiences. \n'+
-            'Maintaining the React Native in-house organization application.\n'+
-            'CreatedRESTfulAPIs withNode.js and Express and improved backend speed.'
-        }
     ],
     education:[
         {
@@ -49,7 +35,7 @@ export default{
             endDate:'01-02-2024',
             degree:'Master',
             major:'Computer Science',
-            description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud'
+            description:''
         },
         {
             id:2,
@@ -58,7 +44,7 @@ export default{
             endDate:'01-01-2025',
             degree:'Master',
             major:'Computer Science',
-            description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud'
+            description:''
         }
     ],
     skills:[
