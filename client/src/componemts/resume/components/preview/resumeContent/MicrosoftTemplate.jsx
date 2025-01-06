@@ -80,6 +80,26 @@ const MicrosoftTemplate = ({ resumeInfo, resumeRef }) => {
         </div>
       )}
 
+            {/* Education Section */}
+            {resumeInfo?.education?.length > 0 && (
+        <div className="mb-6">
+          <h2 className="text-lg font-bold">Education</h2>
+          <hr className="my-2 border-gray-300" />
+          {resumeInfo.education.map((edu, index) => (
+            <div key={index} className="mb-4">
+              <p className="font-semibold">
+                {edu.universityName} | {edu.degree}
+              </p>
+              <p className="text-sm text-gray-600">Major: {edu.major}</p>
+              <p className="text-sm">{edu.startDate} - {edu.endDate}</p>
+              {edu.description && (
+                <p className="text-sm mt-2 text-gray-600">{edu.description}</p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
       {/* Experience Section */}
       {resumeInfo?.experience?.length > 0 && (
   <div className="mb-6">
@@ -155,25 +175,7 @@ const MicrosoftTemplate = ({ resumeInfo, resumeRef }) => {
   </div>
 )}
 
-      {/* Education Section */}
-      {resumeInfo?.education?.length > 0 && (
-        <div className="mb-6">
-          <h2 className="text-lg font-bold">Education</h2>
-          <hr className="my-2 border-gray-300" />
-          {resumeInfo.education.map((edu, index) => (
-            <div key={index} className="mb-4">
-              <p className="font-semibold">
-                {edu.universityName} | {edu.degree}
-              </p>
-              <p className="text-sm text-gray-600">Major: {edu.major}</p>
-              <p className="text-sm">{edu.startDate} - {edu.endDate}</p>
-              {edu.description && (
-                <p className="text-sm mt-2 text-gray-600">{edu.description}</p>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
+
 
       {/* Skills Section */}
       {resumeInfo?.skills?.length > 0 && (

@@ -79,6 +79,26 @@ const ModernResumeTemplate = ({ resumeInfo, resumeRef }) => {
         </div>
       )}
 
+            {/* Education */}
+            {resumeInfo?.education?.length > 0 && (
+        <div className="mb-6">
+          <h2 className="text-xl font-bold text-blue-400 border-b-2 pb-1 mb-2">Education</h2>
+          {resumeInfo.education.map((edu, index) => (
+            <div key={index} className="mb-4">
+              <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-1">
+                <GraduationCap size={16} /> {edu?.degree} in {edu?.major}
+              </h3>
+              <div className="flex justify-between text-sm text-gray-600">
+                <span>{edu?.universityName}</span>
+                <span>
+                  {edu?.startDate} - {edu?.endDate}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
       {/* Work Experience */}
       {resumeInfo?.experience?.length > 0 && (
   <div className="mb-6">
@@ -156,25 +176,7 @@ const ModernResumeTemplate = ({ resumeInfo, resumeRef }) => {
 
 
 
-      {/* Education */}
-      {resumeInfo?.education?.length > 0 && (
-        <div className="mb-6">
-          <h2 className="text-xl font-bold text-blue-400 border-b-2 pb-1 mb-2">Education</h2>
-          {resumeInfo.education.map((edu, index) => (
-            <div key={index} className="mb-4">
-              <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-1">
-                <GraduationCap size={16} /> {edu?.degree} in {edu?.major}
-              </h3>
-              <div className="flex justify-between text-sm text-gray-600">
-                <span>{edu?.universityName}</span>
-                <span>
-                  {edu?.startDate} - {edu?.endDate}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+
 
       {/* Technical Skills */}
       {resumeInfo?.skills?.length > 0 && (

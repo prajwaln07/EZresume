@@ -85,6 +85,30 @@ const PrimeProfileTemplate = ({ resumeInfo, resumeRef }) => {
           </div>
         )}
 
+          
+        {/* Education Section */}
+        {resumeInfo?.education?.length > 0 && (
+          <div className="mb-6">
+            <h2
+              className="text-lg font-bold mb-2 uppercase"
+              style={{ color: resumeInfo?.themeColor }}
+            >
+              Education
+            </h2>
+            {resumeInfo.education.map((edu) => (
+              <div key={edu.id} className="mb-4">
+                <p className="text-md font-bold">
+                  {edu.degree} in {edu.major}
+                </p>
+                <p className="text-sm">
+                  {edu.universityName} | {edu.startDate} - {edu.endDate}
+                </p>
+                <p className="text-sm mt-2">{edu.description}</p>
+              </div>
+            ))}
+          </div>
+        )}
+
         {/* Experience Section */}
         {resumeInfo?.experience?.length > 0 && (
   <div className="mb-6">
@@ -161,28 +185,6 @@ const PrimeProfileTemplate = ({ resumeInfo, resumeRef }) => {
 
 
 
-        {/* Education Section */}
-        {resumeInfo?.education?.length > 0 && (
-          <div className="mb-6">
-            <h2
-              className="text-lg font-bold mb-2 uppercase"
-              style={{ color: resumeInfo?.themeColor }}
-            >
-              Education
-            </h2>
-            {resumeInfo.education.map((edu) => (
-              <div key={edu.id} className="mb-4">
-                <p className="text-md font-bold">
-                  {edu.degree} in {edu.major}
-                </p>
-                <p className="text-sm">
-                  {edu.universityName} | {edu.startDate} - {edu.endDate}
-                </p>
-                <p className="text-sm mt-2">{edu.description}</p>
-              </div>
-            ))}
-          </div>
-        )}
 
         {/* Skills Section */}
         {resumeInfo?.skills?.length > 0 && (

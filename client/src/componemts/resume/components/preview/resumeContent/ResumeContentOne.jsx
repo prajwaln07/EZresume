@@ -85,6 +85,28 @@ const ResumeContent = ({ resumeInfo, resumeRef }) => {
         </div>
       )}
 
+            {/* Education */}
+            {resumeInfo?.education?.length > 0 && (
+        <div className="my-4">
+          <h2 className="text-xl font-bold border-b-2 pb-1 mb-2">Education</h2>
+          {resumeInfo.education.map((edu, index) => (
+            <div key={index} className="mb-4">
+              <h3 className="text-lg font-semibold flex items-center gap-1">
+                <GraduationCap size={16} /> {edu?.degree} in {edu?.major}
+              </h3>
+              <div className="flex justify-between">
+                <h4 className="text-sm font-medium">{edu?.universityName}</h4>
+                <span className="text-sm flex items-center gap-1">
+                  <Calendar size={16} /> {edu?.startDate} - {edu?.endDate}
+                </span>
+              </div>
+              <p className="text-sm mt-2">{edu?.description}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+
       {/* Experience */}
       {resumeInfo?.experience?.length > 0 && (
         <div className="my-4">
@@ -159,26 +181,6 @@ const ResumeContent = ({ resumeInfo, resumeRef }) => {
         </div>
       )}
 
-      {/* Education */}
-      {resumeInfo?.education?.length > 0 && (
-        <div className="my-4">
-          <h2 className="text-xl font-bold border-b-2 pb-1 mb-2">Education</h2>
-          {resumeInfo.education.map((edu, index) => (
-            <div key={index} className="mb-4">
-              <h3 className="text-lg font-semibold flex items-center gap-1">
-                <GraduationCap size={16} /> {edu?.degree} in {edu?.major}
-              </h3>
-              <div className="flex justify-between">
-                <h4 className="text-sm font-medium">{edu?.universityName}</h4>
-                <span className="text-sm flex items-center gap-1">
-                  <Calendar size={16} /> {edu?.startDate} - {edu?.endDate}
-                </span>
-              </div>
-              <p className="text-sm mt-2">{edu?.description}</p>
-            </div>
-          ))}
-        </div>
-      )}
 
       {/* Skills */}
       {resumeInfo?.skills?.length > 0 && (

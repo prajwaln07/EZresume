@@ -100,6 +100,28 @@ const SimpleTemplate = ({ resumeInfo, resumeRef }) => {
         </div>
       )}
 
+            {/* Education Section */}
+            {resumeInfo?.education?.length > 0 && (
+        <div className="mb-6">
+          <h2 className="text-lg font-semibold text-gray-700 border-b-2 border-gray-200 pb-1 mb-4 text-center bg-blue-100">
+            EDUCATION
+          </h2>
+          {resumeInfo.education.map((edu) => (
+            <div key={edu.id} className="mb-4">
+              <h3 className="text-md font-bold text-black break-words">
+                {edu.degree} in {edu.major}
+              </h3>
+              <p className="text-sm text-gray-700">{edu.universityName}</p>
+              <p className="text-sm text-gray-600">
+                {edu.startDate} - {edu.endDate}
+              </p>
+              <p className="text-sm text-gray-700 mt-1 break-words">{edu.description}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+
       {/* Professional Experience Section */}
       {resumeInfo?.experience?.length > 0 && (
   <div className="mb-6">
@@ -125,26 +147,6 @@ const SimpleTemplate = ({ resumeInfo, resumeRef }) => {
 )}
 
 
-      {/* Education Section */}
-      {resumeInfo?.education?.length > 0 && (
-        <div className="mb-6">
-          <h2 className="text-lg font-semibold text-gray-700 border-b-2 border-gray-200 pb-1 mb-4 text-center bg-blue-100">
-            EDUCATION
-          </h2>
-          {resumeInfo.education.map((edu) => (
-            <div key={edu.id} className="mb-4">
-              <h3 className="text-md font-bold text-black break-words">
-                {edu.degree} in {edu.major}
-              </h3>
-              <p className="text-sm text-gray-700">{edu.universityName}</p>
-              <p className="text-sm text-gray-600">
-                {edu.startDate} - {edu.endDate}
-              </p>
-              <p className="text-sm text-gray-700 mt-1 break-words">{edu.description}</p>
-            </div>
-          ))}
-        </div>
-      )}
 
 {/* Projects Section */}
 {resumeInfo?.projects?.length > 0 && (

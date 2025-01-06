@@ -109,6 +109,30 @@ const NextGenTemplate = ({ resumeInfo, resumeRef }) => {
         </div>
       )}
 
+            {/* Education */}
+            {resumeInfo?.education?.length > 0 && (
+        <div className="mb-8">
+          <h2
+            className="text-lg font-bold border-b-2 pb-2 mb-4"
+            style={{ color: '#32CD32', fontFamily: 'Georgia, serif' }}
+          >
+            Education
+          </h2>
+          {resumeInfo.education.map((edu) => (
+            <div key={edu.id} className="mb-6">
+              <h3 className="text-md font-semibold text-gray-800 flex items-center gap-2">
+                <GraduationCap size={16} /> {edu.degree} in {edu.major}
+              </h3>
+              <div className="flex justify-between text-sm text-gray-600">
+                <span>{edu.universityName}</span>
+                <span>{edu.startDate} - {edu.endDate}</span>
+              </div>
+              <p className="text-sm text-gray-700 mt-1">{edu.description}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
       {/* Work Experience */}
       {resumeInfo?.experience?.length > 0 && (
   <div className="mb-8">
@@ -199,29 +223,7 @@ const NextGenTemplate = ({ resumeInfo, resumeRef }) => {
       )}
 
 
-      {/* Education */}
-      {resumeInfo?.education?.length > 0 && (
-        <div className="mb-8">
-          <h2
-            className="text-lg font-bold border-b-2 pb-2 mb-4"
-            style={{ color: '#32CD32', fontFamily: 'Georgia, serif' }}
-          >
-            Education
-          </h2>
-          {resumeInfo.education.map((edu) => (
-            <div key={edu.id} className="mb-6">
-              <h3 className="text-md font-semibold text-gray-800 flex items-center gap-2">
-                <GraduationCap size={16} /> {edu.degree} in {edu.major}
-              </h3>
-              <div className="flex justify-between text-sm text-gray-600">
-                <span>{edu.universityName}</span>
-                <span>{edu.startDate} - {edu.endDate}</span>
-              </div>
-              <p className="text-sm text-gray-700 mt-1">{edu.description}</p>
-            </div>
-          ))}
-        </div>
-      )}
+
 
       {/* Technical Skills */}
       {resumeInfo?.skills?.length > 0 && (
