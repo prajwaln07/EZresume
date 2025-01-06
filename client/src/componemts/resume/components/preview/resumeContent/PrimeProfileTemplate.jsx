@@ -111,6 +111,55 @@ const PrimeProfileTemplate = ({ resumeInfo, resumeRef }) => {
   </div>
 )}
 
+        {/* Projects Section */}
+        {resumeInfo?.projects?.length > 0 && (
+          <div className="mb-6">
+            <h2
+              className="text-lg font-bold mb-2 uppercase"
+              style={{ color: resumeInfo?.themeColor }}
+            >
+              Projects
+            </h2>
+            {resumeInfo.projects.map((project, index) => (
+              <div key={index} className="mb-4">
+                <div className="flex justify-between items-center">
+                  <p className="text-md font-bold">{project.name}</p>
+                  <div className="flex items-center gap-4">
+                    {project.link && (
+                      <a
+                        href={cleanUrl(project.link)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 flex items-center gap-1"
+                      >
+                        <Globe size={16} />
+                      </a>
+                    )}
+                    {project.github && (
+                      <a
+                        href={cleanUrl(project.github)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 flex items-center gap-1"
+                      >
+                        <Github size={16} />
+                      </a>
+                    )}
+                  </div>
+                </div>
+                <div
+                  className="text-sm text-gray-700 mt-2 [&>ul]:list-disc [&>ul]:pl-5 [&>li]:mb-1"
+                  dangerouslySetInnerHTML={{ __html: project.description }}
+                />
+                <p className="text-sm text-gray-600 mt-2">
+                  <strong>Technologies:</strong> {project.technologies.join(", ")}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
+
+
 
         {/* Education Section */}
         {resumeInfo?.education?.length > 0 && (

@@ -7,6 +7,7 @@ import Experience from './forms/Experience';
 import Education from './forms/Education';
 import Skills from './forms/Skills';
 import PersonalDetail from './forms/PersonalDetail';
+import Project from './forms/Project';
 
 const FormSection = () => {
 
@@ -43,7 +44,7 @@ const FormSection = () => {
             </button>
           )}
 
-          {activeFormIndex < 5 && (
+          {activeFormIndex < 6 && (
 
             <button 
               disabled={!enableNext}
@@ -67,9 +68,11 @@ const FormSection = () => {
         <Summery/>
       ) : activeFormIndex === 3 ? (
         <Experience />
-      ) : activeFormIndex === 4 ? (
-        <Education />
+      ) :activeFormIndex ===  4 ?(
+        <Project/>
       ) : activeFormIndex === 5 ? (
+        <Education />
+      ) : activeFormIndex === 6 ? (
         <Skills />
       ) : null}
 

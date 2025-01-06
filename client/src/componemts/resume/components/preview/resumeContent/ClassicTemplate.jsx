@@ -136,6 +136,8 @@ const ClassicTemplate = ({ resumeInfo, resumeRef }) => {
         </div>
       )}
 
+      
+
       {/* Professional Experience */}
       {resumeInfo?.experience?.length > 0 && (
   <div className="my-6">
@@ -172,6 +174,63 @@ const ClassicTemplate = ({ resumeInfo, resumeRef }) => {
     ))}
   </div>
 )}
+{/* Projects Section */}
+{resumeInfo?.projects?.length > 0 && (
+  <div className="my-6">
+    <h2
+      className="text-center font-bold text-sm mb-2"
+      style={{ color: resumeInfo?.themeColor }}
+    >
+      Projects
+    </h2>
+    <hr style={{ borderColor: resumeInfo?.themeColor }} />
+    {resumeInfo.projects.map((project, index) => (
+      <div key={index} className="my-5">
+        <div className="flex justify-between items-center">
+          <h2
+            className="text-sm font-bold"
+            style={{ color: resumeInfo?.themeColor }}
+          >
+            {project.name}
+          </h2>
+          <div className="flex items-center gap-4">
+            {project.link && (
+              <a
+                href={cleanUrl(project.link)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500"
+              >
+                <Globe size={16} />
+              </a>
+            )}
+            {project.github && (
+              <a
+                href={cleanUrl(project.github)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500"
+              >
+                <Github size={16} />
+              </a>
+            )}
+          </div>
+        </div>
+        <div className="flex justify-between text-xs mt-1">
+          <p className="text-gray-600">{project.date}</p>
+        </div>
+        <div
+          className="text-sm text-gray-700 mt-2 [&>ul]:list-disc [&>ul]:pl-5 [&>li]:mb-1"
+          dangerouslySetInnerHTML={{ __html: project.description }}
+        />
+        <p className="text-sm text-gray-600 mt-2">
+          <strong>Technologies:</strong> {project.technologies.join(", ")}
+        </p>
+      </div>
+    ))}
+  </div>
+)}
+
 
 
       {/* Skills */}

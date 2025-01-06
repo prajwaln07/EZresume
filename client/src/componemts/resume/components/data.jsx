@@ -82,5 +82,26 @@ export default{
             name:'React Native',
             rating:0,
         }
+    ],
+
+    projects: [
+        {
+            id: 1,
+            name: 'Portfolio Website',
+            description: '<div>Developed a personal portfolio website.</div><div>Showcasing projects, skills, and contact information.</div>',
+            technologies: ['React', 'CSS', 'Netlify'],
+            link: 'https://leetcode.com/u/prajwal_nimbalkar/',
+            github: 'https://leetcode.com/u/prajwal_nimbalkar/'
+        },
+        {
+            id: 2,
+            name: 'E-Commerce Platform',
+            description: '<div>Built a full-stack e-commerce platform.</div><div>Features product search, cart, and payment integration.</div>',
+            technologies: ['React', 'Node.js', 'MongoDB'],
+            link: 'https://leetcode.com/u/prajwal_nimbalkar/',
+            github: 'https://leetcode.com/u/prajwal_nimbalkar/'
+        }
     ]
+    
+    
 }
