@@ -58,7 +58,7 @@ exports.getAllFeedback = async (req, res) => {
                 select: "username",
             })
             .select("comments rating")
-            .sort({ rating: -1 })
+            .sort({ rating: -1, _id: 1  })
             .skip(skip)
             .limit(parseInt(limit));
 
