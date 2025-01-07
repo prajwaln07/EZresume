@@ -33,7 +33,7 @@ const userSchema = new mongoose.Schema({
     },
     profileImage: {
          type: String 
-        }, // URL of the user's profile image
+        }, // URL of the user's profile image..
 });
 
 const User = mongoose.models.User || mongoose.model('User', userSchema);

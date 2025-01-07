@@ -5,6 +5,8 @@ import { toggleTheme } from '../../redux/actions/themeAction';
 import axios from "axios";
 import { userLogout } from '../../redux/actions/userDetail';
 import {toast } from 'react-toastify';
+import apiConfig from '../../api/apiConfig';
+
 
 
 const Navbar = () => {
@@ -52,8 +54,9 @@ const Navbar = () => {
     // Perform logout logic, like clearing auth tokens, Redux state, etc.
 
     try {
-      await axios.post("https://ezresume.onrender.com/api/v1/users/logout");
 
+      await axios.post(apiConfig.users.logout);
+      
       toast.info('User Logout Successful!', {
         position: "bottom-right",
         autoClose: 4000, // Slightly faster auto-close for logout

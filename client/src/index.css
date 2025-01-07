@@ -24,6 +24,15 @@
   .custom-bullet::marker {
     color: #4169E1 !important; /* Royal Blue */
   }
-  
+  /* Hide the scrollbar */
+.feedback-container::-webkit-scrollbar {
+  display: none;
+}
+
+.feedback-container {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 
   

@@ -16,7 +16,9 @@ import Charts from './components/Charts';
 import MetricsCard from "./components/MetricsCard";
 import TemplateManagement from "./components/TemplateManagement";
 import CreateTemplateModal from './components/CreateTemplateModal';
-import EditTemplateModal from './components/EditTemplateModal';
+import EditTemplateModal from './components/EditTemplateModal'
+import apiConfig from "../../../api/apiConfig";
+
 
 ChartJS.register(
   ArcElement,
@@ -27,10 +29,7 @@ ChartJS.register(
   BarElement
 );
 
-// toast.configure({
-//   position: toast.POSITION.TOP_RIGHT,
-//   autoClose: 3000,
-// });
+
 
 const AdminDashboard = () => {
   const [createLoading, setCreateLoading] = useState(false);
@@ -63,7 +62,8 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchTemplates = async () => {
       try {
-        const response = await axios.get("https://ezresume.onrender.com/api/v1/templates/");
+
+        const response = await axios.get(apiConfig.templates.getAll);
         dispatch({ type: "FETCH_TEMPLATES_SUCCESS", payload: response.data });
       } catch (err) {
         dispatch({ type: "FETCH_TEMPLATES_FAILURE", payload: err.message });
@@ -75,7 +75,11 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchNoOfResumeDownloads = async () => {
       try {
-        const response = await axios.get("https://ezresume.onrender.com/api/v1/downloads/count");
+        const response = await axios.get(apiConfig.downloads.count,
+          { 
+            withCredentials:true,
+          });
+
         setMetrics((prev) => ({
           ...prev,
           resumesDownloaded: response.data.totalDownloads,
@@ -101,7 +105,11 @@ const AdminDashboard = () => {
       try {
         const monthlyData = await Promise.all(
           months.map(async ({ month }) => {
-            const response = await axios.get(`https://ezresume.onrender.com/api/v1/downloads/monthly/${month}`);
+
+           const response = await axios.get(apiConfig.downloads.monthly(month),{
+            withCredentials:true,
+           });
+
             return response.data.downloads || 0;
           })
         );
@@ -121,7 +129,9 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchNoOfUsers = async () => {
       try {
-        const response = await axios.get("https://ezresume.onrender.com/api/v1/users/count");
+        const response = await axios.get(apiConfig.users.count,{
+          withCredentials:true,
+        });
         setMetrics((prev) => ({ ...prev, users: response.data.userCount }));
       } catch (err) {
         console.error("Error fetching user count:", err);
@@ -150,14 +160,12 @@ const AdminDashboard = () => {
 
     try {
       setCreateLoading(true);
-      await axios.post(
-        "https://ezresume.onrender.com/api/v1/templates",
-        form,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-          withCredentials: true,
-        }
-      );
+
+      await axios.post(apiConfig.templates.create, form, {
+        headers: { "Content-Type": "multipart/form-data" },
+        withCredentials: true,
+      });
+     
       toast.success("Template created successfully!");
       setShowModal(false); // Close the modal on success
     } catch (error) {
@@ -217,13 +225,11 @@ const AdminDashboard = () => {
     try {
       setCreateLoading(true);
 
-      await axios.put(
-        `https://ezresume.onrender.com/api/v1/templates/${editTemplateData._id}`,
-        form,
-        {
-          withCredentials: true,
-        }
-      );
+
+    await axios.put(apiConfig.templates.update(editTemplateData._id), form, {
+      withCredentials: true,
+    });
+
       toast.success("Template updated successfully!");
       setIsEditing(false); // Close modal after successful update
     } catch (error) {
@@ -266,10 +272,13 @@ const AdminDashboard = () => {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(
-        `https://ezresume.onrender.com/api/v1/templates/${templateToDelete}`,
-        { withCredentials: true }
-      );
+
+
+      await axios.delete(apiConfig.templates.delete(templateToDelete), {
+        withCredentials: true,
+      });
+
+
       toast.success("Template deleted successfully");
       setShowDeleteModal(false);
     } catch (error) {
@@ -285,7 +294,12 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchAverageRating = async () => {
       try {
-        const response = await axios.get("https://ezresume.onrender.com/api/v1/feedback/average");
+
+const response = await axios.get(apiConfig.feedback.getAverage,
+  {
+    withCredentials:true,
+  }
+);
         setMetrics((prev) => ({
           ...prev,
           averageRating: response.data.averageRating,

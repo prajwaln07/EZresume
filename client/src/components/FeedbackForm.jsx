@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import apiConfig from "../api/apiConfig";
+
 
 const FeedbackForm = ({ templateId, onFeedbackSubmitted }) => {
   const [comments, setComments] = useState("");
@@ -19,13 +21,13 @@ const FeedbackForm = ({ templateId, onFeedbackSubmitted }) => {
 
     try {
 
-      const response =await axios.post(
-        "https://ezresume.onrender.com/api/v1/feedback/",
+
+      const response = await axios.post(
+        apiConfig.feedback.create,
         { templateId, comments, rating },
-        {
-          withCredentials: true,  // Allow credentials/cookies to be sent with the request
-        }
+        { withCredentials: true }
       );
+
       
       setSuccessMessage("Feedback submitted successfully!");
       setComments("");

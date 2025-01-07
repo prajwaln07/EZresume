@@ -5,7 +5,7 @@ import { FaInfoCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux"; // Import useSelector
 import { setLoading, unsetLoading } from "../../redux/actions/loadingSetter";
 import { setTemplateID,changeTemplate, fetchTemplatesSuccess, fetchTemplatesFailure } from "../../redux/actions/templateDetails";
-
+import apiConfig from "../../api/apiConfig";
 
 const TemplatePage = () => {
   const [loadingTemplates, setLoadingTemplates] = useState(true); // Loading state for skeleton
@@ -23,7 +23,7 @@ const TemplatePage = () => {
   const getAllTemplates = async () => {
     try {
       dispatch(setLoading());
-      const response = await axios.get("https://ezresume.onrender.com/api/v1/templates/");
+      const response = await axios.get(apiConfig.templates.getAll);
       dispatch(fetchTemplatesSuccess(response.data)); // Dispatch success action with templates
     } catch (err) {
       dispatch(fetchTemplatesFailure(err.message)); // Dispatch failure action with error message

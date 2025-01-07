@@ -3,6 +3,7 @@ import { ResumeInfoContext } from '../../../context/ResumeInfoContext';
 import { useSelector } from 'react-redux';
 import html2pdf from 'html2pdf.js';
 import axios from 'axios';
+import apiConfig from '../../../api/apiConfig';
 
 import ModernResumeTemplate from './preview/resumeContent/ModernResumeTemplate';
 import ClassicTemplate from './preview/resumeContent/ClassicTemplate';
@@ -52,11 +53,11 @@ const ResumePreview = () => {
       
       await html2pdf().from(element).set(options).save();
 
-      const response = await axios.post('https://ezresume.onrender.com/api/v1/downloads/track', {
-        templateId: templateId,  
-      }, {
-        withCredentials: true, 
-      });
+      const response = await axios.post(
+        apiConfig.downloads.track,
+        { templateId },
+        { withCredentials: true }
+      );
 
       if (!response.data.success) {
         console.error('Error tracking download.');

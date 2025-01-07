@@ -1,37 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { setUser } from '../redux/actions/userDetail';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { toast } from 'react-toastify';
+import apiConfig from '../api/apiConfig';
 
 
-const LoginForm = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
+const SignupForm = () => {
   const [formData, setFormData] = useState({
+    username: '',
     email: '',
     password: '',
   });
 
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
 
-  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value,
     });
-    setErrors({ ...errors, [name]: '' }); // Clear individual field errors on change
+    setErrors({ ...errors, [name]: '' });
   };
 
-  // Form validation
   const validate = () => {
     const newErrors = {};
+    if (!formData.username.trim()) {
+      newErrors.username = 'Username is required';
+    } else if (formData.username.length < 3) {
+      newErrors.username = 'Username must be at least 3 characters';
+    }
+
     if (!formData.email) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
@@ -47,7 +49,6 @@ const LoginForm = () => {
     return newErrors;
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
@@ -57,44 +58,17 @@ const LoginForm = () => {
     }
 
     try {
-      const response = await axios.post('https://ezresume.onrender.com/api/v1/users/login', formData, {
-        withCredentials: true,
-      });
 
-      if (response.data.success) {
-        const { email, username, resumes, role } = response.data.user;
-        const token = response.data.token;
 
-        if (token) {
-          localStorage.setItem('token', token);
-        }
-
-        dispatch(
-          setUser({
-            email,
-            username,
-            resumes,
-            role,
-          })
-        );
-        toast.success('User Login Successful!', {
-          position: "bottom-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: false, // Keep it non-clickable for stability
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light", // Keep login theme light for simplicity
-        });
-        navigate('/');
-      }
+const response = await axios.post(apiConfig.users.register, formData);
 
       setSuccessMessage(response.data.success);
-      setFormData({ email: '', password: '' });
+      setFormData({ username: '', email: '', password: '' });
       setErrors({});
     } catch (error) {
-      if (error.response && error.response.data.message) {
+      if (error.response && error.response.data.errors) {
+        setErrors({ form: 'Please fix the errors and try again.' });
+      } else if (error.response && error.response.data.message) {
         setErrors({ form: error.response.data.message });
       } else {
         setErrors({ form: 'Something went wrong. Please try again.' });
@@ -102,26 +76,37 @@ const LoginForm = () => {
     }
   };
 
-  return (
-    <div className="flex flex-col md:flex-row h-[655px]">
-      {/* Left side Image */}
-      <div
-        className="ml-1 hidden lg:block w-2/5 bg-cover bg-center"
-        style={{
-          backgroundImage: `url('https://res.cloudinary.com/dkynwi65w/image/upload/v1735038010/freepik__candid-image-photography-natural-textures-highly-r__2462_dnxbpu.jpg')`,
-        }}
-      ></div>
+  useEffect(() => {
+    if (successMessage) {
+      toast.success('User Signup Successful!', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true, // Allow clicking to close for convenience
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light", // Distinguish signup with a colored theme
+      });
+      navigate('/login');
+    }
+  }, [successMessage]);
 
-      {/* Right side Form */}
-      <div className="flex-grow flex items-center justify-center px-4 md:px-8">
+  return (
+    <div className="h-[655px] flex flex-col md:flex-row">
+      {/* Image Section */}
+      <div className="ml-1 hidden lg:block w-2/5 bg-cover bg-center" style={{ backgroundImage: `url('https://res.cloudinary.com/dkynwi65w/image/upload/v1735036933/freepik__candid-image-photography-natural-textures-highly-r__59814_frkf5a.jpg')` }}></div>
+
+      {/* Form Section */}
+      <div className="w-full md:w-3/5 flex items-center justify-center px-4 md:px-8">
         <motion.div
-          className="max-w-md w-full p-6 bg-white rounded-3xl shadow-2xl"
+          className="max-w-md w-full p-6 bg-white rounded-3xl shadow-2xl border-2"
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
         >
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-center text-gray-800">Welcome Back</h2>
-          <p className="text-center text-gray-600 mt-2">Log in to access your account</p>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-center text-gray-800">Create Your Account</h2>
+          <p className="text-center text-gray-600 mt-2">Join us and get started!</p>
 
           {errors.form && (
             <div className="mt-4 p-4 bg-red-100 text-red-800 rounded-lg text-center">
@@ -130,11 +115,24 @@ const LoginForm = () => {
           )}
 
           <form onSubmit={handleSubmit} className="mt-6 space-y-6">
+            {/* Username */}
+            <div className="form-group">
+              <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-purple-500 focus:border-purple-500 placeholder-gray-400 text-gray-700"
+                placeholder="Enter your username"
+              />
+              {errors.username && <span className="text-red-500 text-sm">{errors.username}</span>}
+            </div>
+
             {/* Email */}
             <div className="form-group">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email
-              </label>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
               <input
                 type="email"
                 id="email"
@@ -149,9 +147,7 @@ const LoginForm = () => {
 
             {/* Password */}
             <div className="form-group">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Password
-              </label>
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
               <input
                 type="password"
                 id="password"
@@ -159,7 +155,7 @@ const LoginForm = () => {
                 value={formData.password}
                 onChange={handleChange}
                 className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-purple-500 focus:border-purple-500 placeholder-gray-400 text-gray-700"
-                placeholder="Enter your password"
+                placeholder="Create a password"
               />
               {errors.password && <span className="text-red-500 text-sm">{errors.password}</span>}
             </div>
@@ -167,11 +163,11 @@ const LoginForm = () => {
             {/* Submit Button */}
             <motion.button
               type="submit"
-              className="w-full border-2 py-3 px-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-xl shadow-lg hover:from-pink-500 hover:to-purple-500 focus:ring-4 focus:ring-purple-300"
+              className="w-full py-3 px-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-xl shadow-lg hover:from-pink-500 hover:to-purple-500 focus:ring-4 focus:ring-purple-300"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
             >
-              Log In
+              Sign Up
             </motion.button>
           </form>
         </motion.div>
@@ -180,4 +176,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SignupForm;

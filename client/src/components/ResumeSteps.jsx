@@ -1,5 +1,5 @@
 import resumeStepsData from './resumeStepsData';
-import  SingleResumeStep from '../componemts/SingleResumeStep';
+import  SingleResumeStep from '../components/SingleResumeStep';
   
 
   export default function ResumeSteps() {

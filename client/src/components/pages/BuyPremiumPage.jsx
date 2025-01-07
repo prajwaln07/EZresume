@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-{/* <img src='https://res.cloudinary.com/dkynwi65w/image/upload/v1734421333/openart-image_vveqGWyR_1730110513576_raw_u7uegq.jpg'></img> */}
 
 const PremiumRequired = () => {
   return (

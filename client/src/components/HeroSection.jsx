@@ -1,5 +1,5 @@
 import React from 'react'
-import Glitter from '../componemts/Glitter';  // Assuming this is a custom component
+import Glitter from '../components/Glitter';  // Assuming this is a custom component
 import { useSelector } from 'react-redux';  // To access Redux state
 
 

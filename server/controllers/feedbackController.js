@@ -43,23 +43,38 @@ exports.getFeedbackByTemplateId = async (req, res) => {
     }
 };
 
-// Get all feedback (Admin only)
 exports.getAllFeedback = async (req, res) => {
     try {
+        const { page = 1, limit = 5 } = req.query;
+        const skip = (page - 1) * limit;
+
+        // Fetch total count of feedback for pagination
+        const totalFeedback = await Feedback.countDocuments();
+
+        // Fetch feedback data with pagination and populate user details
         const feedback = await Feedback.find()
             .populate({
                 path: "userId",
                 select: "username",
             })
             .select("comments rating")
-            .sort({ rating: -1 });
+            .sort({ rating: -1 })
+            .skip(skip)
+            .limit(parseInt(limit));
 
-        res.json(feedback);
+        const totalPages = Math.ceil(totalFeedback / limit);
+
+        res.json({
+            feedback,
+            totalPages,
+            currentPage: parseInt(page),
+        });
     } catch (err) {
-        console.error(err);
-        res.status(500).send("Error fetching feedback");
+        console.error("Error fetching feedback:", err.message);
+        res.status(500).json({ error: "Error fetching feedback" });
     }
 };
+
 
 exports.getOverallAverageRating = async (req, res) => {
     try {

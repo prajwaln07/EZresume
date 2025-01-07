@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
-import Navbar from './componemts/navbar/Navbar';
+import Navbar from './components/navbar/Navbar';
 import {Routes,Route} from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import TemplatePage from './componemts/pages/TemplatePage';
-import HomePage from './componemts/pages/HomePage';
-import UnderConstruction from './componemts/pages/UnderContructionPage';
-import SignupForm from './componemts/SignupForm';
-import LoginForm from './componemts/LoginForm';
-import IndexOne from './componemts/resume/IndexOne';
-import SupportPage from './componemts/Support';
-import FeedbackForm from './componemts/FeedbackForm';
-import ContactUs from './componemts/ContactUs';
-import AdminDashboard from './componemts/pages/AdminDashboard';
+import TemplatePage from './components/pages/TemplatePage';
+import HomePage from './components/pages/HomePage';
+import UnderConstruction from './components/pages/UnderContructionPage';
+import SignupForm from './components/SignupForm';
+import LoginForm from './components/LoginForm';
+import IndexOne from './components/resume/IndexOne';
+import SupportPage from './components/Support';
+import FeedbackForm from './components/FeedbackForm';
+import ContactUs from './components/ContactUs';
+import AdminDashboard from './components/pages/admin/AdminDashboard'
 
 
 function App() {
