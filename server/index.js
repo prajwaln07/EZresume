@@ -13,7 +13,6 @@ const userRoutes = require('./routes/userRoutes');
 const resumeRoutes = require('./routes/resumeRoutes');
 const templateRoutes = require('./routes/templateRoutes');
 const feedbackRoutes = require('./routes/feedbackRoutes');
-const versionRoutes = require('./routes/versionControlRoutes');
 const downloadRoutes = require('./routes/downloadRoutes'); // Import download route
 
 // OpenAI integration
@@ -38,8 +37,7 @@ app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/resumes', resumeRoutes);
 app.use('/api/v1/templates', templateRoutes);
 app.use('/api/v1/feedback', feedbackRoutes);
-app.use('/api/v1/resumes/:resumeId/versions', verifyToken, versionRoutes);
-app.use('/api/v1/downloads', downloadRoutes); // Add the download route..
+app.use('/api/v1/downloads', downloadRoutes); // Add the download route...
 
 app.use(express.static(path.join(_dirname, '/client/build')));
 
