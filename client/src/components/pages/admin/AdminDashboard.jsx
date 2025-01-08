@@ -34,7 +34,7 @@ ChartJS.register(
 const AdminDashboard = () => {
   const [createLoading, setCreateLoading] = useState(false);
   const [metrics, setMetrics] = useState({
-    users: 12,
+    users: 7,
     templates: 0,
     averageRating: 0,
     resumesDownloaded: 100,
@@ -49,8 +49,10 @@ const AdminDashboard = () => {
     description: "",
     layout: "",
     isCustomizable: false,
-    thumbnail: null,
+    categories: [],
+
   });
+  
 
   const templates = useSelector((state) => state.template.templates || []);
   const dispatch = useDispatch();
@@ -64,7 +66,7 @@ const AdminDashboard = () => {
       try {
 
         const response = await axios.get(apiConfig.templates.getAll);
-        dispatch({ type: "FETCH_TEMPLATES_SUCCESS", payload: response.data });
+        dispatch({ type: "FETCH_TEMPLATES_SUCCESS", payload: response.data.templates });
       } catch (err) {
         dispatch({ type: "FETCH_TEMPLATES_FAILURE", payload: err.message });
       }
@@ -142,7 +144,9 @@ const AdminDashboard = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    
   };
 
   const handleFileChange = (e) => {
@@ -156,7 +160,13 @@ const AdminDashboard = () => {
     form.append("description", formData.description);
     form.append("layout", formData.layout);
     form.append("isCustomizable", formData.isCustomizable);
-    form.append("thumbnail", formData.thumbnail);
+    form.append("thumbnail", formData.thumbnail); // Only if updating the thumbnail
+    
+    // Handle categories array
+    formData.categories.forEach((category) => {
+      form.append("categories[]", category);
+    });
+    
 
     try {
       setCreateLoading(true);
@@ -203,24 +213,32 @@ const AdminDashboard = () => {
       },
     ],
   };
+// here we have work to do
+const handleEditInputChange = (e) => {
+  const { name, value } = e.target;
 
-  const handleEditInputChange = (e) => {
-    const { name, value } = e.target;
     setEditTemplateData((prev) => ({
       ...prev,
       [name]: value,
     }));
-  };
+  
+};
 
   const handleEditSubmit = async (e) => {
     e.preventDefault();
 
     const form = new FormData();
-    form.append("name", editTemplateData.name);
-    form.append("description", editTemplateData.description);
-    form.append("layout", editTemplateData.layout);
-    form.append("isCustomizable", editTemplateData.isCustomizable);
-    form.append("thumbnail", editTemplateData.thumbnail); // Only if you are updating the thumbnail
+form.append("name", editTemplateData.name);
+form.append("description", editTemplateData.description);
+form.append("layout", editTemplateData.layout);
+form.append("isCustomizable", editTemplateData.isCustomizable);
+form.append("thumbnail", editTemplateData.thumbnail); // Only if updating the thumbnail
+
+// Handle categories array
+editTemplateData.categories.forEach((category) => {
+  form.append("categories[]", category);
+});
+
 
     try {
       setCreateLoading(true);
