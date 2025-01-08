@@ -14,6 +14,7 @@ import SimpleTemplate from './preview/resumeContent/SimpleTemplate';
 import BoldResumeTemplate from './preview/resumeContent/BoldResumeTemplate';
 import PrimeProfileTemplate from './preview/resumeContent/PrimeProfileTemplate';
 import GradTemplate from './preview/resumeContent/Customizable/ProfessionalResume';
+import ArtisticTemplate from './preview/resumeContent/Customizable/ArtisticTemplate';
 
 const ResumePreview = () => {
   const { resumeInfo } = useContext(ResumeInfoContext);
@@ -32,7 +33,7 @@ const ResumePreview = () => {
     element.style.overflow = 'hidden';
   
     const options = {
-      filename: 'resume.pdf',
+      filename: 'EZresume.pdf',
       image: { type: 'jpeg', quality: 0.98 },
       html2canvas: {
         scale: 4, 
@@ -83,10 +84,10 @@ const ResumePreview = () => {
     BoldLayout: BoldResumeTemplate,
     PrimeLayout: PrimeProfileTemplate,
     CustomLayout:GradTemplate,
+    ArtisticLayout:ArtisticTemplate,
   };
 
   const TemplateComponent = templates[selectedTemplate] || ResumeContent;
-
 
   return (
     <div>
