@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { toast } from 'react-toastify';
 import apiConfig from '../api/apiConfig';
+import { Eye ,EyeClosed } from 'lucide-react';
 
 
 
@@ -20,6 +21,7 @@ const LoginForm = () => {
 
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
+  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
 
   // Handle input changes
   const handleChange = (e) => {
@@ -59,12 +61,9 @@ const LoginForm = () => {
     }
 
     try {
-
-
-const response = await axios.post(apiConfig.users.login, formData, {
-  withCredentials: true,
-});
-
+      const response = await axios.post(apiConfig.users.login, formData, {
+        withCredentials: true,
+      });
 
       if (response.data.success) {
         const { email, username, resumes, role } = response.data.user;
@@ -83,14 +82,14 @@ const response = await axios.post(apiConfig.users.login, formData, {
           })
         );
         toast.success('User Login Successful!', {
-          position: "bottom-right",
+          position: 'bottom-right',
           autoClose: 5000,
           hideProgressBar: false,
-          closeOnClick: false, // Keep it non-clickable for stability
+          closeOnClick: false,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "light", // Keep login theme light for simplicity
+          theme: 'light',
         });
         navigate('/');
       }
@@ -152,22 +151,30 @@ const response = await axios.post(apiConfig.users.login, formData, {
               {errors.email && <span className="text-red-500 text-sm">{errors.email}</span>}
             </div>
 
-            {/* Password */}
-            <div className="form-group">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Password
-              </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-purple-500 focus:border-purple-500 placeholder-gray-400 text-gray-700"
-                placeholder="Enter your password"
-              />
-              {errors.password && <span className="text-red-500 text-sm">{errors.password}</span>}
-            </div>
+   {/* Password */}
+<div className="form-group relative">
+  <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+    Password
+  </label>
+  <input
+    type={showPassword ? 'text' : 'password'}
+    id="password"
+    name="password"
+    value={formData.password}
+    onChange={handleChange}
+    className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-purple-500 focus:border-purple-500 placeholder-gray-400 text-gray-700"
+    placeholder="Enter your password"
+  />
+  <button
+    type="button"
+    onClick={() => setShowPassword(!showPassword)}
+    className="absolute top-1/2 mt-3 right-3 transform -translate-y-1/2 text-gray-500"
+  >
+    {showPassword ? <EyeClosed></EyeClosed> : <Eye></Eye>}
+  </button>
+  {errors.password && <span className="text-red-500 text-sm">{errors.password}</span>}
+</div>
+
 
             {/* Submit Button */}
             <motion.button

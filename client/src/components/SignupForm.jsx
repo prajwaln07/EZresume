@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { toast } from 'react-toastify';
 import apiConfig from '../api/apiConfig';
+import { Eye ,EyeClosed } from 'lucide-react';
 
 
 const SignupForm = () => {
@@ -16,6 +17,8 @@ const SignupForm = () => {
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
+    const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -145,20 +148,30 @@ const response = await axios.post(apiConfig.users.register, formData);
               {errors.email && <span className="text-red-500 text-sm">{errors.email}</span>}
             </div>
 
-            {/* Password */}
-            <div className="form-group">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-purple-500 focus:border-purple-500 placeholder-gray-400 text-gray-700"
-                placeholder="Create a password"
-              />
-              {errors.password && <span className="text-red-500 text-sm">{errors.password}</span>}
-            </div>
+          {/* Password */}
+<div className="form-group relative">
+  <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+    Password
+  </label>
+  <input
+    type={showPassword ? 'text' : 'password'}
+    id="password"
+    name="password"
+    value={formData.password}
+    onChange={handleChange}
+    className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-purple-500 focus:border-purple-500 placeholder-gray-400 text-gray-700"
+    placeholder="Create a password"
+  />
+  <button
+    type="button"
+    onClick={() => setShowPassword(!showPassword)}
+    className="absolute mt-6 inset-y-0 right-3 flex items-center text-gray-500"
+  >
+    {showPassword ? <EyeClosed></EyeClosed> : <Eye></Eye>}
+  </button>
+  {errors.password && <span className="text-red-500 text-sm">{errors.password}</span>}
+</div>
+
 
             {/* Submit Button */}
             <motion.button
