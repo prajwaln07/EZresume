@@ -68,7 +68,7 @@ const loginUser = async (req, res) => {
     const trimmedPassword = password?.trim();
 
 
-    const user = await User.findOne({ trimmedEmail });
+    const user = await User.findOne({ email:trimmedEmail });
 
     if (!user) {
       return res.status(400).json({ message: 'Invalid credentials.' });
