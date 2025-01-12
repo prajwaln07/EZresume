@@ -6,13 +6,13 @@ import { motion } from 'framer-motion';
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
-    name: '',
     email: '',
     message: '',
     subject:'',
   });
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
+  const [loading,SetLoading] =useState(false);
 
   // Handle input changes
   const handleChange = (e) => {
@@ -24,7 +24,6 @@ const ContactUs = () => {
   // Form validation
   const validate = () => {
     const newErrors = {};
-    if (!formData.name) newErrors.name = 'Name is required';
     if (!formData.email) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
@@ -36,6 +35,7 @@ const ContactUs = () => {
 
   // Handle form submission
   const handleSubmit = async (e) => {
+    SetLoading(true);
     e.preventDefault();
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
@@ -46,10 +46,13 @@ const ContactUs = () => {
     try {
       const response = await axios.post(apiConfig.users.contact, formData);
       setSuccessMessage('Message sent successfully!');
-      setFormData({ name: '', email: '', message: '' });
+      setFormData({ email: '', message: '' });
       setErrors({});
     } catch (error) {
       setErrors({ form: 'Failed to send message. Please try again later.' });
+    }
+    finally{
+    SetLoading(false);
     }
   };
 
@@ -64,7 +67,7 @@ const ContactUs = () => {
       ></div>
 
       {/* Right side Form */}
-      <div className="flex-grow flex items-center justify-center px-4 md:px-8">
+      <div className="flex-grow flex items-center justify-center px-4 md:px-8  h-[550px] mt-16">
         <motion.div
           className="max-w-md w-full p-6 bg-white rounded-3xl shadow-2xl"
           initial={{ opacity: 0, y: 100 }}
@@ -86,22 +89,6 @@ const ContactUs = () => {
           )}
 
           <form onSubmit={handleSubmit} className="mt-6 space-y-6">
-            {/* Name */}
-            <div className="form-group">
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400 text-gray-700"
-                placeholder="Enter your name"
-              />
-              {errors.name && <span className="text-red-500 text-sm">{errors.name}</span>}
-            </div>
 
             {/* Email */}
             <div className="form-group">
@@ -114,7 +101,7 @@ const ContactUs = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400 text-gray-700"
+                className=" block w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400 text-gray-700"
                 placeholder="Enter your email"
               />
               {errors.email && <span className="text-red-500 text-sm">{errors.email}</span>}
@@ -132,7 +119,7 @@ const ContactUs = () => {
                 type="text"
                 value={formData.subject}
                 onChange={handleChange}
-                className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400 text-gray-700"
+                className="block w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400 text-gray-700"
                 placeholder="Enter your subject"
               ></input>
               {errors.subject && <span className="text-red-500 text-sm">{errors.subject}</span>}
@@ -149,7 +136,7 @@ const ContactUs = () => {
                 rows="3"
                 value={formData.message}
                 onChange={handleChange}
-                className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400 text-gray-700"
+                className=" block w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400 text-gray-700"
                 placeholder="Enter your message"
               ></textarea>
               {errors.message && <span className="text-red-500 text-sm">{errors.message}</span>}
@@ -162,8 +149,9 @@ const ContactUs = () => {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
             >
-              Send Message
-            </motion.button>
+{             (!loading) ? "Send Message" :"Sending Message ..."
+}           
+ </motion.button>
           </form>
         </motion.div>
       </div>
