@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import apiConfig from "../api/apiConfig";
+
 import { motion } from 'framer-motion';
 
 const ContactUs = () => {
@@ -7,6 +9,7 @@ const ContactUs = () => {
     name: '',
     email: '',
     message: '',
+    subject:'',
   });
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
@@ -41,7 +44,7 @@ const ContactUs = () => {
     }
 
     try {
-    //   const response = await axios.post('https://example.com/api/contact', formData);
+      const response = await axios.post(apiConfig.users.contact, formData);
       setSuccessMessage('Message sent successfully!');
       setFormData({ name: '', email: '', message: '' });
       setErrors({});
@@ -117,6 +120,24 @@ const ContactUs = () => {
               {errors.email && <span className="text-red-500 text-sm">{errors.email}</span>}
             </div>
 
+            {/* subject */}
+
+            <div className="form-group">
+              <label htmlFor="subject" className="block text-sm font-medium text-gray-700">
+                Subject
+              </label>
+              <input
+                id="subject"
+                name="subject"
+                type="text"
+                value={formData.subject}
+                onChange={handleChange}
+                className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400 text-gray-700"
+                placeholder="Enter your subject"
+              ></input>
+              {errors.subject && <span className="text-red-500 text-sm">{errors.subject}</span>}
+            </div>
+
             {/* Message */}
             <div className="form-group">
               <label htmlFor="message" className="block text-sm font-medium text-gray-700">
@@ -125,7 +146,7 @@ const ContactUs = () => {
               <textarea
                 id="message"
                 name="message"
-                rows="5"
+                rows="3"
                 value={formData.message}
                 onChange={handleChange}
                 className="mt-1 block w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400 text-gray-700"
