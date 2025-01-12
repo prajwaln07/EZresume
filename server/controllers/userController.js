@@ -3,6 +3,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
 const {uploadUserProfileImage} =require('../config/cloudinary');
+const transporter = require('../config/emailService');
+
+
 
 // User Registration Function
 const registerUser = async (req, res) => {
@@ -198,6 +201,87 @@ const getUserCount = async (req, res) => {
 };
 
 
+const sendEmail = async (to, subject, text, html) => {
+  try {
+    // Validate input data before attempting to send the email
+    if (!to || !subject || (!text && !html)) {
+      throw new Error("Missing required fields (to, subject, text/html)");
+    }
+
+    const mailOptions = {
+      from: process.env.EMAIL_USER, // Sender address
+      to, // Receiver address
+      subject, // Subject line
+      text, // Plain text body
+      html, // HTML body (optional)
+    };
+
+    // Sending the email
+    const info = await transporter.sendMail(mailOptions);
+    return info;
+  } catch (error) {
+    console.error('Error sending email:', error); // Log detailed error
+    throw error; // Rethrow to handle it in the route
+  }
+};
+
+
+const contactUs = async (req, res) => {
+  const { email, subject, message } = req.body;
+
+  // Validate input
+  if (!email || !subject || !message) {
+    return res.status(400).json({ success: false, message: 'All fields are required' });
+  }
+
+  try {
+    // Send confirmation email to the user
+    const userConfirmationSubject = "We’ve received your query!";
+    const userConfirmationText = `
+      Dear User,
+      Thank you for reaching out. We have received your query:
+      "${message}"
+      Our team will get back to you as soon as possible.
+      Best regards,
+      The EZResume Team
+    `;
+    const userConfirmationHTML = `
+      <p>Dear User,</p>
+      <p>Thank you for reaching out. We have received your query:</p>
+      <blockquote>${message}</blockquote>
+      <p>Our team will get back to you as soon as possible.</p>
+      <p>Best regards,</p>
+      <p><strong>The EZResume Team</strong></p>
+    `;
+    await sendEmail(email, userConfirmationSubject, userConfirmationText, userConfirmationHTML);
+
+    // Send notification email to the admin
+    const adminNotificationSubject = "New Contact Us Query Received";
+    const adminNotificationText = `
+      New query received:
+      Email: ${email}
+      Subject: ${subject}
+      Message: ${message}
+    `;
+    const adminNotificationHTML = `
+      <p>New query received:</p>
+      <ul>
+        <li><strong>Email:</strong> ${email}</li>
+        <li><strong>Subject:</strong> ${subject}</li>
+        <li><strong>Message:</strong> ${message}</li>
+      </ul>
+      <p>Check the admin dashboard for more details.</p>
+    `;
+    await sendEmail(process.env.EMAIL_USER, adminNotificationSubject, adminNotificationText, adminNotificationHTML);
+
+    res.status(200).json({ success: true, message: 'Your query has been received and a confirmation email has been sent!' });
+  } catch (error) {
+    console.error('Error handling contact us form:', error);
+    res.status(500).json({ success: false, message: 'Error processing your request', error });
+  }
+};
+
+
 module.exports = {
   registerUser,
   loginUser,
@@ -206,4 +290,6 @@ module.exports = {
   deleteUserAccount,
   getUserCount,
   logoutUser,
+  contactUs,
+  sendEmail,
 };
