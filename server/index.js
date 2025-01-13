@@ -20,7 +20,7 @@ connectToDB();
 
 const _dirname = path.resolve();
 let corsOptions = {
-  origin: "https://ezresume.onrender.com",
+  origin: "https://ezresume360.netlify.app",
   credentials: true,
 };
 
