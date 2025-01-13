@@ -19,10 +19,14 @@ dotenv.config();
 connectToDB();
 
 const _dirname = path.resolve();
-let corsOptions = {
-  origin: "https://ezresume360.netlify.app",
-  credentials: true,
+const corsOptions = {
+  origin: "https://ezresume360.netlify.app", // Frontend URL
+  credentials: true, // Allow cookies and credentials
+  optionsSuccessStatus: 200, // For legacy browser support
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allowed HTTP methods
+  allowedHeaders: "Content-Type,Authorization", // Allowed headers
 };
+
 
 const app = express();
 app.use(express.json());
