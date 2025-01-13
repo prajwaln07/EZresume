@@ -8,7 +8,6 @@ const multer = require('multer');
 const path = require('path');
 
 const { verifyToken } = require('./middleware/auth');
-
 const userRoutes = require('./routes/userRoutes');
 const resumeRoutes = require('./routes/resumeRoutes');
 const templateRoutes = require('./routes/templateRoutes');
@@ -20,7 +19,6 @@ dotenv.config();
 connectToDB();
 
 const _dirname = path.resolve();
-
 let corsOptions = {
   origin: "https://ezresume.onrender.com",
   credentials: true,
@@ -33,11 +31,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // Route middleware
+
+
+
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/resumes', resumeRoutes);
 app.use('/api/v1/templates', templateRoutes);
 app.use('/api/v1/feedback', feedbackRoutes);
-app.use('/api/v1/downloads', downloadRoutes); // Add the download route...
+app.use('/api/v1/downloads', downloadRoutes); 
 
 app.use(express.static(path.join(_dirname, '/client/build')));
 
@@ -45,7 +46,7 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(_dirname, 'client', 'build', 'index.html'));
 });
 
-// Start the server..
+// Start the server....
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log('server is running on PORT ', PORT);
