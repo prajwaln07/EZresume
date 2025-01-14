@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const templateSchema = new mongoose.Schema({
   name: { type: String, required: true, maxLength: 100 },
   description: { type: String, required: true, maxLength: 5500 },
-  layout: { type: String, required: true }, // Stores basic layout type or identifier
+  layout: { type: String, required: true }, 
   isCustomizable: { type: Boolean, required: true, default: false },
-  categories: [{ type: String, enum: ['single-column', 'double-column', 'minimal', 'creative', 'professional'] }], // New categories field
+  categories: [{ type: String, enum: ['single-column', 'double-column', 'minimal', 'creative', 'professional'] }], 
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
   image: { type: String, required: true }, 

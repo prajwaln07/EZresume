@@ -21,10 +21,10 @@ export default{
             startDate:'01-01-2021',
             endDate:  '01-01-2022',
             currentlyWorking:true,
-            workSummery:' Designed, developed, and maintained full-stack applications using React and Node.js.\n'+
-            'Implemented responsive user interfaces with React, ensuring seamless user experiences. \n'+
-            'Maintaining the React Native in-house organization application.\n'+
-            'CreatedRESTfulAPIs withNode.js and Express and improved backend speed.'
+            workSummery:'<ul> <li>Designed, developed, and maintained full-stack applications using <strong>React</strong> and <strong> Node.js</strong> .</li>'+
+            '<li> <strong>Implemented responsive  </strong> user interfaces with React, ensuring seamless user experiences. </li>'+
+            '<li>Maintaining the <strong>React Native</strong> in-house organization application.</li>'+
+            '<li> <strong>Created RESTful APIs</strong> with <strong> Node.js</strong> and <strong>Express </strong> and improved backend speed.</li>  </ul>'
         },
     ],
     education: [
@@ -75,7 +75,7 @@ export default{
         {
             id: 1,
             name: 'Portfolio Website',
-            description: '<div>Developed a personal portfolio website.</div><div>Showcasing projects, skills, and contact information.</div>',
+            description: '<ul> <li> <strong>Developed</strong> a personal portfolio website.</li><li>Showcasing <strong>projects</strong> , skills, and contact information.</li> </ul> ',
             technologies: ['React', 'CSS', 'Netlify'],
             link: 'https://leetcode.com/u/prajwal_nimbalkar/',
             github: 'https://leetcode.com/u/prajwal_nimbalkar/'
@@ -83,7 +83,7 @@ export default{
         {
             id: 2,
             name: 'E-Commerce Platform',
-            description: '<div>Built a full-stack e-commerce platform.</div><div>Features product search, cart, and payment integration.</div>',
+            description: '<ul> <li> <strong>Built </strong>a <strong>full-stack </strong>e-commerce platform.</li><li>Features product search, cart, and  <strong>payment integration </strong> .</li> </ul>',
             technologies: ['React', 'Node.js', 'MongoDB'],
             link: 'https://leetcode.com/u/prajwal_nimbalkar/',
             github: 'https://leetcode.com/u/prajwal_nimbalkar/'
