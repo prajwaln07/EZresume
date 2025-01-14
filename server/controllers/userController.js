@@ -91,7 +91,6 @@ const loginUser = async (req, res) => {
      res.cookie('token', token, {
        token,
       httpOnly: true,    // Prevents JavaScript access to the cookie
-      sameSite: 'None', 
       expires: new Date(Date.now() + 1 * 60 * 60 * 1000) // 1 hour expiration
     });
 
