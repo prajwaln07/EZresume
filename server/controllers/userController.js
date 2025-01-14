@@ -91,9 +91,11 @@ const loginUser = async (req, res) => {
      res.cookie('token', token, {
        token,
       httpOnly: true,    // Prevents JavaScript access to the cookie
+      sameSite: 'None', 
       expiresIn:1*60*60*1000     // Cookie expiration time (1 hour)
     });
 
+    
     // Respond with user data (without the password) but no token/
     const { password: _, ...userData } = user.toObject();
     res.status(200).json({
