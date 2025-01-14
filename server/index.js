@@ -24,7 +24,7 @@ const corsOptions = {
   credentials: true, // Allow cookies and credentials
   optionsSuccessStatus: 200, // For legacy browser support
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allowed HTTP methods
-  allowedHeaders: "Content-Type,Authorization,Cookie", // Allow cookies.
+  allowedHeaders: "Content-Type,Authorization", // Allow cookies.
 };
 
 
