@@ -20,7 +20,7 @@ connectToDB();
 
 const _dirname = path.resolve();
 const corsOptions = {
-  origin: "https://ezresume.onrender.com", // Frontend URL
+  origin: "https://ezresumecraft.netlify.app", // Frontend URL
   credentials: true, // Allow cookies and credentials
   optionsSuccessStatus: 200, // For legacy browser support
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allowed HTTP methods
