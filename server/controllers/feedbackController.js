@@ -27,7 +27,7 @@ exports.getFeedbackByTemplateId = async (req, res) => {
         let { templateId } = req.params;
         templateId = new mongoose.Types.ObjectId(templateId);
 
-        const feedback = await Feedback.find({ templateId })
+        const feedback = await Feedback.findById({ templateId })
             .populate({
                 path: "userId",
                 select: "email username",
@@ -45,7 +45,7 @@ exports.getFeedbackByTemplateId = async (req, res) => {
 
 exports.getAllFeedback = async (req, res) => {
     try {
-        const { page = 1, limit = 5 } = req.query;
+        const { page = 1, limit = 4 } = req.query;
         const skip = (page - 1) * limit;
 
         // Fetch total count of feedback for pagination
@@ -79,7 +79,12 @@ exports.getAllFeedback = async (req, res) => {
 exports.getOverallAverageRating = async (req, res) => {
     try {
         const result = await Feedback.aggregate([
-            { $group: { _id: null, averageRating: { $avg: "$rating" } } },
+            { 
+                $group:{ 
+                    _id: null,
+                    averageRating: { $avg: "$rating" }
+                 } 
+            },
         ]);
 
         if (!result.length) {

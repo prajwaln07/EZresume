@@ -112,7 +112,7 @@ const loginUser = async (req, res) => {
 // Get User Profile
 const getUserProfile = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select('-password');
+    const user = await User.findById(req.user.userId).select('-password');
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -135,7 +135,7 @@ if (file) {
 
 
   try {
-    const user = await User.findById(req.user.id).select('-password');
+    const user = await User.findById(req.user.userId).select('-password');
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -160,7 +160,7 @@ if (file) {
 // Delete User Account
 const deleteUserAccount = async (req, res) => {
   try {
-    const user = await User.findByIdAndDelete(req.user.id);
+    const user = await User.findByIdAndDelete(req.user.userId);
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -228,12 +228,17 @@ const sendEmail = async (to, subject, text, html) => {
 
 
 const contactUs = async (req, res) => {
-  const { email, subject, message } = req.body;
+  let { email, subject, message } = req.body;
+
 
   // Validate input
   if (!email || !subject || !message) {
     return res.status(400).json({ success: false, message: 'All fields are required' });
   }
+    email = email.trim();
+  subject = subject.trim();
+  message = message.trim();
+
   
 
   try {
