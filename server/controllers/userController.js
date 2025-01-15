@@ -234,6 +234,7 @@ const contactUs = async (req, res) => {
   if (!email || !subject || !message) {
     return res.status(400).json({ success: false, message: 'All fields are required' });
   }
+  
 
   try {
     // Send confirmation email to the user
@@ -247,12 +248,18 @@ const contactUs = async (req, res) => {
       The EZResume Team
     `;
     const userConfirmationHTML = `
-      <p>Dear User,</p>
-      <p>Thank you for reaching out. We have received your query:</p>
-      <blockquote>${message}</blockquote>
-      <p>Our team will get back to you as soon as possible.</p>
-      <p>Best regards,</p>
-      <p><strong>The EZResume Team</strong></p>
+      <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+        <h2 style="color: #4CAF50;">Thank You for Contacting Us!</h2>
+        <p>Dear User,</p>
+        <p>We appreciate you reaching out. We have received your query as follows:</p>
+        <blockquote style="border-left: 4px solid #4CAF50; padding-left: 10px; color: #555;">${message}</blockquote>
+        <p>Our team will review your query and get back to you at the earliest opportunity.</p>
+        <p>In the meantime, feel free to explore our <a href="https://ezresume.com/help" style="color: #4CAF50; text-decoration: none;">Help Center</a> for more information.</p>
+        <p>Best regards,</p>
+        <p><strong>The EZResume Team</strong></p>
+        <hr style="border: 0; border-top: 1px solid #ddd;" />
+        <p style="font-size: 12px; color: #999;">This is an automated email. Please do not reply.</p>
+      </div>
     `;
     await sendEmail(email, userConfirmationSubject, userConfirmationText, userConfirmationHTML);
 
@@ -265,18 +272,22 @@ const contactUs = async (req, res) => {
       Message: ${message}
     `;
     const adminNotificationHTML = `
-      <p>New query received:</p>
-      <ul>
-        <li><strong>Email:</strong> ${email}</li>
-        <li><strong>Subject:</strong> ${subject}</li>
-        <li><strong>Message:</strong> ${message}</li>
-      </ul>
-      <p>Check the admin dashboard for more details.</p>
+      <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+        <h2 style="color: #FF5722;">New Contact Us Query Received</h2>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Subject:</strong> ${subject}</p>
+        <p><strong>Message:</strong></p>
+        <blockquote style="border-left: 4px solid #FF5722; padding-left: 10px; color: #555;">${message}</blockquote>
+        <p>Check the admin dashboard for more details.</p>
+        <hr style="border: 0; border-top: 1px solid #ddd;" />
+        <p style="font-size: 12px; color: #999;">This is an automated email notification from the EZResume platform.</p>
+      </div>
     `;
     await sendEmail(process.env.EMAIL_USER, adminNotificationSubject, adminNotificationText, adminNotificationHTML);
 
     res.status(200).json({ success: true, message: 'Your query has been received and a confirmation email has been sent!' });
-  } catch (error) {
+} 
+catch (error) {
     console.error('Error handling contact us form:', error);
     res.status(500).json({ success: false, message: 'Error processing your request', error });
   }
