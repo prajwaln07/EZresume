@@ -68,9 +68,13 @@ exports.getMonthlyDownloads = async (req, res) => {
   
 
   try {
+
     const record = await Download.findOne({});
+
     const monthlyDownloads = record?.monthlyDownloads?.get(month) || 0;
+
     res.status(200).json({ month, downloads: monthlyDownloads });
+    
   } catch (error) {
     console.error('Error fetching monthly downloads:', error);
     res.status(500).json({ success: false, message: 'Failed to fetch monthly downloads.' });

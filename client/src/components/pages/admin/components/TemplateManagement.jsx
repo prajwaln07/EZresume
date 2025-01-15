@@ -1,5 +1,7 @@
 import React from "react";
 
+
+
 const TemplateManagement = ({
   templates,
   handleDelete,
@@ -7,6 +9,8 @@ const TemplateManagement = ({
   setEditTemplateData,
   setIsEditing,
   expandedDescription,
+  handleRestore,
+  restoreLoading,
   setExpandedDescription,
 }) => {
   return (
@@ -73,24 +77,38 @@ const TemplateManagement = ({
                   })}
                 </td>
                 <td className="border px-4 py-2">
-                  <div className="flex space-x-2">
-                    <button
-                      className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-400 dark:bg-blue-500 dark:hover:bg-blue-400"
-                      onClick={() => {
-                        setEditTemplateData(template);
-                        setIsEditing(true);
-                      }}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => handleDelete(template._id)}
-                      className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 dark:bg-gray-500 dark:hover:bg-gray-400"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </td>
+  <div className="flex space-x-2">
+    {template.deletedAt ? (
+      // Show Restore button if deletedAt is not null (template is deleted)
+      <button
+        onClick={() => handleRestore(template._id)}
+        className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-400"
+      >
+        Restore
+      </button>
+    ) : (
+      // Show Edit and Delete buttons if deletedAt is null (template is not deleted)
+      <>
+        <button
+          className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-400 dark:bg-blue-500 dark:hover:bg-blue-400"
+          onClick={() => {
+            setEditTemplateData(template);
+            setIsEditing(true);
+          }}
+        >
+          Edit
+        </button>
+        <button
+          onClick={() => handleDelete(template._id)}
+          className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 dark:bg-gray-500 dark:hover:bg-gray-400"
+        >
+          Delete
+        </button>
+      </>
+    )}
+  </div>
+</td>
+
               </tr>
             ))}
           </tbody>

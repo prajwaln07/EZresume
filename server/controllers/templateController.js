@@ -184,6 +184,33 @@ exports.getTemplateById = async (req, res) => {
 
 
 
+// exports.deleteTemplate = async (req, res) => {
+//     try {
+//         const { id } = req.params;
+
+//         // Validate the ID format
+//         if (!mongoose.Types.ObjectId.isValid(id)) {
+//             return res.status(400).json({ message: "Invalid template ID" });
+//         }
+
+//         // Attempt to delete the template
+//         const template = await Template.findByIdAndDelete(id);
+
+//         if (!template) {
+//             return res.status(404).json({ message: "Template not found" });
+//         }
+
+//         // Success response
+//         res.status(200).json({ message: "Template deleted successfully" });
+//     } catch (err) {
+//         console.error("Error deleting template:", err);
+//         res.status(500).json({ message: "Server error" });
+//     }
+// };
+
+
+// Soft delete (mark for deletion)
+
 exports.deleteTemplate = async (req, res) => {
     try {
         const { id } = req.params;
@@ -193,17 +220,65 @@ exports.deleteTemplate = async (req, res) => {
             return res.status(400).json({ message: "Invalid template ID" });
         }
 
-        // Attempt to delete the template
-        const template = await Template.findByIdAndDelete(id);
+        // Attempt to mark the template as deleted
+        const template = await Template.findByIdAndUpdate(
+            id,
+            { deletedAt: new Date() }, // Set the deletedAt timestamp
+            { new: true } // Return the updated document
+        );
 
         if (!template) {
             return res.status(404).json({ message: "Template not found" });
         }
 
         // Success response
-        res.status(200).json({ message: "Template deleted successfully" });
+        res.status(200).json({ message: "Template marked for deletion" });
     } catch (err) {
         console.error("Error deleting template:", err);
         res.status(500).json({ message: "Server error" });
     }
 };
+
+// Restore template (undo deletion)
+exports.restoreTemplate = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        // Validate the ID format
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ message: "Invalid template ID" });
+        }
+
+        // Fetch the template and check the deletion timestamp
+        const template = await Template.findById(id);
+
+        if (!template) {
+            return res.status(404).json({ message: "Template not found" });
+        }
+
+        // Check if the template was marked for deletion
+        if (!template.deletedAt) {
+            return res.status(400).json({ message: "Template is not marked for deletion" });
+        }
+
+        // Check if the deletion timestamp is within the 7-day restore window
+        const currentTime = new Date();
+        const deletionTime = new Date(template.deletedAt);
+        const sevenDaysInMs = 7 * 24 * 60 * 60 * 1000;
+
+        if (currentTime - deletionTime > sevenDaysInMs) {
+            return res.status(400).json({ message: "Restore window has expired" });
+        }
+
+        // Clear the deletedAt field to restore the template
+        template.deletedAt = null;
+        await template.save();
+
+        // Success response
+        res.status(200).json({ message: "Template restored successfully" });
+    } catch (err) {
+        console.error("Error restoring template:", err);
+        res.status(500).json({ message: "Server error" });
+    }
+};
+

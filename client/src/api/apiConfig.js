@@ -18,6 +18,8 @@ const apiConfig = {
     create: `${BASE_URL}/templates`,
     update: (templateId) => `${BASE_URL}/templates/${templateId}`,
     delete: (templateId) => `${BASE_URL}/templates/${templateId}`,
+    restore : (templateId) => `${BASE_URL}/templates/restore/${templateId}`,
+
   },
   downloads: {
     count: `${BASE_URL}/downloads/count`,

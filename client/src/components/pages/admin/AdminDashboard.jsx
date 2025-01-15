@@ -31,6 +31,7 @@ ChartJS.register(
 
 
 
+
 const AdminDashboard = () => {
   const [createLoading, setCreateLoading] = useState(false);
   const [metrics, setMetrics] = useState({
@@ -266,6 +267,28 @@ editTemplateData.categories.forEach((category) => {
     setShowDeleteModal(true);
   };
 
+  const handleRestore = async (templateId) => {
+    try {
+      // Start loading state 
+  
+      // Make the API call to restore the template
+      await axios.put(apiConfig.templates.restore(templateId), {}, {
+        withCredentials: true, 
+      });
+  
+      // Show success toast notification
+      toast.success("Template restored successfully!");
+      
+      // Optionally, trigger any state updates here (e.g., refetch templates or close modal)
+    } catch (error) {
+      console.error("Error restoring template:", error);
+      
+      // Show error toast notification
+      toast.error("Failed to restore template.");
+    } 
+  };
+
+
   const DeleteConfirmationModal = ({ onConfirm, onCancel }) => (
     <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50">
       <div className="bg-white p-6 rounded-lg shadow-lg w-96">
@@ -348,6 +371,7 @@ const response = await axios.get(apiConfig.feedback.getAverage,
       <TemplateManagement
         templates={templates}
         handleDelete={handleDelete}
+        handleRestore={handleRestore}
         setShowModal={setShowModal}
         setEditTemplateData={setEditTemplateData}
         setIsEditing={setIsEditing}

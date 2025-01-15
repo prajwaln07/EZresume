@@ -6,6 +6,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const multer = require('multer');
 const path = require('path');
+const cronJob = require('./utils/cronJob'); // Import the cron job
 
 const { verifyToken } = require('./middleware/auth');
 const userRoutes = require('./routes/userRoutes');
@@ -34,6 +35,8 @@ app.use(express.json());
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+cronJob;
 
 // Route middleware
 
