@@ -45,7 +45,7 @@ function Skills() {
   return (
     <div className="p-5 shadow-lg rounded-lg border-t-4 border-primary mt-10 bg-white">
       <h2 className="font-bold text-2xl text-gray-800">Skills</h2>
-      <p className="text-sm text-gray-600 my-2">Add your top professional key skills</p>
+      <p className="text-sm text-gray-600 my-2">Add your  professional  skills</p>
 
       <div>
         {skillsList.map((item, index) => (
