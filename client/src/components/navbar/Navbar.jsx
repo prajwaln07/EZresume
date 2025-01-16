@@ -96,6 +96,8 @@ const Navbar = () => {
 
         {/* Center Menu Items */}
         <div className="hidden md:flex space-x-8">
+
+
           <Link
             to="/templates"
             className={`text-lg hover:text-blue-500 ${isDarkmode ? 'text-white' : 'text-gray-900'}`}
@@ -110,15 +112,7 @@ const Navbar = () => {
           >
             Contact
           </Link>
-
-
-
-          <Link
-            to="/support"
-            className={`text-lg hover:text-blue-500 ${isDarkmode ? 'text-white' : 'text-gray-900'}`}
-          >
-            Support
-          </Link>
+          
           
         </div>
 

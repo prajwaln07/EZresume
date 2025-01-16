@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLoading, unsetLoading } from "../../redux/actions/loadingSetter";
 import { setTemplateID, changeTemplate, fetchTemplatesSuccess, fetchTemplatesFailure } from "../../redux/actions/templateDetails";
 import apiConfig from "../../api/apiConfig";
+import Chatbot from '../ChatbotWithChat';
 
 const TemplatePage = () => {
   const [loadingTemplates, setLoadingTemplates] = useState(true);
@@ -227,6 +228,8 @@ const TemplatePage = () => {
           </div>
         </div>
       )}
+      <Chatbot></Chatbot>
+
     </div>
   );
 };

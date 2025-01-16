@@ -32,11 +32,14 @@ const HomePage = () => {
       </p>
     </div>
 
+
 <ResumeSteps></ResumeSteps>
 
 <Feedback></Feedback>
 
 <FAQPage></FAQPage>
+
+
 
 <Footer></Footer>
 

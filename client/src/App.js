@@ -8,7 +8,7 @@ import UnderConstruction from './components/pages/UnderContructionPage';
 import SignupForm from './components/SignupForm';
 import LoginForm from './components/LoginForm';
 import IndexOne from './components/resume/IndexOne';
-import SupportPage from './components/Support';
+
 import FeedbackForm from './components/FeedbackForm';
 import ContactUs from './components/ContactUs';
 import AdminDashboard from './components/pages/admin/AdminDashboard'
@@ -42,8 +42,6 @@ function App() {
 
 
 <Route path='*' element={<UnderConstruction></UnderConstruction>}></Route>
-
-<Route path='/support' element = {<SupportPage></SupportPage>}> </Route>
 
 <Route path='/login' element={<LoginForm></LoginForm>}> </Route>
 
