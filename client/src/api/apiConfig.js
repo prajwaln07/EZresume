@@ -18,13 +18,15 @@ const apiConfig = {
     create: `${BASE_URL}/templates`,
     update: (templateId) => `${BASE_URL}/templates/${templateId}`,
     delete: (templateId) => `${BASE_URL}/templates/${templateId}`,
-    restore : (templateId) => `${BASE_URL}/templates/restore/${templateId}`,
-
+    restore: (templateId) => `${BASE_URL}/templates/restore/${templateId}`,
   },
   downloads: {
     count: `${BASE_URL}/downloads/count`,
     monthly: (month) => `${BASE_URL}/downloads/monthly/${month}`,
     track: `${BASE_URL}/downloads/track`,
+  },
+  resumes: {
+    suggestion: `${BASE_URL}/resumes/suggestion`, // Add the suggestion endpoint here
   },
 };
 

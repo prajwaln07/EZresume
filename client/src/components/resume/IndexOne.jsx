@@ -7,6 +7,8 @@ import ResumePreview from './components/ResumePreview';
 import { ResumeInfoContext } from '../../../src/context/ResumeInfoContext';
 import dummy from './components/data'; // You can replace this with dynamic data later
 import { setLightTheme } from '../../redux/actions/themeAction';
+import apiConfig from '../../api/apiConfig'; 
+
 
 const SuggestionsSymbol = ({ suggestions, readabilityScore, missingKeywords }) => {
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -85,7 +87,7 @@ const IndexOne = () => {
       const fetchSuggestions = async () => {
         try {
           const response = await axios.post(
-            'http://localhost:5000/api/v1/resumes/suggestion',
+            apiConfig.resumes.suggestion, // Use the API configuration for the endpoint
             { text: resumeInfo }, // Send the updated resume info
             {
               headers: {
@@ -93,9 +95,11 @@ const IndexOne = () => {
               },
             }
           );
-
-          const fetchedSuggestions = response.data.errors.filter(item => item.suggestions && item.suggestions.length > 1);
-
+      
+          const fetchedSuggestions = response.data.errors.filter(
+            (item) => item.suggestions && item.suggestions.length > 1
+          );
+      
           setSuggestions(fetchedSuggestions);
           setReadabilityScore(response.data.readabilityScore);
           setMissingKeywords(response.data.missingKeywords || []);
