@@ -21,7 +21,7 @@ const SuggestionsSymbol = ({ suggestions, readabilityScore, missingKeywords }) =
       </div>
       {showSuggestions && (
         <div className="fixed top-40 right-[43%] bg-white shadow-lg border rounded-md p-4 z-50 max-w-xs transition-all ease-in-out duration-300 transform scale-105">
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-start gap-2">
             <h4 className="font-bold mb-2 text-lg">Suggestions & Feedback</h4>
             <button
               onClick={() => setShowSuggestions(false)}

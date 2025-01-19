@@ -277,7 +277,6 @@ exports.getSuggestions = async (req, res) => {
     // Combine all suggestions
     const combinedSuggestions = [...matches, ...actionVerbSuggestions];
     // Send suggestions back to the client
-    cosole.log(" combinedSuggestions --> ",combinedSuggestions)
 
     res.status(200).json({
       errors: combinedSuggestions,
