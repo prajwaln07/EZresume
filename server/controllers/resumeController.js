@@ -235,6 +235,7 @@ exports.getSuggestions = async (req, res) => {
     }
     // LanguageTool API endpoint for spelling and grammar
     const apiUrl = "https://api.languagetool.org/v2/check";
+
     // Request to LanguageTool API
     const response = await axios.post(
       apiUrl,
@@ -276,6 +277,8 @@ exports.getSuggestions = async (req, res) => {
     // Combine all suggestions
     const combinedSuggestions = [...matches, ...actionVerbSuggestions];
     // Send suggestions back to the client
+    cosole.log(" combinedSuggestions --> ",combinedSuggestions)
+
     res.status(200).json({
       errors: combinedSuggestions,
       readabilityScore,
