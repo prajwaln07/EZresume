@@ -31,6 +31,7 @@ const Navbar = () => {
 
   // Update body class when the theme changes
   useEffect(() => {
+    
     if (isDarkmode) {
       document.body.classList.add('dark');
     } else {
@@ -59,7 +60,7 @@ const Navbar = () => {
       
       toast.info('User Logout Successful!', {
         position: "bottom-right",
-        autoClose: 4000, // Slightly faster auto-close for logout
+        autoClose: 3000, // Slightly faster auto-close for logout
         hideProgressBar: true, // Remove progress bar for cleaner appearance
         closeOnClick: true,
         pauseOnHover: true,
@@ -80,6 +81,7 @@ const Navbar = () => {
     <nav className={`${isDarkmode ? 'bg-gray-900' : 'bg-white'} transition-colors`}>
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
+
         <div className="h-10 w-10">
           <Link to="/">
             <img
@@ -183,6 +185,7 @@ const Navbar = () => {
       {isOpen && (
         <div className={`md:hidden transition-transform transform ${isDarkmode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'}`}>
           <div className="space-y-4 px-6 py-4">
+
             <Link
               to="/templates"
               className="block text-lg hover:text-blue-500"
@@ -190,19 +193,13 @@ const Navbar = () => {
             >
               Templates
             </Link>
+
             <Link
-              to="/pricing"
+              to="/contactUs"
               className="block text-lg hover:text-blue-500"
               onClick={() => setIsOpen(false)} // Close menu on link click
             >
-              Pricing
-            </Link>
-            <Link
-              to="/support"
-              className="block text-lg hover:text-blue-500"
-              onClick={() => setIsOpen(false)} // Close menu on link click
-            >
-              Support
+              Contact
             </Link>
 
             {isAuthenticated ? (
