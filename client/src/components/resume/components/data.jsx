@@ -10,7 +10,7 @@ export default{
     github:'',
     linkedin:'',
     themeColor:"#ff6666",
-    summery:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
+    summery:'Passion for growth and a drive for success fuel my ambition to continuously learn and adapt in an ever-changing world. With a focus on innovation and efficiency, I strive to contribute meaningfully in all my endeavors',
     experience:[
         {
             id:1,
