@@ -25,7 +25,7 @@ const SingleResumeStep = ({ direction, numberCnt, imageLink, title, desc }) => {
       </div>
 
       {/* Right Section */}
-      <div className="lg:w-1/2 flex justify-center p-6 w-96 h-96 mr-10">
+      <div className="lg:w-1/2 flex justify-center p-6  sm:w-64 sm:h-64 md:w-96 md:h-96 mr-10">
         <img
           src={imageLink}
           alt="Resume Step Illustration"
