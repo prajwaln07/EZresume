@@ -83,24 +83,30 @@ const loginUser = async (req, res) => {
     }
 
     // Generate the token
-    const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET, {
-      expiresIn: process.env.JWT_EXPIRES_IN || '1h',
-    });
+    // const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET, {
+    //   expiresIn: process.env.JWT_EXPIRES_IN || '1h',
+    // });
+
+    const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET);
 
     // Set the token as an HttpOnly cookie
-     res.cookie('token', token, {
-       token,
-      httpOnly: true,    // Prevents JavaScript access to the cookie
-      expires: new Date(Date.now() + 1 * 60 * 60 * 1000) // 1 hour expiration
-    });
-
+    //  res.cookie('token', token, {
+    //    token,
+    //   httpOnly: true,    // Prevents JavaScript access to the cookie
+    //   expires: new Date(Date.now() + 1 * 60 * 60 * 1000) // 1 hour expiration
+    // });
+ 
     
     // Respond with user data (without the password) but no token/
     const { password: _, ...userData } = user.toObject();
-    res.status(200).json({
+    res
+    .status(200)
+    .cookie('token', token,  { httpOnly: true, sameSite: 'None', secure: true })
+    .json({
       success:true,
       message: 'Login successful.',
        user: userData });
+       
   } catch (error) {
     console.error('Login error:', error);
     res.status(500).json({ message: 'Internal server error. Please try again later.' });
