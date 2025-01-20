@@ -7,7 +7,7 @@
 EZResume is a user-friendly and feature-rich resume builder that empowers users to create professional resumes effortlessly. With a variety of templates, advanced UI/UX features, and AI-powered enhancements, EZResume is the ultimate tool for job seekers.
 
 ### 🌐 Live Demo
-Explore the application here: [EZResume](https://ezresume.onrender.com/)
+Explore the application here: [EZResume](https://ezresumecraft.netlify.app/)
 
 ---
 
