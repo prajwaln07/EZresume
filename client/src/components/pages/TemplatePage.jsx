@@ -155,8 +155,14 @@ const TemplatePage = () => {
               ))
           : templates.map((template) => (
               <div
+              onClick={() =>
+                handleTemplateClick(
+                  template.layout,
+                  template._id,
+                )
+              }
                 key={template._id}
-                className="bg-gray-200 dark:bg-gray-800 rounded-md shadow-lg p-4 relative transform transition-all duration-300 group hover:scale-105 hover:shadow-xl hover:bg-teal-100 dark:hover:bg-teal-800"
+                className="bg-gray-200 dark:bg-gray-800 rounded-md shadow-lg p-4 relative transform transition-all duration-300 group hover:scale-105 hover:shadow-xl hover:bg-teal-100 dark:hover:bg-teal-800 hover:cursor-pointer"
               >
                 <div className="relative flex items-center justify-center">
                   <FaInfoCircle
