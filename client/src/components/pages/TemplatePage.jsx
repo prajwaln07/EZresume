@@ -155,12 +155,7 @@ const TemplatePage = () => {
               ))
           : templates.map((template) => (
               <div
-              onClick={() =>
-                handleTemplateClick(
-                  template.layout,
-                  template._id,
-                )
-              }
+
                 key={template._id}
                 className="bg-gray-200 dark:bg-gray-800 rounded-md shadow-lg p-4 relative transform transition-all duration-300 group hover:scale-105 hover:shadow-xl hover:bg-teal-100 dark:hover:bg-teal-800 hover:cursor-pointer"
               >
@@ -170,6 +165,12 @@ const TemplatePage = () => {
                     className="size-6 absolute -right-2 -top-2 text-blue-500 opacity-0 group-hover:opacity-100 cursor-pointer transition-opacity duration-300"
                   />
                   <img
+                                onClick={() =>
+                                  handleTemplateClick(
+                                    template.layout,
+                                    template._id,
+                                  )
+                                }
                     src={template.image}
                     alt={template.name}
                     className="rounded-md mb-4 h-64 object-cover"
