@@ -203,13 +203,7 @@ id=new mongoose.Types.ObjectId(id);
 
 
 
-const calculateReadability = (text) => {
-  const sentences = text.split('.').length;
-  const words = text.split(' ').length;
-  const syllables = text.split(' ').reduce((acc, word) => acc + countSyllables(word), 0);
-  const readabilityScore = 206.835 - (1.015 * (words / sentences)) - (84.6 * (syllables / words));
-  return readabilityScore.toFixed(2);
-};
+
 // Function to count syllables in a word (basic approach)
 const countSyllables = (word) => {
   word = word.toLowerCase();
@@ -260,7 +254,6 @@ exports.getSuggestions = async (req, res) => {
       }))
       .filter(item => item.suggestions.length > 0); // Filter out empty suggestions
     // Readability score: Flesch-Kincaid formula
-    const readabilityScore = calculateReadability(contentToCheck);
     // Action verbs suggestion: Basic check for "action verbs"
     const actionVerbs = ['achieved', 'designed', 'managed', 'led', 'improved']; // Add more action verbs
     const actionVerbSuggestions = [];
@@ -280,7 +273,6 @@ exports.getSuggestions = async (req, res) => {
 
     res.status(200).json({
       errors: combinedSuggestions,
-      readabilityScore,
     });
   } catch (error) {
     console.error("Error fetching suggestions:", error.message);

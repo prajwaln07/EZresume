@@ -10,8 +10,9 @@ import { setLightTheme } from '../../redux/actions/themeAction';
 import apiConfig from '../../api/apiConfig'; 
 
 
-const SuggestionsSymbol = ({ suggestions, readabilityScore, missingKeywords }) => {
+const SuggestionsSymbol = ({ suggestions, missingKeywords }) => {
   const [showSuggestions, setShowSuggestions] = useState(false);
+
   return (
     <>
       <div
@@ -34,31 +35,22 @@ const SuggestionsSymbol = ({ suggestions, readabilityScore, missingKeywords }) =
             </button>
           </div>
           <div className="max-h-60 overflow-y-auto px-2 py-2">
-            {suggestions.length > 0 ? (
-              suggestions.map((item, index) => (
-                <div key={index} className="mb-3 p-2 rounded-lg hover:bg-gray-100">
-                  <p>
-                    <span className="font-bold text-red-500">{item.word}:</span>{' '}
-                    {item.suggestions.join(', ')}
-                  </p>
-                  <p className="text-sm text-gray-500">{item.message}</p>
-                </div>
-              ))
-            ) : (
-              <p>No suggestions found!</p>
-            )}
+            {suggestions.map((item, index) => (
+              <div key={index} className="mb-3 p-2 rounded-lg hover:bg-gray-100">
+                <p>
+                  <span className="font-bold text-red-500">{item.word}:</span>{' '}
+                  {item.suggestions.join(', ')}
+                </p>
+                <p className="text-sm text-gray-500">{item.message}</p>
+              </div>
+            ))}
             {missingKeywords.length > 0 && (
               <div className="mt-3 p-2 rounded-lg bg-yellow-100">
                 <p className="font-semibold">Keyword Optimization:</p>
                 <p>Consider adding these keywords: {missingKeywords.join(', ')}</p>
               </div>
             )}
-            {readabilityScore && (
-              <div className="mt-3 p-2 rounded-lg bg-blue-100">
-                <p className="font-semibold">Readability Score:</p>
-                <p>Flesch-Kincaid Score: {readabilityScore}</p>
-              </div>
-            )}
+
           </div>
         </div>
       )}
@@ -66,13 +58,13 @@ const SuggestionsSymbol = ({ suggestions, readabilityScore, missingKeywords }) =
   );
 };
 
+
 const IndexOne = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
   const [resumeInfo, setResumeInfo] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
-  const [readabilityScore, setReadabilityScore] = useState(null);
   const [missingKeywords, setMissingKeywords] = useState([]);
   useEffect(() => {
     // If you're on the "/resume/maker" route, set to light mode
@@ -101,7 +93,6 @@ const IndexOne = () => {
           );
       
           setSuggestions(fetchedSuggestions);
-          setReadabilityScore(response.data.readabilityScore);
           setMissingKeywords(response.data.missingKeywords || []);
         } catch (error) {
           console.error('Error fetching suggestions:', error);
@@ -122,11 +113,14 @@ const IndexOne = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 p-10 gap-10 mb-20 relative">
         <FormSection />
         <ResumePreview />
-        <SuggestionsSymbol
-          suggestions={suggestions}
-          readabilityScore={readabilityScore}
-          missingKeywords={missingKeywords}
-        />
+
+        {(suggestions.length > 0 || missingKeywords.length > 0) && (
+          <SuggestionsSymbol
+            suggestions={suggestions}
+            missingKeywords={missingKeywords}
+          />
+        )}
+
       </div>
     </ResumeInfoContext.Provider>
   );
