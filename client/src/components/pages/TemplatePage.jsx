@@ -35,10 +35,16 @@ const TemplatePage = () => {
       const params = {
         category,
         customizable: customizable === "" ? undefined : customizable,
-        downloadsRange
+        downloadsRange,
       };
       const response = await axios.get(apiConfig.templates.getAll, { params });
-      dispatch(fetchTemplatesSuccess(response.data.templates));
+  
+      // Filter templates with deletedAt as null
+      const validTemplates = response.data.templates.filter(
+        (template) => template.deletedAt === null
+      );
+  
+      dispatch(fetchTemplatesSuccess(validTemplates));
       setFacets(response.data.facets); // Update facets with data from the backend
     } catch (err) {
       dispatch(fetchTemplatesFailure(err.message));
@@ -48,6 +54,7 @@ const TemplatePage = () => {
       dispatch(unsetLoading());
     }
   };
+  
 
   useEffect(() => {
     getAllTemplates();

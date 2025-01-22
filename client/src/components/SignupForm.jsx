@@ -96,7 +96,7 @@ const response = await axios.post(apiConfig.users.register, formData);
   }, [successMessage]);
 
   return (
-    <div className="h-[655px] flex flex-col md:flex-row">
+    <div className="h-screen flex flex-col md:flex-row">
       {/* Image Section */}
       <div className="ml-1 hidden lg:block w-2/5 bg-cover bg-center" style={{ backgroundImage: `url('https://res.cloudinary.com/dkynwi65w/image/upload/v1735036933/freepik__candid-image-photography-natural-textures-highly-r__59814_frkf5a.jpg')` }}></div>
 

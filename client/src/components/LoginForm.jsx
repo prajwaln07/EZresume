@@ -107,7 +107,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-[655px]">
+    <div className="flex flex-col md:flex-row h-screen overflow-hidden ">
       {/* Left side Image */}
       <div
         className="ml-1 hidden lg:block w-2/5 bg-cover bg-center"

@@ -61,7 +61,7 @@ export default{
         },
         {
             id:1,
-            name:'MySql',
+            name:'MySQL',
             rating:0,
         },
         {
