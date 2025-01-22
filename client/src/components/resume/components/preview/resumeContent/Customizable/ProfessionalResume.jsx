@@ -25,8 +25,6 @@ const GradTemplate = ({ resumeInfo, resumeRef }) => {
   const handleMouseMove = (e) => {
     if (draggingSection) {
       const newPosY = e.clientY - offset.y;
-
-      // Update position of the dragged section
       setPositions((prevPositions) => ({
         ...prevPositions,
         [draggingSection]: { y: newPosY },
@@ -66,7 +64,7 @@ const GradTemplate = ({ resumeInfo, resumeRef }) => {
           top: `${currentPosition.y}px`,
         }}
       >
-        <h2 className="text-lg font-bold">{title}</h2>
+        <h2 className="text-xl font-semibold text-gray-800 tracking-wide">{title}</h2>
         <hr className="my-2 border-gray-300" />
         {content}
       </div>
@@ -80,57 +78,55 @@ const GradTemplate = ({ resumeInfo, resumeRef }) => {
       style={{ width: "7.8in", minHeight: "11in" }}
     >
       {/* Header Section */}
-      <div className="text-left mb-6">
-        <h1 className="text-3xl font-bold">
+      <div className="mb-8">
+        {/* Name and Job Title */}
+        <h1 className="text-4xl font-semibold text-gray-900">
           {resumeInfo?.firstName} {resumeInfo?.lastName || "Your Name"}
         </h1>
-        <p className="text-lg font-semibold text-gray-700">
+        <p className="text-lg font-semibold text-gray-700 mt-1">
           {resumeInfo?.jobTitle || "Professional Title"}
         </p>
-        <p className="text-sm mt-1 text-gray-600">
+        {/* Contact Information */}
+        <p className="text-sm text-gray-600 mt-2">
           {resumeInfo?.address || "Your Address"} | {resumeInfo?.phone || "Your Phone"} |{" "}
           {resumeInfo?.email || "Your Email"}
         </p>
-        <div className="text-sm mt-2 text-gray-600 flex justify-start gap-6">
-          {/* GitHub */}
+        {/* Social Links */}
+        <div className="text-sm mt-3 text-gray-600 flex justify-start gap-6">
           {resumeInfo?.github && (
             <div className="flex items-center gap-1">
-              <Github size={14} />
+              <Github size={16} />
               <a
                 href={cleanUrl(resumeInfo.github)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-primary"
+                className="text-blue-500 hover:underline"
               >
                 GitHub
               </a>
             </div>
           )}
-
-          {/* LinkedIn */}
           {resumeInfo?.linkedin && (
             <div className="flex items-center gap-1">
-              <Linkedin size={14} />
+              <Linkedin size={16} />
               <a
                 href={cleanUrl(resumeInfo.linkedin)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-primary"
+                className="text-blue-500 hover:underline"
               >
                 LinkedIn
               </a>
             </div>
           )}
-
-          {/* Portfolio */}
           {resumeInfo?.portfolio && (
             <div className="flex items-center gap-1">
-              <Globe size={14} />
+              <Globe size={16} />
               <a
                 href={cleanUrl(resumeInfo.portfolio)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-primary"
+                className="text-blue-500 hover:underline"
               >
                 Portfolio
               </a>
@@ -230,13 +226,15 @@ const GradTemplate = ({ resumeInfo, resumeRef }) => {
             </>
           ),
           skills: resumeInfo?.skills?.length > 0 && (
-            <ul className="list-disc pl-5 text-sm text-gray-600 grid grid-cols-2">
-              {resumeInfo.skills.map((skill, index) => (
-                <li key={index} className="break-words col-span-1">
-                  {skill.name}
-                </li>
-              ))}
-            </ul>
+            <div className="mb-6">
+              <ul className="list-disc pl-5 text-sm text-gray-600 grid grid-cols-2 gap-2">
+                {resumeInfo.skills.map((skill, index) => (
+                  <li key={index} className="col-span-1 break-words">
+                    {skill.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
           ),
         };
 
