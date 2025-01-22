@@ -80,59 +80,67 @@ const GradTemplate = ({ resumeInfo, resumeRef }) => {
       {/* Header Section */}
       <div className="mb-8">
         {/* Name and Job Title */}
-        <h1 className="text-4xl font-semibold text-gray-900">
-          {resumeInfo?.firstName} {resumeInfo?.lastName || "Your Name"}
-        </h1>
-        <p className="text-lg font-semibold text-gray-700 mt-1">
-          {resumeInfo?.jobTitle || "Professional Title"}
-        </p>
-        {/* Contact Information */}
-        <p className="text-sm text-gray-600 mt-2">
-          {resumeInfo?.address || "Your Address"} | {resumeInfo?.phone || "Your Phone"} |{" "}
-          {resumeInfo?.email || "Your Email"}
-        </p>
-        {/* Social Links */}
-        <div className="text-sm mt-3 text-gray-600 flex justify-start gap-6">
-          {resumeInfo?.github && (
-            <div className="flex items-center gap-1">
-              <Github size={16} />
-              <a
-                href={cleanUrl(resumeInfo.github)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-500 hover:underline"
-              >
-                GitHub
-              </a>
-            </div>
-          )}
-          {resumeInfo?.linkedin && (
-            <div className="flex items-center gap-1">
-              <Linkedin size={16} />
-              <a
-                href={cleanUrl(resumeInfo.linkedin)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-500 hover:underline"
-              >
-                LinkedIn
-              </a>
-            </div>
-          )}
-          {resumeInfo?.portfolio && (
-            <div className="flex items-center gap-1">
-              <Globe size={16} />
-              <a
-                href={cleanUrl(resumeInfo.portfolio)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-500 hover:underline"
-              >
-                Portfolio
-              </a>
-            </div>
-          )}
-        </div>
+        <h1 className="text-5xl font-extrabold text-gray-900" style={{ fontFamily: "'Lora', serif" }}>
+  <span style={{ fontSize: '4rem' }}>{resumeInfo?.firstName?.charAt(0)}</span>
+  {resumeInfo?.firstName?.slice(1)}{" "}
+  <span style={{ fontSize: '4rem' }}>{resumeInfo?.lastName?.charAt(0)}</span>
+  {resumeInfo?.lastName?.slice(1) || "Your Name"}
+</h1>
+
+<p className="text-2xl font-semibold text-gray-900 mt-2" style={{ fontFamily: "'Lora', serif" }}>
+  {resumeInfo?.jobTitle || "Professional Title"}
+</p>
+
+{/* Contact Information */}
+<p className="text-sm text-gray-600 mt-3" style={{ fontFamily: "'Lora', serif" }}>
+  {resumeInfo?.address || "Your Address"} | {resumeInfo?.phone || "Your Phone"} |{" "}
+  {resumeInfo?.email || "Your Email"}
+</p>
+
+{/* Social Links */}
+<div className="text-sm mt-4 text-gray-600 flex justify-start gap-6" style={{ fontFamily: "'Lora', serif" }}>
+  {resumeInfo?.github && (
+    <div className="flex items-center gap-1">
+      <Github size={16} />
+      <a
+        href={cleanUrl(resumeInfo.github)}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-500 hover:underline"
+      >
+        GitHub
+      </a>
+    </div>
+  )}
+  {resumeInfo?.linkedin && (
+    <div className="flex items-center gap-1">
+      <Linkedin size={16} />
+      <a
+        href={cleanUrl(resumeInfo.linkedin)}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-500 hover:underline"
+      >
+        LinkedIn
+      </a>
+    </div>
+  )}
+  {resumeInfo?.portfolio && (
+    <div className="flex items-center gap-1">
+      <Globe size={16} />
+      <a
+        href={cleanUrl(resumeInfo.portfolio)}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-500 hover:underline"
+      >
+        Portfolio
+      </a>
+    </div>
+  )}
+</div>
+
+
       </div>
 
       {/* Render Sections */}
