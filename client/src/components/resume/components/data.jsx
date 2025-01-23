@@ -37,15 +37,6 @@ export default{
           major: 'Computer Science',
           description: ''
         },
-        {
-          id: 2,
-          universityName: 'Western Illinois University',
-          startDate: '01-03-2023',
-          endDate: '01-01-2025',
-          degree: 'Bachelor',
-          major: 'Information Technology',
-          description: ''
-        }
       ],
       
     skills:[
