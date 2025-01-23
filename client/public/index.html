@@ -5,7 +5,7 @@
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    
+
     <!-- Optimized Description -->
     <meta
       name="description"
@@ -21,11 +21,17 @@
     <!-- Author Meta Tag -->
     <meta name="author" content="EZresume Team" />
 
+    <!-- Robots Meta Tag -->
+    <meta name="robots" content="index, follow" />
+
+    <!-- Canonical Tag -->
+    <link rel="canonical" href="https://ezresumecraft.netlify.app/" />
+
     <!-- Open Graph Tags (Social Sharing Optimization) -->
     <meta property="og:title" content="EZresume: Create Professional Resumes Easily" />
     <meta property="og:description" content="Build professional resumes quickly with EZresume. Choose from beautiful templates, customize, and download!" />
     <meta property="og:image" content="%PUBLIC_URL%/social-preview.png" />
-    <meta property="og:url" content="https://www.yourwebsite.com" />
+    <meta property="og:url" content="https://ezresumecraft.netlify.app/" />
     <meta property="og:type" content="website" />
 
     <!-- Twitter Card Tags -->
@@ -34,10 +40,35 @@
     <meta name="twitter:description" content="Build professional resumes quickly with EZresume. Choose from beautiful templates, customize, and download!" />
     <meta name="twitter:image" content="%PUBLIC_URL%/social-preview.png" />
 
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "EZresume",
+      "url": "https://ezresumecraft.netlify.app/",
+      "description": "EZresume: The ultimate tool for creating professional resumes effortlessly.",
+      "author": {
+        "@type": "Organization",
+        "name": "EZresume Team"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://ezresumecraft.netlify.app/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
     <!-- Fonts -->
     <link
+      rel="preload"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      as="style"
+    />
+    <link
       rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
     />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Merriweather:wght@400;700&display=swap"
