@@ -80,10 +80,10 @@ const GradTemplate = ({ resumeInfo, resumeRef }) => {
       {/* Header Section */}
       <div className="mb-8">
         {/* Name and Job Title */}
-        <h1 className="text-5xl font-extrabold text-gray-900" style={{ fontFamily: "'Lora', serif" }}>
-  <span style={{ fontSize: '4rem' }}>{resumeInfo?.firstName?.charAt(0)}</span>
+        <h1 className="text-4xl font-extrabold text-gray-900" style={{ fontFamily: "'Lora', serif" }}>
+  <span style={{ fontSize: '3rem' }}>{resumeInfo?.firstName?.charAt(0)}</span>
   {resumeInfo?.firstName?.slice(1)}{" "}
-  <span style={{ fontSize: '4rem' }}>{resumeInfo?.lastName?.charAt(0)}</span>
+  <span style={{ fontSize: '3rem' }}>{resumeInfo?.lastName?.charAt(0)}</span>
   {resumeInfo?.lastName?.slice(1) || "Your Name"}
 </h1>
 
