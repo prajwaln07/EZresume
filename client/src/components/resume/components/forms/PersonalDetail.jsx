@@ -109,6 +109,7 @@ function PersonalDetail() {
         theme="snow"
         value={resumeInfo?.linkedin || ''}
         onChange={(value) => handleInputChange('linkedin', value)}
+        placeholder='Add your LinkedIn profile URL (e.g., https://www.linkedin.com/in/username)'
         modules={{
             toolbar: [['link']], // Simplified toolbar
         }}
@@ -123,6 +124,7 @@ function PersonalDetail() {
     <ReactQuill
         theme="snow"
         value={resumeInfo?.github || ''}
+        placeholder='Add your GitHub URL (e.g., https://github.com/username)'
         onChange={(value) => handleInputChange('github', value)}
         modules={{
             toolbar: [['link']], // Simplified toolbar
@@ -139,6 +141,7 @@ function PersonalDetail() {
     <ReactQuill
         theme="snow"
         value={resumeInfo?.portfolio || ''}
+        placeholder="Add your portfolio website URL (e.g., https://yourportfolio.com)"
         onChange={(value) => handleInputChange('portfolio', value)}
         modules={{
             toolbar: [['link']], // Simplified toolbar
