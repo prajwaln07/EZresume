@@ -184,32 +184,7 @@ exports.getTemplateById = async (req, res) => {
 
 
 
-// exports.deleteTemplate = async (req, res) => {
-//     try {
-//         const { id } = req.params;
 
-//         // Validate the ID format
-//         if (!mongoose.Types.ObjectId.isValid(id)) {
-//             return res.status(400).json({ message: "Invalid template ID" });
-//         }
-
-//         // Attempt to delete the template
-//         const template = await Template.findByIdAndDelete(id);
-
-//         if (!template) {
-//             return res.status(404).json({ message: "Template not found" });
-//         }
-
-//         // Success response
-//         res.status(200).json({ message: "Template deleted successfully" });
-//     } catch (err) {
-//         console.error("Error deleting template:", err);
-//         res.status(500).json({ message: "Server error" });
-//     }
-// };
-
-
-// Soft delete (mark for deletion)
 
 exports.deleteTemplate = async (req, res) => {
     try {
