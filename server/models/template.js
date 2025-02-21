@@ -8,7 +8,7 @@ const templateSchema = new mongoose.Schema({
   categories: [{ type: String, enum: ['single-column', 'double-column', 'minimal', 'creative', 'professional'] }], 
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
-  deletedAt: { type: Date, default: null }, // Tracks deletion timestamp
+  deletedAt: { type: Date, default: null }, 
   image: { type: String, required: true }, 
   downloads: { type: Number, default: 0 },
 });

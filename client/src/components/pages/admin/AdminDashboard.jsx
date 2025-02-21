@@ -97,25 +97,27 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchMonthlyDownloads = async () => {
       const months = Array.from({ length: 12 }, (_, i) => {
-        const date = new Date();
-        date.setMonth(date.getMonth() - i);
+        const today = new Date();
+        const date = new Date(today.getFullYear(), today.getMonth() - i, 7); // Always set the date to the 7th
+    
         return {
           month: date.toISOString().slice(0, 7),
           label: date.toLocaleString("default", { month: "short", year: "numeric" }),
         };
       }).reverse();
-
+  
       try {
         const monthlyData = await Promise.all(
           months.map(async ({ month }) => {
-
-           const response = await axios.get(apiConfig.downloads.monthly(month),{
-            withCredentials:true,
-           });
-
+           
+            const response = await axios.get(apiConfig.downloads.monthly(month), {
+              withCredentials: true,
+            });
+  
             return response.data.downloads || 0;
           })
         );
+  
         setMonthlyDownloads(
           months.map((month, index) => ({
             label: month.label,
@@ -126,8 +128,10 @@ const AdminDashboard = () => {
         console.error("Error fetching monthly downloads:", err);
       }
     };
+  
     fetchMonthlyDownloads();
   }, []);
+  
 
   useEffect(() => {
     const fetchNoOfUsers = async () => {
