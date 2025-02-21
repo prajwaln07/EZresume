@@ -6,7 +6,7 @@ const {uploadThumbnail} =require('../config/cloudinary')
 exports.createTemplate = async (req, res) => {
     try {
         const { name, description, layout, isCustomizable, categories } = req.body; 
-        const thumbnail = req.file; // Get the uploaded file from req.file
+        const thumbnail = req.file; 
 
         if (!name || !description || !layout || !thumbnail || !categories) {
             return res.status(400).send("All fields (name, description, layout, thumbnail, categories) are required.");
@@ -166,9 +166,6 @@ exports.getAllTemplates = async (req, res) => {
 
 exports.getTemplateById = async (req, res) => {
     try {
-
-
-
         const { id } = req.params;
 
         const template = await Template.findById(id);
@@ -207,7 +204,9 @@ exports.deleteTemplate = async (req, res) => {
         }
 
         // Success response
-        res.status(200).json({ message: "Template marked for deletion" });
+        res.status(200).json({ 
+            message: "Template marked for deletion"
+         });
     } catch (err) {
         console.error("Error deleting template:", err);
         res.status(500).json({ message: "Server error" });
@@ -228,7 +227,9 @@ exports.restoreTemplate = async (req, res) => {
         const template = await Template.findById(id);
 
         if (!template) {
-            return res.status(404).json({ message: "Template not found" });
+            return res.status(404).json({ 
+                message: "Template not found"
+             });
         }
 
         // Check if the template was marked for deletion

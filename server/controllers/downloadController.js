@@ -72,7 +72,7 @@ exports.getMonthlyDownloads = async (req, res) => {
     const record = await Download.findOne({});
 
     const monthlyDownloads = record?.monthlyDownloads?.get(month) || 0;
-
+ 
     res.status(200).json({ month, downloads: monthlyDownloads });
     
   } catch (error) {
@@ -89,13 +89,16 @@ exports.getTemplateDownloads = async (req, res) => {
     const templateRecord = await Template.findById(templateId);
 
     if (!templateRecord) {
-      return res.status(404).json({ success: false, message: 'Template not found' });
+      return res.status(404).json({ 
+        success: false,
+        message: 'Template not found' });
     }
 
     res.status(200).json({
       templateId,
       downloads: templateRecord.downloads,
     });
+    
   } catch (error) {
     console.error('Error fetching template-specific downloads:', error);
     res.status(500).json({

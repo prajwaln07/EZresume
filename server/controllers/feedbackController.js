@@ -34,9 +34,10 @@ exports.getFeedbackByTemplateId = async (req, res) => {
             })
             .select("comments rating");
 
-        if (!feedback.length) return res.status(404).send("No feedback found for this template");
+            if (!feedback.length) 
+            return res.status(404).send("No feedback found for this template");
 
-        res.json(feedback);
+            res.json(feedback);
     } catch (err) {
         console.error(err);
         res.status(500).send("Error fetching feedback");
