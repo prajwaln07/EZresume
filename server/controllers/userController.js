@@ -111,11 +111,20 @@ const loginUser = async (req, res) => {
     const { password: _, ...userData } = user.toObject();
      res
     .status(200)
-    .cookie('token', token,  { httpOnly: true, sameSite: 'None', secure: true, expires: new Date(Date.now() + 2 * 60 * 60 * 1000) })
-    .json({
-      success:true,
-      message: 'Login successful.',
-       user: userData });
+    .cookie('token', token,  
+      { 
+
+        httpOnly: true, 
+        sameSite: 'None',
+        secure: true, 
+        expires: new Date(Date.now() + 2 * 60 * 60 * 1000)
+       }
+      )
+      .json({
+       success:true,
+       message: 'Login successful.',
+       user: userData 
+      });
        
   } catch (error) {
     console.error('Login error:', error);
