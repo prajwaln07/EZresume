@@ -9,6 +9,7 @@ const { sendEmail,userConfirmationHTML, userConfirmationText, adminNotificationH
 
 // User Registration Function
 const registerUser = async (req, res) => {
+  
   await body('username').isString().isLength({ min: 3 }).trim().escape().run(req);
   await body('email').isEmail().normalizeEmail().run(req);
   await body('password').isLength({ min: 6 }).run(req);
@@ -30,7 +31,10 @@ const registerUser = async (req, res) => {
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ success:false,message: 'Email already in use.' });
+      return res.status(400).json({ 
+        success:false,
+        message: 'Email already in use.'
+       });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -44,7 +48,11 @@ const registerUser = async (req, res) => {
 
     const { password: _, ...userData } = user.toObject();
     res.status(201).json({
-      success:true, message: 'User registered successfully.', user: userData });
+       success:true, 
+       message: 'User registered successfully.',
+       user: userData
+    });
+
   } catch (error) {
     console.error('Registration error:', error);
     res.status(500).json({ message: 'Internal server error. Please try again later.' });
@@ -74,24 +82,34 @@ const loginUser = async (req, res) => {
     const user = await User.findOne({ email:trimmedEmail });
 
     if (!user) {
-      return res.status(400).json({ message: 'Invalid credentials.' });
+      return res.status(400).json({ 
+         message: 'Invalid credentials.' 
+        });
     }
                   
     const isMatch = await bcrypt.compare(trimmedPassword, user.password);
+
     if (!isMatch) {
-      return res.status(400).json({ message: 'Invalid credentials.' });
+      return res.status(400).json({ 
+        message: 'Invalid credentials.'
+       });
     }
     
-    const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET,{
+    const token = jwt.sign(
+       {
+       userId: user._id,
+        role: user.role
+       }, 
+
+      process.env.JWT_SECRET,
+
+      {
       expiresIn: process.env.JWT_EXPIRES_IN || '1h',
-    });
-
-
- 
-    
+      }
+  );   
     // Respond with user data (without the password) but no token/
     const { password: _, ...userData } = user.toObject();
-    res
+     res
     .status(200)
     .cookie('token', token,  { httpOnly: true, sameSite: 'None', secure: true, expires: new Date(Date.now() + 2 * 60 * 60 * 1000) })
     .json({
@@ -147,9 +165,15 @@ if (file) {
 
     await user.save();
 
-    res.status(200).json({ message: 'User profile updated successfully', user });
+    res.status(200).json({ 
+      message: 'User profile updated successfully', 
+      user
+    });
   } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
+    res.status(500).json({
+       message: 'Server error',
+        error: error.message
+       });
   }
 };
 
@@ -160,11 +184,18 @@ const deleteUserAccount = async (req, res) => {
   try {
     const user = await User.findByIdAndDelete(req.user.userId);
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ 
+        message: 'User not found'
+       });
     }
-    res.status(200).json({ message: 'User account deleted successfully' });
+    res.status(200).json({ 
+      message: 'User account deleted successfully'
+     });
   } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
+    res.status(500).json({ 
+      message: 'Server error', 
+      error: error.message 
+    });
   }
 };
 
@@ -178,7 +209,9 @@ const logoutUser = async (req, res) => {
       expires: new Date(0) // Set to a past date to clear it
     });
 
-    res.status(200).json({ message: 'Logout successful.' });
+       res.status(200).json({
+       message: 'Logout successful.'
+       });
   } catch (error) {
     console.error('Logout error:', error);
     res.status(500).json({ message: 'Internal server error. Please try again later.' });
@@ -195,7 +228,9 @@ const getUserCount = async (req, res) => {
     });
   } catch (error) {
     console.error('Error fetching user count:', error);
-    res.status(500).json({ message: 'Internal server error. Please try again later.' });
+       res.status(500).json({
+       message: 'Internal server error. Please try again later.'
+       });
   }
 };
 
