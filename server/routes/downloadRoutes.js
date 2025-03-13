@@ -11,11 +11,12 @@ const {
   cacheTotalDownloads,
   cacheMonthlyDownloads,
   cacheTemplateDownloads,
+  rateLimit,
 } = require('../middleware/redis');
 
 const router = express.Router();
 
-router.post('/track', verifyToken, checkRole(['admin']), trackDownload);
+router.post('/track', rateLimit,trackDownload);
 router.get('/count', verifyToken, checkRole(['admin']), cacheTotalDownloads, getTotalDownloads);
 router.get('/monthly/:month', verifyToken, checkRole(['admin']), cacheMonthlyDownloads, getMonthlyDownloads);
 router.get('/template/:templateId', cacheTemplateDownloads, getTemplateDownloads);

@@ -38,14 +38,10 @@ exports.trackDownload = async (req, res) => {
       return res.status(404).json({ success: false, message: 'Template not found' });
     }
 
-    // ✅ Instead of deleting, update Redis with fresh values
     const newTotalDownloads = globalRecord.count;
-    const newMonthlyDownloads = globalRecord.monthlyDownloads[currentMonth];
     const newTemplateDownloads = templateRecord.downloads;
 
-    redisClient.setEx("total_downloads", 300, JSON.stringify(newTotalDownloads));
-    redisClient.setEx(`monthly_downloads_${currentMonth}`, 300, JSON.stringify(newMonthlyDownloads));
-    redisClient.setEx(`template_downloads_${templateId}`, 300, JSON.stringify(newTemplateDownloads));
+
 
     res.status(200).json({
       success: true,

@@ -1,6 +1,48 @@
 const redisClient = require('../config/redisClient');
 
 const CACHE_TTL = 300; // 5 minutes;;
+const RATE_LIMIT_WINDOW = 60; // 1 minute
+const MAX_REQUESTS = 5; // Allow 5 requests per minute
+
+
+const rateLimit = async (req, res, next) => {
+  const realIp = req.headers["x-forwarded-for"]?.split(",")[0] || req.ip; // Get real user IP
+  const userId = req.user?.id || realIp; // Use user ID if authenticated, else fallback to real IP
+  const key = `rate_limit_${userId}`;
+
+  try {
+    // Increment request count
+    const requests = await redisClient.incr(key);
+
+    // Get remaining TTL
+    let ttl = await redisClient.ttl(key);
+    if (ttl === -1) {
+      await redisClient.expire(key, RATE_LIMIT_WINDOW); // Ensure expiration is set
+      ttl = RATE_LIMIT_WINDOW;
+    }
+
+    // If request limit exceeded
+    if (requests > MAX_REQUESTS) {
+      res.set("Retry-After", ttl);
+      return res.status(429).json({
+        success: false,
+        message: `Too many requests. Try again in ${ttl} seconds.`,
+      });
+    }
+
+    // Set rate limit headers
+    res.set("X-RateLimit-Limit", MAX_REQUESTS);
+    res.set("X-RateLimit-Remaining", Math.max(0, MAX_REQUESTS - requests));
+    res.set("X-RateLimit-Reset", ttl);
+
+    next();
+  } catch (error) {
+    console.error("❌ Redis Rate Limit Error:", error);
+    return res.status(500).json({ success: false, message: "Rate limiting failed." });
+  }
+};
+
+
 
 // Helper function to get cache
 const getCache = async (key) => {
@@ -56,4 +98,5 @@ module.exports = {
   cacheMonthlyDownloads,
   cacheTemplateDownloads,
   setCache,
+  rateLimit,
 };
