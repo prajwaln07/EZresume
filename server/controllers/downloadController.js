@@ -20,7 +20,7 @@ exports.trackDownload = async (req, res) => {
   try {
     const currentMonth = getCurrentMonthKey();
 
-    // Update global and monthly download counts
+    // Update global and monthly download counts..
     const globalRecord = await Download.findOneAndUpdate(
       {},
       { $inc: { count: 1, [`monthlyDownloads.${currentMonth}`]: 1 } },
@@ -78,8 +78,7 @@ exports.getMonthlyDownloads = async (req, res) => {
 
   try {
     const record = await Download.findOne({});
-    const monthlyDownloads = record?.monthlyDownloads?.[month] || 0;
-
+    const monthlyDownloads = record?.monthlyDownloads?.get(String(month));
     // Store in Redis
     setCache(`monthly_downloads_${month}`, monthlyDownloads);
 
