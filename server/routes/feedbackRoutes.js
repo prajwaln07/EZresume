@@ -1,6 +1,9 @@
 const express = require('express');
+
 const router = express.Router();
+
 const feedbackController = require('../controllers/feedbackController');
+
 const { verifyToken, checkRole } = require('../middleware/auth');
 
 // Get overall average rating
@@ -13,6 +16,10 @@ router.post('/', verifyToken, feedbackController.submitFeedback);
 router.get('/', feedbackController.getAllFeedback);
 
 // Get feedback for a specific template
-router.get('/:templateId', verifyToken, checkRole(['admin']), feedbackController.getFeedbackByTemplateId);
+router.get('/:templateId', verifyToken, checkRole(['admin']),  feedbackController.getFeedbackByTemplateId );
 
 module.exports = router;
+
+
+
+
