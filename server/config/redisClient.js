@@ -1,22 +1,32 @@
-const redis = require('redis');
+const redis = require("redis");
+
+// Ensure Redis URL is provided (set in Render)
+const redisUrl = process.env.REDIS_URL;
+
+if (!redisUrl) {
+  console.error("❌ REDIS_URL is not set. Make sure to add it in Render's environment variables.");
+  process.exit(1); // Stop the app if no Redis URL is found
+}
 
 const redisClient = redis.createClient({
+  url: redisUrl, // Use the Render-provided Redis URL
   socket: {
-    host: '0.0.0.0', 
-    port: 6379
-  }
+    tls: true, // Required for Upstash (secure connection)
+  },
 });
 
-// Handle Redis connection events
-redisClient.on('connect', () => console.log('🚀 Redis Connected Successfully!'));
-redisClient.on('error', (err) => console.error('❌ Redis Connection Error:', err));
-redisClient.on('reconnecting', () => console.log('🔄 Redis Reconnecting...'));
+// Redis event listeners
+redisClient.on("connect", () => console.log("🚀 Redis Connected Successfully!"));
+redisClient.on("error", (err) => console.error("❌ Redis Connection Error:", err));
+redisClient.on("reconnecting", () => console.log("🔄 Redis Reconnecting..."));
 
+// Connect to Redis
 (async () => {
   try {
-    await redisClient.connect();
+    await redisClient.connect(); // Required for Redis v4+
+    console.log("✅ Redis connection established.");
   } catch (err) {
-    console.error('❌ Failed to connect to Redis:', err);
+    console.error("❌ Failed to connect to Redis:", err);
   }
 })();
 
