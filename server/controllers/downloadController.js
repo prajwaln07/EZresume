@@ -1,7 +1,6 @@
 const Download = require('../models/downloadCnt'); 
 const Template = require('../models/template');
 const { setCache } = require('../middleware/redis');
-const redisClient = require('../config/redisClient');
 
 // Helper function to get the current month key
 const getCurrentMonthKey = () => {
@@ -74,6 +73,7 @@ exports.getTotalDownloads = async (req, res) => {
 
 // Fetch monthly downloads with Redis caching
 exports.getMonthlyDownloads = async (req, res) => {
+
   const { month } = req.params;
 
   try {

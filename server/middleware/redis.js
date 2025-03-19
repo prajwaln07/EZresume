@@ -1,8 +1,9 @@
 const redisClient = require('../config/redisClient');
 
-const CACHE_TTL = 300; // 5 minutes;;
-const RATE_LIMIT_WINDOW = 60; // 1 minute
-const MAX_REQUESTS = 5; // Allow 5 requests per minute
+const CACHE_TTL = 300; 
+const RATE_LIMIT_WINDOW = 60; 
+const MAX_REQUESTS = 5; 
+
 
 
 const rateLimit = async (req, res, next) => {
@@ -67,7 +68,7 @@ const setCache = async (key, value) => {
 // Middleware to check cache for total downloads
 const cacheTotalDownloads = async (req, res, next) => {
   const cachedData = await getCache("total_downloads");
-  if (cachedData !== null) {
+  if (cachedData) {
     return res.status(200).json({ totalDownloads: cachedData });
   }
   next();
@@ -76,8 +77,10 @@ const cacheTotalDownloads = async (req, res, next) => {
 // Middleware to check cache for monthly downloads
 const cacheMonthlyDownloads = async (req, res, next) => {
   const { month } = req.params;
+
   const cachedData = await getCache(`monthly_downloads_${month}`);
-  if (cachedData !== null) {
+
+  if (cachedData) {
     return res.status(200).json({ month, downloads: cachedData });
   }
   next();
@@ -87,7 +90,7 @@ const cacheMonthlyDownloads = async (req, res, next) => {
 const cacheTemplateDownloads = async (req, res, next) => {
   const { templateId } = req.params;
   const cachedData = await getCache(`template_downloads_${templateId}`);
-  if (cachedData !== null) {
+  if (cachedData) {
     return res.status(200).json({ templateId, downloads: cachedData });
   }
   next();

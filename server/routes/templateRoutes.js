@@ -1,6 +1,7 @@
 // server/routes/templateRoutes.js
 const express = require('express');
 const router = express.Router();
+
 const multer = require('multer');
 const templateController = require('../controllers/templateController');
 const { verifyToken, checkRole } = require('../middleware/auth');

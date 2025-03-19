@@ -1,6 +1,5 @@
 const redis = require("redis");
 
-// Ensure Redis URL is provided (set in Render)
 const redisUrl = process.env.REDIS_URL;
 
 if (!redisUrl) {
@@ -9,9 +8,9 @@ if (!redisUrl) {
 }
 
 const redisClient = redis.createClient({
-  url: redisUrl, // Use the Render-provided Redis URL
+  url: redisUrl, 
   socket: {
-    tls: true, // Required for Upstash (secure connection)
+    tls: true, // required for upstash (secure URL) ; 
   },
 });
 
