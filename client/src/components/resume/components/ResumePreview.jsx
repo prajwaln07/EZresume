@@ -112,7 +112,7 @@ const ResumePreview = () => {
     ArtisticLayout: ArtisticTemplate,
   };
 
-  const TemplateComponent = ResumeContent;
+  const TemplateComponent = templates.selectedTemplate;
 
   return (
     <div>
