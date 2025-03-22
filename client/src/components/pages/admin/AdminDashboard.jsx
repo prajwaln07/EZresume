@@ -109,7 +109,7 @@ const AdminDashboard = () => {
       try {
         const monthlyData = await Promise.all(
           months.map(async ({ month }) => {
-           
+                console.log(month);
             const response = await axios.get(apiConfig.downloads.monthly(month), {
               withCredentials: true,
             });

@@ -8,12 +8,13 @@ import Education from './forms/Education';
 import Skills from './forms/Skills';
 import PersonalDetail from './forms/PersonalDetail';
 import Project from './forms/Project';
+import Achievements from './forms/Achievements';
 
 const FormSection = () => {
   const [activeFormIndex, setActiveFormIndex] = useState(1);
   const [enableNext, setEnableNext] = useState(true);
 
-  const progressPercentages = [0, 10, 25, 50, 75, 90, 100]; // Define logical percentages for each section
+  const progressPercentages = [0, 10, 20, 35, 50, 70, 85, 100]; // Updated percentages to account for Achievements
   const sectionTitles = [
     "Personal Details",
     "Summary",
@@ -21,6 +22,7 @@ const FormSection = () => {
     "Experience",
     "Projects",
     "Skills",
+    "Achievements", // Added Achievements
   ];
 
   const ClickHandler = (value) => {
@@ -77,7 +79,7 @@ const FormSection = () => {
             </button>
           )}
 
-          {activeFormIndex < 6 && (
+          {activeFormIndex < 7 && ( // Updated to include the new section
             <button
               disabled={!enableNext}
               className="flex gap-2 cursor-pointer text-gray-700 hover:text-blue-600"
@@ -104,6 +106,8 @@ const FormSection = () => {
         <Project />
       ) : activeFormIndex === 6 ? (
         <Skills />
+      ) : activeFormIndex === 7 ? ( // Render Achievements here
+        <Achievements />
       ) : null}
     </div>
   );

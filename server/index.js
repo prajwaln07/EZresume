@@ -1,3 +1,4 @@
+
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
@@ -6,7 +7,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const multer = require('multer');
 const path = require('path');
-const cronJob = require('./utils/cronJob'); // Import the cron job
+const cronJob = require('./utils/cronJob'); // Import the cron job ........
 
 const { verifyToken } = require('./middleware/auth');
 const userRoutes = require('./routes/userRoutes');
@@ -20,12 +21,12 @@ dotenv.config();
 connectToDB();
 
 const _dirname = path.resolve();
-const corsOptions = {
+const corsOptions = {  
   origin: "https://ezresumecraft.netlify.app", // Frontend URL
   credentials: true, // Allow cookies and credentials
   optionsSuccessStatus: 200, // For legacy browser support
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allowed HTTP methods
-  allowedHeaders: "Content-Type,Authorization", // Allow cookies.
+  allowedHeaders: "Content-Type,Authorization", // Allow cookies . . . . . .
 };
 
 

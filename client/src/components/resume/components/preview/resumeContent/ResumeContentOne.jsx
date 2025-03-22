@@ -200,6 +200,31 @@ const ResumeContent = ({ resumeInfo, resumeRef }) => {
           </ul>
         </div>
       )}
+
+{/* Achievements */}
+{resumeInfo?.achievements?.length > 0 && (
+  <div className="my-4">
+    <h2 className="text-xl font-bold border-b-2 pb-1 mb-2" style={{ fontFamily: "'Lora', serif" }}>
+      Achievements
+    </h2>
+    <ul className="list-disc pl-5 text-sm text-gray-700">
+      {resumeInfo.achievements.map((achievement, index) => (
+        <li key={index} className="mb-2">
+          {/* Title */}
+          <span className="font-bold inline">{achievement.title}</span>:{" "}
+          {/* Description with rich HTML rendering */}
+          <span
+            className="text-gray-700 inline"
+            dangerouslySetInnerHTML={{ __html: achievement.description }}
+          />
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
+
+
+
     </div>
   );
 };

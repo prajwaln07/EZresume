@@ -1,4 +1,4 @@
-const BASE_URL = "https://ezresume-1.onrender.com/api/v1";
+const BASE_URL = "https://ezresume-cr7r.onrender.com/api/v1";
 
 const apiConfig = {
   feedback: {

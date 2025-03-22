@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useRef, useState, useEffect } from 'react';
 import { ResumeInfoContext } from '../../../context/ResumeInfoContext';
 import { useSelector } from 'react-redux';
 import html2pdf from 'html2pdf.js';
@@ -20,18 +20,39 @@ const ResumePreview = () => {
   const { resumeInfo } = useContext(ResumeInfoContext);
   const resumeRef = useRef();
   const [loading, setLoading] = useState(false);
+  const [retryAfter, setRetryAfter] = useState(null); // Time (in seconds) before retry is allowed
+  const [retryTimer, setRetryTimer] = useState(null); // Timer countdown for retry
   const templateId = useSelector((state) => state.template.selectedTemplateID);
 
   const selectedTemplate = useSelector((state) => state.template.selectedTemplate);
 
+  // Countdown effect for retryAfter
+  useEffect(() => {
+    if (retryAfter > 0) {
+      setRetryTimer(retryAfter);
+      const interval = setInterval(() => {
+        setRetryTimer((prev) => {
+          if (prev > 1) return prev - 1;
+          clearInterval(interval);
+          setRetryAfter(null); // Enable button after countdown
+          return null;
+        });
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }
+  }, [retryAfter]);
+
   const downloadResume = async () => {
+    if (retryAfter) return; // Prevent clicking when retry is active
     setLoading(true);
+    setRetryAfter(null); // Reset retry message
     const element = resumeRef.current;
-  
+
     element.style.width = '8.5in'; // Match PDF size
     element.style.boxSizing = 'border-box';
     element.style.overflow = 'hidden';
-  
+
     const options = {
       filename: 'EZresume.pdf',
       image: { type: 'jpeg', quality: 0.98 },
@@ -49,11 +70,12 @@ const ResumePreview = () => {
         orientation: 'portrait',
       },
     };
-  
+
     try {
-      
+      // Generate PDF
       await html2pdf().from(element).set(options).save();
 
+      // Track download
       const response = await axios.post(
         apiConfig.downloads.track,
         { templateId },
@@ -64,15 +86,18 @@ const ResumePreview = () => {
         console.error('Error tracking download.');
       }
     } catch (error) {
-      console.error('Error while generating PDF or tracking download:', error);
+      if (error.response?.status === 429) {
+        const retrySeconds = parseInt(error.response.headers["retry-after"], 10) || 60; // Default to 60 sec
+        setRetryAfter(retrySeconds);
+      } else {
+        console.error('Error while generating PDF or tracking download:', error);
+      }
     } finally {
       element.style.width = ''; // Reset styles
       element.style.boxSizing = '';
       setLoading(false);
     }
   };
-  
-  
 
   const templates = {
     ModernLayout: ModernResumeTemplate,
@@ -83,25 +108,33 @@ const ResumePreview = () => {
     SimpleLayout: SimpleTemplate,
     BoldLayout: BoldResumeTemplate,
     PrimeLayout: PrimeProfileTemplate,
-    CustomLayout:GradTemplate,
-    ArtisticLayout:ArtisticTemplate,
+    CustomLayout: GradTemplate,
+    ArtisticLayout: ArtisticTemplate,
   };
 
-  const TemplateComponent = templates[selectedTemplate] || ArtisticTemplate;
+  const TemplateComponent = ResumeContent;
 
   return (
     <div>
       <TemplateComponent resumeInfo={resumeInfo} resumeRef={resumeRef} />
-      
-      <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 z-10">
+
+      <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 z-10 text-center">
         <button
           onClick={downloadResume}
-          disabled={loading}
-          className={`bg-blue-500 text-white p-4 rounded shadow-md hover:bg-blue-600 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+          disabled={loading || retryAfter !== null} // Disable when retry is active
+          className={`bg-blue-500 text-white p-4 rounded shadow-md hover:bg-blue-600 ${
+            loading || retryAfter !== null ? 'opacity-50 cursor-not-allowed' : ''
+          }`}
           aria-label="Download Resume as PDF"
         >
           {loading ? 'Downloading...' : 'Download Resume (PDF)'}
         </button>
+
+        {retryAfter && (
+          <p className="text-red-500 mt-2">
+            Too many requests! Try again in {retryTimer} seconds.
+          </p>
+        )}
       </div>
     </div>
   );

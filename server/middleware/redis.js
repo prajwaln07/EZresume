@@ -18,9 +18,10 @@ const rateLimit = async (req, res, next) => {
     // Get remaining TTL
     let ttl = await redisClient.ttl(key);
     if (ttl === -1) {
-      await redisClient.expire(key, RATE_LIMIT_WINDOW); // Ensure expiration is set
+      await redisClient.expire(key, RATE_LIMIT_WINDOW);
       ttl = RATE_LIMIT_WINDOW;
     }
+    
 
     // If request limit exceeded
     if (requests > MAX_REQUESTS) {
