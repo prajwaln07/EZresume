@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react'
 import Glitter from '../components/Glitter';
 import { useSelector } from 'react-redux';
+import { Link } from 'lucide-react';
+import { NavLink } from 'react-router-dom';
 
 const HeroSection = () => {
   const isDarkmode = useSelector((state) => state.theme.isDarkmode);
@@ -123,9 +125,9 @@ const HeroSection = () => {
               Start your journey to a standout resume today!
             </p>
             
-            <button className={`mt-4 px-6 py-3 rounded-md ${isDarkmode ? 'bg-indigo-600 hover:bg-indigo-700' : 'bg-indigo-500 hover:bg-indigo-600'} text-white font-medium transition-colors duration-200 transform hover:scale-105`}>
+            <NavLink to="/templates" className={`mt-4 px-6 py-3 rounded-md ${isDarkmode ? 'bg-indigo-600 hover:bg-indigo-700' : 'bg-indigo-500 hover:bg-indigo-600'} text-white font-medium transition-colors duration-200 transform hover:scale-105`}>
               Get Started Free
-            </button>
+            </NavLink>
           </div>
         </div>
       </div>
