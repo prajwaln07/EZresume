@@ -87,11 +87,15 @@ const MicrosoftTemplate = ({ resumeInfo, resumeRef }) => {
           <hr className="my-2 border-gray-300" />
           {resumeInfo.education.map((edu, index) => (
             <div key={index} className="mb-4">
-              <p className="font-semibold">
+              <div className="flex justify-between ">
+              <div>
+              <p className="font-semibold ">
                 {edu.universityName} | {edu.degree}
               </p>
               <p className="text-sm text-gray-600">Major: {edu.major}</p>
+              </div>
               <p className="text-sm">{edu.startDate} - {edu.endDate}</p>
+              </div>
               {edu.description && (
                 <p className="text-sm mt-2 text-gray-600">{edu.description}</p>
               )}
@@ -182,13 +186,33 @@ const MicrosoftTemplate = ({ resumeInfo, resumeRef }) => {
         <div>
           <h2 className="text-lg font-bold">Skills & Abilities</h2>
           <hr className="my-2 border-gray-300" />
-          <ul className="list-disc pl-5 text-sm text-gray-600">
+          <ul className="list-disc pl-5 text-sm text-gray-600 grid grid-cols-2">
             {resumeInfo.skills.map((skill, index) => (
               <li key={index} className="break-words">{skill.name}</li>
             ))}
           </ul>
         </div>
       )}
+
+{/* Achievements Section */}
+{resumeInfo?.achievements?.length > 0 && (
+  <div className="mb-6">
+    <h2 className="text-lg font-bold">Achievements</h2>
+    <hr className="my-2 border-gray-300" />
+    {resumeInfo.achievements.map((achievement, index) => (
+      <div key={index} className="mb-4">
+        <p className="font-semibold">{achievement.title}</p>
+        <p
+          className="text-sm text-gray-700 mt-1"
+          dangerouslySetInnerHTML={{ __html: achievement.description }}
+        />
+      </div>
+    ))}
+  </div>
+)}
+
+
+
     </div>
   );
 };

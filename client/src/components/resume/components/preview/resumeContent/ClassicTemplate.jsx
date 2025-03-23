@@ -165,7 +165,7 @@ const ClassicTemplate = ({ resumeInfo, resumeRef }) => {
         </h2>
         {/* Updated to handle HTML content from ReactQuill */}
         <div
-  className="text-sm text-gray-700 mt-2 [&>ul]:list-disc [&>ul]:pl-5 [&>li]:mb-1"
+  className="text-sm text-gray-700 mt-2 "
   dangerouslySetInnerHTML={{ __html: experience?.workSummery || '' }}
 ></div>
 
@@ -254,6 +254,33 @@ const ClassicTemplate = ({ resumeInfo, resumeRef }) => {
           </div>
         </div>
       )}
+
+{/* Achievements Section */}
+{resumeInfo?.achievements?.length > 0 && (
+  <div className="my-6">
+    <h2
+      className="text-center font-bold text-sm mb-2"
+      style={{ color: resumeInfo?.themeColor }}
+    >
+      Achievements
+    </h2>
+    <hr style={{ borderColor: resumeInfo?.themeColor }} />
+    {resumeInfo.achievements.map((achievement, index) => (
+      <div key={index} className="my-4">
+        <h3
+          className="text-sm font-bold"
+          style={{ color: resumeInfo?.themeColor }}
+        >
+          {achievement.title}
+        </h3>
+        <p className="text-xs text-gray-700 mt-1">{achievement.description}</p>
+      </div>
+    ))}
+  </div>
+)}
+
+
+
     </div>
   );
 };

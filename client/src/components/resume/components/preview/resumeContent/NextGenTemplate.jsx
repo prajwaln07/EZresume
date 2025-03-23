@@ -249,6 +249,34 @@ const NextGenTemplate = ({ resumeInfo, resumeRef }) => {
           </ul>
         </div>
       )}
+
+{/* Achievements */}
+{resumeInfo?.achievements?.length > 0 && (
+  <div className="mb-8">
+    <h2
+      className="text-lg font-bold border-b-2 pb-2 mb-4"
+      style={{ color: '#32CD32', fontFamily: 'Georgia, serif' }}
+    >
+      Achievements
+    </h2>
+    {resumeInfo.achievements.map((achievement, index) => (
+      <div key={index} className="mb-6">
+        <p className="font-semibold text-gray-800">{achievement.title}</p>
+        <div
+          className="text-sm text-gray-700 mt-1"
+          style={{
+            whiteSpace: "normal",
+            wordWrap: "break-word",
+            maxWidth: "100%",
+          }}
+          dangerouslySetInnerHTML={{ __html: achievement.description }}
+        />
+      </div>
+    ))}
+  </div>
+)}
+
+
     </div>
   );
 };

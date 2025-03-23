@@ -76,11 +76,18 @@ const PrimeProfileTemplate = ({ resumeInfo, resumeRef }) => {
     )}
   </div>
 </div>
-
+<div className="border border-t-[1px] border-black w-[100%] "></div>
 
         {/* Summary Section */}
         {resumeInfo?.summery && (
+          
           <div className="mb-6">
+            <h2
+              className="text-lg font-bold mb-2 uppercase"
+              style={{ color: resumeInfo?.themeColor }}
+            >
+              Summary
+            </h2>
             <p className="text-sm">{resumeInfo.summery}</p>
           </div>
         )}
@@ -204,6 +211,28 @@ const PrimeProfileTemplate = ({ resumeInfo, resumeRef }) => {
             </ul>
           </div>
         )}
+{/* Achievements Section */}
+{resumeInfo?.achievements?.length > 0 && (
+  <div className="mb-6">
+    <h2
+      className="text-lg font-bold mb-2 uppercase"
+      style={{ color: resumeInfo?.themeColor }}
+    >
+      Achievements
+    </h2>
+    {resumeInfo.achievements.map((achievement, index) => (
+      <div key={index} className="mb-4">
+        <p className="text-md font-bold">{achievement.title}</p>
+        <div
+          className="text-sm text-gray-700 mt-2 [&>ul]:list-disc [&>ul]:pl-5 [&>li]:mb-1"
+          dangerouslySetInnerHTML={{ __html: achievement.description }}
+        />
+      </div>
+    ))}
+  </div>
+)}
+
+
       </div>
     </div>
   );
