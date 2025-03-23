@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import Glitter from '../components/Glitter';
 import { useSelector } from 'react-redux';
-import { Link } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
 const HeroSection = () => {
