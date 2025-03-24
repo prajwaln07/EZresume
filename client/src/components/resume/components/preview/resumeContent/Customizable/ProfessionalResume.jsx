@@ -74,12 +74,12 @@ const GradTemplate = ({ resumeInfo, resumeRef }) => {
   };
 
   const sectionContent = {
-    summary: resumeInfo?.summery && (
+    Summary: resumeInfo?.summery && (
       <p className="text-sm leading-relaxed text-gray-700">
         {resumeInfo.summery}
       </p>
     ),
-    education:
+    Education:
       resumeInfo?.education?.length > 0 && (
         <>
           {resumeInfo.education.map((edu, index) => (
@@ -100,7 +100,7 @@ const GradTemplate = ({ resumeInfo, resumeRef }) => {
           ))}
         </>
       ),
-    "work-experience":
+    "Work-experience":
       resumeInfo?.experience?.length > 0 && (
         <>
           {resumeInfo.experience.map((exp, index) => (
@@ -122,7 +122,7 @@ const GradTemplate = ({ resumeInfo, resumeRef }) => {
           ))}
         </>
       ),
-    projects:
+    Projects:
       resumeInfo?.projects?.length > 0 && (
         <>
           {resumeInfo.projects.map((project, index) => (
@@ -168,7 +168,7 @@ const GradTemplate = ({ resumeInfo, resumeRef }) => {
           ))}
         </>
       ),
-    achievements:
+    Achievements:
       resumeInfo?.achievements?.length > 0 && (
         <>
           {resumeInfo.achievements.map((achievement, index) => (
@@ -182,7 +182,7 @@ const GradTemplate = ({ resumeInfo, resumeRef }) => {
           ))}
         </>
       ),
-    skills:
+    Skills:
       resumeInfo?.skills?.length > 0 && (
         <div className="mb-3">
           <ul className="list-disc pl-5 text-sm text-gray-600 grid grid-cols-2 gap-2">
