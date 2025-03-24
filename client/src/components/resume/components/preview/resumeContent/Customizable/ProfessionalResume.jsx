@@ -9,7 +9,7 @@ const GradTemplate = ({ resumeInfo, resumeRef }) => {
   const [sectionsOrder, setSectionsOrder] = useState([
     "Summary",
     "Education",
-    "Work-Experience",
+    "Experience",
     "Projects",
     "Achievements",
     "Skills",
@@ -100,7 +100,7 @@ const GradTemplate = ({ resumeInfo, resumeRef }) => {
           ))}
         </>
       ),
-    "Work-experience":
+    "Experience":
       resumeInfo?.experience?.length > 0 && (
         <>
           {resumeInfo.experience.map((exp, index) => (
