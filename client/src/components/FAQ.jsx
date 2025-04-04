@@ -59,7 +59,7 @@ const FAQPage = () => {
                 <span>{activeIndex === index ? '-' : '+'}</span>
               </button>
               {activeIndex === index && (
-                <div className="p-4 text-sm">{faq.answer}</div>
+                <div className="p-4 text-sm text-left ">{faq.answer}</div>
               )}
             </div>
           ))}

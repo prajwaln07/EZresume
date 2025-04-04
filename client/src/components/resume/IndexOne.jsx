@@ -19,12 +19,20 @@ const IndexOne = () => {
   const [resumeInfo, setResumeInfo] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
   const [missingKeywords, setMissingKeywords] = useState([]);
+
+
   useEffect(() => {
-    // If you're on the "/resume/maker" route, set to light mode
+    setResumeInfo(dummy);
+  }, []);
+
+
+  useEffect(() => {
+    // in dark mode this page looks so cringe so i have allowed only light mode here...
     if (location.pathname === '/resume/maker') {
       dispatch(setLightTheme());
     }
   }, [location.pathname]);
+  
 
   useEffect(() => {
     // Update resumeInfo and fetch suggestions when it changes
@@ -46,7 +54,6 @@ const IndexOne = () => {
           );
       
           setSuggestions(fetchedSuggestions);
-          setMissingKeywords(response.data.missingKeywords || []);
         } catch (error) {
           console.error('Error fetching suggestions:', error);
         }
@@ -56,10 +63,6 @@ const IndexOne = () => {
     }
   }, [resumeInfo]);
 
-  useEffect(() => {
-    // Initially set resumeInfo to dummy data or from other sources
-    setResumeInfo(dummy);
-  }, []);
 
   return (
     <ResumeInfoContext.Provider value={{ resumeInfo, setResumeInfo }}>

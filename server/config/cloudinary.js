@@ -1,7 +1,6 @@
 const cloudinary = require('cloudinary').v2;
-const streamifier = require('streamifier'); // You'll need to install this package
+const streamifier = require('streamifier');
 
-// Configure Cloudinary
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
@@ -20,7 +19,6 @@ const uploadThumbnail = (buffer) => {
                 resolve(result);
             }
         );
-
         // Use streamifier to convert the buffer to a stream
         streamifier.createReadStream(buffer).pipe(stream);
     });

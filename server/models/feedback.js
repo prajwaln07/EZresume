@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const feedbackSchema = new mongoose.Schema({
+  
   userId: {
      type: mongoose.Schema.Types.ObjectId,
       ref: 'User', 
@@ -10,19 +11,19 @@ const feedbackSchema = new mongoose.Schema({
   templateId: { 
     type: mongoose.Schema.Types.ObjectId, 
     ref: 'Template' 
-  }, // Reference to the template being reviewed (if applicable)
+  }, // Reference to the template (optional)
   comments: {
       type: String, 
       required: true,
       maxLength: 1000
-     }, // Textual feedback from the user
+     }, // feedback from  user
 
   rating: { 
      type: Number,
      required: true,
       min: 1, 
       max: 5 
-    }, // Numerical rating, typically on a 1–5 scale
+    }, //  rating,1 to 5 scale
   createdAt: {
      type: Date,
      default: Date.now 

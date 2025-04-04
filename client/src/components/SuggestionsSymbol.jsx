@@ -44,14 +44,6 @@ const SuggestionsSymbol = ({ suggestions = [], missingKeywords = [] }) => {
             ) : (
               <p className="text-sm text-gray-500">No suggestions available.</p>
             )}
-
-            {/* Missing keywords */}
-            {missingKeywords.length > 0 && (
-              <div className="mt-3 p-2 rounded-lg bg-yellow-100">
-                <p className="font-semibold">Keyword Optimization:</p>
-                <p>Consider adding these keywords: {missingKeywords.join(', ')}</p>
-              </div>
-            )}
           </div>
         </div>
       )}

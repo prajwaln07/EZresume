@@ -1,26 +1,27 @@
 const redisClient = require('../config/redisClient');
 
-const CACHE_TTL = 300; 
-const RATE_LIMIT_WINDOW = 60; 
-const MAX_REQUESTS = 5; 
+const CACHE_TTL = 300; // 5 mins cache to live ,after 5 min cached data will be removed 
+const RATE_LIMIT_WINDOW = 60; // rate limiting window ,only 5 req are allowed within 1 minute
+const MAX_REQUESTS = 5; // no of req allowed ,,,we have allowed only 5 req in single minute 
 
 
 
 const rateLimit = async (req, res, next) => {
   const realIp = req.headers["x-forwarded-for"]?.split(",")[0] || req.ip; // Get real user IP
-  const userId = req.user?.id || realIp; // Use user ID if authenticated, else fallback to real IP
+  const userId = req.user?.userId || realIp; // Use user ID if authenticated, else fallback to real IP
   const key = `rate_limit_${userId}`;
 
   try {
     // Increment request count
     const requests = await redisClient.incr(key);
 
-    // Get remaining TTL
+    // Get remaining TTL --> gives us the remaining time in ms for the current TTL ie(key's TTL)
     let ttl = await redisClient.ttl(key);
-    if (ttl === -1) {
+    if (ttl === -1) { // -1 means that we havenlt assigned time to that key.
       await redisClient.expire(key, RATE_LIMIT_WINDOW);
       ttl = RATE_LIMIT_WINDOW;
     }
+    
     
 
     // If request limit exceeded
@@ -31,11 +32,11 @@ const rateLimit = async (req, res, next) => {
         message: `Too many requests. Try again in ${ttl} seconds.`,
       });
     }
-
-    // Set rate limit headers
-    res.set("X-RateLimit-Limit", MAX_REQUESTS);
-    res.set("X-RateLimit-Remaining", Math.max(0, MAX_REQUESTS - requests));
-    res.set("X-RateLimit-Reset", ttl);
+   // Set rate limit headers
+   res.set("X-RateLimit-Limit", MAX_REQUESTS);
+   res.set("X-RateLimit-Remaining", Math.max(0, MAX_REQUESTS - requests));
+   res.set("X-RateLimit-Reset", ttl);
+ 
 
     next();
   } catch (error) {

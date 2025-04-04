@@ -199,19 +199,6 @@ id=new mongoose.Types.ObjectId(id);
   }
 };
 
-
-
-
-
-
-// Function to count syllables in a word (basic approach)
-const countSyllables = (word) => {
-  word = word.toLowerCase();
-  if (word.length <= 3) return 1;
-  const syllablePattern = /[aeiouy]{1,2}/g;
-  const syllables = word.match(syllablePattern);
-  return syllables ? syllables.length : 1;
-};
 exports.getSuggestions = async (req, res) => {
   try {
     // Destructure the body to get the text that needs spell checking

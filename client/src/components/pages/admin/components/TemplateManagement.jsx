@@ -13,6 +13,8 @@ const TemplateManagement = ({
   restoreLoading,
   setExpandedDescription,
 }) => {
+
+
   return (
     <div className="mt-12 bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md">
       <h3 className="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-4">
@@ -115,7 +117,8 @@ const TemplateManagement = ({
         </table>
       </div>
       <div className="lg:hidden">
-        {/* Stacked Layout for Smaller Screens */}
+
+            {/* if screen is smalle i.e for resposiveness we will show temeplate vertically , so it will enhance UX */}
         {templates.map((template) => (
           <div
             key={template._id}

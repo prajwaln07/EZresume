@@ -4,28 +4,26 @@ const redisUrl = process.env.REDIS_URL;
 
 if (!redisUrl) {
   console.error("❌ REDIS_URL is not set. Make sure to add it in Render's environment variables.");
-  process.exit(1); // Stop the app if no Redis URL is found
+  process.exit(1); //  if no redis URL ,then stop
 }
 
 const redisClient = redis.createClient({
   url: redisUrl, 
   socket: {
-    tls: true, // required for upstash (secure URL) ; 
+    tls: true,
   },
 });
 
-// Redis event listeners
-redisClient.on("connect", () => console.log("🚀 Redis Connected Successfully!"));
-redisClient.on("error", (err) => console.error("❌ Redis Connection Error:", err));
-redisClient.on("reconnecting", () => console.log("🔄 Redis Reconnecting..."));
+// Redis event listeners (registed the event , now depending on connection respective event will trigger )
+redisClient.on("reconnecting", () => console.log("Redis Reconnecting..."));
 
 // Connect to Redis
 (async () => {
   try {
-    await redisClient.connect(); // Required for Redis v4+
-    console.log("✅ Redis connection established.");
+    await redisClient.connect(); 
+    console.log("  Redis connection established.");
   } catch (err) {
-    console.error("❌ Failed to connect to Redis:", err);
+    console.error("Failed to connect to Redis:", err);
   }
 })();
 

@@ -23,6 +23,7 @@ function Education() {
   const handleChange = (event, index) => {
     const newEntries = educationalList.slice();
     const { name, value } = event.target;
+    // newEntries[index] will be an object , now to access an object here we have used [] this time
     newEntries[index][name] = value;
     setEducationalList(newEntries);
   };

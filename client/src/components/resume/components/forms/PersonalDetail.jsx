@@ -1,7 +1,7 @@
 import { ResumeInfoContext } from '../../../../context/ResumeInfoContext';
 import React, { useContext } from 'react';
 import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css'; // Import the Quill styles
+import 'react-quill/dist/quill.snow.css';
 
 function PersonalDetail() {
     const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
@@ -109,7 +109,7 @@ function PersonalDetail() {
         theme="snow"
         value={resumeInfo?.linkedin || ''}
         onChange={(value) => handleInputChange('linkedin', value)}
-        placeholder='Add your LinkedIn profile URL (e.g., https://www.linkedin.com/in/username)'
+        placeholder='Add your LinkedIn profile URL (e.g., https://www.linkedin.com/in/prajwalNimbalkar)'
         modules={{
             toolbar: [['link']], // Simplified toolbar
         }}
@@ -124,7 +124,7 @@ function PersonalDetail() {
     <ReactQuill
         theme="snow"
         value={resumeInfo?.github || ''}
-        placeholder='Add your GitHub URL (e.g., https://github.com/username)'
+        placeholder='Add your GitHub URL (e.g., https://github.com/prajwaln07)'
         onChange={(value) => handleInputChange('github', value)}
         modules={{
             toolbar: [['link']], // Simplified toolbar
@@ -141,7 +141,7 @@ function PersonalDetail() {
     <ReactQuill
         theme="snow"
         value={resumeInfo?.portfolio || ''}
-        placeholder="Add your portfolio website URL (e.g., https://yourportfolio.com)"
+        placeholder="Add your portfolio website URL (e.g., https://prajwalNimbalkar.com)"
         onChange={(value) => handleInputChange('portfolio', value)}
         modules={{
             toolbar: [['link']], // Simplified toolbar

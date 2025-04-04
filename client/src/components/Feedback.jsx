@@ -13,12 +13,16 @@ const Feedback = () => {
   const [feedbacks, setFeedbacks] = useState([]);
   const loading = useSelector((state) => state.loader.loading);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const [page, setPage] = useState(1);
+  const [totalPages,setTotalPages]=useState(10);
+  const limit = 4;
 
-  const fetchFeedbacks = async () => {
+  const fetchFeedbacks = async (pageNo) => {
     try {
       dispatch(setLoading());
-      const response = await axios.get(apiConfig.feedback.getAll(1, 10)); // Fetch more items for smooth scrolling
+      const response = await axios.get(apiConfig.feedback.getAll(pageNo, limit));
       setFeedbacks(response.data.feedback);
+      setTotalPages(response.data.totalPages);
     } catch (error) {
       console.error("Error fetching feedbacks:", error);
     } finally {
@@ -27,21 +31,9 @@ const Feedback = () => {
   };
 
   useEffect(() => {
-    fetchFeedbacks();
-  }, []);
+    fetchFeedbacks(page);
+  }, [page]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (carouselRef.current) {
-        carouselRef.current.scrollBy({ left: 1, behavior: "smooth" });
-        if (carouselRef.current.scrollLeft >= carouselRef.current.scrollWidth - carouselRef.current.clientWidth) {
-          carouselRef.current.scrollTo({ left: 0, behavior: "smooth" });
-        }
-      }
-    }, 30); // Continuous smooth scrolling
-
-    return () => clearInterval(interval);
-  }, []);
 
   const feedbackClickHandler = () => {
     navigate("/feedback");
@@ -66,30 +58,48 @@ const Feedback = () => {
         </h2>
         <div ref={carouselRef} className="flex overflow-x-auto space-x-4 scrollbar-hide p-4">
           {loading
-            ? Array(4).fill(0).map((_, index) => (
-                <div
-                  key={index}
-                  className="bg-gray-300 dark:bg-gray-700 flex flex-col items-center rounded-lg shadow-md p-4 w-72 animate-pulse"
-                >
-                  <div className="bg-gray-400 dark:bg-gray-600 rounded-md w-5/12 h-3 mb-4"></div>
-                  <div className="bg-gray-400 dark:bg-gray-600 h-20 w-3/4 mb-2 mx-auto rounded"></div>
-                  <div className="bg-gray-400 dark:bg-gray-600 h-6 w-6/12 mb-2 mx-auto rounded"></div>
-                </div>
-              ))
+            ? Array(4)
+                .fill(0)
+                .map((_, index) => (
+                  <div
+                    key={index}
+                    className="bg-gray-300 dark:bg-gray-700 flex flex-col items-center rounded-lg shadow-md p-4 w-72 animate-pulse"
+                  >
+                    <div className="bg-gray-400 dark:bg-gray-600 rounded-md w-5/12 h-3 mb-4"></div>
+                    <div className="bg-gray-400 dark:bg-gray-600 h-20 w-3/4 mb-2 mx-auto rounded"></div>
+                    <div className="bg-gray-400 dark:bg-gray-600 h-6 w-6/12 mb-2 mx-auto rounded"></div>
+                  </div>
+                ))
             : feedbacks.map((feedback, index) => (
                 <div
                   key={index}
                   className="bg-white dark:bg-gray-900 border dark:border-gray-700 shadow-md rounded-lg p-4 w-72 flex-shrink-0"
                 >
                   <div className="mb-2">{renderStars(feedback.rating)}</div>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4">
-                    {feedback.comments}
-                  </p>
+                  <p className="text-gray-700 dark:text-gray-300 mb-4">{feedback.comments}</p>
                   <p className="text-sm text-gray-500 dark:text-gray-400">
                     - {feedback.userId?.username || "Anonymous"}
                   </p>
                 </div>
               ))}
+        </div>
+
+        {/* Pagination Buttons */}
+        <div className="flex justify-center mt-4">
+          <button
+            onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+            disabled={page === 1}
+            className="px-4 py-2 mx-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white rounded-lg shadow-md"
+          >
+            Prev
+          </button>
+          <button
+            onClick={() => setPage((prev) => prev + 1)}
+            disabled={page === totalPages}
+            className="px-4 py-2 mx-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white rounded-lg shadow-md"
+          >
+            Next
+          </button>
         </div>
       </div>
 

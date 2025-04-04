@@ -13,6 +13,7 @@ const Navbar = () => {
 
   const [isOpen, setIsOpen] = useState(false); // For mobile menu
   const [isModalOpen, setIsModalOpen] = useState(false); // For logout modal
+
   const isDarkmode = useSelector((state) => state.theme.isDarkmode); // Redux state
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const username = useSelector((state) => state.user.username);
@@ -60,25 +61,22 @@ const Navbar = () => {
       
       toast.info('User Logout Successful!', {
         position: "bottom-right",
-        autoClose: 3000, // Slightly faster auto-close for logout
-        hideProgressBar: true, // Remove progress bar for cleaner appearance
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark", // Set a dark theme to signify logout
+        autoClose: 3000, 
+        hideProgressBar: true, 
+        theme: "dark", 
       });
       dispatch(userLogout());
     } catch (err) {
       console.log("Got error while logging out.", err.message);
     }
-    setIsModalOpen(false); // Close the modal
+    setIsModalOpen(false); 
 
-    navigate('/'); // Redirect to the home page or login page
+    navigate('/'); 
   };
 
   return (
     <nav className={`${isDarkmode ? 'bg-gray-900' : 'bg-white'} transition-colors`}>
+
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
 
@@ -189,7 +187,7 @@ const Navbar = () => {
             <Link
               to="/templates"
               className="block text-lg hover:text-blue-500"
-              onClick={() => setIsOpen(false)} // Close menu on link click
+              onClick={() => setIsOpen(false)} 
             >
               Templates
             </Link>
@@ -197,7 +195,7 @@ const Navbar = () => {
             <Link
               to="/contactUs"
               className="block text-lg hover:text-blue-500"
-              onClick={() => setIsOpen(false)} // Close menu on link click
+              onClick={() => setIsOpen(false)} 
             >
               Contact
             </Link>
@@ -247,7 +245,7 @@ const Navbar = () => {
       {isModalOpen && (
         <div
           className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
-          onClick={() => setIsModalOpen(false)} // Close modal on background click
+          onClick={() => setIsModalOpen(false)} 
         >
           <div
             className={`p-6 rounded-lg shadow-md transition-transform transform ${
@@ -255,7 +253,7 @@ const Navbar = () => {
                 ? 'bg-gray-800 text-white border border-gray-600'
                 : 'bg-white text-gray-900 border border-gray-200'
             }`}
-            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
+            onClick={(e) => e.stopPropagation()} // here we are stopping event bubbling ,if user clicks inside the modal then we do not want to bubble the event and go tho the upper onlcik which will close the modal 
           >
             <h2 className="text-xl font-bold mb-4">Confirm Logout</h2>
             <p className="mb-6">Are you sure you want to log out?</p>

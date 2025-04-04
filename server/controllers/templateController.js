@@ -88,7 +88,7 @@ exports.getAllTemplates = async (req, res) => {
         let filter = {};
 
         // Define the boundaries for downloads
-        const downloadBoundaries = [0, 50, 100, 500, 1000, 5000]; // Your defined ranges
+        const downloadBoundaries = [0, 50, 100, 500, 1000, 5000];
 
         // Filter by category
         if (category) {
@@ -96,8 +96,8 @@ exports.getAllTemplates = async (req, res) => {
         }
 
         // Filter by customizable
-        if (customizable !== undefined) {
-            filter.isCustomizable = customizable === 'true'; // Convert to boolean
+        if (customizable) {
+            filter.isCustomizable = customizable === 'true'; // boolena conversion
         }
 
         // Filter by downloads range
@@ -111,21 +111,23 @@ exports.getAllTemplates = async (req, res) => {
             }
         }
 
-        // Fetch templates and facet counts
+        
         const [templates, facets] = await Promise.all([
             Template.find(filter),
             Template.aggregate([
                 {
                     $facet: {
                         categories: [
-                            { $unwind: "$categories" },
-                            { $group: { _id: "$categories", count: { $sum: 1 } } },
+
+                            { $unwind: "$categories" }, // unwind is used to desctruture the elemtend from an array ,like as you can observe in template model each template can have multimple categories so if that the case then if i want to calculate the total number of categories then i need to unwind them and then i will calculate the count of them 
+                            { $group: { _id: "$categories", count: { $sum: 1 } } },// now we are grouping then again based on categories but this time we are calculating ,how much they are per category 
                         ],
-                        customizable: [
+                        customizable: [ 
                             { $group: { _id: "$isCustomizable", count: { $sum: 1 } } },
                         ],
                         downloadsRanges: [
                             {
+                                // bucket is used to group the data but based on predefined boudaries , and the default calue is also present for values that are outside a boundary 
                                 $bucket: {
                                     groupBy: "$downloads",
                                     boundaries: [0, 50, 100, 500, 1000, 5000],
@@ -145,7 +147,7 @@ exports.getAllTemplates = async (req, res) => {
             const upper = downloadBoundaries[index + 1] || '5000+'; // last bucket is unlimited
             return {
                 ...range,
-                label: `${lower}-${upper === '5000+' ? upper : upper - 1}` // Format the label as "0-50", "51-100", etc.
+                label: `${lower}-${upper === '5000+' ? upper : upper - 1}` // Format the label as "0-50" like this 
             };
         });
 

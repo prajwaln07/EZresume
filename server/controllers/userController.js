@@ -6,19 +6,7 @@ const {uploadUserProfileImage} =require('../config/cloudinary');
 const { sendEmail,userConfirmationHTML, userConfirmationText, adminNotificationHTML, adminNotificationText } = require('../utils/emailUtils');
 
 
-
-// User Registration Function
 const registerUser = async (req, res) => {
-  
-  await body('username').isString().isLength({ min: 3 }).trim().escape().run(req);
-  await body('email').isEmail().normalizeEmail().run(req);
-  await body('password').isLength({ min: 6 }).run(req);
-
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
   try {
     const { username, email, password } = req.body;
 
@@ -46,11 +34,9 @@ const registerUser = async (req, res) => {
 
     await user.save();
 
-    const { password: _, ...userData } = user.toObject();
     res.status(201).json({
        success:true, 
        message: 'User registered successfully.',
-       user: userData
     });
 
   } catch (error) {
@@ -63,15 +49,6 @@ const registerUser = async (req, res) => {
 
 // User Login Function
 const loginUser = async (req, res) => {
-  await body('email').isEmail().normalizeEmail().run(req);
-  await body('password').isLength({ min: 6 }).run(req);
-
-  const errors = validationResult(req);
-
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
   try {
     const { email, password } = req.body;
 
@@ -109,8 +86,7 @@ const loginUser = async (req, res) => {
   );   
     // Respond with user data (without the password) but no token/
     const { password: _, ...userData } = user.toObject();
-     res
-    .status(200)
+     res.status(200)
     .cookie('token', token,  
       { 
 
@@ -149,42 +125,7 @@ const getUserProfile = async (req, res) => {
 
 
 
-// Update User Profile
-const updateUserProfile = async (req, res) => {
-  const { username,file} = req.body;
-// In your updateUserProfile function:
-if (file) {
-  const cloudResponse = await uploadUserProfileImage(file);
-  user.profileImage = cloudResponse; // Save the image URL
-}
 
-
-  try {
-    const user = await User.findById(req.user.userId).select('-password');
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    // Update fields
-    if (username) user.username = username;
-    // if (email) user.email = email;
-
-    // If a file is uploaded, upload it to Cloudinary
- 
-
-    await user.save();
-
-    res.status(200).json({ 
-      message: 'User profile updated successfully', 
-      user
-    });
-  } catch (error) {
-    res.status(500).json({
-       message: 'Server error',
-        error: error.message
-       });
-  }
-};
 
 
 
@@ -215,6 +156,8 @@ const logoutUser = async (req, res) => {
     // Clear the cookie by setting its expiration date in the past
     res.cookie('token', '', { 
       httpOnly: true, 
+      sameSite:'none',
+      secure:true,
       expires: new Date(0) // Set to a past date to clear it
     });
 
@@ -262,11 +205,11 @@ const contactUs = async (req, res) => {
   try {
     // Send confirmation email to the user
     const userConfirmationSubject = "We’ve received your query!";
-    const userConfirmationHTMLContent = userConfirmationHTML(message); // HTML content
+    const userConfirmationHTMLContent = userConfirmationHTML(message); // HTML content.....
     const userConfirmationTextContent = userConfirmationText(message); // Text content
     await sendEmail(email, userConfirmationSubject, userConfirmationTextContent, userConfirmationHTMLContent);
 
-    // Send notification email to the admin
+    // Send notification email to the admin........
     const adminNotificationSubject = "New Contact Us Query Received";
     const adminNotificationHTMLContent = adminNotificationHTML(email, subject, message); // HTML content
     const adminNotificationTextContent = adminNotificationText(email, subject, message); // Text content
@@ -284,7 +227,6 @@ module.exports = {
   registerUser,
   loginUser,
   getUserProfile,
-  updateUserProfile,
   deleteUserAccount,
   getUserCount,
   logoutUser,

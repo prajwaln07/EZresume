@@ -8,9 +8,9 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        'spin-slow': 'spin 4s linear infinite',  // Adjust the 4s to make it slower or faster
+        'spin-slow': 'spin 4s linear infinite',  
       },
     }, // Customize the default theme here
   },
-  plugins: [], // Add plugins like typography or forms if needed
+  plugins: [], 
 };

@@ -9,7 +9,7 @@ const templateSchema = new mongoose.Schema({
     description: { 
       type: String,
       required: true,
-      maxLength: 5500 
+      maxLength: 8000 
     },
     layout: {
       type: String,
@@ -27,11 +27,11 @@ const templateSchema = new mongoose.Schema({
       enum: ['single-column', 'double-column', 'minimal', 'creative', 'professional']
      }
     ], 
-  createdAt: {
+     createdAt: {
       type: Date,
       default: Date.now
      },
-  updatedAt: {
+    updatedAt: {
      type: Date,
      default: Date.now
      },
