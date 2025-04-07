@@ -11,7 +11,6 @@ const cronJob = require('./utils/cronJob'); // Import the cron job ........
 
 const { verifyToken } = require('./middleware/auth');
 const userRoutes = require('./routes/userRoutes');
-const resumeRoutes = require('./routes/resumeRoutes');
 const templateRoutes = require('./routes/templateRoutes');
 const feedbackRoutes = require('./routes/feedbackRoutes');
 const downloadRoutes = require('./routes/downloadRoutes'); // Import download route
@@ -44,7 +43,6 @@ cronJob;
 
 
 app.use('/api/v1/users', userRoutes);
-app.use('/api/v1/resumes', resumeRoutes);
 app.use('/api/v1/templates', templateRoutes);
 app.use('/api/v1/feedback', feedbackRoutes);
 app.use('/api/v1/downloads', downloadRoutes); 
