@@ -15,8 +15,8 @@ const rateLimit = async (req, res, next) => {
     // Increment request count
     const requests = await redisClient.incr(key);
 
-    // Get remaining TTL --> gives us the remaining time in ms for the current TTL ie(key's TTL)
-    let ttl = await redisClient.ttl(key);
+    let ttl = await redisClient.ttl(key); // tells us remaining time ,if it is expired then -2 or if it is -1 then it means we have not settled expire time.
+    
     if (ttl === -1) { // -1 means that we havenlt assigned time to that key.
       await redisClient.expire(key, RATE_LIMIT_WINDOW);
       ttl = RATE_LIMIT_WINDOW;
@@ -32,42 +32,34 @@ const rateLimit = async (req, res, next) => {
         message: `Too many requests. Try again in ${ttl} seconds.`,
       });
     }
-   // Set rate limit headers
-   res.set("X-RateLimit-Limit", MAX_REQUESTS);
-   res.set("X-RateLimit-Remaining", Math.max(0, MAX_REQUESTS - requests));
-   res.set("X-RateLimit-Reset", ttl);
- 
 
     next();
   } catch (error) {
-    console.error("❌ Redis Rate Limit Error:", error);
+    console.error(" Redis Rate Limit Error:", error);
     return res.status(500).json({ success: false, message: "Rate limiting failed." });
   }
 };
 
 
 
-// Helper function to get cache
 const getCache = async (key) => {
   try {
     const cachedData = await redisClient.get(key);
     return cachedData ? JSON.parse(cachedData) : null;
   } catch (err) {
-    console.warn(`⚠️ Redis Read Error for ${key}:`, err.message);
+    console.warn(`Redis Read Error for ${key}:`, err.message);
     return null;
   }
 };
 
-// Helper function to set cache
 const setCache = async (key, value) => {
   try {
-    await redisClient.setEx(key, CACHE_TTL, JSON.stringify(value));
+    await redisClient.setEx(key, CACHE_TTL, JSON.stringify(value)); // always remember to pass 2nd parameter as cache_ttl whenever used setEx.
   } catch (err) {
-    console.warn(`⚠️ Redis Write Error for ${key}:`, err.message);
+    console.warn(`Redis Write Error for ${key}:`, err.message);
   }
 };
 
-// Middleware to check cache for total downloads
 const cacheTotalDownloads = async (req, res, next) => {
   const cachedData = await getCache("total_downloads");
   if (cachedData) {
