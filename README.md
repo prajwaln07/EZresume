@@ -1,6 +1,6 @@
 # EZResume
 
-[![Website](https://img.shields.io/website?url=https%3A%2F%2Fezresume.onrender.com)](https://ezresume.onrender.com)
+[![Website](https://img.shields.io/website?url=https%3A%2F%2Fezresume.onrender.com)](https://ezresumecraft.netlify.app/)
 [![GitHub stars](https://img.shields.io/github/stars/prajwaln07/resume-builder?style=social)](https://github.com/prajwaln07/resume-builder/stargazers)
 [![GitHub license](https://img.shields.io/github/license/prajwaln07/resume-builder)](https://github.com/prajwaln07/resume-builder/blob/main/LICENSE)
 
