@@ -10,11 +10,11 @@ exports.verifyToken = (req, res, next) => {
      token = req.header('Authorization')?.replace('Bearer ', '');
   
     if (req.cookies && req.cookies.token) {
-        token = req.cookies.token; // Extract the token from cookies
+        token = req.cookies.token;
     }
   
     if (!token) 
-    return res.status(403).send("Access Denied: No Token Provided");
+    return res.status(403).send(" Access Denied: No Token Provided ");
    
     try {
         const verified = jwt.verify(token, process.env.JWT_SECRET);
@@ -49,7 +49,6 @@ exports.checkToken = (req, res, next) => {
 };
 
 
-// Middleware for role-based access control
 exports.checkRole = (roles) => {
     return  (req, res, next) => {
         try {
