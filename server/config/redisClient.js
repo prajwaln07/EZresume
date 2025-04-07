@@ -14,10 +14,7 @@ const redisClient = redis.createClient({
   },
 });
 
-// Redis event listeners (registed the event , now depending on connection respective event will trigger )
-redisClient.on("reconnecting", () => console.log("Redis Reconnecting..."));
 
-// Connect to Redis
 (async () => {
   try {
     await redisClient.connect(); 
