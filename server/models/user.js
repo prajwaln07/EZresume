@@ -21,12 +21,6 @@ const userSchema = new mongoose.Schema({
           enum: ['user', 'admin'],
           default: 'user' 
         },
-    resumes: [
-        {
-             type: mongoose.Schema.Types.ObjectId,
-              ref: 'Resume'
-             }
-    ],
     createdAt: { 
         type: Date, 
         default: Date.now 
