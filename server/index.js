@@ -7,7 +7,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const multer = require('multer');
 const path = require('path');
-const cronJob = require('./utils/cronJob'); // Import the cron job ........
+const cronJob = require('./utils/cronJob'); 
 
 const { verifyToken } = require('./middleware/auth');
 const userRoutes = require('./routes/userRoutes');
