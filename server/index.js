@@ -13,7 +13,8 @@ const { verifyToken } = require('./middleware/auth');
 const userRoutes = require('./routes/userRoutes');
 const templateRoutes = require('./routes/templateRoutes');
 const feedbackRoutes = require('./routes/feedbackRoutes');
-const downloadRoutes = require('./routes/downloadRoutes'); // Import download route
+const resumedRoutes = require('./routes/resumeRoute'); 
+const downloadRoutes = require('./routes/downloadRoutes'); 
 
 // OpenAI integration
 dotenv.config();
@@ -46,6 +47,7 @@ app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/templates', templateRoutes);
 app.use('/api/v1/feedback', feedbackRoutes);
 app.use('/api/v1/downloads', downloadRoutes); 
+app.use('/api/v1/resume', resumeRoutes); 
 
 
 
