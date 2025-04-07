@@ -12,13 +12,5 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// Verify connection configuration
-transporter.verify((error, success) => {
-  if (error) {
-    console.error('Error with email configuration:', error);
-  } else {
-    console.log('Email service is ready to send messages.');
-  }
-});
 
 module.exports = transporter;
