@@ -1,7 +1,6 @@
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { body, validationResult } = require('express-validator');
 const {uploadUserProfileImage} =require('../config/cloudinary');
 const { sendEmail,userConfirmationHTML, userConfirmationText, adminNotificationHTML, adminNotificationText } = require('../utils/emailUtils');
 
