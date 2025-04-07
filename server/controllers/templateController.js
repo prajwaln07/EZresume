@@ -98,17 +98,21 @@ exports.getAllTemplates = async (req, res) => {
             filter.isCustomizable = customizable === 'true'; // boolena conversion
         }
 
-        // Filter by downloads range
-        if (downloadsRange) {
-            const downloadsRangeIndex = downloadBoundaries.indexOf(Number(downloadsRange));
-            if (downloadsRangeIndex !== -1) {
-                const lowerBound = downloadBoundaries[downloadsRangeIndex];
-                const upperBound = downloadBoundaries[downloadsRangeIndex + 1] || Infinity; // next threshold or Infinity for last bucket
+    
 
-                filter.downloads = { $gte: lowerBound, $lte: upperBound }; // Downloads between the selected range
+        if (downloadsRange) {
+            const rangeValue = Number(downloadsRange);
+            const index = downloadBoundaries.indexOf(rangeValue);
+
+            if (index !== -1) {
+                const lowerBound = downloadBoundaries[index];
+                const upperBound = downloadBoundaries[index + 1] ?? Infinity;
+
+                filter.downloads = { $gte: lowerBound, $lte: upperBound };
             }
         }
 
+        
         
         const [templates, facets] = await Promise.allSettled([
             Template.find(filter),
