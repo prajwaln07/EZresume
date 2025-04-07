@@ -54,11 +54,18 @@ const loginUser = async (req, res) => {
     const trimmedEmail = email?.trim();
     const trimmedPassword = password?.trim();
 
+    if(!trimmedEmail || !trimmedPassword){
+       return res.status(400).json({
+        success:false,
+        message:"all fields are required."
+      })
+    }
+
 
     const user = await User.findOne({ email:trimmedEmail });
 
     if (!user) {
-      return res.status(400).json({ 
+      return res.status(401).json({ 
          message: 'Invalid credentials.' 
         });
     }
@@ -83,8 +90,9 @@ const loginUser = async (req, res) => {
       expiresIn: process.env.JWT_EXPIRES_IN || '1h',
       }
   );   
-    // Respond with user data (without the password) but no token/
+
     const { password: _, ...userData } = user.toObject();
+    
      res.status(200)
     .cookie('token', token,  
       { 
@@ -92,7 +100,7 @@ const loginUser = async (req, res) => {
         httpOnly: true, 
         sameSite: 'None',
         secure: true, 
-        expires: new Date(Date.now() + 2 * 60 * 60 * 1000)
+        expires: new Date(Date.now() + (60 * 60 * 1000))
        }
       )
       .json({
@@ -152,15 +160,16 @@ const deleteUserAccount = async (req, res) => {
 
 const logoutUser = async (req, res) => {
   try {
-    // Clear the cookie by setting its expiration date in the past
+
     res.cookie('token', '', { 
       httpOnly: true, 
       sameSite:'none',
       secure:true,
-      expires: new Date(0) // Set to a past date to clear it
+      expires: new Date(0)
     });
 
        res.status(200).json({
+         success:true,
        message: 'Logout successful.'
        });
   } catch (error) {
@@ -172,7 +181,7 @@ const logoutUser = async (req, res) => {
 // Get Count of Users
 const getUserCount = async (req, res) => {
   try {
-    const userCount = await User.countDocuments(); // Get total count of users
+    const userCount = await User.countDocuments();
     res.status(200).json({
       success: true,
       userCount: userCount,
@@ -191,15 +200,17 @@ const getUserCount = async (req, res) => {
 const contactUs = async (req, res) => {
   let { email, subject, message } = req.body;
 
+    // Trim the inputs ,there might be a case where user have entered just spaces like "    " so to avoid it i have used .trim() method .
+  email = email.trim();
+  subject = subject.trim();
+  message = message.trim();
+
   // Validate input
   if (!email || !subject || !message) {
     return res.status(400).json({ success: false, message: 'All fields are required' });
   }
 
-  // Trim the inputs
-  email = email.trim();
-  subject = subject.trim();
-  message = message.trim();
+
 
   try {
     // Send confirmation email to the user
