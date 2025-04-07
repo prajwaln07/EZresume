@@ -6,9 +6,9 @@ const mongoose = require('mongoose');
 exports.submitFeedback = async (req, res) => {
     try {
         let { templateId, comments, rating } = req.body;
-        let userId = new mongoose.Types.ObjectId(req.user.userId); // Assuming user ID is set in req.user by the auth middleware
+        let userId = new mongoose.Types.ObjectId(req.user.userId); // as we are coming to this controller through our middleware of authecation so we have req.user.userId
 
-        if (!comments || rating === undefined) {
+        if (!comments || !rating) {
             return res.status(400).send("Comments and rating are required.");
         }
 
