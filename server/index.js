@@ -47,7 +47,7 @@ app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/templates', templateRoutes);
 app.use('/api/v1/feedback', feedbackRoutes);
 app.use('/api/v1/downloads', downloadRoutes); 
-app.use('/api/v1/resume', resumeRoutes); 
+app.use('/api/v1/resumes', resumeRoutes); 
 
 
 
