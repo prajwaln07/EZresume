@@ -6,9 +6,8 @@ cron.schedule('0 0 */7 * *', async () => {  // Cron expression for every 7 days
     try {
 
         // Set the cutoff date to 7 days ago
-        const cutoffDate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000); //7 days ago
+        const cutoffDate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000); 
 
-        // Delete templates older than 3 days (based on the 'deletedAt' field)
         const result = await Template.deleteMany({ deletedAt: { $lt: cutoffDate } });
 
     } catch (error) {
