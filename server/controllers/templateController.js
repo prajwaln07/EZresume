@@ -22,10 +22,9 @@ exports.createTemplate = async (req, res) => {
             isCustomizable,
             layout, 
             image: thumbnail_cloud,
-            categories  // Save categories to the new template
+            categories  
         });
 
-        // Respond with the newly created template
         res.status(201).json({
             success: true,
             newTemplate
