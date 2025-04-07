@@ -114,7 +114,7 @@ exports.getAllTemplates = async (req, res) => {
 
         
         
-        const [templates, facets] = await Promise.allSettled([
+        const [templates, facets] = await Promise.all([
             Template.find(filter),
             Template.aggregate([
                 {
