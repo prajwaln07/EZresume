@@ -146,10 +146,10 @@ exports.getAllTemplates = async (req, res) => {
         // Add the label for ranges
         const formattedRanges = facets[0].downloadsRanges.map((range, index) => {
             const lower = downloadBoundaries[index];
-            const upper = downloadBoundaries[index + 1] || '5000+'; // last bucket is unlimited
+            const upper = downloadBoundaries[index + 1] || '5000+'; 
             return {
                 ...range,
-                label: `${lower}-${upper === '5000+' ? upper : upper - 1}` // Format the label as "0-50" like this 
+                label: `${lower}-${upper === '5000+' ? upper : upper - 1}` 
             };
         });
 
@@ -178,7 +178,7 @@ exports.getTemplateById = async (req, res) => {
 
         res.json(template);
     } catch (err) {
-        console.error(err); // Log the error for debugging
+        console.error(err); 
         res.status(500).send("Error fetching template");
     }
 };
@@ -189,9 +189,11 @@ exports.getTemplateById = async (req, res) => {
 
 exports.deleteTemplate = async (req, res) => {
     try {
-        const { id } = req.params;
+        let { id } = req.params;
 
-        // Validate the ID format
+            id = new mongoose.Types.ObjectId(id);
+        
+
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(400).json({ message: "Invalid template ID" });
         }
@@ -199,8 +201,8 @@ exports.deleteTemplate = async (req, res) => {
         // Attempt to mark the template as deleted
         const template = await Template.findByIdAndUpdate(
             id,
-            { deletedAt: new Date() }, // Set the deletedAt timestamp
-            { new: true } // Return the updated document
+            { deletedAt: new Date() }, // Set the deletedAt timestamp,current time is set as deleted time ,like we are doing soft deletion here means it will be deleted by cron job automatically after 7 days
+            { new: true } 
         );
 
         if (!template) {
@@ -220,9 +222,11 @@ exports.deleteTemplate = async (req, res) => {
 // Restore template (undo deletion)
 exports.restoreTemplate = async (req, res) => {
     try {
-        const { id } = req.params;
+        let { id } = req.params; // this is now is string format need to convert this into valid mongoDB it first.
 
-        // Validate the ID format
+        id = new mongoose.Types.ObjectId(id);
+
+
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(400).json({ message: "Invalid template ID" });
         }
@@ -250,11 +254,9 @@ exports.restoreTemplate = async (req, res) => {
             return res.status(400).json({ message: "Restore window has expired" });
         }
 
-        // Clear the deletedAt field to restore the template
         template.deletedAt = null;
         await template.save();
-
-        // Success response
+        
         res.status(200).json({ message: "Template restored successfully" });
     } catch (err) {
         console.error("Error restoring template:", err);
