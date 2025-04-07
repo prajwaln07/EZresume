@@ -13,7 +13,7 @@ const { verifyToken } = require('./middleware/auth');
 const userRoutes = require('./routes/userRoutes');
 const templateRoutes = require('./routes/templateRoutes');
 const feedbackRoutes = require('./routes/feedbackRoutes');
-const resumedRoutes = require('./routes/resumeRoute'); 
+const resumedRoutes = require('./routes/resumeRoutes'); 
 const downloadRoutes = require('./routes/downloadRoutes'); 
 
 // OpenAI integration
