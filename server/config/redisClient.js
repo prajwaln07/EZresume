@@ -4,7 +4,7 @@ const redisUrl = process.env.REDIS_URL;
 
 if (!redisUrl) {
   console.error("REDIS_URL is not set.");
-  // process.exit(1);
+  process.exit(1);
 }
 
 const redisClient = redis.createClient({
