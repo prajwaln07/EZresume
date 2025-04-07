@@ -22,11 +22,9 @@ const rateLimit = async (req, res, next) => {
       ttl = RATE_LIMIT_WINDOW;
     }
     
-    
-
     // If request limit exceeded
     if (requests > MAX_REQUESTS) {
-      res.set("Retry-After", ttl);
+      res.set("Retry-After", ttl); // this will be utilized at client side using res.headers.get 
       return res.status(429).json({
         success: false,
         message: `Too many requests. Try again in ${ttl} seconds.`,
