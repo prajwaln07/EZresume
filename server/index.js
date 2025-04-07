@@ -49,11 +49,7 @@ app.use('/api/v1/templates', templateRoutes);
 app.use('/api/v1/feedback', feedbackRoutes);
 app.use('/api/v1/downloads', downloadRoutes); 
 
-app.use(express.static(path.join(_dirname, '/client/build')));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(_dirname, 'client', 'build', 'index.html'));
-});
 
 // Start the server....
 const PORT = process.env.PORT || 4000;
