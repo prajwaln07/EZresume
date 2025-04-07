@@ -6,16 +6,16 @@ const protect = async (req, res, next) => {
 
     // Check for token in headers
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
-        token = req.headers.authorization.split(' ')[1]; // Extract the token from the "Bearer" scheme
+        token = req.headers.authorization.split(' ')[1];
     }
 
     if (req.cookies && req.cookies.token) {
-        token = req.cookies.token; // Extract the token from cookies
+        token = req.cookies.token; // Extracting token from cookies ,btter to have fallback option
     }
 
 
     if (!token) {
-        return res.status(401).json({ message: 'Not authorized, no token' });
+        return res.status(403).json({ message: 'Not authorized, no token' });
     }
    
 
