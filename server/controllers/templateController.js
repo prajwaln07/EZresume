@@ -2,7 +2,6 @@ const Template=require('../models/template');
 const mongoose =require('mongoose');
 const {uploadThumbnail} =require('../config/cloudinary')
 
-// .
 exports.createTemplate = async (req, res) => {
     try {
         const { name, description, layout, isCustomizable, categories } = req.body; 
@@ -112,7 +111,7 @@ exports.getAllTemplates = async (req, res) => {
         }
 
         
-        const [templates, facets] = await Promise.all([
+        const [templates, facets] = await Promise.allSettled([
             Template.find(filter),
             Template.aggregate([
                 {
