@@ -6,7 +6,7 @@ const { verifyToken, checkRole } = require('../middleware/auth');
 
 
 
-const storage = multer.memoryStorage(); // Store files in memory (or specify a disk storage location)
+const storage = multer.memoryStorage(); 
 
 const upload = multer({ 
                 storage: storage,
@@ -16,7 +16,6 @@ const upload = multer({
           }); 
 
 
-// Admin-only routes for managing templates.
 router.post('/', verifyToken,checkRole(['admin']), upload.single('thumbnail'), templateController.createTemplate);
 router.put('/:id',verifyToken ,checkRole(['admin']),upload.single('thumbnail'), templateController.updateTemplate);
 
@@ -31,4 +30,3 @@ router.put('/restore/:id', verifyToken,checkRole(['admin']), templateController.
 router.delete('/:id', verifyToken,checkRole(['admin']), templateController.deleteTemplate);
 
 module.exports = router;
-// added comment here .
