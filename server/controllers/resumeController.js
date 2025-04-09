@@ -1,3 +1,5 @@
+const axios = require('axios');
+
 exports.getSuggestions = async (req, res) => {
   try {
     const { summery, experience, education, skills, projects } = req.body.text;
