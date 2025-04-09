@@ -105,6 +105,7 @@ const loginUser = async (req, res) => {
       )
       .json({
        success:true,
+        token=token,
        message: 'Login successful.',
        user: userData 
       });
