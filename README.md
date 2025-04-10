@@ -55,8 +55,7 @@ Explore the application here: [EZResume](https://ezresumecraft.netlify.app/)
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/prajwaln07/resume-builder.git
-   cd resume-builder
+   git clone https://github.com/prajwaln07/EZresume
 
 # For the server
 cd server
