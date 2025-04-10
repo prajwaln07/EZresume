@@ -8,7 +8,6 @@ const getCurrentMonthKey = () => {
   return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
 };
 
-// Track a download
 exports.trackDownload = async (req, res) => {
   const { templateId } = req.body;
 
@@ -22,7 +21,7 @@ exports.trackDownload = async (req, res) => {
     // Update global and monthly download counts..
     const globalRecord = await Download.findOneAndUpdate(
       {},
-      { $inc: { count: 1, [`monthlyDownloads.${currentMonth}`]: 1 } },
+      { $inc: { count: 1, [`monthlyDownloads.${currentMonth}`]: 1 } }, // one for incrementing whole download count and one for that indivitual month 
       { upsert: true, new: true }
     );
 
@@ -49,7 +48,7 @@ exports.trackDownload = async (req, res) => {
       templateDownloads: newTemplateDownloads,
     });
   } catch (error) {
-    console.error('❌ Error tracking download:', error);
+    console.error('Error tracking download:', error);
     res.status(500).json({ success: false, message: 'Failed to track download.' });
   }
 };
@@ -66,7 +65,7 @@ exports.getTotalDownloads = async (req, res) => {
 
     res.status(200).json({ totalDownloads: count });
   } catch (error) {
-    console.error('❌ Error fetching total downloads:', error);
+    console.error('Error fetching total downloads:', error);
     res.status(500).json({ success: false, message: 'Failed to fetch total downloads.' });
   }
 };
@@ -84,7 +83,7 @@ exports.getMonthlyDownloads = async (req, res) => {
 
     res.status(200).json({ month, downloads: monthlyDownloads });
   } catch (error) {
-    console.error('❌ Error fetching monthly downloads:', error);
+    console.error('Error fetching monthly downloads:', error);
     res.status(500).json({ success: false, message: 'Failed to fetch monthly downloads.' });
   }
 };
@@ -104,7 +103,7 @@ exports.getTemplateDownloads = async (req, res) => {
 
     res.status(200).json({ templateId, downloads: templateRecord.downloads });
   } catch (error) {
-    console.error('❌ Error fetching template downloads:', error);
+    console.error('Error fetching template downloads:', error);
     res.status(500).json({ success: false, message: 'Failed to fetch template downloads.' });
   }
 };
